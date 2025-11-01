@@ -174,6 +174,7 @@ export default defineConfig({
           },
           {
             text: 'CI/CD',
+            link: '/applications/ci-cd/introduction',
             collapsed: true,
             items: [
               {
