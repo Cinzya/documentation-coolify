@@ -138,25 +138,6 @@ export default defineConfig({
         ],
       },
       {
-        text: 'Builds',
-        collapsed: true,
-        items: [
-          { text: 'Introduction', link: '/builds/introduction' },
-          {
-            text: 'Build Packs',
-            collapsed: true,
-            items: [
-              { text: 'Overview', link: '/builds/packs/overview' },
-              { text: 'Static', link: '/builds/packs/static' },
-              { text: 'Nixpacks', link: '/builds/packs/nixpacks' },
-              { text: 'Dockerfile', link: '/builds/packs/dockerfile' },
-              { text: 'Docker Compose', link: '/builds/packs/docker-compose' },
-            ]
-          },
-          { text: 'Build Servers', link: '/builds/servers' },
-        ],
-      },
-      {
         text: 'Applications',
         collapsed: true,
         items: [
@@ -176,7 +157,18 @@ export default defineConfig({
               { text: 'Nuxt', link: '/applications/nuxt' },
               { text: 'SvelteKit', link: '/applications/svelte-kit' },
             ]
-          }
+          },
+          {
+            text: 'Build Packs',
+            collapsed: true,
+            items: [
+              { text: 'Overview', link: '/applications/build-packs/overview' },
+              { text: 'Static', link: '/applications/build-packs/static' },
+              { text: 'Nixpacks', link: '/applications/build-packs/nixpacks' },
+              { text: 'Dockerfile', link: '/applications/build-packs/dockerfile' },
+              { text: 'Docker Compose', link: '/applications/build-packs/docker-compose' },
+            ]
+          },
         ],
       },
       {
