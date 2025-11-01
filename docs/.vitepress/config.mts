@@ -179,26 +179,24 @@ export default defineConfig({
             items: [
               {
                 text: 'Github', collapsed: true, items: [
+                  { text: 'Integrations', link: '/applications/ci-cd/github/integration' },
                   { text: 'Manually Setup GitHub App', link: '/applications/ci-cd/github/manually-setup-github-app' },
                   { text: 'Move Between GitHub Apps', link: '/applications/ci-cd/github/move-between-github-apps' },
-                  { text: 'Integrations', link: '/applications/ci-cd/github/integration' },
                   { text: 'Github Actions', link: '/applications/ci-cd/github/github-actions' },
                 ]
               },
               {
-                text: 'Gitlab', collapsed: true, items: [
-                  { text: 'Integrations', link: '/applications/ci-cd/gitlab/integration' },
-                ]
+                text: 'Gitlab',
+                link: '/applications/ci-cd/gitlab/integration',
               },
               {
-                text: 'Bitbucket', collapsed: true, items: [
-                  { text: 'Integrations', link: '/applications/ci-cd/bitbucket/integration' },
-                ]
+                text: 'Bitbucket',
+                link: '/applications/ci-cd/bitbucket/integration',
               },
               {
-                text: 'Gitea', collapsed: true, items: [
-                  { text: 'Integrations', link: '/applications/ci-cd/gitea/integration' },
-                ]
+                text: 'Gitea',
+                collapsed: true,
+                link: '/applications/ci-cd/gitea/integration',
               },
             ]
           },
