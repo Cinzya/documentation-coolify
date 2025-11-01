@@ -99,7 +99,6 @@ Ready to connect your Git provider? Choose your platform for detailed setup guid
 - **[GitLab Integration](/applications/ci-cd/gitlab/integration)** - Connect GitLab repositories
 - **[Bitbucket Integration](/applications/ci-cd/bitbucket/integration)** - Connect Bitbucket repositories
 - **[Gitea Integration](/applications/ci-cd/gitea/integration)** - Connect self-hosted Gitea
-
-For other Git providers, use the deploy keys method described in any of the integration guides above.
+- **[Other Git Providers](/applications/ci-cd/other-providers)** - Connect Gogs, Forgejo, or any custom Git server
 
 Or learn about [Build Packs](/applications/build-packs/overview) to understand how Coolify transforms your code into running containers.

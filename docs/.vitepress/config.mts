@@ -195,8 +195,11 @@ export default defineConfig({
               },
               {
                 text: 'Gitea',
-                collapsed: true,
                 link: '/applications/ci-cd/gitea/integration',
+              },
+              {
+                text: 'Other Providers',
+                link: '/applications/ci-cd/other-providers',
               },
             ]
           },
