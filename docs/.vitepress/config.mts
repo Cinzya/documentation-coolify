@@ -210,7 +210,7 @@ export default defineConfig({
         collapsed: true,
         items: [
           { text: 'Introduction', link: '/services/introduction' },
-          { text: 'All Services', link: '/services/overview' },
+          { text: 'All One-Click Services', link: '/services/overview' },
           { text: 'Services Directory', link: '/services/all' }
         ]
       },
