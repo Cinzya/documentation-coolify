@@ -385,6 +385,7 @@ export default defineConfig({
                 text: 'Docker',
                 collapsed: true,
                 items: [
+                  { text: 'Networking & DNS', link: '/knowledge-base/docker/networking' },
                   { text: 'Compose', link: '/knowledge-base/docker/compose' },
                   { text: 'Docker Commands', link: '/knowledge-base/docker/custom-commands' },
                   { text: 'Registry', link: '/knowledge-base/docker/registry' },
