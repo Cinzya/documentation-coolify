@@ -70,6 +70,14 @@ This rule ensures traffic can reach your PostgreSQL database through the Docker 
 
 If your server is hosted on Hetzner, you may not need ufw-docker. Instead, you can open the relevant database port (e.g., 5432) directly using [Hetzner's firewall UI](https://docs.hetzner.com/cloud/firewalls/overview).
 
+## FAQ
+
+### Why does the `createbuckets` service show as "exited" or "stopped"?
+
+This is normal and expected behavior. The `createbuckets` service (also shown as "minio-bucket" in the dashboard) is designed to run only once during the initial startup to set up the MinIO storage bucket for Supabase. After it successfully creates the required bucket, it exits.
+
+An "exited" status for this service is not an error—it means the service completed its task successfully. You do not need to restart it or take any action.
+
 ## Links
 
 - [Official Website](https://supabase.io)
