@@ -271,6 +271,15 @@ export default defineConfig({
         text: 'Integrations',
         collapsed: true,
         items: [
+          {
+            text: 'CrowdSec',
+            collapsed: true,
+            items: [
+              { text: 'Overview', link: '/integrations/crowdsec/overview' },
+              { text: 'Caddy', link: '/integrations/crowdsec/caddy' },
+              { text: 'Traefik', link: 'https://www.crowdsec.net/blog/securing-automated-app-deployment-crowdsec-and-coolify' },
+            ]
+          },
           { text: 'Webstudio', link: '/integrations/webstudio.md' },
         ],
       },
