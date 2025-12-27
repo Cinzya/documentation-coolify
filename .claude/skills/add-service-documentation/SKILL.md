@@ -56,19 +56,24 @@ Every service requires these 3 files:
 
 ## Detailed Instructions
 
-See the companion reference files:
-
+**Service-specific:**
 - [METADATA.md](./METADATA.md) - Extracting service info from YAML
 - [DOCUMENTATION.md](./DOCUMENTATION.md) - Writing service docs
-- [IMAGES.md](./IMAGES.md) - Logo guidelines
+- [IMAGES.md](./IMAGES.md) - Service logo guidelines
 - [CATALOG.md](./CATALOG.md) - Updating the services list
 - [TEMPLATES.md](./TEMPLATES.md) - Documentation templates
+
+**Shared guidelines:**
+- [FRONTMATTER.md](../_shared/FRONTMATTER.md) - Title, description, Open Graph
+- [IMAGES.md](../_shared/IMAGES.md) - General image syntax
+- [LINKS.md](../_shared/LINKS.md) - Internal and external link formatting
+- [CONTAINERS.md](../_shared/CONTAINERS.md) - VitePress callout containers
 
 ## Important Rules
 
 1. **Download logos locally**: NEVER use external image URLs - always download to `docs/public/images/services/`
 2. **Skip ignored services**: If YAML has `# ignore: true`, don't document it
-3. **Use ZoomableImage**: Always use `<ZoomableImage>` for local documentation images
+3. **Images**: Use `![alt](path)` for logos; use `<ZoomableImage>` only for screenshots
 4. **Add UTM parameters**: Append `?utm_source=coolify.io` to all external links
 5. **Follow naming**: Use lowercase, hyphenated slugs (e.g., `my-service.md`)
 6. **Alphabetical order**: Insert services alphabetically in List.vue

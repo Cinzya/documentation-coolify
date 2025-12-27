@@ -106,25 +106,53 @@ Format: `{service-name}-logo.{extension}`
 
 ## Using Images in Documentation
 
+### When to Use Each Syntax
+
+| Image Type | Syntax | Example |
+|------------|--------|---------|
+| Logos (small) | Standard markdown | `![Appsmith](/docs/images/services/appsmith-logo.svg)` |
+| Screenshots | `<ZoomableImage>` | `<ZoomableImage src="/docs/images/services/dashboard.webp" />` |
+| Large images | `<ZoomableImage>` | `<ZoomableImage src="/docs/images/services/overview.webp" />` |
+
 ### For Service Logos
 
-Always use the `<ZoomableImage>` component:
+Use standard markdown image syntax for logos:
 
-```vue
-<ZoomableImage src="/docs/images/services/appsmith-logo.svg" />
+```markdown
+![ServiceName](/docs/images/services/servicename-logo.svg)
 ```
 
 **Important:**
 
 - Path starts with `/docs/` (not `/public/`)
 - Use exact filename including extension
-- No alt text needed (component handles it)
+- Include alt text for accessibility
+
+### For Screenshots and Large Images
+
+Use `<ZoomableImage>` for images users may want to zoom into:
+
+```vue
+<ZoomableImage src="/docs/images/services/appsmith-dashboard.webp" />
+```
+
+**Use ZoomableImage for:**
+
+- Dashboard screenshots
+- Configuration panels
+- UI walkthroughs
+- Any image with details users need to see closely
+
+**Screenshot guidelines:**
+
+- Save as WebP for best compression
+- Optimize/compress before adding
+- Use descriptive filenames
+- Keep reasonable dimensions (max 1920px wide)
 
 ### For External Images
 
 **⚠️ Avoid external image links when possible. Only use temporarily.**
-
-In rare cases, you may use standard markdown for external images:
 
 ```markdown
 ![Appsmith](https://raw.githubusercontent.com/appsmithorg/appsmith/release/static/images/logo.png)
@@ -133,24 +161,8 @@ In rare cases, you may use standard markdown for external images:
 **Only acceptable for:**
 
 - **Temporary placeholder** while downloading/optimizing the proper logo
-- **Large promotional screenshots** from the official service (before optimization)
 
 **Action required:** Replace external links with downloaded versions before finalizing documentation.
-
-### For Screenshots
-
-If adding usage screenshots:
-
-```vue
-<ZoomableImage src="/docs/images/services/appsmith-dashboard.webp" />
-```
-
-**Screenshot guidelines:**
-
-- Save as WebP for best compression
-- Optimize/compress before adding
-- Use descriptive filenames
-- Keep reasonable dimensions (max 1920px wide)
 
 ## Path Reference
 
@@ -230,7 +242,8 @@ This happens when the image fails to load. Check:
 - Use descriptive, consistent naming
 - Keep file sizes reasonable
 - Test images in both light and dark themes
-- Use `<ZoomableImage>` component for local images
+- Use standard markdown `![alt](path)` for logos
+- Use `<ZoomableImage>` for screenshots and large images
 
 ❌ **Don't:**
 
@@ -242,3 +255,4 @@ This happens when the image fails to load. Check:
 - Use spaces or uppercase in filenames
 - Reference images with wrong extensions
 - Link to images that might break or change
+- Use `<ZoomableImage>` for small logos (unnecessary zoom)

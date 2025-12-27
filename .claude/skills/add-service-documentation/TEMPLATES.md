@@ -16,7 +16,7 @@ description: "Deploy ServiceName on Coolify for [key benefit or use case]."
 
 # ServiceName
 
-<ZoomableImage src="/docs/images/services/servicename-logo.webp" />
+![ServiceName](/docs/images/services/servicename-logo.webp)
 
 ## What is ServiceName?
 
@@ -27,8 +27,8 @@ description: "Deploy ServiceName on Coolify for [key benefit or use case]."
 
 ## Links
 
-- [The official website ›](https://servicename.com?utm_source=coolify.io)
-- [GitHub ›](https://github.com/org/servicename?utm_source=coolify.io)
+- [The official website](https://servicename.com?utm_source=coolify.io)
+- [GitHub](https://github.com/org/servicename?utm_source=coolify.io)
 ```
 
 ### Minimal Example (Ghost)
@@ -49,8 +49,8 @@ Ghost is a powerful app for professional publishers to create, share, and grow a
 
 ## Links
 
-- [The official website ›](https://ghost.org/?utm_source=coolify.io)
-- [GitHub ›](https://github.com/TryGhost/Ghost?utm_source=coolify.io)
+- [The official website](https://ghost.org/?utm_source=coolify.io)
+- [GitHub](https://github.com/TryGhost/Ghost?utm_source=coolify.io)
 ```
 
 ---
@@ -69,7 +69,7 @@ description: "[Detailed description including key features and benefits]"
 
 # ServiceName
 
-<ZoomableImage src="/docs/images/services/servicename-logo.webp" />
+![ServiceName](/docs/images/services/servicename-logo.webp)
 
 ## What is ServiceName?
 
@@ -101,21 +101,21 @@ ServiceName makes it easy to [key benefit]:
 
 ## Learning Resources
 
-- [Documentation ›](https://docs.servicename.com?utm_source=coolify.io)
-- [Tutorials ›](https://servicename.com/tutorials?utm_source=coolify.io)
-- [Video Guides ›](https://youtube.com/@servicename?utm_source=coolify.io)
-- [Templates ›](https://servicename.com/templates?utm_source=coolify.io)
+- [Documentation](https://docs.servicename.com?utm_source=coolify.io)
+- [Tutorials](https://servicename.com/tutorials?utm_source=coolify.io)
+- [Video Guides](https://youtube.com/@servicename?utm_source=coolify.io)
+- [Templates](https://servicename.com/templates?utm_source=coolify.io)
 
 ## Need Help?
 
-- [Discord ›](https://discord.gg/invite?utm_source=coolify.io)
-- [Community Forum ›](https://community.servicename.com?utm_source=coolify.io)
+- [Discord](https://discord.gg/invite?utm_source=coolify.io)
+- [Community Forum](https://community.servicename.com?utm_source=coolify.io)
 - [Support Email](mailto:support@servicename.com)
 
 ## Links
 
-- [The official website ›](https://servicename.com?utm_source=coolify.io)
-- [GitHub ›](https://github.com/org/servicename?utm_source=coolify.io)
+- [The official website](https://servicename.com?utm_source=coolify.io)
+- [GitHub](https://github.com/org/servicename?utm_source=coolify.io)
 ```
 
 ### Comprehensive Example (Appsmith)
@@ -274,7 +274,7 @@ Before submitting documentation:
 
 - [ ] Frontmatter includes title and description
 - [ ] Service name is consistently capitalized
-- [ ] Logo displays using `<ZoomableImage>` or external URL
+- [ ] Logo displays using standard markdown `![alt](path)` syntax
 - [ ] "What is..." section is clear and informative
 - [ ] All external links include `?utm_source=coolify.io`
 - [ ] GitHub and website links are correct

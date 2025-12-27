@@ -37,24 +37,18 @@ description: "Here you can find the documentation for hosting ServiceName with C
 # ServiceName
 ```
 
-#### 2. Image (Required)
+#### 2. Logo (Required)
 ```markdown
-<ZoomableImage src="/docs/images/services/service-logo.webp" />
+![ServiceName](/docs/images/services/service-logo.webp)
 ```
 
 **Important:**
 - **Always download logo locally first** - never use external URLs
-- Use `<ZoomableImage>` component for local images
+- Use standard markdown `![alt](path)` for logos
+- Use `<ZoomableImage>` only for large images/screenshots users need to zoom
 - Path starts with `/docs/images/services/`
 - Extension must match actual file
 - Download from: `https://raw.githubusercontent.com/coollabsio/coolify/main/public/svgs/{logo}.svg`
-
-**Temporary external images** (must be replaced before finalizing):
-```markdown
-![ServiceName](https://raw.githubusercontent.com/org/repo/main/logo.png)
-```
-
-⚠️ Replace with local images before finalizing documentation.
 
 #### 3. What is ServiceName?
 ```markdown
@@ -73,8 +67,8 @@ description: "Here you can find the documentation for hosting ServiceName with C
 ```markdown
 ## Links
 
-- [The official website ›](https://example.com?utm_source=coolify.io)
-- [GitHub ›](https://github.com/org/repo?utm_source=coolify.io)
+- [The official website](https://example.com?utm_source=coolify.io)
+- [GitHub](https://github.com/org/repo?utm_source=coolify.io)
 ```
 
 **Important:** Always append `?utm_source=coolify.io` to external links
@@ -148,15 +142,16 @@ See [TEMPLATES.md](./TEMPLATES.md) for complete examples:
 
 ❌ **Don't:**
 - **Use external image URLs** - always download logos locally first
-- Forget `<ZoomableImage>` for local images
 - Use relative paths for images
 - Omit UTM parameters from external links
 - Use overly technical jargon
 - Include installation instructions (Coolify handles this)
+- Use `<ZoomableImage>` for small logos (unnecessary zoom)
 
 ✅ **Do:**
 - **Download ALL logos to `docs/public/images/services/`** before using
-- Use `<ZoomableImage>` for all local documentation images
+- Use standard markdown `![alt](path)` for logos
+- Use `<ZoomableImage>` for screenshots and large images
 - Start image paths with `/docs/images/services/`
 - Add `?utm_source=coolify.io` to all external links
 - Write in simple, clear language
