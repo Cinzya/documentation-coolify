@@ -94,3 +94,18 @@
     padding-left: calc(var(--vp-sidebar-width)) !important;
   }
 }
+
+/* Make border-top extremely subtle between sidebar groups */
+.group + .group {
+  border-top: 1px solid rgba(0, 0, 0, 0.03) !important;
+}
+
+/* Dark mode: use a slightly more visible subtle border */
+.dark .group + .group {
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Reduce bottom padding on sidebar items */
+.VPSidebarItem.level-0 {
+  padding-bottom: 12px !important;
+}
