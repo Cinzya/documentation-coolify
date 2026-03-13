@@ -14,9 +14,9 @@ Coolify is a **control plane** that coordinates Docker workloads across one or m
 The core idea is:
 - Coolify **manages and orchestrates workloads**
 - Docker on each server **runs the applications**
-- Each server runs its **own reverse proxy**
+- Each server can run its **own reverse proxy**
 - Traffic is routed directly to the application containers
-- If Coolify is removed, the applications **continue running** because they depend only on Docker and the reverse proxy
+- If Coolify is removed, the applications **continue running** because they depend only on Docker (and reverse proxy, if used)
 
 This design avoids a central traffic bottleneck and creates a true **zero vendor lock-in** architecture.
 
@@ -40,7 +40,7 @@ The control plane includes the following internal services:
 - `coolify-redis` - Redis for queues, caching, and background jobs
 - `coolify-realtime` - Soketi for real-time UI updates and logs streaming
 - `coolify-sentinel` - optional service for resource and container monitoring
-- `coolify-proxy` - Traefik or Caddy to handle traffic routing
+- `coolify-proxy` - optional Traefik or Caddy instance on the Coolify host to handle traffic routing
 
 These internal services work together to track state, schedule deployments, and coordinate remote actions.
 
@@ -59,12 +59,15 @@ A **managed server** is any machine you control with SSH access, including:
 - ARM and x86 devices
 - Old laptops or Macs running Linux
 
-Coolify **does not install a persistent agent** on these servers. Instead, it connects remotely using SSH and runs Docker commands when needed. This means the server remains usable and independent even without Coolify.
+Coolify **does not require a persistent deployment agent** on these servers. Instead, it connects remotely using SSH and runs Docker commands when needed.  
+For monitoring, Coolify can optionally run `coolify-sentinel` on a managed server.
+
+This means the server remains usable and independent even without Coolify.
 
 Each managed server handles:
 - running containers
 - handling builds (if configured)
-- running its own reverse proxy
+- running its own reverse proxy (if enabled)
 - exposing apps to the internet
 
 Because services run locally on these servers, traffic goes directly from clients to application containers, not through the main Coolify server.
@@ -79,7 +82,7 @@ Containers isolate processes, making it easier to:
 - restart or replace services consistently
 
 Coolify uses Docker to:
-- build images from source using Dockerfiles or buildpacks
+- build images from source using Dockerfiles
 - pull prebuilt images from registries
 - manage container lifecycle (start, stop, restart)
 - attach Docker volumes for persistent data
@@ -88,7 +91,7 @@ Because everything is standard Docker, you can manage containers manually with D
 
 
 ### Reverse proxy and traffic flow
-Each server managed by Coolify runs its **own reverse proxy container** (Traefik or Caddy). 
+Each server managed by Coolify can run its **own reverse proxy container** (Traefik or Caddy). 
 
 This proxy:
 - listens on ports **80** (HTTP) and **443** (HTTPS)
@@ -101,7 +104,7 @@ Because the proxy runs locally:
 - Traffic is directly routed to the containers
 - Applications remain reachable even if Coolify stops
 
-This is key to the “zero vendor lock-in” of Coolify: **your apps continue running and reachable even if Coolify stops**
+This is key to the “zero vendor lock-in” of Coolify: **your apps continue running and remain reachable through their existing routing setup even if Coolify stops**
 
 
 ## Zero vendor lock-in
