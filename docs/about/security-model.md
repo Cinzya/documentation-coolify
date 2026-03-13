@@ -47,7 +47,6 @@ Coolify's security model is built around these principles:
 4. [Server access model](#server-access-model)
 5. [Deployment and webhook safeguards](#deployment-and-webhook-safeguards)
 6. [Network and traffic security](#network-and-traffic-security)
-7. [Your responsibility as user](#your-responsibility-as-user)
 
 ---
 
