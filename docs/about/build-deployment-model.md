@@ -57,13 +57,17 @@ Builds can run:
 
 Coolify uses standard Docker tooling and supports:
 - **Dockerfiles** – full control over the build process
-- **Buildpacks** – automatic detection (Nixpacks)
+- **Prebuilt Docker images** – no build step, direct deploy
+- **Docker Compose builds** – service-based application builds
+- **Buildpacks** – automatic detection (Nixpacks, static, etc.)
 
 ::: info Note
-Images are cached and reused. Builds only run when the source changes, keeping deployments fast and efficient.
+Images are cached and reused.  
+Builds are skipped when Coolify can reuse an existing image for the same commit and configuration.
 :::
 
-Once built, the resulting Docker image is treated like any other image and can be reused, redeployed, or pushed to any docker registry.
+Once built, the resulting Docker image is treated like any other image and can be reused and redeployed.  
+If a Docker registry is configured, Coolify can also push the built image there.
 
 ---
 
@@ -77,12 +81,12 @@ When deploying an application, Coolify orchestrates container replacement on the
 5. Update the local reverse proxy routing
 6. Stop old containers once the new ones are ready
 
-If a deployment fails, the existing containers remain running.
-
-Coolify never removes a working application until a new one is successfully started.
+Coolify runs the build while your current application keeps running.
+If the build or deployment fails, your currently running application is not replaced.
+If the build passes, Coolify swaps containers to move traffic to the new version.
 
 ::: tip Near zero-downtime deployments
-When health checks are configured, Coolify can perform rolling deployments where traffic is only switched after the new container becomes healthy.
+When health checks are configured and rolling deployment conditions are met, Coolify can perform rolling deployments where traffic is switched only after the new container becomes healthy.
 :::
 
 ---
@@ -111,4 +115,4 @@ Coolify also supports:
 - Automated database backups
 - S3-compatible storage targets
 
-This gurantees your data stays **portable, durable, and fully under your control**, independent of Coolify.
+This guarantees your data stays **portable, durable, and fully under your control**, independent of Coolify.
