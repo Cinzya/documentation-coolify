@@ -134,7 +134,7 @@ export default defineConfig({
         items: [
           { text: 'How Coolify works', link: '/about/how-coolify-works' },
           { text: 'Self Hosted vs Coolify Cloud', link: 'shadow-to-do' },
-          { text: 'Docker & Containers', link: 'shadow-to-do' },
+          { text: 'Docker & Containers', link: '/about/docker-and-containers' },
           { text: 'Networking in Coolify', link: 'shadow-to-do' },
           { text: 'Build & Deployment Model', link: '/about/build-deployment-model' },
           { text: 'Security Model', link: 'shadow-to-do' },
