@@ -137,7 +137,7 @@ export default defineConfig({
           { text: 'Docker & Containers', link: '/about/docker-and-containers' },
           { text: 'Networking in Coolify', link: 'shadow-to-do' },
           { text: 'Build & Deployment Model', link: '/about/build-deployment-model' },
-          { text: 'Security Model', link: 'shadow-to-do' },
+          { text: 'Security Model', link: '/about/security-model' },
         ]
       },
       {
