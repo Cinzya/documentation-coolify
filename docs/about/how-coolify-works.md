@@ -50,6 +50,7 @@ The control plane is generally **not in the traffic path** of your applications,
 If you choose to deploy applications directly on the main Coolify server, the local reverse proxy will route traffic to those applications just like it does on any other managed server.
 :::
 
+---
 
 ### Managed servers
 A **managed server** is any machine you control with SSH access, including:
@@ -72,6 +73,7 @@ Each managed server handles:
 
 Because services run locally on these servers, traffic goes directly from clients to application containers, not through the main Coolify server.
 
+---
 
 ### Docker containers
 Every application, database, or service Coolify handles runs as a **Docker container**. 
@@ -89,6 +91,7 @@ Coolify uses Docker to:
 
 Because everything is standard Docker, you can manage containers manually with Docker commands outside of Coolify if needed.
 
+---
 
 ### Reverse proxy and traffic flow
 Each server managed by Coolify can run its **own reverse proxy container** (Traefik or Caddy). 
