@@ -14,7 +14,8 @@ This gives you a cleaner, safer setup that is easier to move, update, and recove
 Coolify itself also runs in containers. You can verify this on your server by running this:
 
 ```bash
-docker ps | grep coolify
+docker ps --filter "name=coolify" \
+  --format "table {{.Names}}\t{{.Image}}\t{{.RunningFor}}"
 ```
 :::
 
