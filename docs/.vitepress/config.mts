@@ -132,6 +132,7 @@ export default defineConfig({
         text: 'About',
         collapsed: true,
         items: [
+          { text: 'What is Coolify?', link: '/about/what-is-coolify' },
           { text: 'How Coolify works', link: '/about/how-coolify-works' },
           { text: 'Self Hosted vs Coolify Cloud', link: '/about/selfhosted-cloud-comparison' },
           { text: 'Docker & Containers', link: '/about/docker-and-containers' },
