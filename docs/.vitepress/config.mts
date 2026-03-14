@@ -145,39 +145,44 @@ export default defineConfig({
         text: 'Get Started',
         collapsed: false,
         items: [
-          { text: 'Introduction', link: '/get-started/introduction' },
-          {
-            text: 'Installation',
-            link: '/get-started/installation',
-            collapsed: false,
-            items: [
-              { text: 'Upgrade', link: '/get-started/upgrade' },
-              { text: 'Downgrade', link: '/get-started/downgrade' },
-              { text: 'Uninstallation', link: '/get-started/uninstallation' },
-            ]
-          },
-          { text: 'Cloud', link: '/get-started/cloud' },
-          { text: 'Usage', link: '/get-started/usage' },
-          {
-            text: 'Concepts', link: '/get-started/concepts',
-            collapsed: true,
-            items: [
-              { text: 'Screenshots', link: '/get-started/screenshots' },
-              { text: 'Videos', link: '/get-started/videos' },
-            ]
-          },
-          { text: 'Team', link: '/get-started/team' },
-          { text: 'Support', link: '/get-started/support' },
-          { text: 'Sponsors', link: '/get-started/sponsors' },
-          {
-            text: 'Contribute',
-            collapsed: true,
-            items: [
-              { text: 'Coolify', link: '/get-started/contribute/coolify' },
-              { text: 'New Service', link: '/get-started/contribute/service' },
-              { text: 'Documentation', link: '/get-started/contribute/documentation' },
-            ],
-          },
+          { text: 'Choose your path', link: 'shadow-to-do' },
+          { text: 'Start with Self-hosted', link: 'shadow-to-do' },
+          { text: 'Start with Coolify Cloud', link: 'shadow-to-do' },
+          { text: 'Deploy your first app', link: 'shadow-to-do' },
+          { text: 'Deploy your first database', link: 'shadow-to-do' },
+          { text: 'Deploy your first service', link: 'shadow-to-do' },
+          // {
+          //   text: 'Installation',
+          //   link: '/get-started/installation',
+          //   collapsed: false,
+          //   items: [
+          //     { text: 'Upgrade', link: '/get-started/upgrade' },
+          //     { text: 'Downgrade', link: '/get-started/downgrade' },
+          //     { text: 'Uninstallation', link: '/get-started/uninstallation' },
+          //   ]
+          // },
+          // { text: 'Cloud', link: '/get-started/cloud' },
+          // { text: 'Usage', link: '/get-started/usage' },
+          // {
+          //   text: 'Concepts', link: '/get-started/concepts',
+          //   collapsed: true,
+          //   items: [
+          //     { text: 'Screenshots', link: '/get-started/screenshots' },
+          //     { text: 'Videos', link: '/get-started/videos' },
+          //   ]
+          // },
+          // { text: 'Team', link: '/get-started/team' },
+          // { text: 'Support', link: '/get-started/support' },
+          // { text: 'Sponsors', link: '/get-started/sponsors' },
+          // {
+          //   text: 'Contribute',
+          //   collapsed: true,
+          //   items: [
+          //     { text: 'Coolify', link: '/get-started/contribute/coolify' },
+          //     { text: 'New Service', link: '/get-started/contribute/service' },
+          //     { text: 'Documentation', link: '/get-started/contribute/documentation' },
+          //   ],
+          // },
 
         ],
       },
@@ -185,13 +190,92 @@ export default defineConfig({
         text: 'Manage Coolify',
         collapsed: true,
         items: [
-          { text: 'What is Coolify', link: 'shadow-to-do' },
-          { text: 'How Coolify works', link: 'shadow-to-do' },
-          { text: 'Coolify vs Traditional PaaS', link: 'shadow-to-do' },
-          { text: 'Docker & Containers', link: 'shadow-to-do' },
-          { text: 'Networking in Coolify', link: 'shadow-to-do' },
-          { text: 'Build & Deployment Model', link: 'shadow-to-do' },
-          { text: 'Security Model', link: 'shadow-to-do' },
+          {
+            text: 'Instance Management',
+            collapsed: true,
+            items: [
+              { text: 'Update / Upgrade', link: 'shadow-to-do' },
+              { text: 'Downgrade', link: 'shadow-to-do' },
+              { text: 'Uninstallation', link: 'shadow-to-do' },
+              { text: 'Instance Settings', link: 'shadow-to-do' },
+            ]
+          },
+          {
+            text: 'Backup & Recovery',
+            collapsed: true,
+            items: [
+              { text: 'Instance Backup (Manual / Automatic)', link: 'shadow-to-do' },
+              { text: 'Instance Restore', link: 'shadow-to-do' },
+              { text: 'Database Backups', link: 'shadow-to-do' },
+              { text: 'Backup Downloads', link: 'shadow-to-do' },
+            ]
+          },
+          {
+            text: 'Server Management',
+            collapsed: true,
+            items: [
+              { text: 'Add & Validate Server', link: 'shadow-to-do' },
+              { text: 'Build Server', link: 'shadow-to-do' },
+              { text: 'Multiple Servers', link: 'shadow-to-do' },
+              { text: 'Server Terminal Access', link: 'shadow-to-do' },
+              { text: 'Docker Cleanup', link: 'shadow-to-do' },
+              { text: 'Server Patching', link: 'shadow-to-do' },
+              { text: 'Cloud Provider Tokens', link: 'shadow-to-do' },
+            ]
+          },
+          {
+            text: 'Notifications',
+            collapsed: true,
+            items: [
+              { text: 'Discord', link: 'shadow-to-do' },
+              { text: 'Telegram', link: 'shadow-to-do' },
+              { text: 'Email', link: 'shadow-to-do' },
+              { text: 'Slack / Mattermost', link: 'shadow-to-do' },
+              { text: 'Pushover', link: 'shadow-to-do' },
+              { text: 'Webhook', link: 'shadow-to-do' },
+            ]
+          },
+          {
+            text: 'Monitoring & Health',
+            collapsed: true,
+            items: [
+              { text: 'Monitoring Overview', link: 'shadow-to-do' },
+              { text: 'Sentinel and Metrics', link: 'shadow-to-do' },
+              { text: 'Server Reachability', link: 'shadow-to-do' },
+              { text: 'Disk Usage Alerts', link: 'shadow-to-do' },
+              { text: 'Patch Check Alerts', link: 'shadow-to-do' },
+              { text: 'Log Drains', link: 'shadow-to-do' },
+            ]
+          },
+          {
+            text: 'Automation & Tasks',
+            collapsed: true,
+            items: [
+              { text: 'Scheduled Jobs', link: 'shadow-to-do' },
+              { text: 'Scheduled Tasks', link: 'shadow-to-do' },
+              { text: 'Task Execution Logs', link: 'shadow-to-do' },
+            ]
+          },
+          {
+            text: 'Security & Access',
+            collapsed: true,
+            items: [
+              { text: 'OAuth', link: 'shadow-to-do' },
+              { text: 'API Tokens', link: 'shadow-to-do' },
+              { text: 'Private Keys', link: 'shadow-to-do' },
+              { text: 'CA Certificates', link: 'shadow-to-do' },
+              { text: 'Terminal Security', link: 'shadow-to-do' },
+            ]
+          },
+          {
+            text: 'Team Management',
+            collapsed: true,
+            items: [
+              { text: 'Teams & Members', link: 'shadow-to-do' },
+              { text: 'Roles & Permissions', link: 'shadow-to-do' },
+              { text: 'Shared Variables', link: 'shadow-to-do' },
+            ]
+          },
         ]
       },
       {
