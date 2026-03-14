@@ -145,7 +145,7 @@ export default defineConfig({
         text: 'Get Started',
         collapsed: false,
         items: [
-          { text: 'Choose your path', link: 'shadow-to-do' },
+          { text: 'Choose your path', link: '/get-started/choose-your-path' },
           { text: 'Start with Self-hosted', link: 'shadow-to-do' },
           { text: 'Start with Coolify Cloud', link: 'shadow-to-do' },
           { text: 'Deploy your first app', link: 'shadow-to-do' },
