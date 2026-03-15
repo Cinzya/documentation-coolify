@@ -45,6 +45,8 @@ Below are some of the key features and ways you can use Traefik with Coolify:
 
 8. [Wildcard Certificates](/knowledge-base/proxy/traefik/wildcard-certs) -> Secure multiple subdomains with a single SSL certificate.
 
+9. [Access Logs](/knowledge-base/proxy/traefik/access-logs) -> Enable and configure access logging for monitoring and security.
+
 ---
 
 ::: danger CAUTION!  

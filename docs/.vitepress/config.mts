@@ -435,6 +435,7 @@ export default defineConfig({
                       { text: 'Load Balancing', link: '/knowledge-base/proxy/traefik/load-balancing' },
                       { text: 'Redirects', link: '/knowledge-base/proxy/traefik/redirects' },
                       { text: 'Wildcard SSL Certificates', link: '/knowledge-base/proxy/traefik/wildcard-certs' },
+                      { text: 'Access Logs', link: '/knowledge-base/proxy/traefik/access-logs' },
                       { text: 'Protect Services with Authentik', link: '/knowledge-base/proxy/traefik/protect-services-with-authentik' }
                     ]
                   },
