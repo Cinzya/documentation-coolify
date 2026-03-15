@@ -271,6 +271,10 @@ For ongoing operations, see:
 ## Advanced installations
 These options are optional and mostly useful for automation or custom infrastructure requirements.
 
+::: warning Safety first
+  Test advanced changes on a non-production server first. If you manage production workloads, keep backups and a rollback path before applying advanced install settings.
+:::
+
 ---
 
 ### 1. Root user
@@ -428,6 +432,11 @@ docker compose --env-file /data/coolify/source/.env -f /data/coolify/source/dock
 ==
 :::
 
+<Callout type="tip" title="Tip">
+
+  The registry can be changed after installing Coolify by following the steps above.
+</Callout>
+
 ---
 
 ### 4. Compose overrides
@@ -437,15 +446,106 @@ Use this when you need persistent customization of Coolify containers (ports, la
 | :--- | :--- |
 | `/data/coolify/source/docker-compose.custom.yml` | custom compose overrides that persist across upgrades |
 
-Use these exact service keys:
 
-| Service key | Container name |
-| :--- | :--- |
-| `coolify` | `coolify` |
-| `postgres` | `coolify-db` |
-| `redis` | `coolify-redis` |
-| `soketi` | `coolify-realtime` |
+The Compose services are defined with these names — you must use these exact names in your override file:
 
+| Service name | Container name     | Description              |
+|--------------|:-------------------|:-------------------------|
+| `coolify`    | `coolify`          | Main Coolify application |
+| `postgres`   | `coolify-db`       | PostgreSQL database      |
+| `redis`      | `coolify-redis`    | Redis cache              |
+| `soketi`     | `coolify-realtime` | WebSocket server         |
+
+---
+
+#### Examples
+
+#### A. Add Container Labels
+
+Add labels for external tooling such as monitoring or log aggregation:
+
+```yaml
+services:
+  coolify:
+    labels:
+      com.example.monitoring: "true"
+      com.example.environment: "production"
+```
+
+---
+
+#### B. Set Resource Limits
+
+Restrict CPU and memory usage for the main Coolify container:
+
+```yaml
+services:
+  coolify:
+    cpus: 2.0
+    mem_limit: 2G
+    mem_reservation: 512M
+```
+
+See the Docker Compose documentation for the full list of available attributes: [cpus](https://docs.docker.com/reference/compose-file/services/#cpus?utm_source=coolify.io), [mem_limit](https://docs.docker.com/reference/compose-file/services/#mem_limit?utm_source=coolify.io), [mem_reservation](https://docs.docker.com/reference/compose-file/services/#mem_reservation?utm_source=coolify.io), and [other resource constraints](https://docs.docker.com/reference/compose-file/services/#cpu_count?utm_source=coolify.io).
+
+---
+
+#### C. Change Port Binding
+
+The port number can be changed via the `APP_PORT` variable in Coolify's `.env` file (`/data/coolify/source/.env`). However, the override file lets you control *how* the port is bound — something `.env` cannot do.
+
+Bind the Coolify UI to localhost only, so it is only accessible through a reverse proxy:
+
+```yaml
+services:
+  coolify:
+    ports:
+      - "127.0.0.1:8000:8080"
+```
+
+Or close the port entirely and rely on the Docker network (useful when the Coolify Proxy is enabled and configured for the Coolify Dashboard):
+
+```yaml
+services:
+  coolify:
+    ports: !override []
+```
+
+::: warning
+If you remove or restrict port access, make sure you have another way to reach the Coolify UI (e.g., a reverse proxy). Otherwise you will lock yourself out.
+:::
+
+---
+
+#### D. Adjust Database Configuration
+
+Add custom PostgreSQL parameters:
+
+```yaml
+services:
+  postgres:
+    command: postgres -c max_connections=200 -c shared_buffers=512MB
+```
+
+---
+
+#### E. Combine Multiple Customizations
+
+A single override file can modify multiple services:
+
+```yaml
+services:
+  coolify:
+    mem_limit: 2G
+    labels:
+      com.example.monitoring: "true"
+
+  postgres:
+    mem_limit: 1G
+
+  redis:
+    mem_limit: 256M
+```
 ::: tabs key:selfhosted-install-mode
 == Automated
 
@@ -492,8 +592,3 @@ docker compose --env-file /data/coolify/source/.env -f /data/coolify/source/dock
 ```
 ==
 :::
-
-<Callout type="warning" title="Safety first">
-
-  Test advanced changes on a non-production server first. If you manage production workloads, keep backups and a rollback path before applying advanced install settings.
-</Callout>
