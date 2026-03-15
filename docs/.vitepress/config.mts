@@ -444,10 +444,6 @@ export default defineConfig({
                   { text: 'Commands', link: '/knowledge-base/commands' },
                   { text: 'Delete User', link: '/knowledge-base/delete-user' },
                   { text: 'OAuth', link: '/knowledge-base/oauth' },
-                  { text: 'Default Root User', link: '/knowledge-base/create-root-user-with-env' },
-                  { text: 'Custom Docker Network', link: '/knowledge-base/define-custom-docker-network-with-env' },
-                  { text: 'Custom Docker Registry', link: '/knowledge-base/custom-docker-registry' },
-                  { text: 'Custom Compose Overrides', link: '/knowledge-base/custom-compose-overrides' },
                   { text: 'Change Localhost Key', link: '/knowledge-base/change-localhost-key' },
                 ]
               },
