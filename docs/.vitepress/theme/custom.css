@@ -26,6 +26,24 @@
   border: none !important;
 }
 
+/* Restore readable spacing inside tabs (headings, paragraphs, code blocks) */
+.plugin-tabs--content > h2,
+.plugin-tabs--content > h3,
+.plugin-tabs--content > h4 {
+  margin-top: 1.2rem !important;
+  margin-bottom: 0.7rem !important;
+}
+
+.plugin-tabs--content > p {
+  margin: 0.8rem 0 !important;
+}
+
+.plugin-tabs--content > div[class*='language-'],
+.plugin-tabs--content > pre[class*='language-'],
+.plugin-tabs--content > [class*='language-'] {
+  margin: 0.9rem 0 1rem 0 !important;
+}
+
 .dark .plugin-tabs {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2) !important;
 }
