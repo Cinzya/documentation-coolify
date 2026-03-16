@@ -92,6 +92,8 @@ If you create a new key:
 
 <ZoomableImage src="shadow-to-do" alt="Private key setup in Coolify Cloud" />
 
+---
+
 ### 4. Add your server (next onboarding step)
 Now add the server you want to deploy to:
 - give your server a name
@@ -121,7 +123,6 @@ Once your server is validated, deploy your first resource by following one of th
 - [Deploy your first service](/get-started/deploy-your-first-service)
 
 
-
 ## Shared responsibility model
 Coolify Cloud manages the Coolify control plane. You manage the servers and workloads you connect to it.
 
@@ -133,7 +134,6 @@ Coolify Cloud manages the Coolify control plane. You manage the servers and work
 | Server OS updates and security hardening | No | Yes |
 | Application and database runtime/data | No | Yes |
 | Application backups and restore| No | Yes |
-
 
 
 ## Quick answers
@@ -161,11 +161,15 @@ If authentication fails:
 - verify you are using the correct SSH user, IP, and port
 - confirm the key has no passphrase
 
+---
+
 ### Server validation fails because of plan limits
 If Cloud says you exceeded allowed connected servers for your current plan:
 - remove an existing connected server, or
 - upgrade your plan to support more connected servers
 - If the issue still persists after trying the above, send an email to **[hi@coollabs.io](mailto:hi@coollabs.io)** clearly describing the problem.
+
+---
 
 <Callout type="neutral" title="Help">
 
