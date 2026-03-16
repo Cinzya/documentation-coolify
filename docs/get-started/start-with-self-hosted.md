@@ -321,11 +321,16 @@ After your Raspberry Pi boots up, install Coolify by following the installation 
 
 ## After setup
 Once your instance is running:
-1. Start deploying on the same server where Coolify is running:
+
+1. Take a backup of `/data/coolify/source/.env`. This file contains the Coolify database password and the encryption key used to encrypt the database. Without this `.env` file, you will not be able to restore backups for your Coolify instance.
+
+
+2. Start deploying on the same server (`localhost`) where Coolify is running:
    - [Deploy your first app](/get-started/deploy-your-first-app)
    - [Deploy your first database](/get-started/deploy-your-first-database)
    - [Deploy your first service](/get-started/deploy-your-first-service)
-2. If you want to expand beyond a single-server setup, continue with:
+
+3. If you want to expand beyond a single-server setup, continue with:
    - [Add and validate servers](shadow-to-do)
    - [Build server](shadow-to-do)
    - [Multiple servers](shadow-to-do)
