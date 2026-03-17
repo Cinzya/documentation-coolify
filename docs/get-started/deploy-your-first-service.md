@@ -1,0 +1,136 @@
+---
+title: Deploy your first service
+description: Deploy your first one-click service on Coolify using Umami and sign in to verify it is running.
+---
+
+# Deploy your first service
+Deploying your first service in Coolify helps you understand one-click resources and service routing.
+
+In this guide, you will deploy **Umami** (an open source analytics tool) from the one-click resource list.
+
+This path is ideal for a first service deployment because:
+- setup is fast and beginner-friendly
+- no manual Docker Compose setup is required
+- you can verify success by opening the login page
+
+## Before you start
+Make sure:
+- Coolify is installed and accessible
+- you have at least one connected server in Coolify (if you are self-hosting, you can use the same server where Coolify runs which will be `localhost`)
+- Coolify proxy is running on your server
+
+If you are not ready yet, first follow:
+- [Start with Self-hosted](/get-started/start-with-self-hosted)
+- [Start with Coolify Cloud](/get-started/start-with-cloud)
+
+
+## Deploy your first Umami service
+### 1. Check if Coolify proxy is running
+On the Coolify dashboard:
+- click **Servers** on the left sidebar
+- click on your server name
+- check if it says **Proxy is running**
+
+<ZoomableImage src="shadow-to-do" alt="Proxy status in Coolify" />
+
+If it says **Proxy is stopped**, click **Start Proxy**.
+
+---
+
+### 2. Create your first project
+On the Coolify dashboard:
+- click **New Project**
+- enter a project name (example: `my-first-project`)
+- click **Continue**
+
+<ZoomableImage src="shadow-to-do" alt="Create a project in Coolify" />
+
+::: tip Tip
+If you already have a project, skip this step and continue to Step 3.
+:::
+
+---
+
+### 3. Create a new resource
+Open your project and click **Create New Resource**.
+
+<ZoomableImage src="shadow-to-do" alt="Create new resource in Coolify project" />
+
+---
+
+### 4. Choose Umami from service list
+In the one-click resource list:
+- search for **Umami**
+- click **Umami**
+
+<ZoomableImage src="shadow-to-do" alt="Select Umami from one-click services list" />
+
+---
+
+### 5. Deploy
+Click the **Deploy** button.
+
+<ZoomableImage src="shadow-to-do" alt="Deploy Umami service" />
+
+Coolify will pull all required Docker images for Umami and start the containers.
+
+::: tip Tip
+Building is not required for one-click services. All one-click services use prebuilt Docker images.
+:::
+
+---
+
+### 6. Visit the service URL
+After deployment completes:
+- open the generated application URL in Coolify
+- you should see the Umami login page
+
+Default login credentials:
+- username: `admin`
+- password: `umami`
+
+<ZoomableImage src="shadow-to-do" alt="Umami login page after deployment" />
+
+
+## Custom domain (optional)
+If you want to use your own domain:
+- click the pencil icon next to the domain field
+- replace the generated domain with your own domain
+- keep the service port in configuration (example: `https://domain.com:3000`)
+
+When visiting in browser, use:
+- `https://domain.com`
+
+The `:3000` part is for internal routing configuration in Coolify.
+
+For custom domains, make sure:
+- your domain DNS record points to your server IP address
+- the domain is added in Coolify with `https://`
+- ports `80` and `443` are open on your server firewall
+
+
+## Common first-deploy issues
+### 1. Service link does not open
+Check:
+- DNS record points to your server IP (if using your own domain)
+- server firewall allows port `80` and `443`
+- Coolify proxy is running (follow [step 1](#_1-check-if-coolify-proxy-is-running))
+
+
+### 2. Login fails
+Check:
+- you are using the default credentials (`admin` / `umami`) before changing them
+- keyboard input is correct (no extra spaces)
+
+
+### 3. Browser shows site not secure
+This can happen if you are using the auto-generated `sslip.io` domain, because TLS certificate issuance for shared/testing domains can be rate-limited.
+
+If you are using your own domain, make sure:
+- DNS is pointed correctly to your server IP
+- the domain is added in Coolify with `https://` so it will be like `https://example.com`
+
+
+## What to do next
+- [Learn more about services](/services/introduction)
+- [Explore more one-click services](/services/all)
