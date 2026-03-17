@@ -149,7 +149,7 @@ export default defineConfig({
           { text: 'Start with Self-hosted', link: '/get-started/start-with-self-hosted' },
           { text: 'Start with Coolify Cloud', link: '/get-started/start-with-cloud' },
           { text: 'Deploy your first app', link: '/get-started/deploy-your-first-app' },
-          { text: 'Deploy your first database', link: 'shadow-to-do' },
+          { text: 'Deploy your first database', link: '/get-started/deploy-your-first-database' },
           { text: 'Deploy your first service', link: 'shadow-to-do' },
           // {
           //   text: 'Installation',
