@@ -48,7 +48,7 @@ const quickStartCards = [
   {
     title: 'Deploy your first application',
     image: '/docs/images/home/deploy-first-application.webp',
-    link: '/get-started/installation'
+    link: 'get-started/deploy-your-first-app'
   },
   {
     title: 'API',
