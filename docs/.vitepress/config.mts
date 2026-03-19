@@ -195,7 +195,7 @@ export default defineConfig({
             collapsed: true,
             items: [
               { text: 'Update / Upgrade', link: '/manage-coolify/instance-management/update' },
-              { text: 'Downgrade', link: 'shadow-to-do' },
+              { text: 'Downgrade', link: '/manage-coolify/instance-management/downgrade' },
               { text: 'Uninstallation', link: 'shadow-to-do' },
               { text: 'Instance Settings', link: 'shadow-to-do' },
             ]
