@@ -22,8 +22,8 @@ If you need fine-grained token, like with [Cloudflare](https://go-acme.github.io
 1. Setup your wildcard subdomain DNS records, `*.coolify.io`.
 2. Go to your Proxy settings (Servers / Proxy menu) and add the following configuration based on your [providers](https://doc.traefik.io/traefik/https/acme/#providers). The example will use `Hetzner` as a provider.
 
-```bash
-version: '3.8'
+```yaml
+name: coolify-proxy
 networks:
   coolify:
     external: true
@@ -32,8 +32,8 @@ services:
     container_name: coolify-proxy
     image: 'traefik:v3.6'
     restart: unless-stopped
-    environment:
-      - HETZNER_API_TOKEN=<API Key>
+    environment: # [!code focus]
+      - HETZNER_API_TOKEN=<API Key> # [!code focus]
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     networks:
@@ -41,6 +41,7 @@ services:
     ports:
       - '80:80'
       - '443:443'
+      - '443:443/udp'
       - '8080:8080'
     healthcheck:
       test: 'wget -qO- http://localhost:80/ping || exit 1'
@@ -49,7 +50,7 @@ services:
       retries: 5
     volumes:
       - '/var/run/docker.sock:/var/run/docker.sock:ro'
-      - '/data/coolify/proxy:/traefik'
+      - '/data/coolify/proxy/:/traefik'
     command:
       - '--ping=true'
       - '--ping.entrypoint=http'
@@ -58,28 +59,29 @@ services:
       - '--entrypoints.http.address=:80'
       - '--entrypoints.https.address=:443'
       - '--entrypoints.http.http.encodequerysemicolons=true'
+      - '--entryPoints.http.http2.maxConcurrentStreams=250'
       - '--entrypoints.https.http.encodequerysemicolons=true'
+      - '--entryPoints.https.http2.maxConcurrentStreams=250'
+      - '--entrypoints.https.http3'
       - '--providers.docker.exposedbydefault=false'
       - '--providers.file.directory=/traefik/dynamic/'
       - '--providers.file.watch=true'
-      # use dnschallenge instead of httpchallenge
-      # - '--certificatesresolvers.letsencrypt.acme.httpchallenge=true'
-      # - '--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=http'
-      - '--certificatesresolvers.letsencrypt.acme.dnschallenge.provider=hetzner'
-      - '--certificatesresolvers.letsencrypt.acme.dnschallenge.delaybeforecheck=0'
+      - '--certificatesresolvers.letsencrypt.acme.httpchallenge=true' # [!code --][!code focus]
+      - '--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=http' # [!code --][!code focus]
+      - '--certificatesresolvers.letsencrypt.acme.dnschallenge.provider=hetzner' # [!code ++][!code focus]
+      - '--certificatesresolvers.letsencrypt.acme.dnschallenge.delaybeforecheck=0' # [!code ++][!code focus]
       - '--certificatesresolvers.letsencrypt.acme.storage=/traefik/acme.json'
       - '--providers.docker=true'
     labels:
       - traefik.enable=true
       - traefik.http.routers.traefik.entrypoints=http
-      - traefik.http.routers.traefik.middlewares=traefik-basic-auth@file
       - traefik.http.routers.traefik.service=api@internal
-      - traefik.http.routers.traefik.tls.certresolver=letsencrypt
-      - traefik.http.routers.traefik.tls.domains[0].main=coolify.io
-      - traefik.http.routers.traefik.tls.domains[0].sans=*.coolify.io
+      - traefik.http.routers.traefik.tls.certresolver=letsencrypt # [!code focus]
+      - traefik.http.routers.traefik.tls.domains[0].main=coolify.io # [!code focus]
+      - traefik.http.routers.traefik.tls.domains[0].sans=*.coolify.io # [!code focus]
       - traefik.http.services.traefik.loadbalancer.server.port=8080
-      - traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https
-      - traefik.http.middlewares.gzip.compress=true
+      - coolify.managed=true
+      - coolify.proxy=true
 ```
 
 > You can also set `env_file` instead of `environment` in the example above, but then you need to create a `.env` file with the `HETZNER_API_TOKEN` variable on the server.
@@ -94,63 +96,48 @@ If you would like to use one (wildcard) certificate for all of your resources, y
 
 It is useful, because Traefik do not need to generate a new certificate for every resource, so new deployments will be available immediately without waiting for the certificate generation.
 
-- In your application, set your FQDN to a subdomain you would like to use: `https://example.coolify.io`.
+- In your application, set your Domain to a subdomain you would like to use and press save: `https://example.coolify.io`.
 
-```bash
-traefik.enable=true
-traefik.http.routers.<unique_router_name_https>.rule=Host(`example.coolify.io`) && PathPrefix(`/`)
-traefik.http.routers.<unique_router_name_https>.entryPoints=https
-traefik.http.routers.<unique_router_name_https>.middlewares=gzip
-traefik.http.routers.<unique_router_name_https>.service=<unique_service_name>
-traefik.http.routers.<unique_router_name_https>.tls=true
-traefik.http.services.<unique_service_name>.loadbalancer.server.port=80
-traefik.http.routers.<unique_router_name_https>.tls.certresolver=letsencrypt
+<ZoomableImage src="/docs/images/applications/domain.webp" alt="Domain input field on Applications" />
 
-traefik.http.routers.<unique_router_name_http>.rule=Host(`example.coolify.io`) && PathPrefix(`/`)
-traefik.http.routers.<unique_router_name_http>.entryPoints=http
-traefik.http.routers.<unique_router_name_http>.middlewares=redirect-to-https
-```
+<ZoomableImage src="/docs/images/knowledge-base/compose/domain.webp" alt="Domain input field on Services" class="mt-5" />
+
 
 ### SaaS
 
 Redirect all subdomains to one application. You can use this option if you want to use Coolify as a SaaS provider.
 
-- In your application, leave the FQDN configuration `empty`.
+- In your application, leave the Domain field `empty`.
 - Add the following custom label configuration:
 
-:::tabs key:saas
-== Traefik v3
+:::code-group
 
-```bash
+```traefik [Traefik v3]
 traefik.enable=true
-traefik.http.routers.<unique_router_name_https>.rule=HostRegexp(`^.+\.coolify\.io$`)
-traefik.http.routers.<unique_router_name_https>.entryPoints=https
-traefik.http.routers.<unique_router_name_https>.middlewares=gzip
-traefik.http.routers.<unique_router_name_https>.service=<unique_service_name>
-traefik.http.routers.<unique_router_name_https>.tls.certresolver=letsencrypt
-traefik.http.services.<unique_service_name>.loadbalancer.server.port=80
-traefik.http.routers.<unique_router_name_https>.tls=true
-
-traefik.http.routers.<unique_router_name_http>.rule=HostRegexp(`^.+\.coolify\.io$`)
 traefik.http.routers.<unique_router_name_http>.entryPoints=http
 traefik.http.routers.<unique_router_name_http>.middlewares=redirect-to-https
+traefik.http.routers.<unique_router_name_http>.rule=HostRegexp(`^.+\.coolify\.io$`) # [!code highlight]
+traefik.http.routers.<unique_router_name_https>.entryPoints=https
+traefik.http.routers.<unique_router_name_https>.middlewares=gzip
+traefik.http.routers.<unique_router_name_https>.rule=HostRegexp(`^.+\.coolify\.io$`) # [!code highlight]
+traefik.http.routers.<unique_router_name_https>.service=<unique_service_name>
+traefik.http.routers.<unique_router_name_https>.tls.certresolver=letsencrypt
+traefik.http.routers.<unique_router_name_https>.tls=true
+traefik.http.services.<unique_service_name>.loadbalancer.server.port=80
 ```
 
-== Traefik v2
-
-```bash
+```traefik [Traefik v2]
 traefik.enable=true
-traefik.http.routers.<unique_router_name_https>.rule=HostRegexp(`{subdomain:[a-zA-Z0-9-]+}.coolify.io`)
-traefik.http.routers.<unique_router_name_https>.entryPoints=https
-traefik.http.routers.<unique_router_name_https>.middlewares=gzip
-traefik.http.routers.<unique_router_name_https>.service=<unique_service_name>
-traefik.http.routers.<unique_router_name_https>.tls.certresolver=letsencrypt
-traefik.http.services.<unique_service_name>.loadbalancer.server.port=80
-traefik.http.routers.<unique_router_name_https>.tls=true
-
-traefik.http.routers.<unique_router_name_http>.rule=HostRegexp(`{subdomain:[a-zA-Z0-9-]+}.coolify.io`)
 traefik.http.routers.<unique_router_name_http>.entryPoints=http
 traefik.http.routers.<unique_router_name_http>.middlewares=redirect-to-https
+traefik.http.routers.<unique_router_name_http>.rule=HostRegexp(`{subdomain:[a-zA-Z0-9-]+}.coolify.io`) # [!code highlight]
+traefik.http.routers.<unique_router_name_https>.entryPoints=https
+traefik.http.routers.<unique_router_name_https>.middlewares=gzip
+traefik.http.routers.<unique_router_name_https>.rule=HostRegexp(`{subdomain:[a-zA-Z0-9-]+}.coolify.io`) # [!code highlight]
+traefik.http.routers.<unique_router_name_https>.service=<unique_service_name>
+traefik.http.routers.<unique_router_name_https>.tls.certresolver=letsencrypt
+traefik.http.routers.<unique_router_name_https>.tls=true
+traefik.http.services.<unique_service_name>.loadbalancer.server.port=80
 ```
 
 :::
@@ -159,7 +146,8 @@ traefik.http.routers.<unique_router_name_http>.middlewares=redirect-to-https
 
 > `traefik.http.services.<unique_service_name>.loadbalancer.server.port` should be the same as your application listens on. Port 80 if you use a static deployment.
 
+Read more about [HostRegexp](https://doc.traefik.io/traefik/routing/routers/#hostregexp) rule in the official Traefik documentation.
+
 ::: warning Caution
-You cannot use both configurations (Normal & SaaS) at the same time on one
-server.
+Your Application / Service needs to restart for domain changes to take effect.
 :::
