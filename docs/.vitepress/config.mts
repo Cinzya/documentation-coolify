@@ -444,6 +444,7 @@ export default defineConfig({
                       },
                       { text: 'Dynamic Configurations', link: '/knowledge-base/proxy/traefik/dynamic-config' },
                       { text: 'Load Balancing', link: '/knowledge-base/proxy/traefik/load-balancing' },
+                      { text: 'DNS Challenge', link: '/knowledge-base/proxy/traefik/dns-challenge' },
                       { text: 'Wildcard SSL Certificates', link: '/knowledge-base/proxy/traefik/wildcard-certs' },
                       { text: 'Protect Services with Authentik', link: '/knowledge-base/proxy/traefik/protect-services-with-authentik' }
                     ]
