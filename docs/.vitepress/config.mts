@@ -455,6 +455,7 @@ export default defineConfig({
                     items: [
                       { text: 'Overview', link: '/knowledge-base/proxy/caddy/overview' },
                       { text: 'Basic Auth', link: '/knowledge-base/proxy/caddy/basic-auth' },
+                      { text: 'DNS Challenge', link: '/knowledge-base/proxy/caddy/dns-challenge' },
                     ]
                   },
                 ]
