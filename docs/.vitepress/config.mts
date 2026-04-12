@@ -429,7 +429,6 @@ export default defineConfig({
                     collapsed: true,
                     items: [
                       { text: 'Overview', link: '/knowledge-base/proxy/traefik/overview' },
-                      { text: 'Basic Auth', link: '/knowledge-base/proxy/traefik/basic-auth' },
                       { text: 'Custom SSL Certificates', link: '/knowledge-base/proxy/traefik/custom-ssl-certs' },
                       { text: 'Dashboard', link: '/knowledge-base/proxy/traefik/dashboard' },
                       {
@@ -437,6 +436,7 @@ export default defineConfig({
                         link: '/knowledge-base/proxy/traefik/custom-middlewares',
                         collapsed: true,
                         items: [
+                          { text: 'Basic Auth', link: '/knowledge-base/proxy/traefik/basic-auth' },
                           { text: 'Redirects', link: '/knowledge-base/proxy/traefik/redirects' },
                         ]
                       },
