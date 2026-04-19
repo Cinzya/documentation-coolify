@@ -1,114 +1,56 @@
 ---
 title: "Wildcard SSL Certificates"
-description: "Configure Let's Encrypt wildcard SSL certificates with Traefik DNS challenge using Cloudflare, Hetzner, or other providers for automatic subdomain coverage."
+description: "Issue a single Let's Encrypt wildcard SSL certificate (*.example.com) with Traefik to cover every subdomain without per-resource certificate generation."
 ---
 
 # Setup Wildcard SSL Certificates with Traefik
 
+A wildcard certificate (e.g. `*.coolify.io`) covers every subdomain under a single domain with one certificate. Because Traefik does not need to request a new cert for each resource, new deployments become reachable over HTTPS immediately instead of waiting for ACME issuance.
+
 ## Prerequisites
 
-- You need to have a domain name and a DNS provider that supports wildcard subdomains.
-- You need to use [dnsChallenge](https://doc.traefik.io/traefik/https/acme/#dnschallenge) in Traefik to get wildcard certificates from Let's Encrypt.
-- You need to use one of the supported DNS [providers](https://go-acme.github.io/lego/dns/index.html#dns-providers).
-
-::: tip Tip
-Each provider needs environment variables to be set in the Traefik configuration. You can find the required variables in the [official documentation](https://go-acme.github.io/lego/dns/index.html#dns-providers).
-
-If you need fine-grained token, like with [Cloudflare](https://go-acme.github.io/lego/dns/cloudflare/), check the provider configurations.
-:::
+- Traefik must already be using the **DNS challenge** — wildcard certificates cannot be issued via the HTTP challenge. If you haven't switched yet, follow the [DNS challenge guide](./dns-challenge) first.
+- A **wildcard DNS `A` record** pointing to your server, e.g. `*.coolify.io` → your server's IP.
 
 ## Configuration
 
-1. Setup your wildcard subdomain DNS records, `*.coolify.io`.
-2. Go to your Proxy settings (Servers / Proxy menu) and add the following configuration based on your [providers](https://doc.traefik.io/traefik/https/acme/#providers). The example will use `Hetzner` as a provider.
+With the DNS challenge already in place, open **Servers → your server → Proxy** and add the three highlighted labels to the Traefik configuration:
 
 ```yaml
-name: coolify-proxy
-networks:
-  coolify:
-    external: true
-services:
-  traefik:
-    container_name: coolify-proxy
-    image: 'traefik:v3.6'
-    restart: unless-stopped
-    environment: # [!code focus]
-      - HETZNER_API_TOKEN=<API Key> # [!code focus]
-    extra_hosts:
-      - 'host.docker.internal:host-gateway'
-    networks:
-      - coolify
-    ports:
-      - '80:80'
-      - '443:443'
-      - '443:443/udp'
-      - '8080:8080'
-    healthcheck:
-      test: 'wget -qO- http://localhost:80/ping || exit 1'
-      interval: 4s
-      timeout: 2s
-      retries: 5
-    volumes:
-      - '/var/run/docker.sock:/var/run/docker.sock:ro'
-      - '/data/coolify/proxy/:/traefik'
-    command:
-      - '--ping=true'
-      - '--ping.entrypoint=http'
-      - '--api.dashboard=true'
-      - '--api.insecure=false'
-      - '--entrypoints.http.address=:80'
-      - '--entrypoints.https.address=:443'
-      - '--entrypoints.http.http.encodequerysemicolons=true'
-      - '--entryPoints.http.http2.maxConcurrentStreams=250'
-      - '--entrypoints.https.http.encodequerysemicolons=true'
-      - '--entryPoints.https.http2.maxConcurrentStreams=250'
-      - '--entrypoints.https.http3'
-      - '--providers.docker.exposedbydefault=false'
-      - '--providers.file.directory=/traefik/dynamic/'
-      - '--providers.file.watch=true'
-      - '--certificatesresolvers.letsencrypt.acme.httpchallenge=true' # [!code --][!code focus]
-      - '--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=http' # [!code --][!code focus]
-      - '--certificatesresolvers.letsencrypt.acme.dnschallenge.provider=hetzner' # [!code ++][!code focus]
-      - '--certificatesresolvers.letsencrypt.acme.dnschallenge.delaybeforecheck=0' # [!code ++][!code focus]
-      - '--certificatesresolvers.letsencrypt.acme.storage=/traefik/acme.json'
-      - '--providers.docker=true'
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.traefik.entrypoints=http
-      - traefik.http.routers.traefik.service=api@internal
-      - traefik.http.routers.traefik.tls.certresolver=letsencrypt # [!code focus]
-      - traefik.http.routers.traefik.tls.domains[0].main=coolify.io # [!code focus]
-      - traefik.http.routers.traefik.tls.domains[0].sans=*.coolify.io # [!code focus]
-      - traefik.http.services.traefik.loadbalancer.server.port=8080
-      - coolify.managed=true
-      - coolify.proxy=true
+labels:
+  - traefik.enable=true
+  - traefik.http.routers.traefik.entrypoints=http
+  - traefik.http.routers.traefik.service=api@internal
+  - traefik.http.routers.traefik.tls.certresolver=letsencrypt # [!code ++]
+  - traefik.http.routers.traefik.tls.domains[0].main=coolify.io # [!code ++]
+  - traefik.http.routers.traefik.tls.domains[0].sans=*.coolify.io # [!code ++]
+  - traefik.http.services.traefik.loadbalancer.server.port=8080
+  - coolify.managed=true
+  - coolify.proxy=true
 ```
 
-> You can also set `env_file` instead of `environment` in the example above, but then you need to create a `.env` file with the `HETZNER_API_TOKEN` variable on the server.
+These labels tell Traefik to request a single certificate whose SAN covers both the apex (`coolify.io`) and the wildcard (`*.coolify.io`). Replace `coolify.io` with your own domain.
 
-> Change `--certificatesresolvers.letsencrypt.acme.dnschallenge.provider=hetzner` to your provider.
-
-Now you have two options to configure your wildcard subdomain for your resources.
+Restart the proxy after saving. Once the certificate is issued, you have two options for applying it to your resources.
 
 ### Normal
 
-If you would like to use one (wildcard) certificate for all of your resources, you can use this option.
+Use this if each resource lives on its own subdomain and you want them all served by the single wildcard certificate.
 
-It is useful, because Traefik do not need to generate a new certificate for every resource, so new deployments will be available immediately without waiting for the certificate generation.
-
-- In your application, set your Domain to a subdomain you would like to use and press save: `https://example.coolify.io`.
+- In your application, set the Domain to a subdomain such as `https://example.coolify.io` and press save.
 
 <ZoomableImage src="/docs/images/applications/domain.webp" alt="Domain input field on Applications" />
 
 <ZoomableImage src="/docs/images/knowledge-base/compose/domain.webp" alt="Domain input field on Services" class="mt-5" />
 
+Because the wildcard cert already covers `*.coolify.io`, Traefik reuses it for every new resource — no per-deployment ACME round trip.
 
-### SaaS
+### SaaS — route every subdomain to one application
 
-Redirect all subdomains to one application. You can use this option if you want to use Coolify as a SaaS provider.
+Use this if one application should respond to *every* subdomain (for example, a multi-tenant SaaS where each tenant gets their own subdomain).
 
-- In your application, leave the Domain field `empty`.
-- Add the following custom label configuration:
+- Leave the application's Domain field **empty**.
+- Add the following custom labels:
 
 :::code-group
 
@@ -142,12 +84,12 @@ traefik.http.services.<unique_service_name>.loadbalancer.server.port=80
 
 :::
 
-> `traefik.http.routers.<unique_router_name_https>.tls.certresolver` should be the same as your `certresolver` name in Traefik proxy configuration, by default `letsencrypt`.
+> `<unique_router_name_https>.tls.certresolver` must match the resolver name in your Traefik proxy configuration — `letsencrypt` by default.
 
-> `traefik.http.services.<unique_service_name>.loadbalancer.server.port` should be the same as your application listens on. Port 80 if you use a static deployment.
+> `<unique_service_name>.loadbalancer.server.port` must match the port your application listens on (use `80` for static deployments).
 
-Read more about [HostRegexp](https://doc.traefik.io/traefik/routing/routers/#hostregexp) rule in the official Traefik documentation.
+Read more about the [HostRegexp](https://doc.traefik.io/traefik/routing/routers/#hostregexp) rule in the official Traefik documentation.
 
 ::: warning Caution
-Your Application / Service needs to restart for domain changes to take effect.
+Your application or service needs to restart for domain changes to take effect.
 :::
