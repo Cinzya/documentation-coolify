@@ -206,8 +206,6 @@ export default defineConfig({
             items: [
               { text: 'Instance Backup', link: '/manage-coolify/backup-and-recovery/instance-backup' },
               { text: 'Instance Restore', link: '/manage-coolify/backup-and-recovery/instance-restore' },
-              { text: 'Database Backups', link: 'shadow-to-do' },
-              { text: 'Backup Downloads', link: 'shadow-to-do' },
             ]
           },
           {

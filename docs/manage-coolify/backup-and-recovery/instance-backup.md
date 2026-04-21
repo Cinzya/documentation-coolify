@@ -31,14 +31,6 @@ If you see **Configure Backup**, click it once to create the instance backup con
 
 Default frequency is `0 0 * * *` (every day at `00:00`)
 
-::: warning Important
-Keep both:
-- the database backup file
-- `/data/coolify/source/.env`
-
-Without `/data/coolify/source/.env`, restore will fail even if you still have the database backup file. The `.env` file contains the key used to encrypt the databse.
-:::
-
 
 ## Backup from dashboard
 Use the Backup tab if the Coolify dashboard is available, otherwise follow the [Backup from terminal guide](#backup-from-terminal)
@@ -225,7 +217,6 @@ This creates `/data/backups/coolify-ssh-keys/`
 
 These files help the restored instance reconnect to servers managed by Coolify.
 
----
 
 ## Backup from terminal
 Use this if the dashboard is unavailable.
