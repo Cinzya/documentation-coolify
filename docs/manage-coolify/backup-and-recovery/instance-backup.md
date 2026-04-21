@@ -43,7 +43,19 @@ Without `/data/coolify/source/.env`, restore will fail even if you still have th
 ## Backup from dashboard
 Use the Backup tab if the Coolify dashboard is available, otherwise follow the [Backup from terminal guide](#backup-from-terminal)
 
-### Scheduled Backup
+### Create a backup now
+Use this when you want to create a backup immediately.
+
+1. Visit `https://your-coolify-domain.com/settings/backup`
+2. Click **Backup Now**
+2. Wait for the new backup entry to appear in **Executions**
+3. Download the backup file or copy the value from `Location`
+
+::: tip Tip
+If `S3 Enabled` is active, `Backup Now` also uploads the backup to the selected S3 storage.
+:::
+
+### Scheduled Backup settings
 The Scheduled Backup page includes:
 | Item | Description |
 | :--- | :--- |
@@ -199,6 +211,20 @@ cp /data/coolify/source/.env /data/backups/coolify-source.env
 
 This creates a copy at: `/data/backups/coolify-source.env`
 
+### Back up SSH keys
+If you may restore this backup on another server later, also back up the Coolify SSH keys.
+
+Run:
+
+```sh
+mkdir -p /data/backups/coolify-ssh-keys
+cp -R /data/coolify/ssh/keys/. /data/backups/coolify-ssh-keys/
+```
+
+This creates `/data/backups/coolify-ssh-keys/`
+
+These files help the restored instance reconnect to servers managed by Coolify.
+
 ---
 
 ## Backup from terminal
@@ -233,7 +259,22 @@ This creates a copy at:
 
 `/data/backups/coolify-source.env`
 
-### 3. Keep both files
-Keep both:
+### 3. Back up SSH keys
+If you may restore this backup on another server later, also back up the Coolify SSH keys.
+
+Run:
+
+```sh
+mkdir -p /data/backups/coolify-ssh-keys
+cp -R /data/coolify/ssh/keys/. /data/backups/coolify-ssh-keys/
+```
+
+This creates `/data/backups/coolify-ssh-keys/`
+
+These files help the restored instance reconnect to servers managed by Coolify.
+
+### 4. Keep the restore files
+Keep these files somewhere safe:
 - `/data/backups/coolify-db-manual-backup.dmp`
 - `/data/backups/coolify-source.env`
+- `/data/backups/coolify-ssh-keys/`
