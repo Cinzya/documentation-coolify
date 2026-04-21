@@ -4,11 +4,13 @@ description: Configure instance backups for the Coolify database, download backu
 ---
 
 # Instance backup
-Instance backup lets you back up the internal `coolify-db` database for your Coolify installation.
+Instance backup lets you backup the Coolify database for your Coolify instance.
 
-This guide is for **self-hosted** users who want to create, store, and retrieve backups of their Coolify instance.
+::: info Note
+This guide is for **self-hosted** users who want to setup and manage backups of their Coolify instance.
 
 If you use **Coolify Cloud**, instance backup for the Coolify control plane is managed by the Coolify team and is not user-configurable.
+:::
 
 To access instance backup:
 - click **Settings** from the left sidebar, then open **Backup**
@@ -19,7 +21,7 @@ To access instance backup:
 The Backup tab has two main areas:
 | Item | Description |
 | :--- | :--- |
-| [Scheduled Backup](#scheduled-backup) | Configure automatic backup behavior for the internal `coolify-db` database. |
+| [Scheduled Backup](#scheduled-backup) | Configure automatic backup behavior for the `coolify-db` database. |
 | [Executions](#executions) | Review backup history, file locations, availability, and cleanup actions. |
 
 ## Before you start
@@ -116,7 +118,7 @@ Default is `0 0 * * *` (daily at `00:00`).
 #### Timezone
 `Timezone` is a read-only field in this page.
 
-Instance backup follows the **Server Timezone** of the localhost server.
+Instance backup follows the **Server Timezone** of the localhost server (where Coolify is running).
 
 ---
 
@@ -148,7 +150,7 @@ Rules to know:
 ---
 
 ### Executions
-The Executions area shows the backup history for the internal `coolify-db` database.
+The Executions area shows the backup history for the Coolify database.
 
 <ZoomableImage src="shadow-to-do" alt="Coolify instance backup executions" />
 
