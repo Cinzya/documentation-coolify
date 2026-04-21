@@ -229,11 +229,10 @@ The `coolify-db` container must be running before you run the backup command.
 Run:
 
 ```sh
-source /data/coolify/source/.env
-mkdir -p /data/coolify/backups/coolify/manual
-docker exec -e PGPASSWORD="$DB_PASSWORD" coolify-db \
+mkdir -p /data/backups/
+docker exec coolify-db \
   pg_dump --format=custom --no-acl --no-owner \
-  --username "$DB_USERNAME" "${DB_DATABASE:-coolify}" \
+  --username=coolify coolify \
   > /data/backups/coolify-db-manual-backup.dmp
 ```
 
@@ -246,9 +245,7 @@ Run:
 cp /data/coolify/source/.env /data/backups/coolify-source.env
 ```
 
-This creates a copy at:
-
-`/data/backups/coolify-source.env`
+This creates a copy at: `/data/backups/coolify-source.env`
 
 ### 3. Back up SSH keys
 If you may restore this backup on another server later, also back up the Coolify SSH keys.
