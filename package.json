@@ -14,9 +14,10 @@
   },
   "private": true,
   "scripts": {
-    "dev": "vitepress dev docs",
-    "build": "vitepress build docs",
-    "preview": "vitepress preview docs"
+    "generate:services": "node scripts/generate-service-list.mjs",
+    "dev": "node scripts/generate-service-list.mjs && vitepress dev docs",
+    "build": "node scripts/generate-service-list.mjs && vitepress build docs",
+    "preview": "node scripts/generate-service-list.mjs && vitepress preview docs"
   },
   "dependencies": {
     "@korrektly/sdk": "^0.1.4",
