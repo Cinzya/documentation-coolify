@@ -41,7 +41,7 @@ Go to the **General** tab then **Edit Compose File**
 
 Then add this line
 `ports:
-      - $&#123;POSTGRES_PORT:-5432&#125;:$&#123;POSTGRES_PORT:-5432&#125;`
+      - ${POSTGRES_PORT:-5432}:${POSTGRES_PORT:-5432}`
 
 To
 
