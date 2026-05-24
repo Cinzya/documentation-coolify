@@ -236,10 +236,8 @@ function Page() {
 
   const indexLayoutProps = data.isIndex
     ? {
-        sidebar: {
-          enabled: false,
-        },
         containerProps: {
+          'data-docs-index': true,
           style: {
             '--fd-sidebar-col': '0px',
           } as CSSProperties,
