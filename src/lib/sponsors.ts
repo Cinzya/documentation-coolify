@@ -10,6 +10,9 @@ export type Sponsor = {
   imageKey?: string;
   imagePath?: string;
   imageUrl?: string;
+  docsImageKey?: string;
+  docsImagePath?: string;
+  docsImageUrl?: string;
   tier: SponsorTier;
   pinned?: boolean;
   imageStyle?: string;
@@ -29,6 +32,7 @@ export type SponsorsResponse = {
     repository: string;
     landing: string;
     imagesBaseUrl: string;
+    docsImagesBaseUrl?: string;
   };
   tiers: Record<SponsorTier, Sponsor[]>;
 };
