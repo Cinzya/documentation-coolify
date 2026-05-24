@@ -85,7 +85,7 @@ const sidebarMetas = {
   },
   'applications/build-packs': {
     title: 'Build Packs',
-    pages: ['static', 'nixpacks', 'dockerfile', 'docker-compose'],
+    pages: ['static', 'nixpacks', 'railpack', 'dockerfile', 'docker-compose'],
   },
   'applications/build-packs/nixpacks': {
     pages: ['node-versioning'],
