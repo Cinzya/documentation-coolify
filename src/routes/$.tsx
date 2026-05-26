@@ -63,7 +63,7 @@ export const Route = createFileRoute('/$')({
     const title = data.isIndex ? site.title : `${data.title} | ${site.title}`;
     const description = data.description || site.description;
     const canonicalUrl = absoluteUrl(data.url.endsWith('/') ? data.url : `${data.url}`);
-    const ogImageUrl = data.ogImagePath;
+    const ogImageUrl = absoluteUrl(data.ogImagePath);
     const structuredData = {
       '@context': 'https://schema.org',
       '@type': data.isIndex ? 'WebPage' : 'TechArticle',
