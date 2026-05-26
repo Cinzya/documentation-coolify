@@ -194,7 +194,9 @@ const clientLoader = browserCollections.docs.createClientLoader({
           breadcrumb={{ enabled: false }}
           footer={{ enabled: !hideFooter }}
         >
-          <MDX components={useMDXComponents()} />
+          <DocsBody>
+            <MDX components={useMDXComponents()} />
+          </DocsBody>
         </DocsPage>
       );
     }
