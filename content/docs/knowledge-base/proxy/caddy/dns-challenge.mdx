@@ -42,7 +42,7 @@ services:
     build: # [!code ++:7][!code focus:7]
       dockerfile_inline: | 
         FROM caddy:2.11-builder AS builder
-        RUN xcaddy build --with github.com/lucaslorentz/caddy-docker-proxy/v2 --with github.com/caddy-dns/hetzner
+        RUN xcaddy build --with github.com/lucaslorentz/caddy-docker-proxy/v2@v2.8.11 --with github.com/caddy-dns/hetzner/v2@v2.0.0
         FROM caddy:2.11-alpine
         COPY --from=builder /usr/bin/caddy /usr/bin/caddy
         CMD ["caddy", "docker-proxy"]
@@ -85,7 +85,7 @@ services:
     build: # [!code ++:7][!code focus:7]
       dockerfile_inline: |
         FROM caddy:2.11-builder AS builder
-        RUN xcaddy build --with github.com/lucaslorentz/caddy-docker-proxy/v2 --with github.com/caddy-dns/cloudflare
+        RUN xcaddy build --with github.com/lucaslorentz/caddy-docker-proxy/v2@v2.8.11 --with github.com/caddy-dns/cloudflare@v0.2.4
         FROM caddy:2.11-alpine
         COPY --from=builder /usr/bin/caddy /usr/bin/caddy
         CMD ["caddy", "docker-proxy"]
@@ -128,7 +128,7 @@ services:
     build: # [!code ++:7][!code focus:7]
       dockerfile_inline: |
         FROM caddy:2.11-builder AS builder
-        RUN xcaddy build --with github.com/lucaslorentz/caddy-docker-proxy/v2 --with github.com/caddy-dns/route53
+        RUN xcaddy build --with github.com/lucaslorentz/caddy-docker-proxy/v2@v2.8.11 --with github.com/caddy-dns/route53@v1.6.2
         FROM caddy:2.11-alpine
         COPY --from=builder /usr/bin/caddy /usr/bin/caddy
         CMD ["caddy", "docker-proxy"]
