@@ -84,6 +84,44 @@ body {
   }
 }
 
+a[aria-label='GitHub'] {
+  height: 2.25rem;
+  width: auto;
+  gap: 0.5rem;
+  border: 2px solid rgb(0 0 0 / 0.24);
+  border-radius: 9999px;
+  background: rgb(0 0 0 / 0.04);
+  padding-inline: 0.75rem;
+  color: rgb(39 39 42);
+  box-shadow:
+    0 2px 8px rgb(0 0 0 / 0.05);
+}
+
+a[aria-label='GitHub'] svg {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+a[aria-label='GitHub']:hover {
+  border-color: rgb(0 0 0 / 0.34);
+  background: rgb(0 0 0 / 0.065);
+  color: rgb(0 0 0);
+}
+
+.dark a[aria-label='GitHub'] {
+  border-color: rgb(255 255 255 / 0.42);
+  background: rgb(255 255 255 / 0.045);
+  color: rgb(245 245 245);
+  box-shadow:
+    0 0 10px rgb(255 255 255 / 0.08);
+}
+
+.dark a[aria-label='GitHub']:hover {
+  border-color: rgb(255 255 255 / 0.58);
+  background: rgb(255 255 255 / 0.065);
+  color: white;
+}
+
 a[aria-label='Discord'] {
   height: 2.25rem;
   width: auto;
