@@ -78,6 +78,10 @@ body {
   flex: 0 0 auto;
 }
 
+[role='dialog'][class*='w-(--radix-popover-trigger-width)'][class*='fd-scroll-container'] {
+  min-width: var(--radix-popover-trigger-width);
+}
+
 @media (min-width: 768px) {
   button[aria-label='Collapse Sidebar'] {
     display: none;
