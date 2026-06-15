@@ -7,14 +7,30 @@ const pageTree = {
   name: 'Docs',
   children: [
     {
+      type: 'page',
+      name: 'Home',
+      url: '/',
+    },
+    {
+      type: 'page',
+      name: 'Choose your path',
+      url: '/choose-your-path',
+    },
+    {
+      type: 'page',
+      name: 'Support',
+      url: '/support',
+    },
+    {
       type: 'folder',
-      name: 'Get Started',
+      name: 'Core',
       root: true,
+      $ref: 'core/meta.json',
       children: [
         {
           type: 'page',
-          name: 'Introduction',
-          url: '/get-started/introduction',
+          name: 'What is Coolify',
+          url: '/core/what-is-coolify',
         },
       ],
     },
@@ -122,13 +138,16 @@ const pageTree = {
 } satisfies Root;
 
 describe('createDocsLayoutTabs', () => {
-  test('builds the balanced 8-item switcher without descriptions', () => {
+  test('builds the balanced 9-item switcher without descriptions', () => {
     const tabs = createDocsLayoutTabs(pageTree);
     const titles = tabs.map((tab) => tab.title);
+    const home = tabs.find((tab) => tab.title === 'Home');
+    const core = tabs.find((tab) => tab.title === 'Core');
     const services = tabs.find((tab) => tab.title === 'Services');
     const troubleshoot = tabs.find((tab) => tab.title === 'Troubleshoot');
 
     assert.deepEqual(titles, [
+      'Home',
       'Core',
       'Apps',
       'Services',
@@ -139,6 +158,12 @@ describe('createDocsLayoutTabs', () => {
       'Knowledge Base',
     ]);
 
+    assert.equal(home?.url, '/');
+    assert.equal(home?.urls?.has('/'), true);
+    assert.equal(home?.urls?.has('/choose-your-path'), true);
+    assert.equal(home?.urls?.has('/support'), true);
+    assert.equal(core?.url, '/core/what-is-coolify');
+    assert.equal(core?.urls?.has('/core/what-is-coolify'), true);
     assert.equal(services?.url, '/services/all');
     assert.equal(services?.urls?.has('/services/all'), true);
     assert.equal(services?.urls?.has('/services/activepieces'), true);
@@ -157,6 +182,7 @@ describe('createDocsLayoutTabs', () => {
         return icon.props?.className;
       }),
       [
+        'size-5 text-fd-muted-foreground',
         'size-5 text-fd-muted-foreground',
         'size-5 text-fd-muted-foreground',
         'size-5 text-fd-muted-foreground',

@@ -1,11 +1,18 @@
 import type { Node, Root } from 'fumadocs-core/page-tree';
 import type { LayoutTab } from 'fumadocs-ui/layouts/shared';
-import { AppWindow, BookOpen, Boxes, CircleHelp, Code2, Database, Plug, Rocket } from 'lucide-react';
+import { AppWindow, BookOpen, Boxes, CircleHelp, Code2, Database, House, Plug, Rocket } from 'lucide-react';
 import type { ReactNode } from 'react';
 
 const tabIconClassName = 'size-5 text-fd-muted-foreground';
 
-type TabDefinition = {
+type HomeTabDefinition = {
+  type: 'home';
+  title: string;
+  icon: ReactNode;
+};
+
+type RootTabDefinition = {
+  type?: 'root';
   ref: string;
   title: string;
   label?: string;
@@ -13,11 +20,17 @@ type TabDefinition = {
   icon: ReactNode;
 };
 
+type TabDefinition = HomeTabDefinition | RootTabDefinition;
+
 const tabDefinitions: TabDefinition[] = [
   {
-    ref: 'get-started/meta.json',
-    title: 'Get Started',
-    label: 'Core',
+    type: 'home',
+    title: 'Home',
+    icon: <House className={tabIconClassName} aria-hidden="true" />,
+  },
+  {
+    ref: 'core/meta.json',
+    title: 'Core',
     icon: <Rocket className={tabIconClassName} aria-hidden="true" />,
   },
   {
@@ -63,6 +76,18 @@ const tabDefinitions: TabDefinition[] = [
 
 type RootFolder = Extract<Node, { type: 'folder' }> & { root: true };
 
+function collectRootPageUrls(nodes: Node[]) {
+  const urls = new Set<string>(['/']);
+
+  for (const node of nodes) {
+    if (node.type === 'page') {
+      urls.add(node.url);
+    }
+  }
+
+  return urls;
+}
+
 function collectPageUrls(nodes: Node[], urls = new Set<string>()) {
   for (const node of nodes) {
     if (node.type === 'page') {
@@ -93,6 +118,17 @@ function getTabUrl(folder: RootFolder, fallbackUrl?: string) {
 
 export function createDocsLayoutTabs(tree: Root): LayoutTab[] {
   return tabDefinitions.flatMap((definition) => {
+    if (definition.type === 'home') {
+      return [
+        {
+          title: definition.title,
+          icon: definition.icon,
+          url: '/',
+          urls: collectRootPageUrls(tree.children),
+        },
+      ];
+    }
+
     const folder = findRootFolder(tree, definition.ref, definition.title);
     if (!folder) return [];
 

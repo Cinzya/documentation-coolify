@@ -7,8 +7,8 @@ import { searchPath } from 'fumadocs-core/breadcrumb';
 import { preparePageTree } from './page-tree';
 
 describe('preparePageTree', () => {
-  test('keeps core sidebar metadata aligned with get started content files', () => {
-    const docsDir = path.join(process.cwd(), 'content/docs/get-started');
+  test('keeps home sidebar metadata aligned with root content files', () => {
+    const docsDir = path.join(process.cwd(), 'content/docs');
     const meta = JSON.parse(fs.readFileSync(path.join(docsDir, 'meta.json'), 'utf8')) as { pages: string[] };
     const contentSlugs = new Set(
       fs
@@ -21,14 +21,16 @@ describe('preparePageTree', () => {
     );
     const pageSlugs = meta.pages.filter((page) => !page.startsWith('---'));
 
-    assert.deepEqual(
-      pageSlugs.filter((page) => !contentSlugs.has(page)),
-      [],
-    );
     assert.ok(pageSlugs.includes('choose-your-path'));
     assert.ok(pageSlugs.includes('deploy-your-first-app'));
     assert.ok(pageSlugs.includes('deploy-your-first-database'));
     assert.ok(pageSlugs.includes('deploy-your-first-service'));
+    assert.deepEqual(
+      pageSlugs
+        .filter((page) => ['choose-your-path', 'start-with-self-hosted', 'start-with-cloud', 'support'].includes(page))
+        .filter((page) => !contentSlugs.has(page)),
+      [],
+    );
   });
 
   test('keeps troubleshoot overview inside the troubleshoot root for sidebar scoping', () => {

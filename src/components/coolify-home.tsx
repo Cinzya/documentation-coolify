@@ -126,7 +126,7 @@ export function CoolifyHome() {
 
           <div className="flex flex-wrap gap-3">
             <a
-              href={`${site.docsBasePath}/get-started/choose-your-path`}
+              href={`${site.docsBasePath}/choose-your-path`}
               className="inline-flex h-11 items-center rounded-md bg-[#6b16ed] px-5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#5f12d8]"
             >
               Get Started
