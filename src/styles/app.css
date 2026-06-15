@@ -12,11 +12,31 @@
 }
 
 .dark {
-  --color-fd-primary: #c084fc;
+  --color-fd-background: hsl(0, 0%, 3.5%);
+  --color-fd-card: hsl(0, 0%, 5.5%);
+  --color-fd-popover: hsl(0, 0%, 6.5%);
+  --color-fd-muted: hsl(0, 0%, 8%);
+  --color-fd-secondary: hsl(0, 0%, 9.5%);
+  --color-fd-border: hsla(0, 0%, 45%, 0.18);
+  --color-fd-primary: #a78bfa;
   --color-fd-primary-foreground: #fafafa;
-  --color-fd-ring: #c084fc;
-  --color-fd-accent: rgb(192 132 252 / 0.22);
-  --color-fd-accent-foreground: #fbf7ff;
+  --color-fd-ring: #a78bfa;
+  --color-fd-accent: rgb(124 58 237 / 0.18);
+  --color-fd-accent-foreground: #faf7ff;
+}
+
+.dark #nd-sidebar {
+  --color-fd-muted: hsl(0, 0%, 7%);
+  --color-fd-secondary: hsl(0, 0%, 9%);
+  --color-fd-muted-foreground: hsl(0, 0%, 70%);
+}
+
+.dark [data-radix-popper-content-wrapper] [role='dialog'].bg-fd-popover\/60 {
+  background-color: hsl(0, 0%, 8%);
+  border-color: rgba(180, 180, 180, 0.18);
+  box-shadow:
+    0 18px 48px rgb(0 0 0 / 0.48),
+    0 0 0 1px rgb(255 255 255 / 0.035);
 }
 
 html {
@@ -30,6 +50,47 @@ html > body[data-scroll-locked] {
 
 body {
   text-wrap: pretty;
+}
+
+.prose :where(h1, h2):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+  margin-bottom: 0.45em;
+}
+
+.prose :where(h3, h4):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+  margin-bottom: 0.35em;
+}
+
+.prose :where(ul):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+  padding-inline-start: 1.5rem;
+}
+
+.prose :where(ol):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+  padding-inline-start: 1.75rem;
+}
+
+figure.shiki.border {
+  border-width: 2px;
+  border-color: rgba(150, 150, 150, 0.12);
+}
+
+.dark figure.shiki.border {
+  border-color: rgba(180, 180, 180, 0.09);
+}
+
+[data-accordion-value] {
+  font-size: 0.9375rem;
+  line-height: 1.5rem;
+}
+
+[data-accordion-value] + [data-state] > div {
+  border-top: 1px solid var(--color-fd-border);
+  background-color: rgb(0 0 0 / 0.018);
+  padding-block: 0.875rem 1rem;
+  padding-inline-start: 2.25rem;
+}
+
+.dark [data-accordion-value] + [data-state] > div {
+  background-color: rgb(255 255 255 / 0.025);
 }
 
 .prose :where(img) {

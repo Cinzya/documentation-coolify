@@ -1,5 +1,6 @@
 {
   "title": "Databases",
+  "root": true,
   "pages": [
     "ssl",
     "backups",

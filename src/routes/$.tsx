@@ -3,7 +3,7 @@ import { createFileRoute, notFound, redirect } from '@tanstack/react-router';
 import browserCollections from 'collections/browser';
 import type { Root } from 'fumadocs-core/page-tree';
 import { useFumadocsLoader } from 'fumadocs-core/source/client';
-import { Suspense, useLayoutEffect, type CSSProperties, type ReactNode } from 'react';
+import { Suspense, useLayoutEffect, useMemo, type CSSProperties, type ReactNode } from 'react';
 import { ClientAPIPage } from '@/components/api-page';
 import { DocsLayout } from 'fumadocs-ui/layouts/docs';
 import { useSidebar } from 'fumadocs-ui/layouts/docs/slots/sidebar';
@@ -11,6 +11,7 @@ import { DocsBody, DocsPage, MarkdownCopyButton } from 'fumadocs-ui/layouts/docs
 import { useMDXComponents } from '@/components/mdx';
 import { ViewOptionsPopover } from '@/components/page-actions';
 import { type DocsManifest, getManifestKey, type LoaderData } from '@/lib/docs-manifest';
+import { createDocsLayoutTabs } from '@/lib/docs-layout-tabs';
 import { baseOptions } from '@/lib/layout.shared';
 import { preparePageTree } from '@/lib/page-tree';
 import { absoluteUrl, getDocGithubPath, getDocOgPath, site } from '@/lib/site';
@@ -218,6 +219,7 @@ const clientLoader = browserCollections.docs.createClientLoader({
 
 function Page() {
   const data = useFumadocsLoader(Route.useLoaderData()) as unknown as RuntimeLoaderData;
+  const layoutTabs = useMemo(() => createDocsLayoutTabs(data.pageTree), [data.pageTree]);
   let content: ReactNode;
 
   if (data.type === 'openapi') {
@@ -248,7 +250,7 @@ function Page() {
     : {};
 
   return (
-    <DocsLayout {...baseOptions()} tree={data.pageTree} {...indexLayoutProps}>
+    <DocsLayout {...baseOptions()} tree={data.pageTree} tabs={layoutTabs} {...indexLayoutProps}>
       <IndexSidebarState isIndex={data.isIndex} />
       <Suspense>{content}</Suspense>
     </DocsLayout>

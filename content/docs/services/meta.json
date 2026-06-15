@@ -1,5 +1,6 @@
 {
   "title": "Services",
+  "root": true,
   "pages": [
     "overview",
     "all"

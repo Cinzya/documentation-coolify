@@ -1,13 +1,32 @@
 import type { Folder, Item, Node, Root } from 'fumadocs-core/page-tree';
 
-const folderIndexLinks = new Map<string, Item>([
+type FolderIndexLink = {
+  item: Item;
+  includeInChildren?: boolean;
+};
+
+const folderIndexLinks = new Map<string, FolderIndexLink>([
   [
     'services/meta.json',
     {
-      $id: 'services-introduction-index',
-      type: 'page',
-      name: 'Services',
-      url: '/services/introduction',
+      item: {
+        $id: 'services-introduction-index',
+        type: 'page',
+        name: 'Services',
+        url: '/services/all',
+      },
+    },
+  ],
+  [
+    'troubleshoot/meta.json',
+    {
+      item: {
+        $id: 'troubleshoot-overview-index',
+        type: 'page',
+        name: 'Overview',
+        url: '/troubleshoot',
+      },
+      includeInChildren: true,
     },
   ],
 ]);
@@ -19,11 +38,15 @@ function applyFolderIndexLinks(nodes: Node[]) {
     const linkedIndex = node.$ref ? folderIndexLinks.get(node.$ref) : undefined;
 
     if (linkedIndex) {
-      node.index = { ...linkedIndex };
+      node.index = { ...linkedIndex.item };
+
+      if (linkedIndex.includeInChildren && !node.children.some((child) => child.type === 'page' && child.url === node.index?.url)) {
+        node.children.unshift({ ...linkedIndex.item });
+      }
     }
 
     const index = node.children.find(
-      (child): child is Item => child.type === 'page' && linkedIndex?.url === child.url,
+      (child): child is Item => child.type === 'page' && linkedIndex?.item.url === child.url,
     );
 
     if (index) {

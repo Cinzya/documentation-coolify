@@ -1,4 +1,5 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
+import { Cloud } from 'lucide-react';
 import { publicAssetFallbackPath, site } from './site';
 
 function CoolifyNavTitle() {
@@ -17,12 +18,6 @@ function CoolifyNavTitle() {
 export function baseOptions(): BaseLayoutProps {
   return {
     links: [
-      {
-        type: 'main',
-        url: 'https://coolify.io/pricing/',
-        text: 'Coolify Cloud',
-        external: true,
-      },
       {
         type: 'icon',
         url: 'https://github.com/coollabsio/coolify',
@@ -45,6 +40,14 @@ export function baseOptions(): BaseLayoutProps {
             <path d="M20.317 4.369A19.791 19.791 0 0 0 15.885 3c-.191.347-.408.813-.558 1.177a18.27 18.27 0 0 0-5.304 0A12.64 12.64 0 0 0 9.46 3a19.736 19.736 0 0 0-4.438 1.372C2.218 8.537 1.456 12.596 1.838 16.598A19.91 19.91 0 0 0 7.284 19.32a13.443 13.443 0 0 0 1.169-1.907 12.59 12.59 0 0 1-1.844-.88c.155-.114.307-.233.454-.355 3.555 1.64 7.414 1.64 10.927 0 .15.122.302.24.454.355-.593.348-1.21.644-1.844.88.34.66.73 1.296 1.17 1.907a19.88 19.88 0 0 0 5.45-2.722c.456-4.64-.78-8.664-3.903-12.23M8.02 14.176c-1.066 0-1.94-.98-1.94-2.185 0-1.206.857-2.185 1.94-2.185 1.092 0 1.957.988 1.94 2.185 0 1.206-.857 2.185-1.94 2.185m7.14 0c-1.067 0-1.94-.98-1.94-2.185 0-1.206.856-2.185 1.94-2.185 1.091 0 1.956.988 1.939 2.185 0 1.206-.848 2.185-1.94 2.185" />
           </svg>
         ),
+        external: true,
+      },
+      {
+        type: 'icon',
+        url: 'https://coolify.io/pricing/',
+        text: 'Coolify Cloud',
+        label: 'Coolify Cloud',
+        icon: <Cloud className="size-4" aria-hidden="true" />,
         external: true,
       },
     ],
