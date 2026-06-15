@@ -12,7 +12,7 @@ import { ViewOptionsPopover } from '@/components/page-actions';
 import { type DocsManifest, getManifestKey, type LoaderData } from '@/lib/docs-manifest';
 import { createDocsLayoutTabs } from '@/lib/docs-layout-tabs';
 import { baseOptions } from '@/lib/layout.shared';
-import { preparePageTree } from '@/lib/page-tree';
+import { prepareHomeSidebarPageTree, preparePageTree } from '@/lib/page-tree';
 import { absoluteUrl, getDocGithubPath, getDocOgPath, site } from '@/lib/site';
 import { getPageMarkdownUrl, source } from '@/lib/source';
 
@@ -25,6 +25,13 @@ type RuntimeLoaderData = LoaderData extends infer T
 function toPublicDocUrl(url: string): string {
   if (url === '/') return site.docsBasePath;
   return `${site.docsBasePath}${url}`;
+}
+
+function toInternalDocUrl(url: string): string {
+  if (!url.startsWith(site.docsBasePath)) return url;
+
+  const path = url.slice(site.docsBasePath.length);
+  return path || '/';
 }
 
 const folderIndexRedirects = new Map([
@@ -219,6 +226,10 @@ const clientLoader = browserCollections.docs.createClientLoader({
 function Page() {
   const data = useFumadocsLoader(Route.useLoaderData()) as unknown as RuntimeLoaderData;
   const layoutTabs = useMemo(() => createDocsLayoutTabs(data.pageTree), [data.pageTree]);
+  const sidebarTree = useMemo(
+    () => (isHomeSidebarRoute(data) ? prepareHomeSidebarPageTree(data.pageTree) : data.pageTree),
+    [data],
+  );
   let content: ReactNode;
 
   if (data.type === 'openapi') {
@@ -238,10 +249,19 @@ function Page() {
   }
 
   return (
-    <DocsLayout {...baseOptions()} tree={data.pageTree} tabs={layoutTabs}>
+    <DocsLayout {...baseOptions()} tree={sidebarTree} tabs={layoutTabs}>
       <Suspense>{content}</Suspense>
     </DocsLayout>
   );
+}
+
+function isHomeSidebarRoute(data: RuntimeLoaderData) {
+  if (data.type !== 'docs') return false;
+
+  const internalUrl = toInternalDocUrl(data.url);
+  if (internalUrl === '/') return true;
+
+  return data.pageTree.children.some((node) => node.type === 'page' && node.url === internalUrl);
 }
 
 function PageActions({

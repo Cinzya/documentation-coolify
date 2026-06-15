@@ -66,3 +66,10 @@ export function preparePageTree<T extends Root | Folder>(tree: T): T {
   applyFolderIndexLinks(prepared.children);
   return prepared;
 }
+
+export function prepareHomeSidebarPageTree(tree: Root): Root {
+  return {
+    ...tree,
+    children: tree.children.filter((node) => !(node.type === 'folder' && node.root === true)),
+  };
+}

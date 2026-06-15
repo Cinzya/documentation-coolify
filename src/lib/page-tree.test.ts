@@ -4,7 +4,7 @@ import path from 'node:path';
 import { describe, test } from 'node:test';
 import type { Root } from 'fumadocs-core/page-tree';
 import { searchPath } from 'fumadocs-core/breadcrumb';
-import { preparePageTree } from './page-tree';
+import { prepareHomeSidebarPageTree, preparePageTree } from './page-tree';
 
 describe('preparePageTree', () => {
   test('keeps home sidebar metadata aligned with root content files', () => {
@@ -86,5 +86,35 @@ describe('preparePageTree', () => {
       .find((item) => item.type === 'folder' && item.root);
 
     assert.equal(root?.name, 'Troubleshoot');
+  });
+
+  test('removes root section folders from the home sidebar tree', () => {
+    const tree = prepareHomeSidebarPageTree({
+      name: 'Docs',
+      children: [
+        {
+          type: 'page',
+          name: 'Choose your path',
+          url: '/choose-your-path',
+        },
+        {
+          type: 'folder',
+          name: 'Core',
+          root: true,
+          $ref: 'core/meta.json',
+          children: [],
+        },
+        {
+          type: 'folder',
+          name: 'Contribute',
+          children: [],
+        },
+      ],
+    } satisfies Root);
+
+    assert.deepEqual(
+      tree.children.map((node) => node.name),
+      ['Choose your path', 'Contribute'],
+    );
   });
 });
