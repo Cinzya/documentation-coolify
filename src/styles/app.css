@@ -82,6 +82,16 @@ body {
   min-width: var(--radix-popover-trigger-width);
 }
 
+[role='dialog'][class*='w-(--radix-popover-trigger-width)'][class*='fd-scroll-container'] a[aria-current='page'] {
+  background-color: color-mix(in oklab, var(--color-fd-primary) 10%, transparent);
+  color: var(--color-fd-primary);
+  font-weight: 600;
+}
+
+[role='dialog'][class*='w-(--radix-popover-trigger-width)'][class*='fd-scroll-container'] a[aria-current='page'] svg {
+  color: currentColor;
+}
+
 @media (min-width: 768px) {
   button[aria-label='Collapse Sidebar'] {
     display: none;
