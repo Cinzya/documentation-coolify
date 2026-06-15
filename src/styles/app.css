@@ -109,15 +109,15 @@ a[aria-label='GitHub']:hover {
 }
 
 .dark a[aria-label='GitHub'] {
-  border-color: rgb(255 255 255 / 0.42);
+  border-color: rgb(255 255 255 / 0.3);
   background: rgb(255 255 255 / 0.045);
   color: rgb(245 245 245);
   box-shadow:
-    0 0 10px rgb(255 255 255 / 0.08);
+    0 0 8px rgb(255 255 255 / 0.055);
 }
 
 .dark a[aria-label='GitHub']:hover {
-  border-color: rgb(255 255 255 / 0.58);
+  border-color: rgb(255 255 255 / 0.42);
   background: rgb(255 255 255 / 0.065);
   color: white;
 }
@@ -144,21 +144,21 @@ a[aria-label='Discord']:hover {
 }
 
 .dark a[aria-label='Discord'] {
-  border-color: rgb(123 140 255 / 0.72);
+  border-color: rgb(123 140 255 / 0.56);
   background: rgb(88 101 242 / 0.16);
   color: rgb(236 238 255);
   box-shadow:
-    0 0 0 1px rgb(88 101 242 / 0.22),
-    0 0 14px rgb(88 101 242 / 0.38);
+    0 0 0 1px rgb(88 101 242 / 0.16),
+    0 0 12px rgb(88 101 242 / 0.28);
 }
 
 .dark a[aria-label='Discord']:hover {
-  border-color: rgb(164 174 255 / 0.9);
+  border-color: rgb(164 174 255 / 0.72);
   background: rgb(88 101 242 / 0.2);
   color: white;
   box-shadow:
-    0 0 0 1px rgb(88 101 242 / 0.3),
-    0 0 18px rgb(88 101 242 / 0.5);
+    0 0 0 1px rgb(88 101 242 / 0.22),
+    0 0 16px rgb(88 101 242 / 0.36);
 }
 
 a[aria-label='Coolify Cloud'] {
