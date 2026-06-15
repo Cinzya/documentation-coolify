@@ -5,6 +5,7 @@ import type { Root } from 'fumadocs-core/page-tree';
 import { useFumadocsLoader } from 'fumadocs-core/source/client';
 import { Suspense, useMemo, type ReactNode } from 'react';
 import { ClientAPIPage } from '@/components/api-page';
+import { ThemeToggle } from '@/components/theme-toggle';
 import { DocsLayout } from 'fumadocs-ui/layouts/notebook';
 import { DocsBody, DocsPage, MarkdownCopyButton } from 'fumadocs-ui/layouts/notebook/page';
 import { useMDXComponents } from '@/components/mdx';
@@ -250,7 +251,13 @@ function Page() {
   }
 
   return (
-    <DocsLayout {...layoutOptions} nav={{ ...layoutOptions.nav, mode: 'top' }} tree={sidebarTree} tabs={layoutTabs}>
+    <DocsLayout
+      {...layoutOptions}
+      nav={{ ...layoutOptions.nav, mode: 'top' }}
+      sidebar={{ banner: <ThemeToggle /> }}
+      tree={sidebarTree}
+      tabs={layoutTabs}
+    >
       <Suspense>{content}</Suspense>
     </DocsLayout>
   );

@@ -54,5 +54,8 @@ export function baseOptions(): BaseLayoutProps {
     nav: {
       title: <CoolifyNavTitle />,
     },
+    themeSwitch: {
+      enabled: false,
+    },
   };
 }

@@ -62,6 +62,22 @@ body {
   border-inline-end: 1px solid hsl(0 0% 100% / 0.06);
 }
 
+#nd-sidebar > div:first-child {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#nd-sidebar > div:first-child > button:not([data-theme-toggle]) {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+#nd-sidebar [data-theme-toggle] {
+  margin-inline-start: 0;
+  flex: 0 0 auto;
+}
+
 .prose :where(h1, h2):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
   margin-bottom: 0.45em;
 }
