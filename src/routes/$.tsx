@@ -213,8 +213,8 @@ const clientLoader = browserCollections.docs.createClientLoader({
       <DocsPage
         toc={toc}
         breadcrumb={{ enabled: false }}
-        tableOfContent={{ footer: pageActions }}
-        tableOfContentPopover={{ footer: pageActions }}
+        tableOfContent={{ style: 'clerk', footer: pageActions }}
+        tableOfContentPopover={{ style: 'clerk', footer: pageActions }}
       >
         <DocsBody>
           <MDX components={useMDXComponents()} />
