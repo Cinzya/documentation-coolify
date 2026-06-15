@@ -1,7 +1,15 @@
 import type { Node, Root } from 'fumadocs-core/page-tree';
 import type { LayoutTab } from 'fumadocs-ui/layouts/shared';
-import { AppWindow, BookOpen, Boxes, CircleHelp, Code2, Database, House, Plug, Rocket } from 'lucide-react';
 import type { ReactNode } from 'react';
+import { BookOpen } from 'reicon-react/icons/BookOpen';
+import { Box } from 'reicon-react/icons/Box';
+import { Code } from 'reicon-react/icons/Code';
+import { Database } from 'reicon-react/icons/Database';
+import { HelpCircle } from 'reicon-react/icons/HelpCircle';
+import { Home3 } from 'reicon-react/icons/Home3';
+import { Plug } from 'reicon-react/icons/Plug';
+import { Rocket } from 'reicon-react/icons/Rocket';
+import { Window } from 'reicon-react/icons/Window';
 
 const tabIconClassName = 'size-5 text-fd-muted-foreground';
 
@@ -26,7 +34,7 @@ const tabDefinitions: TabDefinition[] = [
   {
     type: 'home',
     title: 'Home',
-    icon: <House className={tabIconClassName} aria-hidden="true" />,
+    icon: <Home3 className={tabIconClassName} aria-hidden="true" />,
   },
   {
     ref: 'core/meta.json',
@@ -37,13 +45,13 @@ const tabDefinitions: TabDefinition[] = [
     ref: 'applications/meta.json',
     title: 'Applications',
     label: 'Apps',
-    icon: <AppWindow className={tabIconClassName} aria-hidden="true" />,
+    icon: <Window className={tabIconClassName} aria-hidden="true" />,
   },
   {
     ref: 'services/meta.json',
     title: 'Services',
     fallbackUrl: '/services/all',
-    icon: <Boxes className={tabIconClassName} aria-hidden="true" />,
+    icon: <Box className={tabIconClassName} aria-hidden="true" />,
   },
   {
     ref: 'databases/meta.json',
@@ -59,13 +67,13 @@ const tabDefinitions: TabDefinition[] = [
     ref: 'api-reference/meta.json',
     title: 'API Reference',
     label: 'API',
-    icon: <Code2 className={tabIconClassName} aria-hidden="true" />,
+    icon: <Code className={tabIconClassName} aria-hidden="true" />,
   },
   {
     ref: 'troubleshoot/meta.json',
     title: 'Troubleshoot',
     fallbackUrl: '/troubleshoot',
-    icon: <CircleHelp className={tabIconClassName} aria-hidden="true" />,
+    icon: <HelpCircle className={tabIconClassName} aria-hidden="true" />,
   },
   {
     ref: 'knowledge-base/meta.json',
