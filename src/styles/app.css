@@ -84,6 +84,45 @@ body {
   }
 }
 
+a[aria-label='Discord'] {
+  height: 2.25rem;
+  width: auto;
+  gap: 0.5rem;
+  border: 2px solid rgb(88 101 242 / 0.32);
+  border-radius: 9999px;
+  background: rgb(88 101 242 / 0.16);
+  padding-inline: 0.875rem;
+  color: #4652d9;
+  box-shadow:
+    0 2px 8px rgb(88 101 242 / 0.12);
+}
+
+a[aria-label='Discord']:hover {
+  border-color: rgb(88 101 242 / 0.42);
+  background: rgb(88 101 242 / 0.22);
+  color: #3540bf;
+  box-shadow:
+    0 3px 10px rgb(88 101 242 / 0.16);
+}
+
+.dark a[aria-label='Discord'] {
+  border-color: rgb(123 140 255 / 0.72);
+  background: rgb(88 101 242 / 0.16);
+  color: rgb(236 238 255);
+  box-shadow:
+    0 0 0 1px rgb(88 101 242 / 0.22),
+    0 0 14px rgb(88 101 242 / 0.38);
+}
+
+.dark a[aria-label='Discord']:hover {
+  border-color: rgb(164 174 255 / 0.9);
+  background: rgb(88 101 242 / 0.2);
+  color: white;
+  box-shadow:
+    0 0 0 1px rgb(88 101 242 / 0.3),
+    0 0 18px rgb(88 101 242 / 0.5);
+}
+
 a[aria-label='Coolify Cloud'] {
   height: 2.25rem;
   width: auto;
