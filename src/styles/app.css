@@ -78,6 +78,12 @@ body {
   flex: 0 0 auto;
 }
 
+@media (min-width: 768px) {
+  button[aria-label='Collapse Sidebar'] {
+    display: none;
+  }
+}
+
 .prose :where(h1, h2):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
   margin-bottom: 0.45em;
 }
