@@ -21,7 +21,7 @@ Application data such as mounted volumes must be backed up and restored separate
 :::
 
 ## What you need
-If you have not created the backup yet, follow [Back up your Coolify instance](/manage-coolify/backup-and-recovery/instance-backup) first.
+If you have not created the backup yet, follow [Back up your Coolify instance](/core/backup-and-recovery/instance-backup) first.
 
 Before you restore, make sure you have:
 - the Coolify database backup file
@@ -86,7 +86,7 @@ Make sure the restore files are available on the server where you will run the r
 
 You can place them anywhere on that server, as long as you know the full path.
 
-If you followed the [backup guide on this doc](/manage-coolify/backup-and-recovery/instance-backup) , your backup files will be in these locations:
+If you followed the [backup guide on this doc](/core/backup-and-recovery/instance-backup) , your backup files will be in these locations:
 - `/data/backups/coolify-db-manual-backup.dmp`
 - `/data/backups/coolify-source.env`
 - `/data/backups/coolify-ssh-keys/`
@@ -162,7 +162,7 @@ grep '^APP_KEY=' /path/to/coolify-source.env
 
 <Callout type="tip" title="Tip">
 
-If you followed the [backup guide on this doc](/manage-coolify/backup-and-recovery/instance-backup) , your `.env` backup files will be in `/data/backups/coolify-source.env`
+If you followed the [backup guide on this doc](/core/backup-and-recovery/instance-backup) , your `.env` backup files will be in `/data/backups/coolify-source.env`
 </Callout>
 
 Then open the active `.env` file on the new server:

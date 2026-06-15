@@ -33,6 +33,26 @@ describe('preparePageTree', () => {
     );
   });
 
+  test('keeps core sidebar metadata aligned with core content files', () => {
+    const docsDir = path.join(process.cwd(), 'content/docs/core');
+    const meta = JSON.parse(fs.readFileSync(path.join(docsDir, 'meta.json'), 'utf8')) as { pages: string[] };
+    const contentSlugs = new Set(
+      fs
+        .readdirSync(docsDir, { withFileTypes: true })
+        .flatMap((entry) => {
+          if (entry.isDirectory()) return [entry.name];
+          if (entry.isFile() && entry.name.endsWith('.mdx')) return [entry.name.replace(/\.mdx$/, '')];
+          return [];
+        }),
+    );
+    const pageSlugs = meta.pages.filter((page) => !page.startsWith('---'));
+
+    assert.ok(pageSlugs.includes('what-is-coolify'));
+    assert.ok(pageSlugs.includes('instance-management'));
+    assert.ok(pageSlugs.includes('backup-and-recovery'));
+    assert.deepEqual(pageSlugs.filter((page) => !contentSlugs.has(page)), []);
+  });
+
   test('keeps troubleshoot overview inside the troubleshoot root for sidebar scoping', () => {
     const tree = preparePageTree({
       name: 'Docs',

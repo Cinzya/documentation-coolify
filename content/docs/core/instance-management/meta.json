@@ -1,0 +1,9 @@
+{
+  "title": "Instance Management",
+  "pages": [
+    "instance-settings",
+    "update",
+    "downgrade",
+    "uninstallation"
+  ]
+}
