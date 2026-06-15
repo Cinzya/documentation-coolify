@@ -3,10 +3,9 @@ import { createFileRoute, notFound, redirect } from '@tanstack/react-router';
 import browserCollections from 'collections/browser';
 import type { Root } from 'fumadocs-core/page-tree';
 import { useFumadocsLoader } from 'fumadocs-core/source/client';
-import { Suspense, useLayoutEffect, useMemo, type CSSProperties, type ReactNode } from 'react';
+import { Suspense, useMemo, type ReactNode } from 'react';
 import { ClientAPIPage } from '@/components/api-page';
 import { DocsLayout } from 'fumadocs-ui/layouts/docs';
-import { useSidebar } from 'fumadocs-ui/layouts/docs/slots/sidebar';
 import { DocsBody, DocsPage, MarkdownCopyButton } from 'fumadocs-ui/layouts/docs/page';
 import { useMDXComponents } from '@/components/mdx';
 import { ViewOptionsPopover } from '@/components/page-actions';
@@ -238,20 +237,8 @@ function Page() {
     });
   }
 
-  const indexLayoutProps = data.isIndex
-    ? {
-        containerProps: {
-          'data-docs-index': true,
-          style: {
-            '--fd-sidebar-col': '0px',
-          } as CSSProperties,
-        },
-      }
-    : {};
-
   return (
-    <DocsLayout {...baseOptions()} tree={data.pageTree} tabs={layoutTabs} {...indexLayoutProps}>
-      <IndexSidebarState isIndex={data.isIndex} />
+    <DocsLayout {...baseOptions()} tree={data.pageTree} tabs={layoutTabs}>
       <Suspense>{content}</Suspense>
     </DocsLayout>
   );
@@ -272,14 +259,4 @@ function PageActions({
       <ViewOptionsPopover markdownUrl={markdownUrl} githubUrl={githubUrl} />
     </div>
   );
-}
-
-function IndexSidebarState({ isIndex }: { isIndex: boolean }) {
-  const { setCollapsed } = useSidebar();
-
-  useLayoutEffect(() => {
-    setCollapsed(isIndex);
-  }, [isIndex, setCollapsed]);
-
-  return null;
 }

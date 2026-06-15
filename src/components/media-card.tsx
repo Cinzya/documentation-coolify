@@ -1,49 +1,74 @@
 'use client';
 
+import Link from 'fumadocs-core/link';
 import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
-import type { ReactNode } from 'react';
-import { publicAssetFallbackPath, publicAssetPath } from '@/lib/site';
 
 interface MediaCardProps {
-  description: string;
+  title: string;
+  description?: string;
+  href?: string;
   imageSrc: string;
   imageAlt?: string;
 }
 
-interface MediaCardGroupProps {
-  children: ReactNode;
-}
-
-function getFallbackImageSrc(src: string): string | null {
-  if (!src || /^(?:[a-z]+:)?\/\//i.test(src) || src.startsWith('data:')) return null;
-  if (src.startsWith('/docs/')) return publicAssetFallbackPath(src.slice('/docs'.length) || '/');
-  return publicAssetPath(src);
-}
-
 export function MediaCard({
+  title,
   description,
+  href,
   imageSrc,
-  imageAlt = description,
+  imageAlt = title,
 }: MediaCardProps) {
-  const resolvedSrc = getFallbackImageSrc(imageSrc) ?? imageSrc;
+  const content = (
+    <>
+      {href ? (
+        <MediaImage imageSrc={imageSrc} imageAlt={imageAlt} />
+      ) : (
+        <ImageZoom src={imageSrc} alt={imageAlt}>
+          <MediaImage imageSrc={imageSrc} imageAlt={imageAlt} zoomable />
+        </ImageZoom>
+      )}
+      <div className="px-4 py-3">
+        <h2 className="not-prose !m-0 text-base font-medium">{title}</h2>
+        {description ? <p className="my-0! mt-1 text-sm text-fd-muted-foreground">{description}</p> : null}
+      </div>
+    </>
+  );
+
+  const className =
+    'block overflow-hidden rounded-xl border bg-fd-card text-fd-card-foreground transition-colors hover:bg-fd-accent/80';
+
+  if (href) {
+    return (
+      <Link href={href} data-card className={className}>
+        {content}
+      </Link>
+    );
+  }
 
   return (
-    <div
-      data-media-card=""
-      className="not-prose overflow-hidden rounded-lg border bg-fd-card text-fd-card-foreground"
-    >
-      <ImageZoom src={resolvedSrc} alt={imageAlt}>
-        <img
-          src={resolvedSrc}
-          alt={imageAlt}
-          className="m-0 block h-auto w-full cursor-zoom-in object-cover"
-        />
-      </ImageZoom>
-      <p className="m-0 px-4 py-3 text-sm leading-6 text-fd-muted-foreground">{description}</p>
+    <div data-card className={className}>
+      {content}
     </div>
   );
 }
 
-export function MediaCardGroup({ children }: MediaCardGroupProps) {
-  return <div className="mt-5 grid grid-cols-1 gap-6 sm:grid-cols-2">{children}</div>;
+function MediaImage({
+  imageSrc,
+  imageAlt,
+  zoomable,
+}: {
+  imageSrc: string;
+  imageAlt: string;
+  zoomable?: boolean;
+}) {
+  return (
+    // biome-ignore lint/performance/noImgElement: static export
+    <img
+      src={imageSrc}
+      alt={imageAlt}
+      className={['not-prose !m-0 block aspect-video w-full object-cover', zoomable ? 'cursor-zoom-in' : '']
+        .filter(Boolean)
+        .join(' ')}
+    />
+  );
 }

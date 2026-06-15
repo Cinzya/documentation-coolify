@@ -106,25 +106,3 @@ figure.shiki.border {
 [data-media-card] > * {
   margin: 0 !important;
 }
-
-[data-media-card] [data-rmiz] {
-  display: block;
-  margin: 0 !important;
-  line-height: 0;
-}
-
-[data-media-card] img {
-  display: block;
-  width: 100%;
-  height: auto;
-  margin: 0 !important;
-}
-
-[data-media-card] p {
-  margin: 0 !important;
-}
-
-[data-docs-index] [data-sidebar-placeholder],
-[data-docs-index] [data-sidebar-panel] {
-  display: none;
-}

@@ -24,26 +24,13 @@ const sidebarMetas = {
   '': {
     pages: [
       'index',
-      'get-started',
-      'applications',
-      'services',
-      'databases',
-      'integrations',
-      'knowledge-base',
-      'api-reference',
-      'troubleshoot',
-    ],
-  },
-  'get-started': {
-    title: 'Get Started',
-    pages: [
-      '---Setup---',
-      'introduction',
-      'installation',
-      'upgrade',
-      'downgrade',
-      'uninstallation',
-      'cloud',
+      '---Home---',
+      'choose-your-path',
+      'start-with-self-hosted',
+      'start-with-cloud',
+      'deploy-your-first-app',
+      'deploy-your-first-database',
+      'deploy-your-first-service',
       '---Learn---',
       'usage',
       'concepts',
@@ -53,16 +40,49 @@ const sidebarMetas = {
       'team',
       'support',
       'sponsors',
-      '---Contribute---',
       'contribute',
+      'core',
+      'applications',
+      'services',
+      'databases',
+      'integrations',
+      'knowledge-base',
+      'api-reference',
+      'troubleshoot',
     ],
   },
-  'get-started/contribute': {
+  contribute: {
     title: 'Contribute',
     pages: ['coolify', 'service', 'documentation'],
   },
+  core: {
+    title: 'Core',
+    root: true,
+    pages: [
+      '---Understand Coolify---',
+      'what-is-coolify',
+      'how-coolify-works',
+      'selfhosted-cloud-comparison',
+      'build-deployment-model',
+      'docker-and-containers',
+      'networking-in-coolify',
+      'security-model',
+      '---Manage Coolify---',
+      'instance-management',
+      'backup-and-recovery',
+    ],
+  },
+  'core/instance-management': {
+    title: 'Instance Management',
+    pages: ['instance-settings', 'update', 'downgrade', 'uninstallation'],
+  },
+  'core/backup-and-recovery': {
+    title: 'Backup and Recovery',
+    pages: ['instance-backup', 'instance-restore'],
+  },
   applications: {
     title: 'Applications',
+    root: true,
     pages: [
       '---Frameworks---',
       'django',
@@ -109,14 +129,17 @@ const sidebarMetas = {
   },
   services: {
     title: 'Services',
+    root: true,
     pages: ['overview', 'all'],
   },
   databases: {
     title: 'Databases',
+    root: true,
     pages: ['ssl', 'backups', 'mysql', 'mariadb', 'postgresql', 'mongodb', 'redis', 'dragonfly', 'keydb', 'clickhouse'],
   },
   integrations: {
     title: 'Integrations',
+    root: true,
     pages: ['cloudflare', 'external:[Crowdsec](https://www.crowdsec.net/blog/securing-automated-app-deployment-crowdsec-and-coolify)'],
   },
   'integrations/cloudflare': {
@@ -129,6 +152,7 @@ const sidebarMetas = {
   },
   'knowledge-base': {
     title: 'Knowledge Base',
+    root: true,
     pages: [
       '---Internal---',
       'internal',
@@ -247,10 +271,12 @@ const sidebarMetas = {
   },
   'api-reference': {
     title: 'API Reference',
+    root: true,
     pages: ['authorization', 'api'],
   },
   troubleshoot: {
     title: 'Troubleshoot',
+    root: true,
     pages: ['installation', 'applications', 'dashboard', 'docker', 'server', 'dns-and-domains'],
   },
   'troubleshoot/installation': {
@@ -476,12 +502,67 @@ function convertHomePage(markdown) {
   }
 
   return `---
-title: Coolify
-description: Coolify is an open-source Platform as a Service (PaaS) for self-hosting databases, services, and applications with free SSL, backups, and Git integration.
-full: true
+title: Home
+description: Welcome to Coolify Documentation
 ---
 
-<CoolifyHome />
+# Build & deploy with Coolify
+Your handbook to owning and operating your infrastructure with Coolify.
+
+## Get started
+Set up Coolify and deploy your first app in minutes.
+
+<MediaCardGroup>
+  <MediaCard title="Quick start" imageSrc="/docs/images/home/quick-start.webp" href="/choose-your-path" />
+  <MediaCard title="Deploy your first application" imageSrc="/docs/images/home/deploy-first-application.webp" href="/deploy-your-first-app" />
+  <MediaCard title="API" imageSrc="/docs/images/home/api.webp" href="/api-reference/authorization" />
+  <MediaCard title="CLI" imageSrc="/docs/images/home/cli.webp" href="/knowledge-base/commands" />
+</MediaCardGroup>
+
+## Deploy any language. Any framework.
+If it runs in Docker, you can deploy it with Coolify.
+
+<MediaCardGroup>
+  <MediaCard title="Laravel" imageSrc="/docs/images/home/laravel.webp" href="/applications/laravel" />
+  <MediaCard title="Next.js" imageSrc="/docs/images/home/nextjs.webp" href="/applications/nextjs" />
+  <MediaCard title="Django" imageSrc="/docs/images/home/django.webp" href="/applications/django" />
+  <MediaCard title="Ruby on Rails" imageSrc="/docs/images/home/rails.webp" href="/applications/rails" />
+</MediaCardGroup>
+
+[View all language and framework guides](/applications)
+
+## Deploy any database
+If it runs in Docker, you can deploy it with Coolify.
+
+<MediaCardGroup>
+  <MediaCard title="PostgreSQL" imageSrc="/docs/images/home/postgres.webp" href="/databases/postgresql" />
+  <MediaCard title="MySQL" imageSrc="/docs/images/home/mysql.webp" href="/databases/mysql" />
+  <MediaCard title="Redis" imageSrc="/docs/images/home/redis.webp" href="/databases/redis" />
+  <MediaCard title="MongoDB" imageSrc="/docs/images/home/mongodb.webp" href="/databases/mongodb" />
+</MediaCardGroup>
+
+[View all database guides](/databases)
+
+## Deploy any service
+Run **300+** open-source software with our **single click** service templates.
+
+<MediaCardGroup>
+  <MediaCard title="n8n" imageSrc="/docs/images/home/n8n.webp" href="/services/n8n" />
+  <MediaCard title="Strapi" imageSrc="/docs/images/home/strapi.webp" href="/services/strapi" />
+  <MediaCard title="Convex" imageSrc="/docs/images/home/convex.webp" href="/services/convex" />
+  <MediaCard title="WordPress" imageSrc="/docs/images/home/wordpress.webp" href="/services/wordpress" />
+</MediaCardGroup>
+
+[View all service templates](/services/all)
+
+## Help & Support
+Get help from the community and the Coolify team.
+
+<MediaCardGroup>
+  <MediaCard title="Discord community" imageSrc="/docs/images/home/discord-community.webp" href="/support" />
+  <MediaCard title="Github discussions" imageSrc="/docs/images/home/github-discussions.webp" href="https://github.com/coollabsio/coolify/discussions" />
+  <MediaCard title="Email" imageSrc="/docs/images/home/email.webp" href="/support" />
+</MediaCardGroup>
 `
 }
 

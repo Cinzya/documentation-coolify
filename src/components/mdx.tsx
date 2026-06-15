@@ -7,8 +7,8 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import type { MDXComponents } from 'mdx/types';
 import type React from 'react';
-import { CoolifyHome } from './coolify-home';
-import { MediaCard, MediaCardGroup } from './media-card';
+import { MediaCard } from './media-card';
+import { MediaCardGroup } from './media-card-group';
 import { ScreenshotTab, ScreenshotTabs } from './screenshot-tabs';
 import { ServicesList } from './services-list';
 import { SponsorsList } from './sponsors-list';
@@ -31,7 +31,6 @@ export function getMDXComponents(components?: MDXComponents) {
     Callout,
     Card,
     Cards,
-    CoolifyHome,
     File,
     Files,
     Folder,
