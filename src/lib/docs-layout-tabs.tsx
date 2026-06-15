@@ -2,14 +2,14 @@ import type { Node, Root } from 'fumadocs-core/page-tree';
 import type { LayoutTab } from 'fumadocs-ui/layouts/shared';
 import type { ReactNode } from 'react';
 import { BookOpen } from 'reicon-react/icons/BookOpen';
-import { Box } from 'reicon-react/icons/Box';
-import { Code } from 'reicon-react/icons/Code';
 import { Database } from 'reicon-react/icons/Database';
-import { HelpCircle } from 'reicon-react/icons/HelpCircle';
-import { Home3 } from 'reicon-react/icons/Home3';
-import { Plug } from 'reicon-react/icons/Plug';
-import { Rocket } from 'reicon-react/icons/Rocket';
-import { Window } from 'reicon-react/icons/Window';
+import { LaptopCode } from 'reicon-react/icons/LaptopCode';
+import { Office } from 'reicon-react/icons/Office';
+import { Plug2 } from 'reicon-react/icons/Plug2';
+import { Settings } from 'reicon-react/icons/Settings';
+import { StarFall3 } from 'reicon-react/icons/StarFall3';
+import { Warning22 } from 'reicon-react/icons/Warning22';
+import { WindowPointer } from 'reicon-react/icons/WindowPointer';
 
 const tabIconClassName = 'size-5 text-fd-muted-foreground';
 
@@ -34,51 +34,51 @@ const tabDefinitions: TabDefinition[] = [
   {
     type: 'home',
     title: 'Home',
-    icon: <Home3 className={tabIconClassName} aria-hidden="true" />,
+    icon: <Office weight="Filled" className={tabIconClassName} aria-hidden="true" />,
   },
   {
     ref: 'core/meta.json',
     title: 'Core',
-    icon: <Rocket className={tabIconClassName} aria-hidden="true" />,
+    icon: <StarFall3 weight="Filled" className={tabIconClassName} aria-hidden="true" />,
   },
   {
     ref: 'applications/meta.json',
     title: 'Applications',
     label: 'Apps',
-    icon: <Window className={tabIconClassName} aria-hidden="true" />,
+    icon: <WindowPointer weight="Filled" className={tabIconClassName} aria-hidden="true" />,
   },
   {
     ref: 'services/meta.json',
     title: 'Services',
     fallbackUrl: '/services/all',
-    icon: <Box className={tabIconClassName} aria-hidden="true" />,
+    icon: <Settings weight="Filled" className={tabIconClassName} aria-hidden="true" />,
   },
   {
     ref: 'databases/meta.json',
     title: 'Databases',
-    icon: <Database className={tabIconClassName} aria-hidden="true" />,
+    icon: <Database weight="Filled" className={tabIconClassName} aria-hidden="true" />,
   },
   {
     ref: 'integrations/meta.json',
     title: 'Integrations',
-    icon: <Plug className={tabIconClassName} aria-hidden="true" />,
+    icon: <Plug2 weight="Filled" className={tabIconClassName} aria-hidden="true" />,
   },
   {
     ref: 'api-reference/meta.json',
     title: 'API Reference',
     label: 'API',
-    icon: <Code className={tabIconClassName} aria-hidden="true" />,
+    icon: <LaptopCode weight="Filled" className={tabIconClassName} aria-hidden="true" />,
   },
   {
     ref: 'troubleshoot/meta.json',
     title: 'Troubleshoot',
     fallbackUrl: '/troubleshoot',
-    icon: <HelpCircle className={tabIconClassName} aria-hidden="true" />,
+    icon: <Warning22 weight="Filled" className={tabIconClassName} aria-hidden="true" />,
   },
   {
     ref: 'knowledge-base/meta.json',
     title: 'Knowledge Base',
-    icon: <BookOpen className={tabIconClassName} aria-hidden="true" />,
+    icon: <BookOpen weight="Filled" className={tabIconClassName} aria-hidden="true" />,
   },
 ] as const;
 
