@@ -5,8 +5,8 @@ import type { Root } from 'fumadocs-core/page-tree';
 import { useFumadocsLoader } from 'fumadocs-core/source/client';
 import { Suspense, useMemo, type ReactNode } from 'react';
 import { ClientAPIPage } from '@/components/api-page';
-import { DocsLayout } from 'fumadocs-ui/layouts/docs';
-import { DocsBody, DocsPage, MarkdownCopyButton } from 'fumadocs-ui/layouts/docs/page';
+import { DocsLayout } from 'fumadocs-ui/layouts/notebook';
+import { DocsBody, DocsPage, MarkdownCopyButton } from 'fumadocs-ui/layouts/notebook/page';
 import { useMDXComponents } from '@/components/mdx';
 import { ViewOptionsPopover } from '@/components/page-actions';
 import { type DocsManifest, getManifestKey, type LoaderData } from '@/lib/docs-manifest';
@@ -230,6 +230,7 @@ function Page() {
     () => (isHomeSidebarRoute(data) ? prepareHomeSidebarPageTree(data.pageTree) : data.pageTree),
     [data],
   );
+  const layoutOptions = baseOptions();
   let content: ReactNode;
 
   if (data.type === 'openapi') {
@@ -249,7 +250,7 @@ function Page() {
   }
 
   return (
-    <DocsLayout {...baseOptions()} tree={sidebarTree} tabs={layoutTabs}>
+    <DocsLayout {...layoutOptions} nav={{ ...layoutOptions.nav, mode: 'top' }} tree={sidebarTree} tabs={layoutTabs}>
       <Suspense>{content}</Suspense>
     </DocsLayout>
   );
