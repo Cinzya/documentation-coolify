@@ -1,4 +1,21 @@
 import type { Folder, Item, Node, Root } from 'fumadocs-core/page-tree';
+import { createElement } from 'react';
+import { ArrowSquare2 } from 'reicon-react/icons/ArrowSquare2';
+import { BookSaved2 } from 'reicon-react/icons/BookSaved2';
+import { Box2 } from 'reicon-react/icons/Box2';
+import { Cloud } from 'reicon-react/icons/Cloud';
+import { CodeCircle } from 'reicon-react/icons/CodeCircle';
+import { Database } from 'reicon-react/icons/Database';
+import { DocumentText2 } from 'reicon-react/icons/DocumentText2';
+import { Heart } from 'reicon-react/icons/Heart';
+import { MedalStars } from 'reicon-react/icons/MedalStars';
+import { Profile2user2 } from 'reicon-react/icons/Profile2user2';
+import { Rocket } from 'reicon-react/icons/Rocket';
+import { Server } from 'reicon-react/icons/Server';
+import { Settings } from 'reicon-react/icons/Settings';
+import { Stars4 } from 'reicon-react/icons/Stars4';
+import { Window } from 'reicon-react/icons/Window';
+import { WindowPointer } from 'reicon-react/icons/WindowPointer';
 
 type FolderIndexLink = {
   item: Item;
@@ -29,6 +46,33 @@ const folderIndexLinks = new Map<string, FolderIndexLink>([
       includeInChildren: true,
     },
   ],
+]);
+
+const homeSidebarItemIconClassName = 'text-fd-muted-foreground';
+
+function homeSidebarIcon(Icon: typeof Rocket) {
+  return createElement(Icon, {
+    weight: 'Filled',
+    className: homeSidebarItemIconClassName,
+    'aria-hidden': true,
+  });
+}
+
+const homeSidebarItemIcons = new Map<string, ReturnType<typeof createElement>>([
+  ['/choose-your-path', homeSidebarIcon(ArrowSquare2)],
+  ['/start-with-self-hosted', homeSidebarIcon(Server)],
+  ['/start-with-cloud', homeSidebarIcon(Cloud)],
+  ['/deploy-your-first-app', homeSidebarIcon(WindowPointer)],
+  ['/deploy-your-first-database', homeSidebarIcon(Database)],
+  ['/deploy-your-first-service', homeSidebarIcon(Settings)],
+  ['/screenshots', homeSidebarIcon(Window)],
+  ['/sponsors', homeSidebarIcon(Heart)],
+  ['/support', homeSidebarIcon(MedalStars)],
+  ['/team', homeSidebarIcon(Profile2user2)],
+  ['/contribute/guidelines', homeSidebarIcon(BookSaved2)],
+  ['/contribute/coolify', homeSidebarIcon(Stars4)],
+  ['/contribute/documentation', homeSidebarIcon(DocumentText2)],
+  ['/contribute/service', homeSidebarIcon(Box2)],
 ]);
 
 function applyFolderIndexLinks(nodes: Node[]) {
@@ -70,6 +114,15 @@ export function preparePageTree<T extends Root | Folder>(tree: T): T {
 export function prepareHomeSidebarPageTree(tree: Root): Root {
   return {
     ...tree,
-    children: tree.children.filter((node) => !(node.type === 'folder' && node.root === true)),
+    children: tree.children
+      .filter((node) => !(node.type === 'folder' && node.root === true))
+      .map((node) => {
+        if (node.type !== 'page') return node;
+
+        const icon = homeSidebarItemIcons.get(node.url);
+        if (!icon) return node;
+
+        return { ...node, icon };
+      }),
   };
 }
