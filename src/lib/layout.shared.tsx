@@ -1,5 +1,5 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
-import { Cloud } from 'lucide-react';
+import { Cloud } from 'reicon-react';
 import { publicAssetFallbackPath, site } from './site';
 
 function CoolifyNavTitle() {
@@ -47,7 +47,12 @@ export function baseOptions(): BaseLayoutProps {
         url: 'https://coolify.io/pricing/',
         text: 'Coolify Cloud',
         label: 'Coolify Cloud',
-        icon: <Cloud className="size-4" aria-hidden="true" />,
+        icon: (
+          <>
+            <Cloud className="size-4" size={16} weight="Filled" aria-hidden="true" />
+            <span>Cloud</span>
+          </>
+        ),
         external: true,
       },
     ],
