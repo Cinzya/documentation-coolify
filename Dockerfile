@@ -5,7 +5,8 @@ ARG VITE_ANALYTICS_DOMAIN=coolify.io/docs
 ARG VITE_SITE_URL=https://coolify.io/docs/
 ENV VITE_ANALYTICS_DOMAIN=${VITE_ANALYTICS_DOMAIN}
 ENV VITE_SITE_URL=${VITE_SITE_URL}
-RUN apk add --no-cache nodejs npm
+RUN apk add --no-cache nodejs npm fontconfig ttf-dejavu font-noto font-noto-emoji
+RUN fc-cache -f
 
 # Set working directory and copy necessary files
 WORKDIR /app
@@ -44,7 +45,7 @@ RUN --mount=type=cache,target=/root/.bun \
     bun run build
 
 # Stage 2: NGINX Unprivileged Setup
-FROM nginxinc/nginx-unprivileged:1.29.8-alpine-slim AS final
+FROM nginxinc/nginx-unprivileged:1.30.1-alpine-slim AS final
 
 # Set working directory for NGINX and copy built files from the build stage
 WORKDIR /usr/share/nginx/html

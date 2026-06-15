@@ -18,8 +18,8 @@ These preview deployments are automatically deleted once the associated pull req
 <ZoomImage src="/docs/images/applications/ci-cd/github/preview-deploy/4.webp" />
 
 - **Preview URL Template:** Each preview deployment gets its own unique URL based on this template.
-  - Use <code v-pre>&#123;&#123;random&#125;&#125;</code> to generate a random subdomain each time a PR is deployed.
-  - Use <code v-pre>&#123;&#123;pr_id&#125;&#125;</code> to use the pull request ID as the subdomain.
+  - Use `{{random}}` to generate a random subdomain each time a PR is deployed.
+  - Use `{{pr_id}}` to use the pull request ID as the subdomain.
 
 
 <Callout type="warn" title="IMPORTANT">
@@ -81,14 +81,17 @@ We have a dedicated guide for setting up the GitHub App, so please follow it fir
 As part of the setup, ensure Preview Deployments is configured correctly. The steps differ depending on whether you use Automated or Manual setup, as shown below.
 
 
-<Callout type="info">
+<Tabs items={['Automated Setup', 'Manual Setup']}>
 
-== Automated Setup
+<Tab value="Automated Setup">
 <ZoomImage src="/docs/images/applications/ci-cd/github/preview-deploy/github-app/1.webp" />
 
 Before you click "Register now", enable the "Preview Deployments" option. That's it!
 
-== Manual Setup
+</Tab>
+
+<Tab value="Manual Setup">
+
 <ZoomImage src="/docs/images/applications/ci-cd/github/preview-deploy/github-app/2.webp" />
 
 While setting up permissions for the GitHub App, do the following:
@@ -100,8 +103,10 @@ While setting up permissions for the GitHub App, do the following:
 
 That's it!
 
+</Tab>
 
-</Callout>
+</Tabs>
+
 
 
 ---
