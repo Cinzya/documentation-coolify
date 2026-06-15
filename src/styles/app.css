@@ -52,6 +52,16 @@ body {
   text-wrap: pretty;
 }
 
+#nd-sidebar {
+  background-color: hsl(0 0% 98%);
+  border-inline-end: 1px solid hsl(0 0% 90% / 0.65);
+}
+
+.dark #nd-sidebar {
+  background-color: hsl(0 0% 5%);
+  border-inline-end: 1px solid hsl(0 0% 100% / 0.06);
+}
+
 .prose :where(h1, h2):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
   margin-bottom: 0.45em;
 }
