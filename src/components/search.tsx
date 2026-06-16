@@ -1,19 +1,22 @@
 'use client';
 
 import { create } from '@orama/orama';
+import type { ComponentProps } from 'react';
 import {
   SearchDialog,
   SearchDialogClose,
   SearchDialogContent,
   SearchDialogHeader,
-  SearchDialogIcon,
   SearchDialogInput,
   SearchDialogList,
   SearchDialogOverlay,
   type SharedProps,
+  useSearch,
 } from 'fumadocs-ui/components/dialog/search';
 import { useI18n } from 'fumadocs-ui/contexts/i18n';
 import { useDocsSearch } from 'fumadocs-core/search/client';
+import { Search3 } from 'reicon-react';
+import { cn } from '@/lib/cn';
 import { site } from '@/lib/site';
 
 function initOrama() {
@@ -37,12 +40,25 @@ export default function LocalSearchDialog(props: SharedProps) {
       <SearchDialogOverlay />
       <SearchDialogContent>
         <SearchDialogHeader>
-          <SearchDialogIcon />
+          <SearchDialogIconWithReicon />
           <SearchDialogInput />
           <SearchDialogClose />
         </SearchDialogHeader>
         <SearchDialogList items={query.data !== 'empty' ? query.data : null} />
       </SearchDialogContent>
     </SearchDialog>
+  );
+}
+
+function SearchDialogIconWithReicon({ className, ...props }: ComponentProps<typeof Search3>) {
+  const { isLoading } = useSearch();
+
+  return (
+    <Search3
+      {...props}
+      className={cn('size-5 text-fd-muted-foreground', isLoading && 'animate-pulse duration-400', className)}
+      weight="Filled"
+      aria-hidden="true"
+    />
   );
 }

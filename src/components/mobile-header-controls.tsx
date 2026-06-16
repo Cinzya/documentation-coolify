@@ -1,9 +1,9 @@
 'use client';
 
 import type { ComponentProps, MouseEvent } from 'react';
+import { useI18n } from 'fumadocs-ui/contexts/i18n';
 import { useSearchContext } from 'fumadocs-ui/contexts/search';
-import type { SearchTriggerProps } from 'fumadocs-ui/layouts/shared/slots/search-trigger';
-import { FullSearchTrigger } from 'fumadocs-ui/layouts/shared/slots/search-trigger';
+import type { FullSearchTriggerProps, SearchTriggerProps } from 'fumadocs-ui/layouts/shared/slots/search-trigger';
 import {
   Sidebar as NotebookSidebar,
   SidebarCollapseTrigger,
@@ -51,6 +51,49 @@ export function MobileSearchTrigger({
   );
 }
 
+export function FullSearchTriggerWithReicon({
+  hideIfDisabled,
+  className,
+  onClick,
+  ...props
+}: FullSearchTriggerProps) {
+  const { enabled, hotKey, setOpenSearch } = useSearchContext();
+  const { text } = useI18n();
+
+  if (hideIfDisabled && !enabled) return null;
+
+  function handleClick(event: MouseEvent<HTMLButtonElement>) {
+    onClick?.(event);
+
+    if (!event.defaultPrevented) {
+      setOpenSearch(true);
+    }
+  }
+
+  return (
+    <button
+      type="button"
+      data-search-full=""
+      {...props}
+      className={cn(
+        'inline-flex items-center gap-2 rounded-lg border bg-fd-secondary/50 p-1.5 ps-2 text-sm text-fd-muted-foreground transition-colors hover:bg-fd-accent hover:text-fd-accent-foreground',
+        className,
+      )}
+      onClick={handleClick}
+    >
+      <Search3 className="size-4" weight="Filled" aria-hidden="true" />
+      {text.search}
+      <div className="ms-auto inline-flex gap-0.5">
+        {hotKey.map((key, index) => (
+          <kbd key={index} className="rounded-md border bg-fd-background px-1.5">
+            {key.display}
+          </kbd>
+        ))}
+      </div>
+    </button>
+  );
+}
+
 export function MobileSidebarTrigger({ className: _className, children: _children, ...props }: ComponentProps<'button'>) {
   return (
     <NotebookSidebarTrigger {...props} data-mobile-sidebar-toggle="" className={mobileHeaderButtonClassName}>
@@ -78,5 +121,5 @@ export const mobileSidebarSlots = {
 
 export const mobileSearchTriggerSlots = {
   sm: MobileSearchTrigger,
-  full: FullSearchTrigger,
+  full: FullSearchTriggerWithReicon,
 };
