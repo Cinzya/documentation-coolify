@@ -48,7 +48,7 @@ const folderIndexLinks = new Map<string, FolderIndexLink>([
   ],
 ]);
 
-const homeSidebarItemIconClassName = 'text-fd-muted-foreground';
+const homeSidebarItemIconClassName = 'size-4.5 shrink-0 text-fd-muted-foreground';
 
 function homeSidebarIcon(Icon: typeof Rocket) {
   return createElement(Icon, {
