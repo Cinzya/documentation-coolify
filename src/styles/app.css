@@ -87,6 +87,7 @@ body {
 #nd-sidebar > div:first-child > button:not([data-theme-toggle]) {
   min-width: 0;
   flex: 1 1 auto;
+  padding-inline: 0.75rem 0.5rem;
 }
 
 #nd-sidebar [data-theme-toggle],
@@ -103,6 +104,10 @@ body {
 #nd-sidebar-mobile [data-mobile-sidebar-toggle] {
   height: 2.8125rem;
   width: 2.8125rem;
+}
+
+#nd-sidebar [data-mobile-sidebar-toggle] {
+  display: none;
 }
 
 #nd-sidebar-mobile > div:first-child {
