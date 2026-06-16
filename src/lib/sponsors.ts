@@ -7,6 +7,15 @@ export type Sponsor = {
   name: string;
   url: string;
   description: string;
+  image?: {
+    key?: string;
+    path?: string;
+    url?: string;
+    docs?: {
+      path?: string;
+      url?: string;
+    };
+  };
   imageKey?: string;
   imagePath?: string;
   imageUrl?: string;
