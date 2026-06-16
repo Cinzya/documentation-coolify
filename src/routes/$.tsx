@@ -5,9 +5,10 @@ import type { Root } from 'fumadocs-core/page-tree';
 import { useFumadocsLoader } from 'fumadocs-core/source/client';
 import { Suspense, useMemo, type ReactNode } from 'react';
 import { ClientAPIPage } from '@/components/api-page';
+import { ReiconMarkdownCopyButton } from '@/components/markdown-copy-button';
 import { MobileDrawerHeaderActions } from '@/components/mobile-header-controls';
 import { DocsLayout } from 'fumadocs-ui/layouts/notebook';
-import { DocsBody, DocsPage, MarkdownCopyButton } from 'fumadocs-ui/layouts/notebook/page';
+import { DocsBody, DocsPage } from 'fumadocs-ui/layouts/notebook/page';
 import { useMDXComponents } from '@/components/mdx';
 import { ViewOptionsPopover } from '@/components/page-actions';
 import { type DocsManifest, getManifestKey, type LoaderData } from '@/lib/docs-manifest';
@@ -283,7 +284,7 @@ function PageActions({
 }) {
   return (
     <div className={className}>
-      <MarkdownCopyButton markdownUrl={markdownUrl} />
+      <ReiconMarkdownCopyButton markdownUrl={markdownUrl} />
       <ViewOptionsPopover markdownUrl={markdownUrl} githubUrl={githubUrl} />
     </div>
   );

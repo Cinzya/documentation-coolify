@@ -5,7 +5,8 @@ import { useMemo } from 'react';
 import { usePathname } from 'fumadocs-core/framework';
 import { buttonVariants } from 'fumadocs-ui/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from 'fumadocs-ui/components/ui/popover';
-import { ChevronDown, ExternalLinkIcon, TextIcon } from 'lucide-react';
+import { ChevronDown, TextIcon } from 'lucide-react';
+import { SquareArrowRightUp } from 'reicon-react';
 
 interface ViewOptionItem {
   title: string;
@@ -111,7 +112,7 @@ export function ViewOptionsPopover({
           >
             {item.icon}
             {item.title}
-            <ExternalLinkIcon className="ms-auto size-3.5 text-fd-muted-foreground" />
+            <SquareArrowRightUp className="ms-auto size-3.5 text-fd-muted-foreground" weight="Filled" aria-hidden="true" />
           </a>
         ))}
       </PopoverContent>
