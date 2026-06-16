@@ -52,6 +52,17 @@ body {
   text-wrap: pretty;
 }
 
+@media (max-width: 1279px) {
+  div[class*='[grid-area:toc-popover]'] ~ article[class*='[grid-area:main]'] {
+    transition: filter 150ms ease;
+  }
+
+  div[class*='[grid-area:toc-popover]']:has(button[data-state='open'][aria-expanded='true'])
+    ~ article[class*='[grid-area:main]'] {
+    filter: blur(4px);
+  }
+}
+
 #nd-sidebar {
   background-color: hsl(0 0% 98%);
   border-inline-end: 1px solid hsl(0 0% 90% / 0.65);
