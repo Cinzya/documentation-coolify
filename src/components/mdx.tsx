@@ -12,6 +12,7 @@ import { MediaCardGroup } from './media-card-group';
 import { ScreenshotTab, ScreenshotTabs } from './screenshot-tabs';
 import { ServicesList } from './services-list';
 import { SponsorsList } from './sponsors-list';
+import { SponsorsPage } from './sponsors-page';
 import { TeamPage } from './team-page';
 import { ZoomImage } from './zoom-image';
 
@@ -41,6 +42,7 @@ export function getMDXComponents(components?: MDXComponents) {
     ScreenshotTabs,
     ServicesList,
     SponsorsList,
+    SponsorsPage,
     TeamPage,
     Step,
     Steps,
