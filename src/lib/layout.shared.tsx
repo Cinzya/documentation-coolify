@@ -1,8 +1,14 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
+import type { DocsSlots } from 'fumadocs-ui/layouts/notebook';
 import { Cloud } from 'reicon-react';
 import { DiscordInfo, getDiscordInviteUrl } from '@/components/discord-info';
 import { GithubInfo, getGithubRepoUrl } from '@/components/github-info';
+import { mobileSearchTriggerSlots, mobileSidebarSlots } from '@/components/mobile-header-controls';
 import { publicAssetFallbackPath, site } from './site';
+
+type SharedLayoutOptions = BaseLayoutProps & {
+  slots?: BaseLayoutProps['slots'] & Pick<DocsSlots, 'sidebar'>;
+};
 
 function CoolifyNavTitle() {
   return (
@@ -17,7 +23,7 @@ function CoolifyNavTitle() {
   );
 }
 
-export function baseOptions(): BaseLayoutProps {
+export function baseOptions(): SharedLayoutOptions {
   return {
     links: [
       {
@@ -52,6 +58,10 @@ export function baseOptions(): BaseLayoutProps {
     ],
     nav: {
       title: <CoolifyNavTitle />,
+    },
+    slots: {
+      searchTrigger: mobileSearchTriggerSlots,
+      sidebar: mobileSidebarSlots,
     },
     themeSwitch: {
       enabled: false,
