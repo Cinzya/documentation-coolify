@@ -187,7 +187,7 @@ const clientLoader = browserCollections.docs.createClientLoader({
   ) {
     const pageActions = (
       <PageActions
-        className="mt-4 flex flex-row items-center gap-2 border-t pt-4"
+        className="mt-4 flex flex-row items-center gap-2 border-t pt-4 max-xl:mb-4 max-xl:ps-2"
         githubUrl={getDocGithubPath(path)}
         markdownUrl={markdownUrl}
       />
