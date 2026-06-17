@@ -5,20 +5,12 @@ import { File, Files, Folder } from 'fumadocs-ui/components/files';
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 import type { MDXComponents } from 'mdx/types';
 import type React from 'react';
-import { ChooseYourPath } from './choose-your-path';
-import { CoolActionCard } from './cool-action-card';
-import { CoolActionCardGrid } from './cool-action-card-grid';
-import { CoolCallout } from './cool-callout';
-import { CoolFlow } from './cool-flow';
-import { CoolTable } from './cool-table';
-import { Callout } from './callout';
-import { MediaCard } from './media-card';
-import { MediaCardGroup } from './media-card-group';
-import { ScreenshotTab, ScreenshotTabs } from './screenshot-tabs';
-import { ServicesList } from './services-list';
-import { SponsorsList } from './sponsors-list';
-import { SponsorsPage } from './sponsors-page';
-import { Tab, Tabs } from './tabs';
+import { MediaCard } from '@/components/cards/media-card';
+import { MediaCardGroup } from '@/components/cards/media-card-group';
+import { ServicesList } from '@/components/data/services-list';
+import { SponsorsList } from '@/components/data/sponsors-list';
+import { ChooseYourPath } from '@/components/pages/choose-your-path';
+import { SponsorsPage } from '@/components/pages/sponsors-page';
 import {
   SelfHostedAdvancedOptions,
   SelfHostedFirewallSshBasics,
@@ -30,8 +22,16 @@ import {
   SelfHostedProjectResources,
   SelfHostedRaspberryInstallMethods,
   SelfHostedServerRequirements,
-} from './start-with-self-hosted';
-import { TeamPage } from './team-page';
+} from '@/components/pages/start-with-self-hosted';
+import { TeamPage } from '@/components/pages/team-page';
+import { CoolActionCard } from './cool-action-card';
+import { CoolActionCardGrid } from './cool-action-card-grid';
+import { CoolCallout } from './cool-callout';
+import { CoolFlow } from './cool-flow';
+import { CoolTable } from './cool-table';
+import { Callout } from './callout';
+import { ScreenshotTab, ScreenshotTabs } from './screenshot-tabs';
+import { Tab, Tabs } from './tabs';
 import { ZoomImage } from './zoom-image';
 
 function Badge({ text, children }: { type?: string; text?: string; children?: React.ReactNode }) {

@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react';
 import { buttonVariants } from 'fumadocs-ui/components/ui/button';
 import { SearchIcon } from 'lucide-react';
-import services from '../generated/services.json';
+import services from '../../generated/services.json';
 
 type Service = {
   name: string;

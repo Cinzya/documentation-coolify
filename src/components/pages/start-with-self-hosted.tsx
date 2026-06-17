@@ -3,11 +3,11 @@
 import type React from 'react';
 import { Children, isValidElement, useEffect, useLayoutEffect, useState } from 'react';
 import type { IconComponent } from 'reicon-react';
-import { CoolActionCard } from '@/components/cool-action-card';
-import { CoolActionCardGrid } from '@/components/cool-action-card-grid';
-import { CoolCallout } from '@/components/cool-callout';
-import { CoolFlow } from '@/components/cool-flow';
-import type { CoolActionCardVariant } from '@/components/cool-types';
+import { CoolActionCard } from '@/components/docs/cool-action-card';
+import { CoolActionCardGrid } from '@/components/docs/cool-action-card-grid';
+import { CoolCallout } from '@/components/docs/cool-callout';
+import { CoolFlow } from '@/components/docs/cool-flow';
+import type { CoolActionCardVariant } from '@/components/docs/cool-types';
 import {
   ArrowRight,
   Autobrightness2,

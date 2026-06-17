@@ -1,9 +1,9 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 import type { DocsSlots } from 'fumadocs-ui/layouts/notebook';
 import { Cloud } from 'reicon-react';
-import { DiscordInfo, getDiscordInviteUrl } from '@/components/discord-info';
-import { GithubInfo, getGithubRepoUrl } from '@/components/github-info';
-import { mobileSearchTriggerSlots, mobileSidebarSlots } from '@/components/mobile-header-controls';
+import { DiscordInfo, getDiscordInviteUrl } from '@/components/layout/discord-info';
+import { GithubInfo, getGithubRepoUrl } from '@/components/layout/github-info';
+import { mobileSearchTriggerSlots, mobileSidebarSlots } from '@/components/layout/mobile-header-controls';
 import { publicAssetFallbackPath, site } from './site';
 
 type SharedLayoutOptions = BaseLayoutProps & {

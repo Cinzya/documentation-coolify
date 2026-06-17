@@ -12,7 +12,7 @@ import {
   useSidebar,
 } from 'fumadocs-ui/layouts/notebook/slots/sidebar';
 import { Search3, Sidebar } from 'reicon-react';
-import { ThemeToggle } from '@/components/theme-toggle';
+import { ThemeToggle } from '@/components/layout/theme-toggle';
 import { cn } from '@/lib/cn';
 
 const mobileHeaderButtonClassName =

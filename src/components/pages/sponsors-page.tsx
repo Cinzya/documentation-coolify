@@ -1,4 +1,4 @@
-import { SponsorsList } from './sponsors-list';
+import { SponsorsList } from '@/components/data/sponsors-list';
 
 export function SponsorsPage() {
   return (
