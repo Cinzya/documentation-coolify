@@ -10,6 +10,7 @@ import { CoolActionCard } from './cool-action-card';
 import { CoolActionCardGrid } from './cool-action-card-grid';
 import { CoolCallout } from './cool-callout';
 import { CoolFlow } from './cool-flow';
+import { CoolTable } from './cool-table';
 import { Callout } from './callout';
 import { MediaCard } from './media-card';
 import { MediaCardGroup } from './media-card-group';
@@ -55,6 +56,7 @@ export function getMDXComponents(components?: MDXComponents) {
     CoolActionCardGrid,
     CoolCallout,
     CoolFlow,
+    CoolTable,
     File,
     Files,
     Folder,

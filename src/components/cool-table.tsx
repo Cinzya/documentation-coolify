@@ -1,0 +1,58 @@
+import type React from 'react';
+import { cn } from '@/lib/cn';
+import type { CoolIcon } from './cool-types';
+
+type CoolTableColumn = {
+  header: React.ReactNode;
+  icon?: CoolIcon;
+};
+
+type CoolTableProps = React.ComponentProps<'div'> & {
+  columns: CoolTableColumn[];
+  rows: React.ReactNode[][];
+};
+
+export function CoolTable({ className, columns, rows, ...props }: CoolTableProps) {
+  return (
+    <div
+      data-cool-docs
+      className={cn('not-prose my-3 overflow-hidden rounded-lg border border-fd-border bg-fd-background/70', className)}
+      {...props}
+    >
+      <div className="relative overflow-auto prose-no-margin">
+        <table className="comparison-table w-full min-w-[42rem] text-sm sm:min-w-0">
+          <thead>
+            <tr className="comparison-header">
+              {columns.map((column, index) => {
+                const Icon = column.icon;
+
+                return (
+                  <th
+                    key={index}
+                    className={index === 0 ? 'font-semibold text-fd-muted-foreground' : 'font-semibold text-fd-foreground'}
+                  >
+                    <span className="flex items-center gap-2">
+                      {Icon ? <Icon className="size-4 shrink-0" weight="Filled" aria-hidden={true} /> : null}
+                      <span>{column.header}</span>
+                    </span>
+                  </th>
+                );
+              })}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row, rowIndex) => (
+              <tr key={rowIndex}>
+                {row.map((cell, cellIndex) => (
+                  <td key={cellIndex} className={cellIndex === 0 ? 'font-medium text-fd-foreground' : 'leading-6 text-fd-muted-foreground'}>
+                    {cell}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}

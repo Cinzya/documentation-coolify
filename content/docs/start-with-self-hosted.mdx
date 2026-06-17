@@ -16,12 +16,15 @@ import {
   SelfHostedServerRequirements,
 } from '@/components/start-with-self-hosted';
 import {
+  ArrowsDown,
   ArrowsRight,
   Autobrightness2,
   Box2,
+  Checklist2,
   Globe3,
   LaptopCode,
   Layers,
+  Notes2,
   PenNib,
   SackDollar,
   ServerCloud,
@@ -84,14 +87,21 @@ You can even use our [referral link](https://coolify.io/hetzner) to support the 
 
 ### 2. Supported operating systems
 
-| Base | Distributions | Notes |
-| :--- | :--- | :--- |
-| Debian-based | Debian, Ubuntu | Ubuntu non-LTS: use Manual install |
-| Red Hat-based | CentOS, Fedora, Red Hat, AlmaLinux, Rocky, TencentOS, Asahi | Docker may need manual pre-install on some variants |
-| SUSE-based | SLES, SUSE, openSUSE | Supported |
-| Arch-based | Arch Linux | Supported |
-| Alpine-based | Alpine Linux | Supported |
-| Raspberry Pi OS | Raspberry Pi OS (64-bit) | Use 64-bit image |
+<CoolTable
+  columns={[
+    { header: 'Base', icon: ServerCloud },
+    { header: 'Distributions', icon: Layers },
+    { header: 'Notes', icon: Notes2 },
+  ]}
+  rows={[
+    ['Debian-based', 'Debian, Ubuntu', 'Ubuntu non-LTS: use Manual install'],
+    ['Red Hat-based', 'CentOS, Fedora, Red Hat, AlmaLinux, Rocky, TencentOS, Asahi', 'Docker may need manual pre-install on some variants'],
+    ['SUSE-based', 'SLES, SUSE, openSUSE', 'Supported'],
+    ['Arch-based', 'Arch Linux', 'Supported'],
+    ['Alpine-based', 'Alpine Linux', 'Supported'],
+    ['Raspberry Pi OS', 'Raspberry Pi OS (64-bit)', 'Use 64-bit image'],
+  ]}
+/>
 
 <CoolCallout id="operating-system-support" icon={Layers} title="Operating system support">
 
@@ -105,12 +115,19 @@ Coolify only runs on Linux-based operating systems. You may be able to run it on
 
 ### 3. Minimum hardware requirements
 
-| Item | Minimum | Notes |
-| :--- | :--- | :--- |
-| CPU | 2 cores | Increase cores if running multiple workloads on one server. |
-| Memory | 2 GB RAM | Increase memory as your workload grows. |
-| Disk | 10 GB free space | Keep additional space for Docker images, volumes, and backups. |
-| Architecture | amd64 or arm64 | ARM64 is required for Raspberry Pi OS installations. |
+<CoolTable
+  columns={[
+    { header: 'Item', icon: Checklist2 },
+    { header: 'Minimum', icon: ArrowsDown },
+    { header: 'Notes', icon: Notes2 },
+  ]}
+  rows={[
+    ['CPU', '2 cores', 'Increase cores if running multiple workloads on one server.'],
+    ['Memory', '2 GB RAM', 'Increase memory as your workload grows.'],
+    ['Disk', '10 GB free space', 'Keep additional space for Docker images, volumes, and backups.'],
+    ['Architecture', 'amd64 or arm64', 'ARM64 is required for Raspberry Pi OS installations.'],
+  ]}
+/>
 
 <CoolCallout id="hardware-resource-planning" icon={SackDollar} title="Hardware resource planning for budget users">
 
