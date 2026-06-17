@@ -186,6 +186,7 @@ const clientLoader = browserCollections.docs.createClientLoader({
     { toc, frontmatter, default: MDX },
     { hideFooter, markdownUrl, path }: { hideFooter?: boolean; markdownUrl: string; path: string },
   ) {
+    const hidePageChrome = path.includes('choose-your-path');
     const pageActions = (
       <PageActions
         className="mt-4 flex flex-row items-center gap-2 border-t pt-4 max-xl:mb-4 max-xl:ps-2"
@@ -214,8 +215,9 @@ const clientLoader = browserCollections.docs.createClientLoader({
       <DocsPage
         toc={toc}
         breadcrumb={{ enabled: false }}
-        tableOfContent={{ style: 'clerk', footer: pageActions }}
-        tableOfContentPopover={{ style: 'clerk', footer: pageActions }}
+        footer={{ enabled: !hideFooter && !hidePageChrome }}
+        tableOfContent={hidePageChrome ? { enabled: false } : { style: 'clerk', footer: pageActions }}
+        tableOfContentPopover={hidePageChrome ? { enabled: false } : { style: 'clerk', footer: pageActions }}
       >
         <DocsBody>
           <MDX components={useMDXComponents()} />
