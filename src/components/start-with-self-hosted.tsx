@@ -195,34 +195,6 @@ const firewallSshGuides = [
   variant: CoolActionCardVariant;
 }>;
 
-const beforeBeginSections = [
-  {
-    section: 'Server requirements',
-    href: '#1-server-requirements',
-    check: 'Confirm you have a server or device with SSH access.',
-  },
-  {
-    section: 'Supported operating systems',
-    href: '#2-supported-operating-systems',
-    check: 'Confirm your Linux distribution is supported.',
-  },
-  {
-    section: 'Minimum hardware requirements',
-    href: '#3-minimum-hardware-requirements',
-    check: 'Confirm CPU, memory, disk, and architecture fit Coolify.',
-  },
-  {
-    section: 'Server resources for your projects',
-    href: '#4-server-resources-for-your-projects',
-    check: 'Estimate resources based on the projects you plan to run.',
-  },
-  {
-    section: 'Configure SSH access and firewall',
-    href: '#5-configure-ssh-access-and-firewall',
-    check: 'Prepare SSH access and required firewall ports.',
-  },
-];
-
 const methodGuides = {
   automated: {
     id: 'automated-install-flow',
