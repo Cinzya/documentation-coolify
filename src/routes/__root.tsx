@@ -1,4 +1,4 @@
-import { createRootRoute, HeadContent, Outlet, Scripts } from '@tanstack/react-router';
+import { createRootRoute, HeadContent, Link, Outlet, Scripts } from '@tanstack/react-router';
 import { RootProvider } from 'fumadocs-ui/provider/tanstack';
 import * as React from 'react';
 import SearchDialog from '@/components/search';
@@ -116,11 +116,25 @@ function RootComponent() {
         ) : null}
       </head>
       <body className="flex min-h-screen flex-col">
-        <RootProvider search={{ SearchDialog }}>
+        <RootProvider components={{ Link: DocsLink }} search={{ SearchDialog }}>
           <Outlet />
         </RootProvider>
         <Scripts />
       </body>
     </html>
   );
+}
+
+function DocsLink({
+  href = '#',
+  prefetch = true,
+  ...props
+}: React.AnchorHTMLAttributes<HTMLAnchorElement> & {
+  prefetch?: boolean;
+}) {
+  if (href.startsWith('#')) {
+    return <a href={href} {...props} />;
+  }
+
+  return <Link to={href} preload={prefetch ? 'intent' : false} {...props} />;
 }
