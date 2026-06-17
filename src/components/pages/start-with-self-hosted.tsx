@@ -86,7 +86,7 @@ function openInstallMethodTab(event: React.MouseEvent<HTMLAnchorElement>, method
   );
 }
 
-const serverRequirementOptions: Array<{
+export const serverRequirementOptions: Array<{
   title: string;
   detail: string;
   icon: IconComponent;
@@ -166,7 +166,7 @@ const projectResourceWorkloads = [
   'Beszel',
 ];
 
-const firewallSshGuides = [
+export const firewallSshGuides = [
   {
     title: 'SSH access',
     detail: 'Configure OpenSSH so Coolify can connect to your server.',
@@ -255,10 +255,10 @@ const methodGuides = {
   },
 } as const;
 
-const nextSteps = [
+export const nextSteps = [
   {
     title: 'Deploy an application',
-    detail: 'Start with an app deployment once the local server is connected.',
+    detail: 'Start with an app deployment once your server is connected.',
     href: '/deploy-your-first-app',
     icon: WindowPointer,
   },
