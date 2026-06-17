@@ -19,7 +19,12 @@ export function CoolCallout({ children, className, contentClassName, icon: Icon,
 
   async function copySectionLink() {
     const url = `${window.location.origin}${window.location.pathname}#${id}`;
-    await navigator.clipboard.writeText(url);
+    try {
+      await navigator.clipboard.writeText(url);
+    } catch {
+      return;
+    }
+
     setCopied(true);
     window.setTimeout(() => setCopied(false), 1400);
   }
