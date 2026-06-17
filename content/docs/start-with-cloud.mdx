@@ -45,12 +45,12 @@ Check these requirements first so Cloud onboarding can validate your server with
 
 | Section | Check |
 | :--- | :--- |
-| [1. How Cloud works](#1-how-cloud-works) | Understand which parts Cloud manages and which parts you manage. |
+| [1. How Cloud works](#1-how-cloud-works) | See where the Cloud instance runs and how it connects to your servers. |
 | [2. Your own server is required](#2-your-own-server-is-required) | Confirm you have server infrastructure for workloads. |
-| [3. Server resources for your projects](#3-server-resources-for-your-projects) | Estimate resources based on the projects you plan to run. |
-| [4. Server access requirements](#4-server-access-requirements) | Prepare SSH access, Docker support, and firewall rules. |
-| [5. Shared responsibility model](#5-shared-responsibility-model) | Know what Cloud manages and what remains your responsibility. |
-| [6. Subscription and server limits](#6-subscription-and-server-limits) | Choose the number of servers you want to connect. |
+| [3. Server resources for your projects](#3-server-resources-for-your-projects) | Confirm your servers have enough CPU, memory, and storage for your workloads. |
+| [4. Server access requirements](#4-server-access-requirements) | Confirm SSH access, Docker support, and firewall rules are ready. |
+| [5. Shared responsibility model](#5-shared-responsibility-model) | Confirm who is responsible for the control plane, servers, workloads, and backups. |
+| [6. Subscription and server limits](#6-subscription-and-server-limits) | Confirm your plan supports the number of servers you want to connect. |
 
 ---
 
@@ -60,7 +60,7 @@ In Coolify Cloud, the Coolify instance, dashboard, control plane, and related se
 
 You **do not** get direct access to that managed infrastructure.
 
-The main benefit is that you do not need to allocate CPU, RAM, or storage on your own servers for running Coolify itself. Your servers are used for your workloads.
+Coolify Cloud infrastructure runs on Hetzner infrastructure in Falkenstein, Germany. It connects to your servers over SSH from the documented [IPv4 addresses](https://coolify.io/ipv4.txt) and [IPv6 addresses](https://coolify.io/ipv6.txt).
 
 <CoolCallout className="my-5" id="cloud-managed-control-plane" icon={StarSparkle} title="Managed control plane">
 
