@@ -349,6 +349,14 @@ a[aria-label='Coolify Cloud']:hover {
   margin-bottom: 0.35em;
 }
 
+:where(h2, h3, h4):has([data-hidden-heading]) {
+  height: 0;
+  margin: 0 !important;
+  overflow: hidden;
+  padding: 0 !important;
+  pointer-events: none;
+}
+
 .prose :where(ul):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
   padding-inline-start: 1.5rem;
 }
