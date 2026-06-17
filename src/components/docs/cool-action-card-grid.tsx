@@ -1,5 +1,5 @@
 import type React from 'react';
-import { cn } from '@/lib/cn';
+import { cn } from '@/lib/ui/cn';
 
 export function CoolActionCardGrid({ children, className, ...props }: React.ComponentProps<'section'>) {
   return (

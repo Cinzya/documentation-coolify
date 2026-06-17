@@ -13,7 +13,7 @@ import {
 } from 'fumadocs-ui/layouts/notebook/slots/sidebar';
 import { Search3, Sidebar } from 'reicon-react';
 import { ThemeToggle } from '@/components/layout/theme-toggle';
-import { cn } from '@/lib/cn';
+import { cn } from '@/lib/ui/cn';
 
 const mobileHeaderButtonClassName =
   'inline-flex size-9 items-center justify-center rounded-lg border bg-fd-secondary/50 text-fd-secondary-foreground transition-colors hover:bg-fd-accent hover:text-fd-accent-foreground';

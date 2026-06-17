@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { cn } from '@/lib/cn';
+import { cn } from '@/lib/ui/cn';
 
 const discordInviteCode = 'ka4bNH8TMU';
 const discordInviteUrl = 'https://coollabs.io/discord';

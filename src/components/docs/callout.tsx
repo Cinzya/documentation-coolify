@@ -1,6 +1,6 @@
 import type React from 'react';
 import { CheckCircle, InfoCircle, StarSparkle, Warning22 } from 'reicon-react';
-import { cn } from '@/lib/cn';
+import { cn } from '@/lib/ui/cn';
 
 type CalloutType = 'error' | 'idea' | 'info' | 'success' | 'warning';
 

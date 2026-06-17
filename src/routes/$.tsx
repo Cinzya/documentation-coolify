@@ -11,12 +11,12 @@ import { DocsLayout } from 'fumadocs-ui/layouts/notebook';
 import { DocsBody, DocsPage } from 'fumadocs-ui/layouts/notebook/page';
 import { useMDXComponents } from '@/components/docs/mdx';
 import { ViewOptionsPopover } from '@/components/layout/page-actions';
-import { type DocsManifest, getManifestKey, type LoaderData } from '@/lib/docs-manifest';
-import { createDocsLayoutTabs } from '@/lib/docs-layout-tabs';
-import { baseOptions } from '@/lib/layout.shared';
-import { prepareHomeSidebarPageTree, preparePageTree } from '@/lib/page-tree';
-import { absoluteUrl, getDocGithubPath, getDocOgPath, site } from '@/lib/site';
-import { getPageMarkdownUrl, source } from '@/lib/source';
+import { type DocsManifest, getManifestKey, type LoaderData } from '@/lib/docs/docs-manifest';
+import { createDocsLayoutTabs } from '@/lib/docs/docs-layout-tabs';
+import { baseOptions } from '@/lib/ui/layout.shared';
+import { prepareHomeSidebarPageTree, preparePageTree } from '@/lib/docs/page-tree';
+import { absoluteUrl, getDocGithubPath, getDocOgPath, site } from '@/lib/config/site';
+import { getPageMarkdownUrl, source } from '@/lib/docs/source';
 
 type RuntimeLoaderData = LoaderData extends infer T
   ? T extends unknown

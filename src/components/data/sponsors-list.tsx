@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import { SPONSORS_URL, type Sponsor, type SponsorsResponse } from '@/lib/sponsors';
+import { SPONSORS_URL, type Sponsor, type SponsorsResponse } from '@/lib/config/sponsors';
 
 const ref = 'coolify.io';
 function addRef(url: string): string {

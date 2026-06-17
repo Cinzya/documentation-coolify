@@ -1,6 +1,6 @@
 import type React from 'react';
 import { ArrowRight, Check } from 'reicon-react';
-import { cn } from '@/lib/cn';
+import { cn } from '@/lib/ui/cn';
 import type { CoolActionCardVariant, CoolIcon } from './cool-types';
 
 type CoolActionCardProps = Omit<React.ComponentProps<'a'>, 'title'> & {

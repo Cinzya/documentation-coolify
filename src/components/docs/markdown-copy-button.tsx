@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { buttonVariants } from 'fumadocs-ui/components/ui/button';
 import { useCopyButton } from 'fumadocs-ui/utils/use-copy-button';
 import { Copy, CopySuccess2 } from 'reicon-react';
-import { cn } from '@/lib/cn';
+import { cn } from '@/lib/ui/cn';
 
 const markdownCache = new Map<string, Promise<string>>();
 

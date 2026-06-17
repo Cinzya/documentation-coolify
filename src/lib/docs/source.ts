@@ -1,8 +1,8 @@
 import { type InferPageType, loader, multiple } from 'fumadocs-core/source';
 import { openapiPlugin, openapiSource } from 'fumadocs-openapi/server';
 import { docs } from 'collections/server';
-import { openapi } from './openapi';
-import { getDocMarkdownPath, site } from './site';
+import { openapi } from '../config/openapi';
+import { getDocMarkdownPath, site } from '../config/site';
 
 export const source = loader(
   multiple({

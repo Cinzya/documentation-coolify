@@ -3,7 +3,7 @@
 import type React from 'react';
 import { useState } from 'react';
 import { Link3 } from 'reicon-react';
-import { cn } from '@/lib/cn';
+import { cn } from '@/lib/ui/cn';
 import type { CoolIcon } from './cool-types';
 
 type CoolCalloutProps = Omit<React.ComponentProps<'section'>, 'title'> & {

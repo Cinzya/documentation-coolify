@@ -4,7 +4,7 @@ import { Cloud } from 'reicon-react';
 import { DiscordInfo, getDiscordInviteUrl } from '@/components/layout/discord-info';
 import { GithubInfo, getGithubRepoUrl } from '@/components/layout/github-info';
 import { mobileSearchTriggerSlots, mobileSidebarSlots } from '@/components/layout/mobile-header-controls';
-import { publicAssetFallbackPath, site } from './site';
+import { publicAssetFallbackPath, site } from '../config/site';
 
 type SharedLayoutOptions = BaseLayoutProps & {
   slots?: BaseLayoutProps['slots'] & Pick<DocsSlots, 'sidebar'>;

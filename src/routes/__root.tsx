@@ -2,7 +2,7 @@ import { createRootRoute, HeadContent, Link, Outlet, Scripts } from '@tanstack/r
 import { RootProvider } from 'fumadocs-ui/provider/tanstack';
 import * as React from 'react';
 import SearchDialog from '@/components/layout/search';
-import { absoluteUrl, publicAssetFallbackPath, site } from '@/lib/site';
+import { absoluteUrl, publicAssetFallbackPath, site } from '@/lib/config/site';
 import '@/styles/app.css';
 
 export const Route = createRootRoute({

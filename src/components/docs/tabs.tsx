@@ -3,7 +3,7 @@
 import type React from 'react';
 import { Children, isValidElement, useEffect, useMemo, useState } from 'react';
 import { Layers } from 'reicon-react';
-import { cn } from '@/lib/cn';
+import { cn } from '@/lib/ui/cn';
 import type { CoolIcon } from './cool-types';
 
 type TabsProps = Omit<React.ComponentProps<'div'>, 'defaultValue'> & {

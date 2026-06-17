@@ -16,8 +16,8 @@ import {
 import { useI18n } from 'fumadocs-ui/contexts/i18n';
 import { useDocsSearch } from 'fumadocs-core/search/client';
 import { Search3 } from 'reicon-react';
-import { cn } from '@/lib/cn';
-import { site } from '@/lib/site';
+import { cn } from '@/lib/ui/cn';
+import { site } from '@/lib/config/site';
 
 function initOrama() {
   return create({
