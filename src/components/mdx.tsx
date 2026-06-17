@@ -7,6 +7,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import type { MDXComponents } from 'mdx/types';
 import type React from 'react';
+import { ChooseYourPath } from './choose-your-path';
 import { MediaCard } from './media-card';
 import { MediaCardGroup } from './media-card-group';
 import { ScreenshotTab, ScreenshotTabs } from './screenshot-tabs';
@@ -33,6 +34,7 @@ export function getMDXComponents(components?: MDXComponents) {
     Callout,
     Card,
     Cards,
+    ChooseYourPath,
     File,
     Files,
     Folder,
