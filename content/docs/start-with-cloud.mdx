@@ -46,11 +46,11 @@ Check these requirements first so Cloud onboarding can validate your server with
 | Section | Check |
 | :--- | :--- |
 | [1. How Cloud works](#1-how-cloud-works) | See where the Cloud instance runs and how it connects to your servers. |
-| [2. Your own server is required](#2-your-own-server-is-required) | Confirm you have server infrastructure for workloads. |
-| [3. Server resources for your projects](#3-server-resources-for-your-projects) | Confirm your servers have enough CPU, memory, and storage for your workloads. |
-| [4. Server access requirements](#4-server-access-requirements) | Confirm SSH access, Docker support, and firewall rules are ready. |
-| [5. Shared responsibility model](#5-shared-responsibility-model) | Confirm who is responsible for the control plane, servers, workloads, and backups. |
-| [6. Subscription and server limits](#6-subscription-and-server-limits) | Confirm your plan supports the number of servers you want to connect. |
+| [2. Shared responsibility model](#2-shared-responsibility-model) | Confirm who is responsible for the control plane, servers, workloads, and backups. |
+| [3. Your own server is required](#3-your-own-server-is-required) | Confirm you have server infrastructure for workloads. |
+| [4. Server resources for your projects](#4-server-resources-for-your-projects) | Confirm your servers have enough CPU, memory, and storage for your workloads. |
+| [5. Subscription and server limits](#5-subscription-and-server-limits) | Confirm your plan supports the number of servers you want to connect. |
+| [6. Server access requirements](#6-server-access-requirements) | Confirm SSH access, Docker support, and firewall rules are ready. |
 
 ---
 
@@ -70,40 +70,7 @@ Cloud keeps the Coolify control plane hosted, updated, maintained, and backed up
 
 ---
 
-### 2. Your own server is required
-
-Coolify Cloud does **not** provide workload servers. You must bring your own server infrastructure for apps, databases, and services.
-
-Your server can be:
-
-<CloudServerOptions />
-
-<CoolCallout className="my-5" id="server-provider" icon={ServerCloud} title="Server provider">
-
-If you haven’t picked a server provider yet, consider using [Hetzner](https://coolify.io/hetzner).
-You can even use our [referral link](https://coolify.io/hetzner) to support the project.
-
-</CoolCallout>
-
----
-
-### 3. Server resources for your projects
-
-The resources you need depend on your projects. If you host multiple services or larger applications, choose a server with higher CPU, memory, and storage.
-
-<SelfHostedProjectResources />
-
----
-
-### 4. Server access requirements
-
-For connecting servers to Coolify Cloud, make sure:
-
-<CloudAccessBasics />
-
----
-
-### 5. Shared responsibility model
+### 2. Shared responsibility model
 
 Coolify Cloud manages the Coolify control plane. You manage the servers and workloads you connect to it.
 
@@ -133,7 +100,32 @@ Coolify Cloud manages the Coolify instance. You still manage server operating sy
 
 ---
 
-### 6. Subscription and server limits
+### 3. Your own server is required
+
+Coolify Cloud does **not** provide workload servers. You must bring your own server infrastructure for apps, databases, and services.
+
+Your server can be:
+
+<CloudServerOptions />
+
+<CoolCallout className="my-5" id="server-provider" icon={ServerCloud} title="Server provider">
+
+If you haven’t picked a server provider yet, consider using [Hetzner](https://coolify.io/hetzner).
+You can even use our [referral link](https://coolify.io/hetzner) to support the project.
+
+</CoolCallout>
+
+---
+
+### 4. Server resources for your projects
+
+The resources you need depend on your projects. If you host multiple services or larger applications, choose a server with higher CPU, memory, and storage.
+
+<SelfHostedProjectResources />
+
+---
+
+### 5. Subscription and server limits
 
 Coolify Cloud is a pay-as-you-go service. Pricing starts at **$5/month** and scales with the number of servers you want to connect (**$3/month** per additional server). See the [pricing page](https://coolify.io/pricing) for the latest pricing details.
 
@@ -144,6 +136,14 @@ Your subscription is based on connected server count, so choose the number of se
 If Cloud says you exceeded the connected server limit for your current plan, remove an existing connected server or upgrade your plan. If the issue persists, email **[hi@coollabs.io](mailto:hi@coollabs.io)** and describe the problem.
 
 </CoolCallout>
+
+---
+
+### 6. Server access requirements
+
+For connecting servers to Coolify Cloud, make sure:
+
+<CloudAccessBasics />
 
 ---
 
