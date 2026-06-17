@@ -3,34 +3,36 @@
 import { DynamicCodeBlock } from 'fumadocs-ui/components/dynamic-codeblock';
 import type React from 'react';
 import { Children, isValidElement, useEffect, useLayoutEffect, useState } from 'react';
+import type { IconComponent } from 'reicon-react';
 import {
   ArrowRight,
+  ArrowsDown,
   ArrowsRight,
   Autobrightness2,
   Box2,
   Check,
   Checklist2,
-  Cpu,
   Database,
   Flash12,
   Globe3,
-  HardDrive,
   LaptopCode,
   Layers,
   Link3,
+  Notes2,
   PenNib,
   Refresh23,
   Rocket2,
+  SackDollar,
   Setting2,
   Settings,
   SecuritySafe2,
   Server,
   ServerCloud,
   ServerUpdate,
+  ShieldSecurity2,
   Screencast2,
   SignalStream,
   StarSparkle,
-  TickCircle2,
   WindowPointer,
 } from 'reicon-react';
 
@@ -155,7 +157,12 @@ const raspberryPrerequisites = [
   },
 ];
 
-const serverRequirementOptions = [
+const serverRequirementOptions: Array<{
+  title: string;
+  detail: string;
+  icon: IconComponent;
+  href?: string;
+}> = [
   {
     title: 'VPS',
     detail: 'A Virtual Private Server from any provider.',
@@ -175,7 +182,6 @@ const serverRequirementOptions = [
     title: 'Raspberry Pi',
     detail: 'A 64bit supported Raspberry Pi setup.',
     icon: ServerUpdate,
-    href: '/knowledge-base/how-to/raspberry-pi-os#prerequisites',
   },
   {
     title: 'Laptop',
@@ -185,7 +191,7 @@ const serverRequirementOptions = [
   {
     title: 'Any Linux device',
     detail: 'Any device that runs Linux with SSH access.',
-    icon: SignalStream,
+    icon: Flash12,
   },
 ];
 
@@ -264,7 +270,7 @@ const beforeBeginSections = [
     check: 'Confirm your Linux distribution is supported.',
   },
   {
-    section: 'Minimum Hardware Requirements',
+    section: 'Minimum hardware requirements',
     href: '#3-minimum-hardware-requirements',
     check: 'Confirm CPU, memory, disk, and architecture fit Coolify.',
   },
@@ -396,7 +402,7 @@ const advancedOptions = [
     title: 'Root user',
     detail: 'Pre-create the admin account so public registration is never exposed.',
     href: '#_1-root-user',
-    icon: SecuritySafe2,
+    icon: ShieldSecurity2,
     tab: 'Root user',
   },
   {
@@ -922,13 +928,13 @@ export function SelfHostedSupportedOperatingSystems() {
                 <th className="w-[24%] font-semibold text-fd-muted-foreground">Base</th>
                 <th className="w-[44%] font-semibold text-fd-foreground">
                   <div className="flex items-center gap-2">
-                    <Server className="size-4" weight="Filled" aria-hidden="true" />
+                    <Layers className="size-4" weight="Filled" aria-hidden="true" />
                     <span>Distributions</span>
                   </div>
                 </th>
                 <th className="w-[32%] font-semibold text-fd-foreground">
                   <div className="flex items-center gap-2">
-                    <TickCircle2 className="size-4" weight="Filled" aria-hidden="true" />
+                    <Notes2 className="size-4" weight="Filled" aria-hidden="true" />
                     <span>Notes</span>
                   </div>
                 </th>
@@ -975,13 +981,13 @@ export function SelfHostedMinimumHardwareRequirements() {
                 <th className="w-[22%] font-semibold text-fd-muted-foreground">Item</th>
                 <th className="w-[26%] font-semibold text-fd-foreground">
                   <div className="flex items-center gap-2">
-                    <Cpu className="size-4" weight="Filled" aria-hidden="true" />
+                    <ArrowsDown className="size-4" weight="Filled" aria-hidden="true" />
                     <span>Minimum</span>
                   </div>
                 </th>
                 <th className="w-[52%] font-semibold text-fd-foreground">
                   <div className="flex items-center gap-2">
-                    <HardDrive className="size-4" weight="Filled" aria-hidden="true" />
+                    <Notes2 className="size-4" weight="Filled" aria-hidden="true" />
                     <span>Notes</span>
                   </div>
                 </th>
@@ -1001,7 +1007,7 @@ export function SelfHostedMinimumHardwareRequirements() {
       </section>
 
       <section className="rounded-lg border border-fd-border bg-fd-background/70">
-        <SectionHeader id="hardware-resource-planning" icon={ServerCloud} title="Hardware resource planning for budget users" />
+        <SectionHeader id="hardware-resource-planning" icon={SackDollar} title="Hardware resource planning for budget users" />
         <div className="p-4 text-sm leading-6 text-fd-muted-foreground sm:p-5">
           <p className="m-0">
             Coolify can run on smaller servers (for example: 1 CPU core, 512 MB RAM, 4 GB disk),

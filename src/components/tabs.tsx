@@ -18,6 +18,7 @@ import {
   Package,
   PenNib,
   ServerCloud,
+  ShieldSecurity2,
   User,
 } from 'reicon-react';
 import { cn } from '@/lib/cn';
@@ -49,6 +50,7 @@ function getTabIcon(label: string) {
   if (normalized.includes('automated')) return Autobrightness2;
   if (normalized.includes('manual')) return LaptopCode;
   if (normalized.includes('raspberry')) return ServerCloud;
+  if (normalized.includes('root user')) return ShieldSecurity2;
   if (normalized.includes('custom docker network')) return Globe3;
   if (normalized.includes('custom registry source')) return Box2;
   if (normalized.includes('compose overrides')) return PenNib;
