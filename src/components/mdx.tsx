@@ -6,6 +6,10 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 import type { MDXComponents } from 'mdx/types';
 import type React from 'react';
 import { ChooseYourPath } from './choose-your-path';
+import { CoolActionCard } from './cool-action-card';
+import { CoolActionCardGrid } from './cool-action-card-grid';
+import { CoolCallout } from './cool-callout';
+import { CoolFlow } from './cool-flow';
 import { Callout } from './callout';
 import { MediaCard } from './media-card';
 import { MediaCardGroup } from './media-card-group';
@@ -15,27 +19,16 @@ import { SponsorsList } from './sponsors-list';
 import { SponsorsPage } from './sponsors-page';
 import { Tab, Tabs } from './tabs';
 import {
-  SelfHostedAdvancedComposeFileTable,
-  SelfHostedAdvancedComposeServicesTable,
-  SelfHostedAdvancedDockerNetworkTable,
   SelfHostedAdvancedOptions,
-  SelfHostedAdvancedRegistrySourceTable,
-  SelfHostedAdvancedRootUserTable,
-  SelfHostedBeforeBeginTable,
   SelfHostedFirewallSshBasics,
   SelfHostedInstallMethods,
   SelfHostedInstallationTab,
   SelfHostedInstallationTabs,
-  SelfHostedManualAdvancedNotice,
-  SelfHostedMinimumHardwareRequirements,
   SelfHostedMethodGuide,
   SelfHostedNextSteps,
   SelfHostedProjectResources,
   SelfHostedRaspberryInstallMethods,
-  SelfHostedRaspberryPrerequisites,
   SelfHostedServerRequirements,
-  SelfHostedSupportedOperatingSystems,
-  StartWithSelfHosted,
 } from './start-with-self-hosted';
 import { TeamPage } from './team-page';
 import { ZoomImage } from './zoom-image';
@@ -58,6 +51,10 @@ export function getMDXComponents(components?: MDXComponents) {
     Card,
     Cards,
     ChooseYourPath,
+    CoolActionCard,
+    CoolActionCardGrid,
+    CoolCallout,
+    CoolFlow,
     File,
     Files,
     Folder,
@@ -66,29 +63,18 @@ export function getMDXComponents(components?: MDXComponents) {
     ScreenshotTab,
     ScreenshotTabs,
     ServicesList,
-    SelfHostedAdvancedComposeFileTable,
-    SelfHostedAdvancedComposeServicesTable,
-    SelfHostedAdvancedDockerNetworkTable,
     SelfHostedAdvancedOptions,
-    SelfHostedAdvancedRegistrySourceTable,
-    SelfHostedAdvancedRootUserTable,
-    SelfHostedBeforeBeginTable,
     SelfHostedFirewallSshBasics,
     SelfHostedInstallMethods,
     SelfHostedInstallationTab,
     SelfHostedInstallationTabs,
-    SelfHostedManualAdvancedNotice,
-    SelfHostedMinimumHardwareRequirements,
     SelfHostedMethodGuide,
     SelfHostedNextSteps,
     SelfHostedProjectResources,
     SelfHostedRaspberryInstallMethods,
-    SelfHostedRaspberryPrerequisites,
     SelfHostedServerRequirements,
-    SelfHostedSupportedOperatingSystems,
     SponsorsList,
     SponsorsPage,
-    StartWithSelfHosted,
     TeamPage,
     Step,
     Steps,
