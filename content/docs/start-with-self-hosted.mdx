@@ -42,7 +42,7 @@ Check these requirements first so you pick the right install method and avoid se
 
 ---
 
-### 1. Server Requirements
+### 1. Server requirements
 
 You need a server with SSH access. This could be:
 
@@ -62,7 +62,7 @@ You need a server with SSH access. This could be:
 
 ---
 
-### 4. Server Resources for Your Projects
+### 4. Server resources for your projects
 
 The resources you need depend on your projects. If you host multiple services or larger applications, choose a server with higher CPU, memory, and storage.
 
@@ -70,7 +70,7 @@ The resources you need depend on your projects. If you host multiple services or
 
 ---
 
-### 5. Configure SSH access and Firewall
+### 5. Configure SSH access and firewall
 
 <SelfHostedFirewallSshBasics />
 
@@ -124,7 +124,7 @@ curl -fsSL https://cdn.coollabs.io/coolify/install.sh | bash
 
 ---
   
-### 2. Access the Dashboard
+### 2. Access the dashboard
 
 After installation, you’ll see a “Congratulations!” message with the dashboard link in your terminal.
 
@@ -336,7 +336,7 @@ Finish writing the OS image, insert the microSD card into your Raspberry Pi, the
 
 ---
 
-### 4. Follow Automated or Manual installation method
+### 4. Follow automated or manual installation method
 
 After your Raspberry Pi boots, choose one installation method:
 
@@ -596,7 +596,7 @@ docker compose --env-file /data/coolify/source/.env -f /data/coolify/source/dock
 
 ### Examples
 
-#### A. Add Container Labels
+#### A. Add container labels
 
 Add labels for external tooling such as monitoring or log aggregation:
 
@@ -610,7 +610,7 @@ services:
 
 ---
 
-#### B. Set Resource Limits
+#### B. Set resource limits
 
 Restrict CPU and memory usage for the main Coolify container:
 
@@ -626,7 +626,7 @@ See the Docker Compose documentation for the full list of available attributes: 
 
 ---
 
-#### C. Change Port Binding
+#### C. Change port binding
 
 The port number can be changed via the `APP_PORT` variable in Coolify's `.env` file (`/data/coolify/source/.env`). However, the override file lets you control *how* the port is bound — something `.env` cannot do.
 
@@ -655,7 +655,7 @@ If you remove or restrict port access, make sure you have another way to reach t
 
 ---
 
-#### D. Adjust Database Configuration
+#### D. Adjust database configuration
 
 Add custom PostgreSQL parameters:
 
@@ -667,7 +667,7 @@ services:
 
 ---
 
-#### E. Combine Multiple Customizations
+#### E. Combine multiple customizations
 
 A single override file can modify multiple services:
 

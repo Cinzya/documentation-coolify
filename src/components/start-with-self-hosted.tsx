@@ -169,12 +169,12 @@ const serverRequirementOptions: Array<{
     icon: ServerCloud,
   },
   {
-    title: 'Dedicated Server',
+    title: 'Dedicated server',
     detail: 'A full physical server that you control.',
     icon: Server,
   },
   {
-    title: 'Virtual Machine',
+    title: 'Virtual machine',
     detail: 'A Linux VM running on your own infrastructure.',
     icon: Screencast2,
   },
@@ -260,7 +260,7 @@ const firewallSshGuides = [
 
 const beforeBeginSections = [
   {
-    section: 'Server Requirements',
+    section: 'Server requirements',
     href: '#1-server-requirements',
     check: 'Confirm you have a server or device with SSH access.',
   },
@@ -275,12 +275,12 @@ const beforeBeginSections = [
     check: 'Confirm CPU, memory, disk, and architecture fit Coolify.',
   },
   {
-    section: 'Server Resources for Your Projects',
+    section: 'Server resources for your projects',
     href: '#4-server-resources-for-your-projects',
     check: 'Estimate resources based on the projects you plan to run.',
   },
   {
-    section: 'Configure SSH access and Firewall',
+    section: 'Configure SSH access and firewall',
     href: '#5-configure-ssh-access-and-firewall',
     check: 'Prepare SSH access and required firewall ports.',
   },
