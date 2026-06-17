@@ -9,10 +9,11 @@ type CoolTableColumn = {
 
 type CoolTableProps = React.ComponentProps<'div'> & {
   columns: CoolTableColumn[];
+  noWrapColumns?: number[];
   rows: React.ReactNode[][];
 };
 
-export function CoolTable({ className, columns, rows, ...props }: CoolTableProps) {
+export function CoolTable({ className, columns, noWrapColumns = [], rows, ...props }: CoolTableProps) {
   return (
     <div
       data-cool-docs
@@ -29,7 +30,10 @@ export function CoolTable({ className, columns, rows, ...props }: CoolTableProps
                 return (
                   <th
                     key={index}
-                    className={index === 0 ? 'font-semibold text-fd-muted-foreground' : 'font-semibold text-fd-foreground'}
+                    className={[
+                      index === 0 ? 'font-semibold text-fd-muted-foreground' : 'font-semibold text-fd-foreground',
+                      noWrapColumns.includes(index) ? 'whitespace-nowrap' : '',
+                    ].join(' ')}
                   >
                     <span className="flex items-center gap-2">
                       {Icon ? <Icon className="size-4 shrink-0" weight="Filled" aria-hidden={true} /> : null}
@@ -44,7 +48,13 @@ export function CoolTable({ className, columns, rows, ...props }: CoolTableProps
             {rows.map((row, rowIndex) => (
               <tr key={rowIndex}>
                 {row.map((cell, cellIndex) => (
-                  <td key={cellIndex} className={cellIndex === 0 ? 'font-medium text-fd-foreground' : 'leading-6 text-fd-muted-foreground'}>
+                  <td
+                    key={cellIndex}
+                    className={[
+                      cellIndex === 0 ? 'font-medium text-fd-foreground' : 'leading-6 text-fd-muted-foreground',
+                      noWrapColumns.includes(cellIndex) ? 'whitespace-nowrap' : '',
+                    ].join(' ')}
+                  >
                     {cell}
                   </td>
                 ))}
