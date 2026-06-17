@@ -3,147 +3,171 @@ title: Start with Self-hosted
 description: Install and run self-hosted Coolify with a clear path for automated or manual setup.
 ---
 
+import {
+  SelfHostedAdvancedComposeFileTable,
+  SelfHostedAdvancedComposeServicesTable,
+  SelfHostedAdvancedDockerNetworkTable,
+  SelfHostedAdvancedOptions,
+  SelfHostedAdvancedRegistrySourceTable,
+  SelfHostedAdvancedRootUserTable,
+  SelfHostedBeforeBeginTable,
+  SelfHostedFirewallSshBasics,
+  SelfHostedInstallMethods,
+  SelfHostedInstallationTab,
+  SelfHostedInstallationTabs,
+  SelfHostedManualAdvancedNotice,
+  SelfHostedMinimumHardwareRequirements,
+  SelfHostedMethodGuide,
+  SelfHostedNextSteps,
+  SelfHostedProjectResources,
+  SelfHostedRaspberryInstallMethods,
+  SelfHostedRaspberryPrerequisites,
+  SelfHostedServerRequirements,
+  SelfHostedSupportedOperatingSystems,
+  StartWithSelfHosted,
+} from '@/components/start-with-self-hosted';
+
 # Start with Self-hosted
+
 Self-hosting Coolify means you run the Coolify instance on infrastructure you control.
 
-This path is ideal if you want:
-- full control over your setup
-- a free Coolify software path (you still pay your own server costs)
-- ownership of updates, backups, and operations
-
-If you are still deciding between Cloud and self-hosted, read [Choose your path](/choose-your-path) first.
+<StartWithSelfHosted />
 
 
-## Before you install
-Use this checklist before starting either install method.
+## Before you begin
 
-### 1. Server access
-You need a Linux server with SSH access.
+Check these requirements first so you pick the right install method and avoid server, OS, or network issues halfway through setup.
 
-Your server can be:
-- VPS (Virtual Private Server)
-- dedicated server
-- virtual machine
-- old laptop
-- Raspberry Pi (64-bit)
+<SelfHostedBeforeBeginTable />
 
-::: info Note
-1. It’s best to use a fresh server for Coolify to avoid any conflicts with existing applications.
+---
 
-2. If you haven't picked a server provider yet, consider using [Hetzner](https://coolify.io/hetzner). You can even use our [referral link](https://coolify.io/hetzner) to support the project.
-:::
+### 1. Server Requirements
 
-### 2. Supported CPU architecture
-Coolify supports: `amd64` and `arm64` architectures
+You need a server with SSH access. This could be:
 
-### 3. Supported operating systems
-| Base | Distributions | Notes |
-| :--- | :--- | :--- |
-| Debian-based | Debian, Ubuntu | Ubuntu non-LTS: use Manual install |
-| Red Hat-based | CentOS, Fedora, Red Hat, AlmaLinux, Rocky, TencentOS, Asahi | Docker may need manual pre-install on some variants |
-| SUSE-based | SLES, SUSE, openSUSE | Supported |
-| Arch-based | Arch Linux | Supported |
-| Alpine-based | Alpine Linux | Supported |
-| Raspberry Pi OS | Raspberry Pi OS (64-bit) | Use 64-bit image |
+<SelfHostedServerRequirements />
 
-::: warning Linux-only support
-Coolify only runs on Linux-based operating systems.
-The table above reflects distributions where Coolify is known to run well, based on project testing and community reports.
+---
 
-If you are using a Linux distro not listed above, feel free to try installing Coolify and let us know your results.
-:::
+### 2. Supported operating systems
 
-### 4. Minimum recommended resources
-- CPU: 2 cores
-- RAM: 2 GB
-- Storage: 30 GB free
+<SelfHostedSupportedOperatingSystems />
 
-These are practical minimums. If you deploy multiple workloads, use more resources.
+---
 
-<Callout type="tip" title="If you are starting on a tight budget">
+### 3. Minimum Hardware Requirements
 
-Coolify can run on smaller servers (for example: 1 CPU core, 512 MB RAM, 4 GB disk), but this is not recommended.
+<SelfHostedMinimumHardwareRequirements />
 
-If cost is a concern, start with a server 1 CPU core and 1 GB RAM, and upgrade the server as your workloads grow or if it becomes slow due to limited resources.
+---
 
-</Callout>
+### 4. Server Resources for Your Projects
 
-### 5. Firewall and SSH basics
-Before installation, make sure:
-- SSH is configured correctly
-- required ports are open
+The resources you need depend on your projects. If you host multiple services or larger applications, choose a server with higher CPU, memory, and storage.
 
-Use:
-- [OpenSSH guide](/knowledge-base/server/openssh)
-- [Firewall guide](/knowledge-base/server/firewall)
+<SelfHostedProjectResources />
 
-### 6. Root user
-To install Coolify, you need either:
-- `root` user access, or
-- a user with `sudo` privileges
+---
+
+### 5. Configure SSH access and Firewall
+
+<SelfHostedFirewallSshBasics />
+
+---
+
+## Choose installation method
+
+<SelfHostedInstallMethods />
 
 
-## Choose your installation method
-The automated method is recommended for most users.
+<SelfHostedInstallationTabs>
 
-Use manual installation only if:
-- you are on non-LTS Ubuntu (for example `24.10`)
-- the automated script is not suitable for your environment
-- you intentionally want full manual control over the installation process
+<SelfHostedInstallationTab value="automated" id="install-automated">
+  
 
+## Automated installation <span data-hidden-heading></span>
 
 
-::: tabs key:selfhosted-install-mode
-== Automated (Recommended)
+<SelfHostedMethodGuide type="automated" />
 
-#### 1. Run the install script
+---
 
+### 1. Run the install script
+Open your terminal and SSH into your server as root or a user with sudo privileges, then run the command below:
 ```sh
-curl -fsSL https://cdn.coollabs.io/coolify/install.sh | sudo bash
+curl -fsSL https://cdn.coollabs.io/coolify/install.sh | bash
 ```
 
-> The installer automatically:
-> - installs required packages (curl, wget, git, jq, openssl)
-> - installs Docker Engine (when supported by your distro)
-> - configures Docker settings (logging, daemon)
-> - sets up Coolify directories under `/data/coolify`
-> - configures SSH keys for server management
-> - installs and starts Coolify
-> 
-> View the [Script's Source Code](https://github.com/coollabsio/coolify/blob/v4.x/scripts/install.sh)
+<Accordions type="multiple">
+  <Accordion title="What does the installer do?">
 
-<Callout type="warning" title="Heads up!">
+  - installs required packages (curl, wget, git, jq, openssl)
+  - installs Docker Engine (when supported by your distro)
+  - configures Docker settings (logging, daemon)
+  - sets up Coolify directories under `/data/coolify`
+  - configures SSH keys for server management
+  - installs and starts Coolify
+  
+  View the [Script's Source Code](https://github.com/coollabsio/coolify/blob/v4.x/scripts/install.sh)
+  
+  </Accordion>
+</Accordions>
+
+
+<Callout type="warning" title="Before running the installer">
 
   1. If Docker is installed through snap, remove it and install Docker Engine using the [official Docker method](https://docs.docker.com/engine/install/) or let the install script handle it automatically.
 
-  2. The automatic installation script only works with Ubuntu LTS versions (20.04, 22.04, 24.04). If you're using a non-LTS version (e.g., 24.10), use the Manual tab.
+  2. If you use Ubuntu, use an LTS release such as 20.04, 22.04, or 24.04. Non-LTS Ubuntu releases can behave differently, so use the manual installation method if you run into installer issues.
 </Callout>
 
 ---
   
-#### 2. Open the dashboard
-Open Coolify dashboard URL in the browser `http://203.0.113.1:8000` (replace the `203.0.113.1` with the IP address of your server) and create your admin account.
+### 2. Access the Dashboard
 
-That's it!, you can start using Coolify.
+After installation, you’ll see a “Congratulations!” message with the dashboard link in your terminal.
 
-<Callout type="danger" title="Important">
+Open `http://192.168.1.69:8000` in your browser (replace `192.168.1.69` with your server IP) and create your admin account.
 
-  **Create your admin account immediately after installation. If someone else reaches the registration page first, they can gain root access.**
+<Callout type="danger" title="Secure your admin account">
+
+  **Create your admin account as soon as installation finishes. Anyone who reaches the registration page first can become the instance admin and gain root access to your server.**
 </Callout>
-
-==
-
-== Manual
-Use this when you need full control over the installation process or the automated method is not suitable.
-
-### Prerequisites
-- [curl](https://curl.se/) installed
-- Docker Engine installed (version 24+), using official Docker docs:
-  [Install Docker Engine](https://docs.docker.com/engine/install/#server)
 
 ---
 
-#### 1. Create required directories
+### 3. Back up installation secrets
+
+Back up `/data/coolify/source/.env` and keep it somewhere safe.
+
+This file contains installation secrets such as `APP_KEY`, which is used to encrypt Coolify database values. You need this file if you ever want to restore Coolify from a backup.
+
+That's it!, you can start using Coolify.
+
+
+</SelfHostedInstallationTab>
+
+<SelfHostedInstallationTab value="manual" id="install-manual">
+
+## Manual installation <span data-hidden-heading></span>
+
+<SelfHostedMethodGuide type="manual" />
+
+<SelfHostedManualAdvancedNotice />
+
+---
+
+### Prerequisites
+Before running the manual installation commands, make sure your server has:
+
+- [curl](https://curl.se/) installed to download the required Coolify files.
+- Docker Engine 24 or newer installed from the official Docker packages. Follow the [Docker Engine installation guide](https://docs.docker.com/engine/install/#server) for your Linux distribution.
+- SSH access to the server, using the user that will run the installation commands.
+
+---
+
+### 1. Create required directories
 Create the base directories for Coolify under `/data/coolify`:
 
 ```sh
@@ -154,7 +178,7 @@ mkdir -p /data/coolify/proxy/dynamic
 
 ---
 
-#### 2. Generate and register SSH key
+### 2. Generate and register SSH key
 Generate an SSH key for Coolify to manage your server:
 
 ```sh
@@ -168,7 +192,7 @@ cat /data/coolify/ssh/keys/id.root@host.docker.internal.pub >> ~/.ssh/authorized
 chmod 600 ~/.ssh/authorized_keys
 ```
 
-<Callout type="tip" title="Existing SSH keys can be used">
+<Callout type="info" title="Existing SSH keys can be used">
 
 If you already have an SSH key, you can skip generating a new one, but remember to add it to your Coolify instance after installation.
 
@@ -176,7 +200,7 @@ If you already have an SSH key, you can skip generating a new one, but remember 
 
 ---
 
-#### 3. Download required files
+### 3. Download required files
 Download the necessary files from Coolify’s CDN to `/data/coolify/source`:
 
 ```sh
@@ -188,7 +212,7 @@ curl -fsSL https://cdn.coollabs.io/coolify/upgrade.sh -o /data/coolify/source/up
 
 ---
 
-#### 4. Set permissions
+### 4. Set permissions
 Set the correct permissions for the Coolify files and directories:
 
 ```sh
@@ -197,7 +221,7 @@ chmod -R 700 /data/coolify
 ```
 ---
 
-#### 5. Generate secure environment values
+### 5. Generate secure environment values
 Update the `.env` file with secure random values:
 
 ```sh
@@ -218,14 +242,16 @@ sed -i "s|PUSHER_APP_SECRET=.*|PUSHER_APP_SECRET=$(openssl rand -hex 32)|g" /dat
 
 ---
 
-#### 6. Create Docker network
+### 6. Create Docker network
+Create the Docker network Coolify uses to connect its internal services:
+
 ```sh
 docker network create --attachable coolify
 ```
 
 ---
 
-#### 7. Start Coolify
+### 7. Start Coolify
 Launch Coolify using Docker Compose:
 
 ```sh
@@ -234,132 +260,125 @@ docker compose --env-file /data/coolify/source/.env -f /data/coolify/source/dock
 
 <Callout type="info" title="Note">
 
-  You might have to do `docker login` at this point if you have any issues above.
+  If Docker cannot pull the required images, run **`docker login`** and start Coolify again.
 
 </Callout>
 
 ---
 
-#### 8. Open the dashboard
-Visit `http://203.0.113.1:8000` on your browser (replace the `203.0.113.1` with the IP address of your server) and create your admin account.
+### 8. Access the dashboard
+Open `http://192.168.1.69:8000` in your browser (replace `192.168.1.69` with your server IP) and create your admin account.
 
-==
+<Callout type="danger" title="Secure your admin account">
 
-== Raspberry Pi OS
-Use this when you are installing Coolify on a Raspberry Pi.
+  **Create your admin account as soon as installation finishes. Anyone who reaches the registration page first can become the instance admin and gain root access to your server.**
+</Callout>
+
+That's it!, you can start using Coolify.
+
+
+
+</SelfHostedInstallationTab>
+
+<SelfHostedInstallationTab value="raspberry" id="install-raspberry-pi-os">
+
+## Raspberry Pi OS <span data-hidden-heading></span>
+
+<SelfHostedMethodGuide type="raspberry" />
+
+---
 
 ### Prerequisites
-To run Coolify on a Raspberry Pi, you will need one of the following Raspberry Pi models:
-  - Raspberry Pi Zero 2 W
-  - Raspberry Pi 400
-  - Raspberry Pi 3 (all models)
-  - Raspberry Pi 4 (all models)
-  - Raspberry Pi 5 (all models)
+To run Coolify on Raspberry Pi OS, use a 64-bit capable Raspberry Pi model:
+
+<SelfHostedRaspberryPrerequisites />
 
 ---
   
-### Installation
+### 1. Flash 64-bit OS
 
-1. Download and install the [Raspberry Pi Imager](https://www.raspberrypi.com/software/) on your computer.
+Download and install [Raspberry Pi Imager](https://www.raspberrypi.com/software/) on your computer, then insert your microSD card.
 
-2. Insert your microSD card into your computer's card reader.
+In Raspberry Pi Imager:
 
-3. Open Raspberry Pi Imager and select your device:
-   - Click `Choose Device`
-   - Select your Raspberry Pi model
-
-4. Select the Operating System:
-   - Click `Choose OS`
-   - Navigate to `Raspberry Pi OS (other)`
-   - Select `Raspberry Pi OS Lite (64-bit)`
+1. Click `Choose Device` and select your Raspberry Pi model.
+2. Click `Choose OS`.
+3. Select `Raspberry Pi OS (other)`.
+4. Select `Raspberry Pi OS Lite (64-bit)`.
+5. Click `Choose Storage` and select your microSD card.
 
 <Callout type="warning" title="Caution">
 
-  You must select one of the 64-bit OS versions as Coolify is not compatible with 32-bit versions.
+  You must use a 64-bit operating system. Coolify is not compatible with 32-bit Raspberry Pi OS images.
 </Callout>
 
 <Callout type="info" title="Note">
 
-  While you can use the full desktop version `Raspberry Pi OS (64-bit)`/`Raspberry Pi OS Full (64-bit)` or even `Ubuntu`, we recommend the `Raspberry Pi OS Lite` version as it uses fewer resources.
+  You can use `Raspberry Pi OS (64-bit)`, `Raspberry Pi OS Full (64-bit)`, or Ubuntu, but `Raspberry Pi OS Lite (64-bit)` uses fewer resources and is the recommended starting point.
 </Callout>
 
-5. Choose your Storage:
-   - Click `Choose Storage`
-   - Select your microSD card
-   - Double-check you've selected the correct drive to avoid data loss
+---
 
-6. Click `Next` and select `Edit settings` for OS Customization.
-   - Navigate to `Services` and enable SSH with a public key.
-   - Configure other options as needed
+### 2. Enable SSH
+
+Click `Next`, select `Edit settings`, then open the `Services` tab and enable SSH with a public key.
 
 <Callout type="warning" title="Caution">
 
-  The SSH key must not have a passphrase or 2FA enabled, otherwise you will not be able to complete the onboarding process.
+  Use an SSH key without a passphrase or 2FA. Coolify needs this to complete the server onboarding process.
 </Callout>
 
-7. Finish the installation onto the SD card.
+---
 
-8. Once complete, insert the microSD card into your Raspberry Pi and power it on.
+### 3. Boot the Pi
 
+Finish writing the OS image, insert the microSD card into your Raspberry Pi, then power it on.
 
-<Callout type="warning" title="Important">
+---
 
-1. You must select one of the 64-bit OS versions as Coolify is not compatible with 32-bit versions.
+### 4. Follow Automated or Manual installation method
 
-2. The SSH key must not have a passphrase or 2FA enabled, otherwise you will not be able to complete the onboarding process.
-</Callout>
+After your Raspberry Pi boots, choose one installation method:
 
-After your Raspberry Pi boots up, install Coolify by following the installation method above (scroll up and select the **Automated** or **Manual** tab).
-==
-:::
+<SelfHostedRaspberryInstallMethods />
 
-<Callout type="neutral" title="Help">
+</SelfHostedInstallationTab>
 
-  If you get stuck at any step, feel free to join our [Discord community](https://coolify.io/discord) and create a post in the support forum channel.
+</SelfHostedInstallationTabs>
 
-</Callout>
+---
 
 ## After setup
-Once your instance is running:
 
-1. Take a backup of `/data/coolify/source/.env`. This file contains the Coolify database password and the encryption key used to encrypt the database. Without this `.env` file, you will not be able to restore backups for your Coolify instance.
+Once Coolify is running, start by deploying something on the same server where Coolify is installed. When that works, expand to more servers or use the maintenance guides as needed.
 
+<SelfHostedNextSteps />
 
-2. Start deploying on the same server (`localhost`) where Coolify is running:
-   - [Deploy your first app](/deploy-your-first-app)
-   - [Deploy your first database](/deploy-your-first-database)
-   - [Deploy your first service](/deploy-your-first-service)
-
-3. If you want to expand beyond a single-server setup, continue with:
-   - [Add and validate servers](shadow-to-do)
-   - [Build server](shadow-to-do)
-   - [Multiple servers](shadow-to-do)
-
-For ongoing operations, see:
-- [Upgrade](shadow-to-do)
-- [Downgrade](shadow-to-do)
-- [Uninstallation](shadow-to-do)
+---
 
 ## Advanced installations
 These options are optional and mostly useful for automation or custom infrastructure requirements.
 
-::: warning Safety first
-  Test advanced changes on a non-production server first. If you manage production workloads, keep backups and a rollback path before applying advanced install settings.
-:::
+<SelfHostedAdvancedOptions />
+
+<Callout type="warning" title="Safety first">
+
+Test advanced changes on a non-production server first. If you manage production workloads, keep backups and a rollback path before applying advanced install settings.
+
+</Callout>
 
 ---
+
+<Tabs id="advanced-install-option-tabs" items={['Root user', 'Custom Docker network', 'Custom registry source', 'Compose overrides']}>
+<Tab value="Root user">
 
 ### 1. Root user
 Use this when you want to pre-create the root account during installation, so the registration page is never exposed.
 
-| Variable | Required | Notes |
-| :--- | :--- | :--- |
-| `ROOT_USERNAME` | Yes | 3-255 characters. Allowed: letters, numbers, spaces, underscores, and hyphens. |
-| `ROOT_USER_EMAIL` | Yes | Must be a valid email format with a valid DNS record, up to 255 characters. |
-| `ROOT_USER_PASSWORD` | Yes | At least 8 characters with uppercase, lowercase, number, and special symbol. |
+<SelfHostedAdvancedRootUserTable />
 
-::: tabs key:selfhosted-install-mode
-== Automated
+<Tabs items={['Automated', 'Manual']}>
+<Tab value="Automated">
 
 ```sh
 env ROOT_USERNAME=RootUser \
@@ -377,9 +396,9 @@ ROOT_USER_PASSWORD='StrongPassword123!' \
 bash -c 'curl -fsSL https://cdn.coollabs.io/coolify/install.sh | bash'
 ```
 
-==
+</Tab>
 
-== Manual
+<Tab value="Manual">
 
 Edit:
 
@@ -400,22 +419,21 @@ Then run:
 ```sh
 docker compose --env-file /data/coolify/source/.env -f /data/coolify/source/docker-compose.yml -f /data/coolify/source/docker-compose.prod.yml up -d --pull always --remove-orphans --force-recreate
 ```
-==
-:::
 
----
+</Tab>
+</Tabs>
+
+</Tab>
+
+<Tab value="Custom Docker network">
 
 ### 2. Custom Docker network
 Use this when you need a custom Docker address pool because of network overlap or infrastructure policy.
 
-| Variable | Required | Notes |
-| :--- | :--- | :--- |
-| `DOCKER_ADDRESS_POOL_BASE` | Yes | valid CIDR, for example `10.0.0.0/8` |
-| `DOCKER_ADDRESS_POOL_SIZE` | Yes | numeric value (recommended `16-28`) |
-| `DOCKER_POOL_FORCE_OVERRIDE` | No | set `true` only to override an existing host pool |
+<SelfHostedAdvancedDockerNetworkTable />
 
-::: tabs key:selfhosted-install-mode
-== Automated
+<Tabs items={['Automated', 'Manual']}>
+<Tab value="Automated">
 
 ```sh
 env DOCKER_ADDRESS_POOL_BASE=10.0.0.0/8 \
@@ -432,9 +450,9 @@ DOCKER_POOL_FORCE_OVERRIDE=true \
 bash -c 'curl -fsSL https://cdn.coollabs.io/coolify/install.sh | bash'
 ```
 
-==
+</Tab>
 
-== Manual
+<Tab value="Manual">
 
 Edit:
 
@@ -455,20 +473,21 @@ Then run:
 ```sh
 docker compose --env-file /data/coolify/source/.env -f /data/coolify/source/docker-compose.yml -f /data/coolify/source/docker-compose.prod.yml up -d --pull always --remove-orphans --force-recreate
 ```
-==
-:::
 
----
+</Tab>
+</Tabs>
+
+</Tab>
+
+<Tab value="Custom registry source">
 
 ### 3. Custom registry source
 Use this when you want Coolify images pulled from a different registry source.
 
-| Variable | Default | Allowed values |
-| :--- | :--- | :--- |
-| `REGISTRY_URL` | `ghcr.io` | `ghcr.io`, `docker.io` |
+<SelfHostedAdvancedRegistrySourceTable />
 
-::: tabs key:selfhosted-install-mode
-== Automated
+<Tabs items={['Automated', 'Manual']}>
+<Tab value="Automated">
 
 ```sh
 env REGISTRY_URL=docker.io bash -c 'curl -fsSL https://cdn.coollabs.io/coolify/install.sh | bash'
@@ -480,9 +499,9 @@ If you are not logged in as `root`:
 sudo -E env REGISTRY_URL=docker.io bash -c 'curl -fsSL https://cdn.coollabs.io/coolify/install.sh | bash'
 ```
 
-==
+</Tab>
 
-== Manual
+<Tab value="Manual">
 
 Edit:
 
@@ -501,36 +520,81 @@ Then run:
 ```sh
 docker compose --env-file /data/coolify/source/.env -f /data/coolify/source/docker-compose.yml -f /data/coolify/source/docker-compose.prod.yml up -d --pull always --remove-orphans --force-recreate
 ```
-==
-:::
+
+</Tab>
+</Tabs>
 
 <Callout type="tip" title="Tip">
 
   The registry can be changed after installing Coolify by following the steps above.
 </Callout>
 
----
+</Tab>
+
+<Tab value="Compose overrides">
 
 ### 4. Compose overrides
 Use this when you need persistent customization of Coolify containers (ports, labels, resources, command overrides).
 
-| File path | Purpose |
-| :--- | :--- |
-| `/data/coolify/source/docker-compose.custom.yml` | custom compose overrides that persist across upgrades |
+<SelfHostedAdvancedComposeFileTable />
 
 
 The Compose services are defined with these names — you must use these exact names in your override file:
 
-| Service name | Container name     | Description              |
-|--------------|:-------------------|:-------------------------|
-| `coolify`    | `coolify`          | Main Coolify application |
-| `postgres`   | `coolify-db`       | PostgreSQL database      |
-| `redis`      | `coolify-redis`    | Redis cache              |
-| `soketi`     | `coolify-realtime` | WebSocket server         |
+<SelfHostedAdvancedComposeServicesTable />
 
----
 
-#### Examples
+<Tabs items={['Automated', 'Manual']}>
+<Tab value="Automated">
+
+Create override file:
+
+```sh
+nano /data/coolify/source/docker-compose.custom.yml
+```
+
+Validate:
+
+```sh
+cd /data/coolify/source
+docker compose -f docker-compose.yml -f docker-compose.prod.yml -f docker-compose.custom.yml config
+```
+
+Apply by re-running install script:
+
+```sh
+curl -fsSL https://cdn.coollabs.io/coolify/install.sh | bash
+```
+
+</Tab>
+
+<Tab value="Manual">
+
+Create override file:
+
+```sh
+nano /data/coolify/source/docker-compose.custom.yml
+```
+
+Validate:
+
+```sh
+cd /data/coolify/source
+docker compose -f docker-compose.yml -f docker-compose.prod.yml -f docker-compose.custom.yml config
+```
+
+Apply with your manual compose start command:
+
+```sh
+docker compose --env-file /data/coolify/source/.env -f /data/coolify/source/docker-compose.yml -f /data/coolify/source/docker-compose.prod.yml -f /data/coolify/source/docker-compose.custom.yml up -d --pull always --remove-orphans --force-recreate
+```
+
+</Tab>
+</Tabs>
+
+
+
+### Examples
 
 #### A. Add Container Labels
 
@@ -583,9 +647,11 @@ services:
     ports: !override []
 ```
 
-::: warning
+<Callout type="warning" title="Keep dashboard access">
+
 If you remove or restrict port access, make sure you have another way to reach the Coolify UI (e.g., a reverse proxy). Otherwise you will lock yourself out.
-:::
+
+</Callout>
 
 ---
 
@@ -618,49 +684,7 @@ services:
   redis:
     mem_limit: 256M
 ```
-::: tabs key:selfhosted-install-mode
-== Automated
 
-Create override file:
 
-```sh
-nano /data/coolify/source/docker-compose.custom.yml
-```
-
-Validate:
-
-```sh
-cd /data/coolify/source
-docker compose -f docker-compose.yml -f docker-compose.prod.yml -f docker-compose.custom.yml config
-```
-
-Apply by re-running install script:
-
-```sh
-curl -fsSL https://cdn.coollabs.io/coolify/install.sh | bash
-```
-
-==
-
-== Manual
-
-Create override file:
-
-```sh
-nano /data/coolify/source/docker-compose.custom.yml
-```
-
-Validate:
-
-```sh
-cd /data/coolify/source
-docker compose -f docker-compose.yml -f docker-compose.prod.yml -f docker-compose.custom.yml config
-```
-
-Apply with your manual compose start command:
-
-```sh
-docker compose --env-file /data/coolify/source/.env -f /data/coolify/source/docker-compose.yml -f /data/coolify/source/docker-compose.prod.yml -f /data/coolify/source/docker-compose.custom.yml up -d --pull always --remove-orphans --force-recreate
-```
-==
-:::
+</Tab>
+</Tabs>
