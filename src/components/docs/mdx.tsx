@@ -10,6 +10,12 @@ import { MediaCardGroup } from '@/components/cards/media-card-group';
 import { ServicesList } from '@/components/data/services-list';
 import { SponsorsList } from '@/components/data/sponsors-list';
 import { ChooseYourPath } from '@/components/pages/choose-your-path';
+import {
+  CloudAccessBasics,
+  CloudNextSteps,
+  CloudOnboardingFlow,
+  CloudServerOptions,
+} from '@/components/pages/start-with-cloud';
 import { SponsorsPage } from '@/components/pages/sponsors-page';
 import {
   SelfHostedAdvancedOptions,
@@ -52,6 +58,10 @@ export function getMDXComponents(components?: MDXComponents) {
     Card,
     Cards,
     ChooseYourPath,
+    CloudAccessBasics,
+    CloudNextSteps,
+    CloudOnboardingFlow,
+    CloudServerOptions,
     CoolActionCard,
     CoolActionCardGrid,
     CoolCallout,
