@@ -12,6 +12,7 @@ export type Sponsor = {
     path?: string;
     url?: string;
     docs?: {
+      key?: string;
       path?: string;
       url?: string;
     };
