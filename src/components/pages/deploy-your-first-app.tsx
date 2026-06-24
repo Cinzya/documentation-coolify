@@ -19,13 +19,13 @@ import { CoolFlow } from '@/components/docs/cool-flow';
 
 const appDeploymentFlow = {
   checklist: [
-    'Confirm the Coolify proxy is running before creating the app.',
+    'Create or open the project where the app will live.',
     'Use the Docker Image resource type so no repository or build setup is required.',
     'Deploy nginx:alpine and expose port 80.',
     'Use the generated sslip.io domain for the first test.',
     'Open the generated URL and confirm the Nginx welcome page loads.',
   ],
-  steps: ['Check proxy status', 'Create or open a project', 'Choose Docker Image', 'Configure nginx:alpine', 'Deploy and open the URL'],
+  steps: ['Create or open a project', 'Choose Docker Image', 'Enter nginx:alpine', 'Set port 80', 'Deploy and open the URL'],
 };
 
 const prerequisiteCards = [
