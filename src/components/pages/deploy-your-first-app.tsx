@@ -144,7 +144,7 @@ export function FirstAppNetworkChoices() {
           points={[
             'Point DNS to your server IP address.',
             'Replace the generated domain in Coolify.',
-            'Use https:// so certificates can be issued.',
+            'Use https:// so TLS certificates can be issued.',
           ]}
         />
       </div>
