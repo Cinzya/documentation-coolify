@@ -197,7 +197,10 @@ Check:
 </Tab>
 <Tab value="Site not secure" icon={Globe3}>
 
-`sslip.io` can be rate-limited. Use a real domain.
+Browsers show a site-not-secure warning when you open the app with `http://`.
+To make the warning go away, open the app with `https://`.
+For `https://` to work, Coolify needs a TLS certificate from Let's Encrypt.
+Let's Encrypt can rate-limit shared testing domains like `sslip.io`, so use a real domain.
 
 If you are using your own domain, make sure:
 
