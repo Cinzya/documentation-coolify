@@ -44,7 +44,7 @@ const prerequisiteCards = [
   {
     title: 'Proxy is running',
     description: 'On the server page in Coolify, the proxy status should say Proxy is running.',
-    bullets: ['If it is stopped, click Start Proxy', 'The proxy sends web traffic to your app'],
+    bullets: ['If it is stopped, click Start Proxy'],
     icon: SignalStream,
   },
 ];
