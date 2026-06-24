@@ -10,7 +10,7 @@ import {
   FirstAppPrerequisites,
   FirstAppTroubleshooting,
 } from '@/components/pages/deploy-your-first-app';
-import { ArrowsRight, Camera } from 'reicon-react';
+import { ArrowsRight, Camera, Globe3, SignalStream, Warning22 } from 'reicon-react';
 
 # Deploy your first app
 
@@ -174,7 +174,7 @@ Use these checks when the deployment finishes but the application link does not 
 
 
 <Tabs items={['No Available Server', "Link doesn't open", 'Site not secure']}>
-<Tab value="No Available Server">
+<Tab value="No Available Server" icon={Warning22}>
 
 Usually caused by wrong port settings.
 
@@ -184,7 +184,7 @@ Check:
 - the image is `nginx:alpine`
 
 </Tab>
-<Tab value="Link doesn't open">
+<Tab value="Link doesn't open" icon={SignalStream}>
 
 Usually means the server or proxy is not reachable from your browser.
 
@@ -195,7 +195,7 @@ Check:
 - if using your own domain, DNS points to your server IP address
 
 </Tab>
-<Tab value="Site not secure">
+<Tab value="Site not secure" icon={Globe3}>
 
 Testing domains can be rate-limited. Use a real domain.
 
@@ -203,6 +203,7 @@ If you are using your own domain, make sure:
 
 - DNS is pointed correctly to your server IP
 - the domain is added in Coolify with `https://`, for example `https://shadowarcanist.com`
+- restart the app after changing the domain
 
 </Tab>
 </Tabs>
