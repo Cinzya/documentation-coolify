@@ -11,6 +11,13 @@ import { ServicesList } from '@/components/data/services-list';
 import { SponsorsList } from '@/components/data/sponsors-list';
 import { ChooseYourPath } from '@/components/pages/choose-your-path';
 import {
+  FirstAppDeploymentFlow,
+  FirstAppNetworkChoices,
+  FirstAppNextSteps,
+  FirstAppPrerequisites,
+  FirstAppTroubleshooting,
+} from '@/components/pages/deploy-your-first-app';
+import {
   CloudAccessBasics,
   CloudNextSteps,
   CloudOnboardingFlow,
@@ -69,6 +76,11 @@ export function getMDXComponents(components?: MDXComponents) {
     CoolTable,
     File,
     Files,
+    FirstAppDeploymentFlow,
+    FirstAppNetworkChoices,
+    FirstAppNextSteps,
+    FirstAppPrerequisites,
+    FirstAppTroubleshooting,
     Folder,
     MediaCard,
     MediaCardGroup,
