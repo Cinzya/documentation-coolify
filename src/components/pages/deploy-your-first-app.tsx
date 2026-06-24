@@ -57,13 +57,13 @@ const issueCards = [
     icon: Warning22,
   },
   {
-    title: 'Application link does not open',
+    title: "Link doesn't open",
     description: 'Usually means the server or proxy is not reachable from your browser.',
     bullets: ['Confirm ports 80 and 443 are open', 'Confirm Proxy is running'],
     icon: SignalStream,
   },
   {
-    title: 'Browser says site not secure',
+    title: 'Site not secure',
     description: 'Generated testing domains can hit certificate limits. A real domain is more reliable for TLS.',
     bullets: ['Point DNS to the server IP', 'Enter the domain with https:// in Coolify'],
     icon: Globe3,
