@@ -30,7 +30,7 @@ const appDeploymentFlow = {
 
 const prerequisiteCards = [
   {
-    title: 'Coolify dashboard opens',
+    title: 'Dashboard access',
     description: 'You can sign in to Coolify and see the main dashboard.',
     bullets: ['You can access Coolify in your browser', 'You can use the left sidebar'],
     icon: WindowPointer,
@@ -43,8 +43,8 @@ const prerequisiteCards = [
   },
   {
     title: 'Proxy is running',
-    description: 'On the server page in Coolify, the proxy status should say Proxy is running.',
-    bullets: ['If it is stopped, click Start Proxy'],
+    description: 'Open the server page in Coolify and check the proxy status.',
+    bullets: ['Status says Proxy is running', 'If it is stopped, click Start Proxy'],
     icon: SignalStream,
   },
 ];
