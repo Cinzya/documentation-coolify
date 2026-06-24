@@ -10,7 +10,7 @@ import {
   FirstAppPrerequisites,
   FirstAppTroubleshooting,
 } from '@/components/pages/deploy-your-first-app';
-import { ArrowsRight, Camera, Globe3, SignalStream, Warning22 } from 'reicon-react';
+import { ArrowsRight, Box2, Camera, Globe3, SignalStream, Warning22 } from 'reicon-react';
 
 # Deploy your first app
 
@@ -26,6 +26,8 @@ This path is ideal for a first deployment because you do not need a Git reposito
 
 </CoolCallout>
 
+---
+
 
 ## Before you start
 
@@ -35,10 +37,20 @@ Make sure these things are ready before you deploy the app.
 
 If Coolify is not ready yet, first follow [Start with Self-hosted](/start-with-self-hosted) or [Start with Coolify Cloud](/start-with-cloud).
 
+---
+
 
 ## Deployment overview
 
 <FirstAppDeploymentFlow />
+
+<CoolCallout className="my-5" id="apps-run-as-containers" icon={Box2} title="Apps run as containers">
+
+Coolify deploys applications as containers. A container packages the app with what it needs to run, so Coolify can start it, stop it, restart it, and route traffic to it.
+
+In this guide, `nginx:alpine` is the container image Coolify will run.
+
+</CoolCallout>
 
 ---
 
@@ -165,6 +177,8 @@ If you can see the default Nginx welcome page in your browser, your first Coolif
 
 </CoolCallout>
 
+---
+
 
 ## Common first-deploy issues
 
@@ -210,6 +224,8 @@ If you are using your own domain, make sure:
 
 </Tab>
 </Tabs>
+
+---
 
 ## What to do next
 

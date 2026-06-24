@@ -34,7 +34,7 @@ const prerequisiteCards = [
   {
     title: 'Dashboard access',
     description: 'You can sign in to Coolify and see the main dashboard.',
-    bullets: ['You can access Coolify in your browser', 'You can use the left sidebar'],
+    bullets: ['You can access Coolify in your browser', 'Dashboard loads without errors'],
     icon: WindowPointer,
   },
   {
@@ -74,14 +74,14 @@ const issueCards = [
 
 const nextSteps = [
   {
-    title: 'Deploy your first database',
-    detail: 'Add persistent data once your first app is reachable.',
+    title: 'Deploy a database',
+    detail: 'Deploy a database when your app needs persistent data.',
     href: '/deploy-your-first-database',
     icon: Database,
   },
   {
-    title: 'Deploy your first service',
-    detail: 'Use the service catalog for common self-hosted tools.',
+    title: 'Deploy a service',
+    detail: 'Deploy a ready-made service from the Coolify catalog.',
     href: '/deploy-your-first-service',
     icon: Settings,
   },
