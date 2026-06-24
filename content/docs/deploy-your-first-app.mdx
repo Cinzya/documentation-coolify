@@ -173,7 +173,8 @@ Use these checks when the deployment finishes but the application link does not 
 <FirstAppTroubleshooting />
 
 
-### Application link shows "No Available Server"
+<Tabs items={['No Available Server', "Link doesn't open", 'Site not secure']}>
+<Tab value="No Available Server">
 
 Usually caused by wrong port settings.
 
@@ -182,8 +183,10 @@ Check:
 - **Ports Exposes** is set to `80`
 - the image is `nginx:alpine`
 
+</Tab>
+<Tab value="Link doesn't open">
 
-### Application link does not open
+Usually means the server or proxy is not reachable from your browser.
 
 Check:
 
@@ -191,16 +194,18 @@ Check:
 - your server firewall allows ports `80` and `443`
 - if using your own domain, DNS points to your server IP address
 
+</Tab>
+<Tab value="Site not secure">
 
-### Browser shows site not secure
-
-This can happen if you are using the auto-generated `sslip.io` domain, because TLS certificate issuance for shared testing domains can be rate-limited.
+Testing domains can be rate-limited. Use a real domain.
 
 If you are using your own domain, make sure:
 
 - DNS is pointed correctly to your server IP
 - the domain is added in Coolify with `https://`, for example `https://shadowarcanist.com`
 
+</Tab>
+</Tabs>
 
 ## What to do next
 
