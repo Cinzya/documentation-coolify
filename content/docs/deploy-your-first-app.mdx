@@ -10,7 +10,7 @@ import {
   FirstAppPrerequisites,
   FirstAppTroubleshooting,
 } from '@/components/pages/deploy-your-first-app';
-import { ArrowsRight, Camera, InfoCircle } from 'reicon-react';
+import { ArrowsRight, Camera } from 'reicon-react';
 
 # Deploy your first app
 
@@ -48,28 +48,7 @@ If Coolify is not ready yet, first follow [Start with Self-hosted](/start-with-s
 Follow these steps inside the Coolify dashboard. Each step tells you what to click and what you should see before continuing.
 
 
-### 1. Check if Coolify proxy is running
-
-On the Coolify dashboard:
-
-- click **Servers** on the left sidebar
-- click on your server name
-- check if the proxy status says **Proxy is running**
-
-<ZoomableImage src="shadow-to-do" alt="Proxy status in Coolify" />
-
-If it says **Proxy is stopped**, click **Start Proxy** before continuing.
-
-<CoolCallout className="my-5" id="why-proxy-matters" icon={InfoCircle} title="Why this matters">
-
-The proxy is the part of Coolify that sends browser requests to your deployed app. For this first test, the app URL will not work until the proxy is running.
-
-</CoolCallout>
-
----
-
-
-### 2. Create your first project
+### 1. Create your first project
 
 On the Coolify dashboard:
 
@@ -80,13 +59,13 @@ On the Coolify dashboard:
 <ZoomableImage src="shadow-to-do" alt="Create a project in Coolify" />
 
 ::: tip Tip
-If you already have a project, skip this step and continue to Step 3.
+If you already have a project, skip this step and continue to Step 2.
 :::
 
 ---
 
 
-### 3. Create a new resource
+### 2. Create a new resource
 
 Open your project and click **Create New Resource**.
 
@@ -97,7 +76,7 @@ A resource is something Coolify will run for you, such as an app, database, or s
 ---
 
 
-### 4. Choose deployment type
+### 3. Choose deployment type
 
 From the deployment options, choose **Docker Image**.
 
@@ -108,7 +87,7 @@ Choose this option because the app already exists as a ready-to-run container im
 ---
 
 
-### 5. Enter the image reference
+### 4. Enter the image reference
 
 In the image field, enter:
 
@@ -125,7 +104,7 @@ This image starts a simple web server that shows the default Nginx welcome page.
 ---
 
 
-### 6. Configure network settings
+### 5. Configure network settings
 
 Set:
 
@@ -150,7 +129,7 @@ For your first deployment test, using the generated `sslip.io` domain is the fas
 ---
 
 
-### 7. Deploy
+### 6. Deploy
 
 Click the **Deploy** button.
 
@@ -167,7 +146,7 @@ Wait until the deployment finishes before opening the app link.
 ---
 
 
-### 8. Visit application link
+### 7. Visit application link
 
 After deployment completes:
 
