@@ -64,7 +64,7 @@ const issueCards = [
   },
   {
     title: 'Site not secure',
-    description: 'Testing domains can hit TLS limits. Use a real domain.',
+    description: 'Testing domains can be rate-limited. Use a real domain.',
     bullets: ['Point DNS to the server IP', 'Enter the domain with https:// in Coolify'],
     icon: Globe3,
   },
