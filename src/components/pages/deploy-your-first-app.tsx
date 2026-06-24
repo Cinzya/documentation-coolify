@@ -1,3 +1,5 @@
+'use client';
+
 import type React from 'react';
 import {
   ArrowRight,
@@ -53,19 +55,19 @@ const issueCards = [
   {
     title: 'No Available Server',
     description: 'Usually means the port setting does not match the app.',
-    bullets: ['Check Ports Exposes is 80', 'Use nginx:alpine for this guide'],
+    href: '#first-app-issues',
     icon: Warning22,
   },
   {
     title: "Link doesn't open",
     description: 'Usually means the server or proxy is not reachable from your browser.',
-    bullets: ['Confirm ports 80 and 443 are open', 'Confirm Proxy is running'],
+    href: '#first-app-issues',
     icon: SignalStream,
   },
   {
     title: 'Site not secure',
-    description: 'Testing domains can be rate-limited. Use a real domain.',
-    bullets: ['Point DNS to the server IP', 'Enter the domain with https:// in Coolify'],
+    description: 'sslip.io can be rate-limited. Use a real domain.',
+    href: '#first-app-issues',
     icon: Globe3,
   },
 ];
@@ -159,15 +161,32 @@ export function FirstAppTroubleshooting() {
         {issueCards.map((issue) => (
           <CoolActionCard
             key={issue.title}
+            href={issue.href}
+            onClick={(event) => openIssueTab(event, issue.title)}
             title={issue.title}
             description={issue.description}
-            bullets={issue.bullets}
             icon={issue.icon}
           />
         ))}
       </div>
     </CoolActionCardGrid>
   );
+}
+
+function openIssueTab(event: React.MouseEvent<HTMLAnchorElement>, value: string) {
+  event.preventDefault();
+
+  window.dispatchEvent(
+    new CustomEvent('mdx-tabs:set-active', {
+      detail: {
+        id: 'first-app-issues',
+        value,
+      },
+    }),
+  );
+
+  document.getElementById('first-app-issues')?.scrollIntoView({ block: 'start' });
+  window.history.pushState(null, '', '#first-app-issues');
 }
 
 export function FirstAppNextSteps() {

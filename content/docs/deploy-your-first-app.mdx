@@ -173,7 +173,7 @@ Use these checks when the deployment finishes but the application link does not 
 <FirstAppTroubleshooting />
 
 
-<Tabs items={['No Available Server', "Link doesn't open", 'Site not secure']}>
+<Tabs id="first-app-issues" items={['No Available Server', "Link doesn't open", 'Site not secure']}>
 <Tab value="No Available Server" icon={Warning22}>
 
 Usually caused by wrong port settings.
@@ -197,7 +197,7 @@ Check:
 </Tab>
 <Tab value="Site not secure" icon={Globe3}>
 
-Testing domains can be rate-limited. Use a real domain.
+`sslip.io` can be rate-limited. Use a real domain.
 
 If you are using your own domain, make sure:
 
