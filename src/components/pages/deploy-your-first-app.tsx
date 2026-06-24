@@ -140,7 +140,7 @@ export function FirstAppNetworkChoices() {
         />
         <NetworkChoice
           title="Production-style test"
-          code="https://example.com"
+          code="https://shadowarcanist.com"
           points={[
             'Point DNS to your server IP address.',
             'Replace the generated domain in Coolify.',
