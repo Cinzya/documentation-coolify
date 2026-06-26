@@ -11,6 +11,14 @@ import { ServicesList } from '@/components/data/services-list';
 import { SponsorsList } from '@/components/data/sponsors-list';
 import { ChooseYourPath } from '@/components/pages/choose-your-path';
 import {
+  FirstDatabaseDeploymentFlow,
+  FirstDatabaseExposureWarning,
+  FirstDatabaseNextSteps,
+  FirstDatabasePortMapping,
+  FirstDatabasePrerequisites,
+  FirstDatabaseTroubleshooting,
+} from '@/components/pages/deploy-your-first-database';
+import {
   FirstAppDeploymentFlow,
   FirstAppNetworkChoices,
   FirstAppNextSteps,
@@ -76,6 +84,12 @@ export function getMDXComponents(components?: MDXComponents) {
     CoolTable,
     File,
     Files,
+    FirstDatabaseDeploymentFlow,
+    FirstDatabaseExposureWarning,
+    FirstDatabaseNextSteps,
+    FirstDatabasePortMapping,
+    FirstDatabasePrerequisites,
+    FirstDatabaseTroubleshooting,
     FirstAppDeploymentFlow,
     FirstAppNetworkChoices,
     FirstAppNextSteps,

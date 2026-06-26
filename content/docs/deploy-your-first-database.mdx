@@ -3,104 +3,165 @@ title: Deploy your first database
 description: Deploy your first Redis database on Coolify using the one-click resources list and test the connection from terminal.
 ---
 
+import {
+  FirstDatabaseDeploymentFlow,
+  FirstDatabaseExposureWarning,
+  FirstDatabaseNextSteps,
+  FirstDatabasePortMapping,
+  FirstDatabasePrerequisites,
+  FirstDatabaseTroubleshooting,
+} from '@/components/pages/deploy-your-first-database';
+import { ArrowsRight, BrowserTerminal, Database, Key2, Plug2 } from 'reicon-react';
+
 # Deploy your first database
-Deploying your first database in Coolify helps you validate storage, networking, and credentials in a simple flow.
 
-In this guide, you will deploy **Redis** from the one-click resources list.
+Deploying your first database in Coolify helps you validate database creation, credentials, port mapping, and terminal access in a simple flow.
 
-This path is ideal for a first database deployment because:
-- setup is fast and beginner-friendly
-- Redis is lightweight and easy to test from terminal
-- you can verify connection in a few minutes
+In this guide, you will deploy **Redis** from the one-click database resources list.
+
+<CoolCallout id="short-version" icon={ArrowsRight} title="The short version">
+
+Create or open a project, create a Redis database resource, map a host port, deploy Redis, copy the generated password, and run `PING` from your terminal.
+
+This path is ideal for a first database deployment because Redis is lightweight and easy to test.
+
+</CoolCallout>
+
+---
+
 
 ## Before you start
-Make sure:
-- Coolify is installed and accessible
-- you have at least one connected server in Coolify (if you are self-hosting, you can use the same server where Coolify runs which will be `localhost`)
-- your server allows inbound traffic for the host port you plan to map for Redis
 
-If you are not ready yet, first follow:
-- [Start with Self-hosted](/start-with-self-hosted)
-- [Start with Coolify Cloud](/start-with-cloud)
+Make sure these things are ready before you deploy the database.
+
+<FirstDatabasePrerequisites />
+
+If Coolify is not ready yet, first follow [Start with Self-hosted](/start-with-self-hosted) or [Start with Coolify Cloud](/start-with-cloud).
+
+---
+
+
+## Deployment overview
+
+<FirstDatabaseDeploymentFlow />
+
+<CoolCallout className="my-5" id="databases-run-as-containers" icon={Database} title="Databases run as containers">
+
+Coolify deploys databases as containers. For this guide, Coolify will create and run a Redis container, generate credentials, and keep the database data on the server.
+
+The Redis container listens on port `6379` internally. You will map a temporary host port so your terminal can connect to it for testing.
+
+</CoolCallout>
+
+---
 
 
 ## Deploy your first Redis database
+
+Follow these steps inside the Coolify dashboard. Each step tells you what to click and what you should see before continuing.
+
+
 ### 1. Create your first project
+
 On the Coolify dashboard:
+
 - click **New Project**
-- enter a project name (example: `my-first-project`)
+- enter a project name, for example `my-first-project`
 - click **Continue**
 
 <ZoomableImage src="shadow-to-do" alt="Create a project in Coolify" />
 
-::: tip Tip
+<Callout type="success" title="Tip">
+
 If you already have a project, skip this step and continue to Step 2.
-:::
+
+</Callout>
 
 ---
 
+
 ### 2. Create a new resource
+
 Open your project and click **Create New Resource**.
 
 <ZoomableImage src="shadow-to-do" alt="Create new resource in Coolify project" />
 
+A resource is something Coolify will run for you, such as an app, database, or service. In this guide, the resource will be a Redis database.
+
 ---
 
-### 3. Choose Redis from database list
+
+### 3. Choose Redis from the database list
+
 In the resource list:
+
 - search for **Redis**
 - click **Redis**
 
 <ZoomableImage src="shadow-to-do" alt="Select Redis from one-click database list" />
 
+Coolify will create a Redis database resource with generated settings and credentials.
+
 ---
 
-### 4. Configure port mappings
-Set a port mapping so you can connect from terminal.
+
+### 4. Configure port mapping
+
+Set a temporary port mapping so you can connect from your terminal.
 
 Example:
-- **Ports Mappings**: `6380:6379`
 
-This means:
-- `6380` = host/server port you connect to
-- `6379` = Redis port inside the container
+```txt
+6380:6379
+```
+
+<FirstDatabasePortMapping />
 
 <ZoomableImage src="shadow-to-do" alt="Configure Redis port mapping in Coolify" />
 
-::: warning Important
-Exposing a database port publicly is risky in production.
-In this guide, Redis is exposed only for quick testing and learning.
+---
 
-For real production setups, avoid public database exposure unless absolutely required, and enforce strict network controls.
 
-If `6380` is already used on your server, choose another free host port (for example `6381:6379`).
-:::
+### 5. Open the mapped host port on your firewall
+
+Port mapping publishes Redis on the server, but your firewall or cloud provider may still block incoming traffic.
+
+Open the mapped host port, for example TCP `6380`, wherever you manage firewall rules for the server running Redis. This is different for each provider and server setup, so check your provider firewall, security group, or server firewall configuration.
+
+For safer testing, allow the port only from your own IP address and close it again when you are done. For general guidance, see [Firewall](/knowledge-base/server/firewall).
+
+<FirstDatabaseExposureWarning />
 
 ---
 
-### 5. Deploy
+
+### 6. Deploy
+
 Click the **Deploy** button.
 
 <ZoomableImage src="shadow-to-do" alt="Deploy Redis database on Coolify" />
 
 After deployment, keep these values ready:
+
 - server IP address
-- mapped host port (example: `6380`)
-- Redis password from Coolify dashboard
+- mapped host port, for example `6380`
+- Redis password from the Coolify dashboard
 
 ---
 
-### 6. Connect to Redis from terminal
+
+### 7. Connect to Redis from terminal
+
 Use `redis-cli` from your terminal:
 
 ```sh
-redis-cli -h <server-ip> -p <host-port> -a <redis-password>
+redis-cli --user default -h <server-ip> -p <host-port> -a "<redis-password>"
 ```
 
 Example:
 
 ```sh
-redis-cli -h 203.0.113.10 -p 6380 -a "your-password"
+redis-cli --user default -h 203.0.113.10 -p 6380 -a "your-password"
 ```
 
 Then run:
@@ -115,38 +176,70 @@ If everything is working, Redis returns:
 PONG
 ```
 
-::: tip No `redis-cli` installed locally?
-You can run `redis-cli` from a temporary Docker container instead:
+<Callout type="info" title="No redis-cli installed?">
+
+Run `redis-cli` from a temporary Redis container instead:
 
 ```sh
 docker run --rm -it redis:alpine redis-cli --user default -h <server-ip> -p <host-port> -a "<redis-password>" PING
 ```
 
 If the connection works, it returns `PONG`.
-:::
+
+</Callout>
+
+---
 
 
 ## Common first-deploy issues
-### 1. Connection refused
+
+Use these checks when Redis deploys but the terminal test does not behave as expected.
+
+<FirstDatabaseTroubleshooting />
+
+
+<Tabs id="first-database-issues" items={['Connection refused', 'Auth failed', 'redis-cli missing']}>
+<Tab value="Connection refused" icon={Plug2}>
+
+Usually means Redis is not reachable on the host port you are using.
+
 Check:
+
 - Redis deployment is in **running** state
-- host port in `Ports Mappings` is correct
-- server firewall allows the mapped host port
+- **Ports Mappings** uses the host port you are connecting to
+- your server firewall allows the mapped host port
+- you are using the server IP address, not the Redis container IP
 
-### 2. Authentication failed
+</Tab>
+<Tab value="Auth failed" icon={Key2}>
+
+Usually means the password in your command does not match the Redis password in Coolify.
+
 Check:
-- password matches the Redis password shown in Coolify
-- no extra spaces/quotes were added when copying password
 
-### 3. Command not found: `redis-cli`
-Install Redis CLI locally, or run it from a temporary container:
+- copy the Redis password from the Coolify dashboard again
+- keep the password inside quotes if it contains special characters
+- remove accidental spaces before or after the password
+
+</Tab>
+<Tab value="redis-cli missing" icon={BrowserTerminal}>
+
+If your computer does not have `redis-cli`, use Docker to run it temporarily.
 
 ```sh
-docker run --rm -it redis:alpine redis-cli -h <server-ip> -p <host-port> -a <redis-password>
+docker run --rm -it redis:alpine redis-cli --user default -h <server-ip> -p <host-port> -a "<redis-password>" PING
 ```
+
+If Docker is not installed either, install Redis CLI locally or test from a machine that has it.
+
+</Tab>
+</Tabs>
+
+---
 
 
 ## What to do next
-- [Deploy your first app](/deploy-your-first-app)
-- [Deploy your first service](/deploy-your-first-service)
-- Learn more about [Databases](/databases/index)
+
+Your first database confirms that Coolify can create a database, generate credentials, expose a test port, and accept a connection.
+
+<FirstDatabaseNextSteps />
