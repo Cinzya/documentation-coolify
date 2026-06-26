@@ -19,6 +19,13 @@ import {
   FirstDatabaseTroubleshooting,
 } from '@/components/pages/deploy-your-first-database';
 import {
+  FirstServiceDeploymentFlow,
+  FirstServiceNetworkChoices,
+  FirstServiceNextSteps,
+  FirstServicePrerequisites,
+  FirstServiceTroubleshooting,
+} from '@/components/pages/deploy-your-first-service';
+import {
   FirstAppDeploymentFlow,
   FirstAppNetworkChoices,
   FirstAppNextSteps,
@@ -90,6 +97,11 @@ export function getMDXComponents(components?: MDXComponents) {
     FirstDatabasePortMapping,
     FirstDatabasePrerequisites,
     FirstDatabaseTroubleshooting,
+    FirstServiceDeploymentFlow,
+    FirstServiceNetworkChoices,
+    FirstServiceNextSteps,
+    FirstServicePrerequisites,
+    FirstServiceTroubleshooting,
     FirstAppDeploymentFlow,
     FirstAppNetworkChoices,
     FirstAppNextSteps,

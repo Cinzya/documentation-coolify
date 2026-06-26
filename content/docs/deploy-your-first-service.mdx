@@ -3,134 +3,222 @@ title: Deploy your first service
 description: Deploy your first one-click service on Coolify using Umami and sign in to verify it is running.
 ---
 
+import {
+  FirstServiceDeploymentFlow,
+  FirstServiceNetworkChoices,
+  FirstServiceNextSteps,
+  FirstServicePrerequisites,
+  FirstServiceTroubleshooting,
+} from '@/components/pages/deploy-your-first-service';
+import { ArrowsRight, Key2, Settings, SignalStream, Warning22 } from 'reicon-react';
+
 # Deploy your first service
-Deploying your first service in Coolify helps you understand one-click resources and service routing.
 
-In this guide, you will deploy **Umami** (an open source analytics tool) from the one-click resource list.
+Deploying your first service in Coolify helps you validate one-click resources, proxy routing, generated domains, and browser access in a simple flow.
 
-This path is ideal for a first service deployment because:
-- setup is fast and beginner-friendly
-- no manual Docker Compose setup is required
-- you can verify success by opening the login page
+In this guide, you will deploy **Umami**, an open source analytics service, from the one-click service resources list.
 
-## Before you start
-Make sure:
-- Coolify is installed and accessible
-- you have at least one connected server in Coolify (if you are self-hosting, you can use the same server where Coolify runs which will be `localhost`)
-- Coolify proxy is running on your server
+<CoolCallout id="short-version" icon={ArrowsRight} title="The short version">
 
-If you are not ready yet, first follow:
-- [Start with Self-hosted](/start-with-self-hosted)
-- [Start with Coolify Cloud](/start-with-cloud)
+Create or open a project, create an Umami service resource, keep the service port in the URL configuration, deploy it, open the public URL, and sign in with the default credentials.
 
+This path is ideal for a first service deployment because Umami is ready-made, uses prebuilt Docker images, and gives you a clear browser check after deployment.
 
-## Deploy your first Umami service
-### 1. Check if Coolify proxy is running
-On the Coolify dashboard:
-- click **Servers** on the left sidebar
-- click on your server name
-- check if it says **Proxy is running**
-
-<ZoomableImage src="shadow-to-do" alt="Proxy status in Coolify" />
-
-If it says **Proxy is stopped**, click **Start Proxy**.
+</CoolCallout>
 
 ---
 
-### 2. Create your first project
+
+## Before you start
+
+Make sure these things are ready before you deploy the service.
+
+<FirstServicePrerequisites />
+
+If Coolify is not ready yet, first follow [Start with Self-hosted](/start-with-self-hosted) or [Start with Coolify Cloud](/start-with-cloud).
+
+---
+
+
+## Deployment overview
+
+<FirstServiceDeploymentFlow />
+
+<CoolCallout className="my-5" id="services-run-as-containers" icon={Settings} title="Services run as containers">
+
+Coolify deploys one-click services from predefined templates. For this guide, Coolify will create and run the containers Umami needs, then route traffic through the Coolify proxy.
+
+One-click services use prebuilt Docker images, so you do not need to configure a Git repository or build settings for this first test.
+
+</CoolCallout>
+
+---
+
+
+## Deploy your first Umami service
+
+Follow these steps inside the Coolify dashboard. Each step tells you what to click and what you should see before continuing.
+
+
+### 1. Create your first project
+
 On the Coolify dashboard:
+
 - click **New Project**
-- enter a project name (example: `my-first-project`)
+- enter a project name, for example `my-first-project`
 - click **Continue**
 
 <ZoomableImage src="shadow-to-do" alt="Create a project in Coolify" />
 
-::: tip Tip
-If you already have a project, skip this step and continue to Step 3.
-:::
+<Callout type="success" title="Tip">
+
+If you already have a project, skip this step and continue to Step 2.
+
+</Callout>
 
 ---
 
-### 3. Create a new resource
+
+### 2. Create a new resource
+
 Open your project and click **Create New Resource**.
 
 <ZoomableImage src="shadow-to-do" alt="Create new resource in Coolify project" />
 
+A resource is something Coolify will run for you, such as an app, database, or service. In this guide, the resource will be an Umami service.
+
 ---
 
-### 4. Choose Umami from service list
-In the one-click resource list:
+
+### 3. Choose Umami from the service list
+
+In the resource list:
+
 - search for **Umami**
 - click **Umami**
 
 <ZoomableImage src="shadow-to-do" alt="Select Umami from one-click services list" />
 
+Coolify will create an Umami service resource with generated settings.
+
 ---
 
+
+### 4. Review the service URL
+
+Coolify gives the service a generated URL so you can test it quickly.
+
+<FirstServiceNetworkChoices />
+
+<CoolCallout className="my-5" id="keep-service-port" icon={Settings} title="Keep the service port in Coolify">
+
+For the first deployment, you can keep the generated `sslip.io` URL. Do not remove the `:3000` port from the URL field in Coolify, because Coolify uses it to route traffic to Umami.
+
+</CoolCallout>
+
+If you use your own domain, configure it in Coolify as `https://analytics.example.com:3000`. Make sure DNS points to your server IP address and ports `80` and `443` are open on your server firewall.
+
+---
+
+
 ### 5. Deploy
+
 Click the **Deploy** button.
 
 <ZoomableImage src="shadow-to-do" alt="Deploy Umami service" />
 
-Coolify will pull all required Docker images for Umami and start the containers.
+Coolify will pull the required Docker images and start the Umami containers.
 
-::: tip Tip
-Building is not required for one-click services. All one-click services use prebuilt Docker images.
-:::
+After deployment, keep these values ready:
+
+- public service URL without the port
+- Umami username, `admin`
+- Umami password, `umami`
 
 ---
 
-### 6. Visit the service URL
-After deployment completes:
-- open the generated application URL in Coolify
-- you should see the Umami login page
 
-Default login credentials:
-- username: `admin`
-- password: `umami`
+### 6. Open Umami and sign in
+
+Open the public service URL without the port in your browser.
+
+For example, if Coolify is configured with `http://<uuid>.<server-ip>.sslip.io:3000`, visit `http://<uuid>.<server-ip>.sslip.io`.
+
+If you use your own domain and Coolify is configured with `https://analytics.example.com:3000`, visit `https://analytics.example.com`.
+
+You should see the Umami login page. Sign in with the default credentials:
+
+```txt
+username: admin
+password: umami
+```
 
 <ZoomableImage src="shadow-to-do" alt="Umami login page after deployment" />
 
+<Callout type="warning" title="Change the default password">
 
-## Custom domain (optional)
-If you want to use your own domain:
-- click the pencil icon next to the domain field
-- replace the generated domain with your own domain
-- keep the service port in configuration (example: `https://domain.com:3000`)
+After the first test works, change the default Umami password before using the service for real traffic.
 
-When visiting in browser, use:
-- `https://domain.com`
+</Callout>
 
-The `:3000` part is for internal routing configuration in Coolify.
-
-For custom domains, make sure:
-- your domain DNS record points to your server IP address
-- the domain is added in Coolify with `https://`
-- ports `80` and `443` are open on your server firewall
+---
 
 
 ## Common first-deploy issues
-### 1. Service link does not open
+
+Use these checks when Umami deploys but the browser test does not behave as expected.
+
+<FirstServiceTroubleshooting />
+
+
+<Tabs id="first-service-issues" items={["Link doesn't open", 'Login fails', 'Site not secure']}>
+<Tab value="Link doesn't open" icon={SignalStream}>
+
+Usually means the generated URL cannot reach the service through your server and proxy, or the URL is being opened with the wrong port behavior.
+
 Check:
-- DNS record points to your server IP (if using your own domain)
-- server firewall allows port `80` and `443`
-- Coolify proxy is running (follow [step 1](#_1-check-if-coolify-proxy-is-running))
 
+- Umami deployment is in **running** state
+- the URL field in Coolify still includes the service port, for example `:3000`
+- you open the public URL in your browser without `:3000`
+- Coolify proxy is running on the server
+- your server firewall allows ports `80` and `443`
+- if using your own domain, DNS points to your server IP address
 
-### 2. Login fails
+</Tab>
+<Tab value="Login fails" icon={Key2}>
+
+Usually means the credentials do not match what Umami expects.
+
 Check:
-- you are using the default credentials (`admin` / `umami`) before changing them
-- keyboard input is correct (no extra spaces)
 
+- use `admin` as the username for the first login
+- use `umami` as the password before changing it
+- remove accidental spaces before or after either value
+- if the password was already changed, use the updated Umami credentials
 
-### 3. Browser shows site not secure
-This can happen if you are using the auto-generated `sslip.io` domain, because TLS certificate issuance for shared/testing domains can be rate-limited.
+</Tab>
+<Tab value="Site not secure" icon={Warning22}>
+
+Browsers show a site-not-secure warning when you open the service with `http://`.
+To make the warning go away, open the service with `https://`.
+For `https://` to work, Coolify needs a TLS certificate from Let's Encrypt.
+Let's Encrypt can rate-limit shared testing domains like `sslip.io`, so use a real domain.
 
 If you are using your own domain, make sure:
+
 - DNS is pointed correctly to your server IP
-- the domain is added in Coolify with `https://` so it will be like `https://example.com`
+- the domain is added in Coolify with `https://`, for example `https://analytics.example.com`
+- restart the service after changing the domain
+
+</Tab>
+</Tabs>
+
+---
 
 
 ## What to do next
-- [Learn more about services](/services/introduction)
-- [Explore more one-click services](/services/all)
+
+Your first service confirms that Coolify can create a one-click service, start its containers, route a URL through the proxy, and load the service in a browser.
+
+<FirstServiceNextSteps />
