@@ -1,10 +1,7 @@
 'use client';
 
-import type React from 'react';
 import {
-  ArrowRight,
   Box2,
-  Check,
   Database,
   Globe3,
   Key2,
@@ -15,10 +12,14 @@ import {
   Warning22,
   WindowPointer,
 } from 'reicon-react';
-import { CoolActionCard } from '@/components/docs/cool-action-card';
-import { CoolActionCardGrid } from '@/components/docs/cool-action-card-grid';
 import { CoolCallout } from '@/components/docs/cool-callout';
 import { CoolFlow } from '@/components/docs/cool-flow';
+import {
+  FirstDeployCardGrid,
+  FirstDeployChoiceGrid,
+  FirstDeployNextSteps,
+  openFirstDeployIssueTab,
+} from '@/components/docs/first-deploy-sections';
 
 const serviceDeploymentFlow = {
   checklist: [
@@ -96,19 +97,7 @@ const nextSteps = [
 
 export function FirstServicePrerequisites() {
   return (
-    <CoolActionCardGrid data-first-service className="not-prose my-5">
-      <div className="grid gap-4 p-4 sm:p-5 lg:grid-cols-3">
-        {prerequisiteCards.map((card) => (
-          <CoolActionCard
-            key={card.title}
-            title={card.title}
-            description={card.description}
-            bullets={card.bullets}
-            icon={card.icon}
-          />
-        ))}
-      </div>
-    </CoolActionCardGrid>
+    <FirstDeployCardGrid cards={prerequisiteCards} dataAttribute="data-first-service" />
   );
 }
 
@@ -131,114 +120,44 @@ export function FirstServiceDeploymentFlow() {
 export function FirstServiceNetworkChoices() {
   return (
     <CoolCallout data-first-service className="not-prose my-5 overflow-hidden" contentClassName="!p-0" id="first-service-url" icon={Globe3} title="Generated URL or your own domain">
-      <div className="grid gap-0 md:grid-cols-2">
-        <ServiceUrlChoice
-          title="Fastest first test"
-          code="http://<uuid>.<server-ip>.sslip.io:3000"
-          points={[
-            'Keep :3000 in the Coolify URL configuration.',
-            'Visit the URL without :3000 in your browser.',
-            'Use this only to confirm the service and proxy work.',
-          ]}
-        />
-        <ServiceUrlChoice
-          title="Production-style test"
-          code="https://analytics.example.com:3000"
-          points={[
-            'Point DNS to your server IP address.',
-            'Keep :3000 in the Coolify URL configuration.',
-            'Visit https://analytics.example.com in your browser.',
-          ]}
-        />
-      </div>
+      <FirstDeployChoiceGrid
+        choices={[
+          {
+            title: 'Fastest first test',
+            code: 'http://<uuid>.<server-ip>.sslip.io:3000',
+            points: [
+              'Keep :3000 in the Coolify URL configuration.',
+              'Visit the URL without :3000 in your browser.',
+              'Use this only to confirm the service and proxy work.',
+            ],
+          },
+          {
+            title: 'Production-style test',
+            code: 'https://analytics.example.com:3000',
+            points: [
+              'Point DNS to your server IP address.',
+              'Keep :3000 in the Coolify URL configuration.',
+              'Visit https://analytics.example.com in your browser.',
+            ],
+          },
+        ]}
+      />
     </CoolCallout>
   );
 }
 
 export function FirstServiceTroubleshooting() {
   return (
-    <CoolActionCardGrid data-first-service className="not-prose my-5">
-      <div className="grid gap-4 p-4 sm:p-5 lg:grid-cols-3">
-        {issueCards.map((issue) => (
-          <CoolActionCard
-            key={issue.title}
-            href={issue.href}
-            onClick={(event) => openServiceIssueTab(event, issue.title)}
-            title={issue.title}
-            description={issue.description}
-            icon={issue.icon}
-          />
-        ))}
-      </div>
-    </CoolActionCardGrid>
+    <FirstDeployCardGrid
+      cards={issueCards}
+      onCardClick={(event, issue) => openFirstDeployIssueTab(event, 'first-service-issues', issue.title)}
+      dataAttribute="data-first-service"
+    />
   );
 }
 
 export function FirstServiceNextSteps() {
   return (
-    <section data-first-service data-cool-docs className="not-prose my-6 overflow-hidden rounded-lg border border-fd-border bg-fd-background/70">
-      <div className="grid gap-4 p-4 sm:grid-cols-2 sm:p-5 lg:grid-cols-3">
-        {nextSteps.map((step) => {
-          const Icon = step.icon;
-
-          return (
-            <a
-              key={step.title}
-              href={step.href}
-              className="method-card method-card-primary group rounded-lg border border-fd-border bg-fd-muted/20 p-4 shadow-sm transition duration-200 hover:-translate-y-1"
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex items-center gap-3">
-                  <span className="flex size-9 shrink-0 items-center justify-center rounded-md border border-fd-border bg-fd-background text-fd-foreground">
-                    <Icon className="size-5" weight="Filled" aria-hidden={true} />
-                  </span>
-                  <h3 className="m-0 text-sm font-semibold text-fd-foreground">{step.title}</h3>
-                </div>
-                <ArrowRight
-                  className="mt-2 size-4 shrink-0 text-fd-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-fd-foreground"
-                  aria-hidden="true"
-                />
-              </div>
-              <p className="m-0 mt-3 text-sm leading-6 text-fd-muted-foreground">{step.detail}</p>
-            </a>
-          );
-        })}
-      </div>
-    </section>
-  );
-}
-
-function openServiceIssueTab(event: React.MouseEvent<HTMLAnchorElement>, value: string) {
-  event.preventDefault();
-
-  window.dispatchEvent(
-    new CustomEvent('mdx-tabs:set-active', {
-      detail: {
-        id: 'first-service-issues',
-        value,
-      },
-    }),
-  );
-
-  document.getElementById('first-service-issues')?.scrollIntoView({ block: 'start' });
-  window.history.pushState(null, '', '#first-service-issues');
-}
-
-function ServiceUrlChoice({ code, points, title }: { code: string; points: string[]; title: string }) {
-  return (
-    <div className="border-b border-fd-border p-4 last:border-b-0 sm:p-5 md:border-b-0 md:border-e md:last:border-e-0">
-      <h3 className="m-0 text-sm font-semibold text-fd-foreground">{title}</h3>
-      <code className="mt-3 block rounded-md border border-fd-border bg-fd-muted px-3 py-2 text-xs font-semibold text-fd-foreground">
-        {code}
-      </code>
-      <ul className="m-0 mt-4 space-y-2 p-0">
-        {points.map((point) => (
-          <li key={point} className="flex gap-2 text-sm leading-6 text-fd-muted-foreground">
-            <Check className="mt-1 size-4 shrink-0 text-fd-foreground" aria-hidden={true} />
-            <span>{point}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <FirstDeployNextSteps steps={nextSteps} dataAttribute="data-first-service" />
   );
 }
