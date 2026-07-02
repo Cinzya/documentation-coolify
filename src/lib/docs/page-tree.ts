@@ -14,6 +14,7 @@ import { Rocket } from 'reicon-react/icons/Rocket';
 import { Server } from 'reicon-react/icons/Server';
 import { Settings } from 'reicon-react/icons/Settings';
 import { Stars4 } from 'reicon-react/icons/Stars4';
+import { TicketDiscount2 } from 'reicon-react/icons/TicketDiscount2';
 import { Window } from 'reicon-react/icons/Window';
 import { WindowPointer } from 'reicon-react/icons/WindowPointer';
 
@@ -67,6 +68,7 @@ const homeSidebarItemIcons = new Map<string, ReturnType<typeof createElement>>([
   ['/deploy-your-first-service', homeSidebarIcon(Settings)],
   ['/screenshots', homeSidebarIcon(Window)],
   ['/sponsors', homeSidebarIcon(Heart)],
+  ['/offers', homeSidebarIcon(TicketDiscount2)],
   ['/support', homeSidebarIcon(MedalStars)],
   ['/team', homeSidebarIcon(Profile2user2)],
   ['/contribute/guidelines', homeSidebarIcon(BookSaved2)],

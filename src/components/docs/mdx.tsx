@@ -10,6 +10,7 @@ import { MediaCardGroup } from '@/components/cards/media-card-group';
 import { ServicesList } from '@/components/data/services-list';
 import { SponsorsList } from '@/components/data/sponsors-list';
 import { ChooseYourPath } from '@/components/pages/choose-your-path';
+import { OffersPage } from '@/components/pages/offers-page';
 import {
   FirstDatabaseDeploymentFlow,
   FirstDatabaseExposureWarning,
@@ -110,6 +111,7 @@ export function getMDXComponents(components?: MDXComponents) {
     Folder,
     MediaCard,
     MediaCardGroup,
+    OffersPage,
     ScreenshotTab,
     ScreenshotTabs,
     ServicesList,
