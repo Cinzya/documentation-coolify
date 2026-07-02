@@ -73,8 +73,10 @@ export function CarbonAds() {
       <div ref={containerRef} />
       {isBlocked && !hasAd ? (
         <div data-carbon-fallback={true}>
-          <p>Support these docs by whitelisting coolify.io.</p>
-          <span>Carbon ads help fund free, up-to-date Coolify documentation.</span>
+          <p>Support Coolify by whitelisting Carbon ads in your ad blocker.</p>
+          <span>
+            Carbon ads help fund Coolify by showing ads on <code>coolify.io/docs</code>.
+          </span>
         </div>
       ) : null}
     </aside>
