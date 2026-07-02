@@ -37,7 +37,15 @@ export function OffersPage({ children }: { children?: React.ReactNode }) {
   const CopyIcon = promoCopied ? CopySuccess2 : Copy;
 
   return (
-    <div data-cool-docs className="not-prose space-y-6">
+    <div data-offers-page data-cool-docs className="not-prose space-y-6">
+      <style>
+        {`
+          body:has([data-offers-page]) #nd-toc {
+            display: none;
+          }
+        `}
+      </style>
+
       <CoolCallout id="hetzner" icon={ReceiptDiscount2} title="Promo code" contentClassName="!p-0">
         <div className="grid gap-0 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="border-b border-fd-border p-4 lg:border-b-0 lg:border-e sm:p-5">
