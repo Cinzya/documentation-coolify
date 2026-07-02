@@ -52,6 +52,7 @@ import {
   SelfHostedRaspberryInstallMethods,
   SelfHostedServerRequirements,
 } from '@/components/pages/start-with-self-hosted';
+import { SupportPage } from '@/components/pages/support-page';
 import { TeamPage } from '@/components/pages/team-page';
 import { CoolActionCard } from './cool-action-card';
 import { CoolActionCardGrid } from './cool-action-card-grid';
@@ -127,6 +128,7 @@ export function getMDXComponents(components?: MDXComponents) {
     SelfHostedServerRequirements,
     SponsorsList,
     SponsorsPage,
+    SupportPage,
     TeamPage,
     Step,
     Steps,
