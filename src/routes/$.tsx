@@ -10,6 +10,7 @@ import { MobileDrawerHeaderActions } from '@/components/layout/mobile-header-con
 import { DocsLayout } from 'fumadocs-ui/layouts/notebook';
 import { DocsBody, DocsPage } from 'fumadocs-ui/layouts/notebook/page';
 import { useMDXComponents } from '@/components/docs/mdx';
+import { CarbonAds } from '@/components/layout/carbon-ads';
 import { ViewOptionsPopover } from '@/components/layout/page-actions';
 import { type DocsManifest, getManifestKey, type LoaderData } from '@/lib/docs/docs-manifest';
 import { createDocsLayoutTabs } from '@/lib/docs/docs-layout-tabs';
@@ -189,7 +190,7 @@ const clientLoader = browserCollections.docs.createClientLoader({
     const hidePageChrome = path.includes('choose-your-path');
     const pageActions = (
       <PageActions
-        className="mt-4 flex flex-row items-center gap-2 border-t pt-4 max-xl:mb-4 max-xl:ps-2"
+        className="mt-4 border-t pt-4 max-xl:mb-4 max-xl:ps-2"
         githubUrl={getDocGithubPath(path)}
         markdownUrl={markdownUrl}
       />
@@ -288,8 +289,11 @@ function PageActions({
 }) {
   return (
     <div className={className}>
-      <ReiconMarkdownCopyButton markdownUrl={markdownUrl} />
-      <ViewOptionsPopover markdownUrl={markdownUrl} githubUrl={githubUrl} />
+      <div className="flex flex-row items-center gap-2">
+        <ReiconMarkdownCopyButton markdownUrl={markdownUrl} />
+        <ViewOptionsPopover markdownUrl={markdownUrl} githubUrl={githubUrl} />
+      </div>
+      <CarbonAds />
     </div>
   );
 }
