@@ -229,10 +229,11 @@ const clientLoader = browserCollections.docs.createClientLoader({
 
 function Page() {
   const data = useFumadocsLoader(Route.useLoaderData()) as unknown as RuntimeLoaderData;
+  const hasHomeSidebar = isHomeSidebarRoute(data);
   const layoutTabs = useMemo(() => createDocsLayoutTabs(data.pageTree), [data.pageTree]);
   const sidebarTree = useMemo(
-    () => (isHomeSidebarRoute(data) ? prepareHomeSidebarPageTree(data.pageTree) : data.pageTree),
-    [data],
+    () => (hasHomeSidebar ? prepareHomeSidebarPageTree(data.pageTree) : data.pageTree),
+    [data.pageTree, hasHomeSidebar],
   );
   const layoutOptions = baseOptions();
   let content: ReactNode;
@@ -256,6 +257,7 @@ function Page() {
   return (
     <DocsLayout
       {...layoutOptions}
+      key={hasHomeSidebar ? 'home-sidebar' : 'docs-sidebar'}
       nav={{ ...layoutOptions.nav, mode: 'top' }}
       sidebar={{ banner: <MobileDrawerHeaderActions /> }}
       tree={sidebarTree}
