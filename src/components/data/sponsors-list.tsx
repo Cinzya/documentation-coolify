@@ -14,27 +14,29 @@ function sponsorImageUrl(sponsor: Sponsor): string | undefined {
 
 function SponsorCard({ sponsor, size }: { sponsor: Sponsor; size: 'huge' | 'big' }) {
   const imageUrl = sponsorImageUrl(sponsor);
+  const logoWellClass =
+    'sponsor-logo-well flex w-full items-center justify-center border-b border-white/10 bg-neutral-950 shadow-inner shadow-black/30';
 
   if (size === 'huge') {
     return (
       <a
         href={addRef(sponsor.url)}
-        className="sponsor-card sponsor-card-huge group flex min-h-80 w-full flex-col items-center justify-center rounded-lg border border-fd-border bg-fd-background/80 p-8 text-center no-underline shadow-sm transition duration-200 hover:-translate-y-1"
+        className="sponsor-card sponsor-card-huge group flex min-h-80 w-full flex-col items-stretch justify-start overflow-hidden rounded-lg border border-fd-border bg-fd-background/80 p-0 text-center no-underline shadow-sm transition duration-200 hover:-translate-y-1"
         target="_blank"
         rel="noreferrer noopener"
       >
-        <div className="flex h-full flex-col items-center justify-center">
-          {imageUrl ? (
-            <div className="flex h-24 w-full items-center justify-center">
+        <div className="flex min-h-80 w-full flex-1 flex-col items-stretch">
+          <div className={`${logoWellClass} h-40 shrink-0 px-8`}>
+            {imageUrl ? (
               <img
                 src={imageUrl}
                 alt={`${sponsor.name} logo`}
-                className="max-h-24 max-w-72 object-contain"
+                className="max-h-28 max-w-72 object-contain"
               />
-            </div>
-          ) : null}
-          <div className="min-w-0">
-            <p className="m-0 mt-6 text-lg font-bold text-fd-foreground">{sponsor.name}</p>
+            ) : null}
+          </div>
+          <div className="flex min-w-0 flex-1 flex-col items-center justify-center px-8 pb-8 pt-6">
+            <p className="m-0 text-lg font-bold text-fd-foreground">{sponsor.name}</p>
             <p className="m-0 mx-auto mt-3 max-w-72 break-words [overflow-wrap:anywhere] line-clamp-3 text-sm leading-6 text-fd-muted-foreground">
               {sponsor.description}
             </p>
@@ -47,22 +49,22 @@ function SponsorCard({ sponsor, size }: { sponsor: Sponsor; size: 'huge' | 'big'
   return (
     <a
       href={addRef(sponsor.url)}
-      className="sponsor-card group flex min-h-52 w-full flex-col items-center justify-center rounded-lg border border-fd-border bg-fd-background/70 p-5 text-center no-underline shadow-sm transition duration-200 hover:-translate-y-1"
+      className="sponsor-card group flex min-h-52 w-full flex-col items-stretch justify-start overflow-hidden rounded-lg border border-fd-border bg-fd-background/70 p-0 text-center no-underline shadow-sm transition duration-200 hover:-translate-y-1"
       target="_blank"
       rel="noreferrer noopener"
     >
-      <div className="flex min-w-0 flex-col items-center">
-        {imageUrl ? (
-          <div className="flex h-16 w-full shrink-0 items-center justify-center">
+      <div className="flex min-h-52 w-full min-w-0 flex-1 flex-col items-stretch">
+        <div className={`${logoWellClass} h-28 shrink-0 px-5`}>
+          {imageUrl ? (
             <img
               src={imageUrl}
               alt={`${sponsor.name} logo`}
-              className="max-h-14 max-w-40 object-contain"
+              className="max-h-20 max-w-48 object-contain"
             />
-          </div>
-        ) : null}
-        <div className="min-w-0">
-          <p className="m-0 mt-4 text-base font-bold text-fd-foreground">{sponsor.name}</p>
+          ) : null}
+        </div>
+        <div className="flex min-w-0 flex-1 flex-col items-center justify-center px-5 pb-5 pt-4">
+          <p className="m-0 text-base font-bold text-fd-foreground">{sponsor.name}</p>
           <p className="m-0 mx-auto mt-2 max-w-64 break-words [overflow-wrap:anywhere] line-clamp-2 text-sm leading-6 text-fd-muted-foreground">
             {sponsor.description}
           </p>
@@ -134,6 +136,11 @@ export function SponsorsList() {
 
           [data-sponsors-page] .sponsor-card-huge img {
             filter: drop-shadow(0 8px 18px rgb(0 0 0 / 0.12));
+          }
+
+          [data-sponsors-page] .sponsor-logo-well {
+            background:
+              radial-gradient(circle at top, rgb(39 39 42 / 0.96), rgb(9 9 11 / 0.98) 64%);
           }
 
           [data-sponsors-page] .sponsor-card:hover {
