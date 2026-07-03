@@ -12,6 +12,7 @@ import { SponsorsList } from '@/components/data/sponsors-list';
 import { ChooseYourPath } from '@/components/pages/choose-your-path';
 import { CoolifyContributionPage } from '@/components/pages/coolify-contribution-page';
 import { ContributionGuidelinesPage } from '@/components/pages/contribution-guidelines-page';
+import { DocumentationContributionPage } from '@/components/pages/documentation-contribution-page';
 import { OffersPage } from '@/components/pages/offers-page';
 import {
   FirstDatabaseDeploymentFlow,
@@ -95,6 +96,7 @@ export function getMDXComponents(components?: MDXComponents) {
     CoolCallout,
     CoolFlow,
     CoolTable,
+    DocumentationContributionPage,
     File,
     Files,
     FirstDatabaseDeploymentFlow,

@@ -193,7 +193,7 @@ const nextGuides = [
 ];
 
 function CommandBlock({ command }: { command: string }) {
-  return <DynamicCodeBlock lang="bash" code={command} codeblock={{ className: 'my-3', title: 'Command' }} />;
+  return <DynamicCodeBlock lang="bash" code={command} codeblock={{ className: 'my-3' }} />;
 }
 
 function BulletList({ items }: { items: React.ReactNode[] }) {
