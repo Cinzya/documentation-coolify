@@ -10,6 +10,7 @@ import { MediaCardGroup } from '@/components/cards/media-card-group';
 import { ServicesList } from '@/components/data/services-list';
 import { SponsorsList } from '@/components/data/sponsors-list';
 import { ChooseYourPath } from '@/components/pages/choose-your-path';
+import { CoolifyContributionPage } from '@/components/pages/coolify-contribution-page';
 import { ContributionGuidelinesPage } from '@/components/pages/contribution-guidelines-page';
 import { OffersPage } from '@/components/pages/offers-page';
 import {
@@ -83,6 +84,7 @@ export function getMDXComponents(components?: MDXComponents) {
     Card,
     Cards,
     ChooseYourPath,
+    CoolifyContributionPage,
     ContributionGuidelinesPage,
     CloudAccessBasics,
     CloudNextSteps,
