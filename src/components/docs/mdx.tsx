@@ -14,6 +14,7 @@ import { CoolifyContributionPage } from '@/components/pages/coolify-contribution
 import { ContributionGuidelinesPage } from '@/components/pages/contribution-guidelines-page';
 import { DocumentationContributionPage } from '@/components/pages/documentation-contribution-page';
 import { OffersPage } from '@/components/pages/offers-page';
+import { ServiceContributionPage } from '@/components/pages/service-contribution-page';
 import {
   FirstDatabaseDeploymentFlow,
   FirstDatabaseExposureWarning,
@@ -132,6 +133,7 @@ export function getMDXComponents(components?: MDXComponents) {
     SelfHostedProjectResources,
     SelfHostedRaspberryInstallMethods,
     SelfHostedServerRequirements,
+    ServiceContributionPage,
     SponsorsList,
     SponsorsPage,
     SupportPage,
