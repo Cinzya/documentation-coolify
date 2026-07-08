@@ -43,6 +43,7 @@ import {
   CloudOnboardingFlow,
   CloudServerOptions,
 } from '@/components/pages/start-with-cloud';
+import { InstanceSettingsOptions } from '@/components/pages/instance-settings';
 import { SponsorsPage } from '@/components/pages/sponsors-page';
 import {
   SelfHostedAdvancedOptions,
@@ -144,6 +145,7 @@ export function getMDXComponents(components?: MDXComponents) {
     Tabs,
     img: (props) => <ZoomImage {...(props as any)} />,
     Image: ZoomImage,
+    InstanceSettingsOptions,
     ZoomableImage: ZoomImage,
     ZoomImage,
     ...components,
