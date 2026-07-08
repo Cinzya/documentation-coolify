@@ -4,9 +4,57 @@ description: Learn what kinds of Coolify contributions are likely to be accepted
 ---
 
 import { ContributionGuidelinesPage } from '@/components/pages/contribution-guidelines-page';
+import { BrowserCode, Bug, DocumentText2, MedalStars, MessageQuestion2 } from 'reicon-react';
 
 # Contributing to Coolify
 
 We are happy that you are interested in contributing to Coolify.
 
-<ContributionGuidelinesPage />
+<ContributionGuidelinesPage>
+
+<CoolCallout id="ways-to-contribute" icon={MessageQuestion2} title="Ways to contribute" contentClassName="!p-4 sm:!p-5">
+<CoolCardGrid columns={2}>
+<CoolCard
+  icon={MedalStars}
+  title="Support others"
+  description="Answer questions in Discord or GitHub Discussions when you can verify the answer."
+  bullets={['Be patient and respectful', 'Share verified information', 'Remember support is voluntary']}
+  buttons={[
+    { href: 'https://coollabs.io/discord', label: 'Join Discord', variant: 'primary' },
+    { href: 'https://github.com/coollabsio/coolify/discussions', label: 'View discussions', variant: 'tertiary' },
+  ]}
+/>
+
+<CoolCard
+  icon={Bug}
+  title="Report bugs"
+  description="Create an issue only when the bug is reproducible and not already reported."
+  bullets={['Include reproduction steps', 'Add expected and actual results', 'Attach logs or screenshots']}
+  buttons={[
+    { href: 'https://github.com/coollabsio/coolify/issues', label: 'Open issues', variant: 'secondary' },
+  ]}
+/>
+
+<CoolCard
+  icon={BrowserCode}
+  title="Submit code"
+  description="Small fixes are welcome. Larger changes need alignment before implementation."
+  bullets={['One pull request per logical change', 'Reference an issue or discussion', 'Target the next branch']}
+  buttons={[
+    { href: 'https://github.com/coollabsio/coolify', label: 'View repository', variant: 'secondary' },
+  ]}
+/>
+
+<CoolCard
+  icon={DocumentText2}
+  title="Improve docs and services"
+  description="Help improve documentation or add one-click service templates."
+  bullets={['Keep wording clear', 'Use existing docs patterns', 'Follow service contribution rules']}
+  buttons={[
+    { href: '/docs/contribute/documentation', label: 'Read docs guide', variant: 'secondary' },
+  ]}
+/>
+</CoolCardGrid>
+</CoolCallout>
+
+</ContributionGuidelinesPage>

@@ -3,18 +3,14 @@
 import type React from 'react';
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 import {
-  ArrowRight,
   ArrowsRight,
   Box5,
   BranchUp,
-  BrowserCode,
-  Bug,
   Check,
   Checklist2,
   Code2,
   DocumentText2,
   MagicWand,
-  MedalStars,
   MessageQuestion2,
   ShieldCheck,
   StarSparkle,
@@ -23,47 +19,6 @@ import {
 import { CoolActionCard } from '@/components/docs/cool-action-card';
 import { CoolCallout } from '@/components/docs/cool-callout';
 import { CoolFlow } from '@/components/docs/cool-flow';
-
-const contributionPaths = [
-  {
-    title: 'Support others',
-    href: 'https://coollabs.io/discord',
-    secondaryHref: 'https://github.com/coollabsio/coolify/discussions',
-    icon: MedalStars,
-    variant: 'primary' as const,
-    cta: 'Join Discord',
-    secondaryCta: 'View discussions',
-    description: 'Answer questions in Discord or GitHub Discussions when you can verify the answer.',
-    bullets: ['Be patient and respectful', 'Share verified information', 'Remember support is voluntary'],
-  },
-  {
-    title: 'Report bugs',
-    href: 'https://github.com/coollabsio/coolify/issues',
-    icon: Bug,
-    variant: 'secondary' as const,
-    cta: 'Open issues',
-    description: 'Create an issue only when the bug is reproducible and not already reported.',
-    bullets: ['Include reproduction steps', 'Add expected and actual results', 'Attach logs or screenshots'],
-  },
-  {
-    title: 'Submit code',
-    href: 'https://github.com/coollabsio/coolify',
-    icon: BrowserCode,
-    variant: 'secondary' as const,
-    cta: 'View repository',
-    description: 'Small fixes are welcome. Larger changes need alignment before implementation.',
-    bullets: ['One pull request per logical change', 'Reference an issue or discussion', 'Target the next branch'],
-  },
-  {
-    title: 'Improve docs and services',
-    href: '/docs/contribute/documentation',
-    icon: DocumentText2,
-    variant: 'secondary' as const,
-    cta: 'Read docs guide',
-    description: 'Help improve documentation or add one-click service templates.',
-    bullets: ['Keep wording clear', 'Use existing docs patterns', 'Follow service contribution rules'],
-  },
-];
 
 const strongContributions = [
   'Small bug fixes with a clear reproduction path',
@@ -154,51 +109,6 @@ function BulletList({ items }: { items: React.ReactNode[] }) {
   );
 }
 
-function ContributionCard({ path }: { path: (typeof contributionPaths)[number] }) {
-  const Icon = path.icon;
-
-  return (
-    <article className="method-card method-card-secondary flex h-full flex-col rounded-lg border border-fd-border bg-fd-background/70 p-5 shadow-sm">
-      <div className="flex items-center gap-3">
-        <span className="flex size-10 shrink-0 items-center justify-center rounded-md border border-fd-border bg-fd-muted/40 text-fd-foreground">
-          <Icon className="size-5" weight="Filled" aria-hidden={true} />
-        </span>
-        <h3 className="m-0 min-w-0 text-base font-semibold text-fd-foreground">{path.title}</h3>
-      </div>
-
-      <p className="m-0 mt-4 text-sm leading-6 text-fd-muted-foreground">{path.description}</p>
-
-      <ul className="m-0 mt-4 space-y-2 p-0">
-        {path.bullets.map((bullet) => (
-          <li key={bullet} className="flex gap-2 text-sm leading-6 text-fd-muted-foreground">
-            <Check className="mt-1 size-4 shrink-0 text-fd-foreground" aria-hidden={true} />
-            <span>{bullet}</span>
-          </li>
-        ))}
-      </ul>
-
-      <div className="mt-5 flex flex-wrap gap-2">
-        <a
-          href={path.href}
-          className={`method-button method-button-${path.variant} inline-flex w-fit items-center gap-2 border px-3 py-2 text-sm font-semibold transition`}
-        >
-          {path.cta}
-          <ArrowRight className="size-4" aria-hidden={true} />
-        </a>
-        {'secondaryHref' in path && path.secondaryHref ? (
-          <a
-            href={path.secondaryHref}
-            className="method-button method-button-tertiary inline-flex w-fit items-center gap-2 border px-3 py-2 text-sm font-semibold transition"
-          >
-            {path.secondaryCta}
-            <ArrowRight className="size-4" aria-hidden={true} />
-          </a>
-        ) : null}
-      </div>
-    </article>
-  );
-}
-
 function FaqAccordion() {
   return (
     <Accordions type="multiple" className="border-0">
@@ -215,7 +125,7 @@ function SectionDivider() {
   return <div className="h-px bg-fd-border" aria-hidden={true} />;
 }
 
-export function ContributionGuidelinesPage() {
+export function ContributionGuidelinesPage({ children }: { children?: React.ReactNode }) {
   return (
     <div data-contribution-guidelines-page data-cool-docs className="not-prose my-8 space-y-6">
       <style>
@@ -270,13 +180,7 @@ export function ContributionGuidelinesPage() {
 
       <SectionDivider />
 
-      <CoolCallout id="ways-to-contribute" icon={MessageQuestion2} title="Ways to contribute" contentClassName="!p-4 sm:!p-5">
-        <div className="grid gap-4 md:grid-cols-2">
-          {contributionPaths.map((path) => (
-            <ContributionCard key={path.title} path={path} />
-          ))}
-        </div>
-      </CoolCallout>
+      {children}
 
       <SectionDivider />
 
