@@ -1,5 +1,4 @@
 import type React from 'react';
-import { Check } from 'reicon-react';
 import { cn } from '@/lib/ui/cn';
 import { CoolCallout } from './cool-callout';
 import type { CoolIcon } from './cool-types';
@@ -70,10 +69,9 @@ export function CoolCompareColumn({ className, items, title, ...props }: CoolCom
   return (
     <div className={cn('p-4 sm:p-5', className)} {...props}>
       <h3 className="m-0 text-sm font-semibold text-fd-foreground">{title}</h3>
-      <ul className="m-0 mt-3 space-y-2 p-0">
+      <ul className="m-0 mt-3 list-disc space-y-2 ps-5">
         {items.map((item, index) => (
-          <li key={index} className="flex gap-2 text-sm leading-6 text-fd-muted-foreground">
-            <Check className="mt-1 size-4 shrink-0 text-fd-foreground" aria-hidden={true} />
+          <li key={index} className="pl-1 text-sm leading-6 text-fd-muted-foreground">
             <span>{item}</span>
           </li>
         ))}
