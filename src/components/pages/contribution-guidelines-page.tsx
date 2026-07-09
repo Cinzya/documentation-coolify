@@ -6,7 +6,6 @@ import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 import {
   ArrowsRight,
   Box5,
-  BranchUp,
   Checklist2,
   Code2,
   DocumentText2,
@@ -17,7 +16,6 @@ import {
 } from 'reicon-react';
 import { CoolActionCard } from '@/components/docs/cool-action-card';
 import { CoolCallout } from '@/components/docs/cool-callout';
-import { CoolFlow } from '@/components/docs/cool-flow';
 
 const formatExamples = [
   ['fix(ui):', 'UI-related fixes'],
@@ -173,28 +171,6 @@ export function ContributionGuidelinesPage({ children }: { children?: ReactNode 
       <SectionDivider />
 
       <SectionGroup>{children}</SectionGroup>
-
-      <SectionDivider />
-
-      <CoolFlow
-        id="pull-request-flow"
-        icon={BranchUp}
-        title="Before opening a pull request"
-        summary="For anything beyond a small, obvious fix, align with the maintainers before spending time on implementation."
-        steps={[
-          'Check existing issues and discussions',
-          'Discuss larger changes before coding',
-          'Keep one pull request to one logical change',
-          'Test the change in a clean environment',
-          'Open the pull request against the next branch',
-        ]}
-        checklist={[
-          'Reference and close an issue or discussion when possible.',
-          'Do not reformat unrelated files or fix unrelated style issues.',
-          'Keep the contributor agreement in the pull request description.',
-          'Include detailed testing steps so maintainers can reproduce the result.',
-        ]}
-      />
 
       <SectionDivider />
 

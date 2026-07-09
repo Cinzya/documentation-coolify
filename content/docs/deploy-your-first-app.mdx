@@ -4,13 +4,12 @@ description: Deploy your first application on Coolify using the Docker Image opt
 ---
 
 import {
-  FirstAppDeploymentFlow,
   FirstAppNetworkChoices,
   FirstAppNextSteps,
   FirstAppPrerequisites,
   FirstAppTroubleshooting,
 } from '@/components/pages/deploy-your-first-app';
-import { ArrowsRight, Box2, Camera, Globe3, SignalStream, Warning22 } from 'reicon-react';
+import { ArrowsRight, Box2, Camera, Globe3, Rocket2, SignalStream, Warning22 } from 'reicon-react';
 
 # Deploy your first app
 
@@ -42,7 +41,29 @@ If Coolify is not ready yet, first follow [Start with Self-hosted](/start-with-s
 
 ## Deployment overview
 
-<FirstAppDeploymentFlow />
+<section data-first-app className="not-prose my-5">
+<CoolFlow
+  id="first-app-deployment-flow"
+  icon={Rocket2}
+  title="First app deployment flow"
+  summary="This first deployment uses a pre-built Docker image, so you can check that Coolify can create an app, start it, and give you a URL without adding Git or build settings."
+  steps={[
+    'Create or open a project',
+    'Choose Docker Image',
+    'Enter nginx:alpine',
+    'Set port 80',
+    'Deploy and open the URL',
+  ]}
+  checklist={[
+    'Create or open the project where the app will live.',
+    'Use the Docker Image resource type so no repository or build setup is required.',
+    'Deploy nginx:alpine and expose port 80.',
+    'Use the generated sslip.io domain for the first test.',
+    'Open the generated URL and confirm the Nginx welcome page loads.',
+  ]}
+  endnote="You should end with a running nginx container, a generated application URL, and a visible Nginx welcome page."
+/>
+</section>
 
 <CoolCallout className="my-5" id="apps-run-as-containers" icon={Box2} title="Apps run as containers">
 

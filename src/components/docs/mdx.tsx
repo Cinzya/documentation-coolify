@@ -31,7 +31,6 @@ import {
   FirstServiceTroubleshooting,
 } from '@/components/pages/deploy-your-first-service';
 import {
-  FirstAppDeploymentFlow,
   FirstAppNetworkChoices,
   FirstAppNextSteps,
   FirstAppPrerequisites,
@@ -117,7 +116,6 @@ export function getMDXComponents(components?: MDXComponents) {
     FirstServiceNextSteps,
     FirstServicePrerequisites,
     FirstServiceTroubleshooting,
-    FirstAppDeploymentFlow,
     FirstAppNetworkChoices,
     FirstAppNextSteps,
     FirstAppPrerequisites,

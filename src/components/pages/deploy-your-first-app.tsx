@@ -4,7 +4,6 @@ import {
   Box2,
   Database,
   Globe3,
-  Rocket2,
   Server,
   Settings,
   SignalStream,
@@ -12,24 +11,12 @@ import {
   WindowPointer,
 } from 'reicon-react';
 import { CoolCallout } from '@/components/docs/cool-callout';
-import { CoolFlow } from '@/components/docs/cool-flow';
 import {
   FirstDeployCardGrid,
   FirstDeployChoiceGrid,
   FirstDeployNextSteps,
   openFirstDeployIssueTab,
 } from '@/components/docs/first-deploy-sections';
-
-const appDeploymentFlow = {
-  checklist: [
-    'Create or open the project where the app will live.',
-    'Use the Docker Image resource type so no repository or build setup is required.',
-    'Deploy nginx:alpine and expose port 80.',
-    'Use the generated sslip.io domain for the first test.',
-    'Open the generated URL and confirm the Nginx welcome page loads.',
-  ],
-  steps: ['Create or open a project', 'Choose Docker Image', 'Enter nginx:alpine', 'Set port 80', 'Deploy and open the URL'],
-};
 
 const prerequisiteCards = [
   {
@@ -97,22 +84,6 @@ const nextSteps = [
 export function FirstAppPrerequisites() {
   return (
     <FirstDeployCardGrid cards={prerequisiteCards} dataAttribute="data-first-app" />
-  );
-}
-
-export function FirstAppDeploymentFlow() {
-  return (
-    <section data-first-app className="not-prose my-5">
-      <CoolFlow
-        checklist={appDeploymentFlow.checklist}
-        icon={Rocket2}
-        id="first-app-deployment-flow"
-        result="You should end with a running nginx container, a generated application URL, and a visible Nginx welcome page."
-        steps={appDeploymentFlow.steps}
-        summary="This first deployment uses a pre-built Docker image, so you can check that Coolify can create an app, start it, and give you a URL without adding Git or build settings."
-        title="First app deployment flow"
-      />
-    </section>
   );
 }
 

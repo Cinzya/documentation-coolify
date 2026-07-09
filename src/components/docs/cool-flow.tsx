@@ -5,6 +5,7 @@ import type { CoolIcon } from './cool-types';
 
 type CoolFlowProps = {
   checklist: React.ReactNode[];
+  endnote?: React.ReactNode;
   icon: CoolIcon;
   id: string;
   result?: React.ReactNode;
@@ -13,7 +14,9 @@ type CoolFlowProps = {
   title: string;
 };
 
-export function CoolFlow({ checklist, icon, id, result, steps, summary, title }: CoolFlowProps) {
+export function CoolFlow({ checklist, endnote, icon, id, result, steps, summary, title }: CoolFlowProps) {
+  const finalNote = endnote ?? result;
+
   return (
     <CoolCallout data-cool-docs className="overflow-hidden" contentClassName="!p-0" id={id} icon={icon} title={title}>
       <div className="p-4 sm:p-5">
@@ -46,7 +49,7 @@ export function CoolFlow({ checklist, icon, id, result, steps, summary, title }:
               </li>
             ))}
           </ul>
-          {result ? <p className="m-0 mt-5 text-sm leading-6 text-fd-muted-foreground">{result}</p> : null}
+          {finalNote ? <p className="m-0 mt-5 text-sm leading-6 text-fd-muted-foreground">{finalNote}</p> : null}
         </div>
       </div>
     </CoolCallout>
