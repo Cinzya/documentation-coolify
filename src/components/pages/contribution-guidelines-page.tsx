@@ -1,39 +1,23 @@
 'use client';
 
-import type React from 'react';
+import { Children, Fragment } from 'react';
+import type { ReactNode } from 'react';
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 import {
   ArrowsRight,
   Box5,
   BranchUp,
-  Check,
   Checklist2,
   Code2,
   DocumentText2,
   MagicWand,
   MessageQuestion2,
-  ShieldCheck,
   StarSparkle,
   Warning22,
 } from 'reicon-react';
 import { CoolActionCard } from '@/components/docs/cool-action-card';
 import { CoolCallout } from '@/components/docs/cool-callout';
 import { CoolFlow } from '@/components/docs/cool-flow';
-
-const strongContributions = [
-  'Small bug fixes with a clear reproduction path',
-  'Documentation fixes that improve clarity or accuracy',
-  'One-click service additions that follow the template rules',
-  'Narrow code-quality improvements with tests or manual verification',
-];
-
-const avoidContributions = [
-  'Major features or architectural changes without prior discussion',
-  'Large UI or UX rewrites without prior discussion',
-  'Broad refactors mixed into unrelated fixes',
-  'Low-effort AI-generated pull requests',
-  'Pull requests that target a branch other than next',
-];
 
 const formatExamples = [
   ['fix(ui):', 'UI-related fixes'],
@@ -96,19 +80,6 @@ const developmentGuides = [
   },
 ];
 
-function BulletList({ items }: { items: React.ReactNode[] }) {
-  return (
-    <ul className="m-0 space-y-2 p-0">
-      {items.map((item, index) => (
-        <li key={index} className="flex gap-2">
-          <Check className="mt-1 size-4 shrink-0 text-fd-foreground" aria-hidden={true} />
-          <span>{item}</span>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
 function FaqAccordion() {
   return (
     <Accordions type="multiple" className="border-0">
@@ -125,7 +96,28 @@ function SectionDivider() {
   return <div className="h-px bg-fd-border" aria-hidden={true} />;
 }
 
-export function ContributionGuidelinesPage({ children }: { children?: React.ReactNode }) {
+function SectionGroup({ children }: { children?: ReactNode }) {
+  const sections = Children.toArray(children).filter((child) => {
+    if (typeof child === 'string') {
+      return child.trim().length > 0;
+    }
+
+    return true;
+  });
+
+  return (
+    <>
+      {sections.map((section, index) => (
+        <Fragment key={index}>
+          {index > 0 ? <SectionDivider /> : null}
+          {section}
+        </Fragment>
+      ))}
+    </>
+  );
+}
+
+export function ContributionGuidelinesPage({ children }: { children?: ReactNode }) {
   return (
     <div data-contribution-guidelines-page data-cool-docs className="not-prose my-8 space-y-6">
       <style>
@@ -180,26 +172,7 @@ export function ContributionGuidelinesPage({ children }: { children?: React.Reac
 
       <SectionDivider />
 
-      {children}
-
-      <SectionDivider />
-
-      <CoolCallout id="project-direction" icon={ShieldCheck} title="Project direction" contentClassName="!p-0">
-        <div className="grid gap-0 lg:grid-cols-2">
-          <div className="border-b border-fd-border p-4 lg:border-b-0 lg:border-e sm:p-5">
-            <h3 className="m-0 text-sm font-semibold text-fd-foreground">Likely to be accepted</h3>
-            <div className="mt-3 text-sm leading-6 text-fd-muted-foreground">
-              <BulletList items={strongContributions} />
-            </div>
-          </div>
-          <div className="p-4 sm:p-5">
-            <h3 className="m-0 text-sm font-semibold text-fd-foreground">Discuss first or avoid</h3>
-            <div className="mt-3 text-sm leading-6 text-fd-muted-foreground">
-              <BulletList items={avoidContributions} />
-            </div>
-          </div>
-        </div>
-      </CoolCallout>
+      <SectionGroup>{children}</SectionGroup>
 
       <SectionDivider />
 

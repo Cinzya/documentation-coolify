@@ -4,7 +4,7 @@ description: Learn what kinds of Coolify contributions are likely to be accepted
 ---
 
 import { ContributionGuidelinesPage } from '@/components/pages/contribution-guidelines-page';
-import { BrowserCode, Bug, DocumentText2, MedalStars, MessageQuestion2 } from 'reicon-react';
+import { BrowserCode, Bug, DocumentText2, MedalStars, MessageQuestion2, ShieldCheck } from 'reicon-react';
 
 # Contributing to Coolify
 
@@ -56,5 +56,33 @@ We are happy that you are interested in contributing to Coolify.
 />
 </CoolCardGrid>
 </CoolCallout>
+
+<CoolCompare
+  id="project-direction"
+  icon={ShieldCheck}
+  title="Project direction"
+  description="Coolify v4 is focused on stability and sustainable maintenance. Small, focused contributions are easier to review; larger or directional changes need maintainer alignment before implementation."
+>
+<CoolCompareColumn
+  title="Likely to be accepted"
+  items={[
+    'Small bug fixes with a clear reproduction path',
+    'Documentation fixes that improve clarity or accuracy',
+    'One-click service additions that follow the template rules',
+    'Narrow code-quality improvements with tests or manual verification',
+  ]}
+/>
+
+<CoolCompareColumn
+  title="Discuss first or avoid"
+  items={[
+    'Major features or architectural changes without prior discussion',
+    'Large UI or UX rewrites without prior discussion',
+    'Broad refactors mixed into unrelated fixes',
+    'Low-effort AI-generated pull requests',
+    'Pull requests that target a branch other than next',
+  ]}
+/>
+</CoolCompare>
 
 </ContributionGuidelinesPage>

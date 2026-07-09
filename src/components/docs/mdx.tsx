@@ -62,6 +62,7 @@ import { CoolActionCard } from './cool-action-card';
 import { CoolActionCardGrid } from './cool-action-card-grid';
 import { CoolCard, CoolCardGrid } from './cool-card';
 import { CoolCallout } from './cool-callout';
+import { CoolCompare, CoolCompareColumn } from './cool-compare';
 import { CoolFlow } from './cool-flow';
 import { CoolTable } from './cool-table';
 import { Callout } from './callout';
@@ -98,6 +99,8 @@ export function getMDXComponents(components?: MDXComponents) {
     CoolCard,
     CoolCardGrid,
     CoolCallout,
+    CoolCompare,
+    CoolCompareColumn,
     CoolFlow,
     CoolTable,
     DocumentationContributionPage,
