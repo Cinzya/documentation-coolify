@@ -6,4 +6,4 @@ export type CoolIcon = React.ComponentType<{
   weight?: 'Filled' | 'Outline';
 }>;
 
-export type CoolActionCardVariant = 'primary' | 'secondary' | 'tertiary';
+export type CoolActionType = 'primary' | 'secondary' | 'tertiary';

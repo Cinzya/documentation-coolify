@@ -1,5 +1,6 @@
 import type React from 'react';
 import { cn } from '@/lib/ui/cn';
+import { renderCoolLinkValue } from './cool-inline-content';
 import type { CoolIcon } from './cool-types';
 
 type CoolTableColumn = {
@@ -17,7 +18,10 @@ export function CoolTable({ className, columns, noWrapColumns = [], rows, ...pro
   return (
     <div
       data-cool-docs
-      className={cn('not-prose my-3 overflow-hidden rounded-lg border border-fd-border bg-fd-background/70', className)}
+      className={cn(
+        'not-prose my-3 overflow-hidden rounded-lg border border-fd-border bg-fd-background/70 [&_a]:font-semibold [&_a]:text-fd-foreground [&_a]:underline [&_a]:decoration-fd-primary [&_a]:decoration-2 [&_a]:underline-offset-4 [&_a:hover]:decoration-fd-primary/70',
+        className,
+      )}
       {...props}
     >
       <div className="relative overflow-auto prose-no-margin">
@@ -55,7 +59,7 @@ export function CoolTable({ className, columns, noWrapColumns = [], rows, ...pro
                       noWrapColumns.includes(cellIndex) ? 'whitespace-nowrap' : '',
                     ].join(' ')}
                   >
-                    {cell}
+                    {renderCoolLinkValue(cell)}
                   </td>
                 ))}
               </tr>

@@ -1,12 +1,12 @@
 import type React from 'react';
 import { ArrowRight, Check } from 'reicon-react';
 import { cn } from '@/lib/ui/cn';
-import type { CoolActionCardVariant, CoolIcon } from './cool-types';
+import type { CoolActionType, CoolIcon } from './cool-types';
 
 type CoolCardButton = {
   href: string;
   label: React.ReactNode;
-  variant?: CoolActionCardVariant;
+  type?: CoolActionType;
 };
 
 type CoolCardProps = Omit<React.ComponentProps<'article'>, 'title'> & {
@@ -17,7 +17,7 @@ type CoolCardProps = Omit<React.ComponentProps<'article'>, 'title'> & {
   icon: CoolIcon;
   linkLabel?: string;
   title: React.ReactNode;
-  variant?: CoolActionCardVariant;
+  type?: CoolActionType;
 };
 
 type CoolCardGridProps = React.ComponentProps<'div'> & {
@@ -47,7 +47,7 @@ export function CoolCard({
   icon: Icon,
   linkLabel,
   title,
-  variant = 'secondary',
+  type = 'secondary',
   ...props
 }: CoolCardProps) {
   const visibleButtons = buttons?.slice(0, 2) ?? [];
@@ -57,7 +57,7 @@ export function CoolCard({
     <article
       className={cn(
         'method-card flex h-full flex-col rounded-lg border border-fd-border bg-fd-background/70 p-5 shadow-sm',
-        hasMultipleButtons ? undefined : `method-card-${variant}`,
+        hasMultipleButtons ? undefined : `method-card-${type}`,
         href ? 'relative cursor-pointer' : undefined,
         className,
       )}
@@ -99,7 +99,7 @@ export function CoolCard({
             <a
               key={`${button.href}-${String(button.label)}`}
               href={button.href}
-              className={`method-button method-button-${button.variant ?? variant} inline-flex w-fit items-center gap-2 border px-3 py-2 text-sm font-semibold transition`}
+              className={`method-button method-button-${button.type ?? type} inline-flex w-fit items-center gap-2 border px-3 py-2 text-sm font-semibold transition`}
             >
               {button.label}
               <ArrowRight className="size-4" aria-hidden={true} />

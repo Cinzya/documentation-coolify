@@ -1,27 +1,27 @@
 import type React from 'react';
 import { ArrowRight, Check } from 'reicon-react';
 import { cn } from '@/lib/ui/cn';
-import type { CoolActionCardVariant, CoolIcon } from './cool-types';
+import type { CoolActionType, CoolIcon } from './cool-types';
 
 type CoolActionCardProps = Omit<React.ComponentProps<'a'>, 'title'> & {
+  'btn-cta'?: React.ReactNode;
   bullets?: React.ReactNode[];
-  cta?: React.ReactNode;
   description?: React.ReactNode;
   icon: CoolIcon;
   title: React.ReactNode;
-  variant?: CoolActionCardVariant;
+  type?: CoolActionType;
 };
 
 export function CoolActionCard({
+  'btn-cta': btnCta,
   bullets,
   className,
-  cta,
   description,
   href,
   icon: Icon,
   onClick,
   title,
-  variant = 'primary',
+  type = 'primary',
   ...props
 }: CoolActionCardProps) {
   const content = (
@@ -50,9 +50,9 @@ export function CoolActionCard({
         </ul>
       ) : null}
 
-      {cta ? (
-        <span className={`method-button method-button-${variant} mt-5 inline-flex w-fit items-center gap-2 border px-3 py-2 text-sm font-semibold transition`}>
-          {cta}
+      {btnCta ? (
+        <span className={`method-button method-button-${type} mt-5 inline-flex w-fit items-center gap-2 border px-3 py-2 text-sm font-semibold transition`}>
+          {btnCta}
           <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden={true} />
         </span>
       ) : null}
@@ -65,7 +65,7 @@ export function CoolActionCard({
         href={href}
         onClick={onClick}
         className={cn(
-          `method-card method-card-${variant} group rounded-lg border border-fd-border bg-fd-background/70 p-5 shadow-sm transition duration-200 hover:-translate-y-1`,
+          `method-card method-card-${type} group rounded-lg border border-fd-border bg-fd-background/70 p-5 shadow-sm transition duration-200 hover:-translate-y-1`,
           className,
         )}
         {...props}

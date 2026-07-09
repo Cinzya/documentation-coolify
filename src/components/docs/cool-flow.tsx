@@ -1,25 +1,26 @@
 import type React from 'react';
 import { CoolCallout } from './cool-callout';
+import { renderCoolInlineContent } from './cool-inline-content';
 import type { CoolIcon } from './cool-types';
 
 type CoolFlowProps = {
-  checklist: React.ReactNode[];
+  description: React.ReactNode;
   endnote?: React.ReactNode;
   icon: CoolIcon;
   id: string;
+  list?: React.ReactNode[];
   result?: React.ReactNode;
   steps: React.ReactNode[];
-  summary: React.ReactNode;
   title: string;
 };
 
-export function CoolFlow({ checklist, endnote, icon, id, result, steps, summary, title }: CoolFlowProps) {
+export function CoolFlow({ description, endnote, icon, id, list = [], result, steps, title }: CoolFlowProps) {
   const finalNote = endnote ?? result;
 
   return (
     <CoolCallout data-cool-docs className="overflow-hidden" contentClassName="!p-0" id={id} icon={icon} title={title}>
       <div className="p-4 sm:p-5">
-        <p className="m-0 text-sm leading-6 text-fd-muted-foreground">{summary}</p>
+        <p className="m-0 text-sm leading-6 text-fd-muted-foreground">{renderCoolInlineContent(description)}</p>
       </div>
       <div className="grid gap-0 border-t border-fd-border lg:grid-cols-[0.9fr_1.1fr]">
         <div className="border-b border-fd-border p-4 lg:border-b-0 lg:border-e sm:p-5">
@@ -33,19 +34,19 @@ export function CoolFlow({ checklist, endnote, icon, id, result, steps, summary,
                   {index + 1}
                 </span>
                 <div className="min-w-0 pt-0.5">
-                  <p className="m-0 text-sm font-semibold leading-6 text-fd-foreground">{step}</p>
+                  <p className="m-0 text-sm font-semibold leading-6 text-fd-foreground">{renderCoolInlineContent(step)}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
         <div className="p-4 sm:p-5">
-          <ul className="m-0 list-disc space-y-2 ps-5 text-sm leading-6 text-fd-muted-foreground">
-            {checklist.map((item, index) => (
-              <li key={index} className="ps-1">{item}</li>
+          <ul className="m-0 list-disc space-y-2 ps-5 text-sm leading-6 text-fd-muted-foreground [&_a]:font-semibold [&_a]:text-fd-foreground [&_a]:underline [&_a]:decoration-fd-primary [&_a]:decoration-2 [&_a]:underline-offset-4 [&_a:hover]:decoration-fd-primary/70">
+            {list.map((item, index) => (
+              <li key={index} className="ps-1">{renderCoolInlineContent(item)}</li>
             ))}
           </ul>
-          {finalNote ? <p className="m-0 mt-5 text-sm leading-6 text-fd-muted-foreground">{finalNote}</p> : null}
+          {finalNote ? <p className="m-0 mt-5 text-sm leading-6 text-fd-muted-foreground">{renderCoolInlineContent(finalNote)}</p> : null}
         </div>
       </div>
     </CoolCallout>
