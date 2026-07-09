@@ -10,11 +10,8 @@ import { MediaCardGroup } from '@/components/cards/media-card-group';
 import { ServicesList } from '@/components/data/services-list';
 import { SponsorsList } from '@/components/data/sponsors-list';
 import { ChooseYourPath } from '@/components/pages/choose-your-path';
-import { CoolifyContributionPage } from '@/components/pages/coolify-contribution-page';
 import { ContributionGuidelinesPage } from '@/components/pages/contribution-guidelines-page';
-import { DocumentationContributionPage } from '@/components/pages/documentation-contribution-page';
 import { OffersPage } from '@/components/pages/offers-page';
-import { ServiceContributionPage } from '@/components/pages/service-contribution-page';
 import {
   FirstDatabaseExposureWarning,
   FirstDatabaseNextSteps,
@@ -60,6 +57,13 @@ import { CoolCard, CoolCardGrid } from './cool-card';
 import { CoolCallout } from './cool-callout';
 import { CoolCompare, CoolCompareColumn } from './cool-compare';
 import { CoolFlow } from './cool-flow';
+import {
+  CoolDocsPage,
+  CoolInlineValue,
+  CoolPanel,
+  CoolValueCard,
+  CoolValueGrid,
+} from './cool-layout';
 import { CoolTable } from './cool-table';
 import { Callout } from './callout';
 import { ScreenshotTab, ScreenshotTabs } from './screenshot-tabs';
@@ -84,7 +88,6 @@ export function getMDXComponents(components?: MDXComponents) {
     Card,
     Cards,
     ChooseYourPath,
-    CoolifyContributionPage,
     ContributionGuidelinesPage,
     CloudAccessBasics,
     CloudNextSteps,
@@ -96,9 +99,13 @@ export function getMDXComponents(components?: MDXComponents) {
     CoolCallout,
     CoolCompare,
     CoolCompareColumn,
+    CoolDocsPage,
     CoolFlow,
+    CoolInlineValue,
+    CoolPanel,
     CoolTable,
-    DocumentationContributionPage,
+    CoolValueCard,
+    CoolValueGrid,
     File,
     Files,
     FirstDatabaseExposureWarning,
@@ -131,7 +138,6 @@ export function getMDXComponents(components?: MDXComponents) {
     SelfHostedProjectResources,
     SelfHostedRaspberryInstallMethods,
     SelfHostedServerRequirements,
-    ServiceContributionPage,
     SponsorsList,
     SponsorsPage,
     SupportPage,

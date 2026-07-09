@@ -15,7 +15,9 @@ import {
   Warning22,
 } from 'reicon-react';
 import { CoolActionCard } from '@/components/docs/cool-action-card';
+import { CoolActionCardGrid } from '@/components/docs/cool-action-card-grid';
 import { CoolCallout } from '@/components/docs/cool-callout';
+import { CoolDocsPage, CoolPanel } from '@/components/docs/cool-layout';
 
 const formatExamples = [
   ['fix(ui):', 'UI-related fixes'],
@@ -117,15 +119,7 @@ function SectionGroup({ children }: { children?: ReactNode }) {
 
 export function ContributionGuidelinesPage({ children }: { children?: ReactNode }) {
   return (
-    <div data-contribution-guidelines-page data-cool-docs className="not-prose my-8 space-y-6">
-      <style>
-        {`
-          body:has([data-contribution-guidelines-page]) #nd-toc {
-            display: none;
-          }
-        `}
-      </style>
-
+    <CoolDocsPage data-contribution-guidelines-page hideToc>
       <CoolCallout id="short-version" icon={ArrowsRight} title="The short version">
         <p>
           Coolify is used by 470K+ people and maintained by two core maintainers. Contributions
@@ -160,7 +154,7 @@ export function ContributionGuidelinesPage({ children }: { children?: ReactNode 
         id="important"
         icon={Warning22}
         title="Important"
-        className="[&>#important]:text-amber-500 dark:[&>#important]:text-amber-400"
+        type="warn"
       >
         <p>
           These guidelines are stricter than many open-source projects on purpose. Clear structure
@@ -176,12 +170,12 @@ export function ContributionGuidelinesPage({ children }: { children?: ReactNode 
 
       <CoolCallout id="formats" icon={Checklist2} title="Commit and pull request format" contentClassName="!p-0">
         <div className="grid gap-0 lg:grid-cols-[0.85fr_1.15fr]">
-          <div className="border-b border-fd-border p-4 lg:border-b-0 lg:border-e sm:p-5">
+          <CoolPanel className="border-b border-fd-border lg:border-b-0 lg:border-e">
             <p className="m-0 text-sm leading-6 text-fd-muted-foreground">
               Commit messages and pull request titles should start with an action and category. Keep
               descriptions concise; walls of text listing every small change may be rejected.
             </p>
-          </div>
+          </CoolPanel>
           <div className="divide-y divide-fd-border">
             {formatExamples.map(([prefix, description]) => (
               <div key={prefix} className="grid gap-3 p-4 sm:grid-cols-[8rem_1fr] sm:px-5">
@@ -211,23 +205,22 @@ export function ContributionGuidelinesPage({ children }: { children?: ReactNode 
 
       <SectionDivider />
 
-      <CoolCallout id="development-guides" icon={DocumentText2} title="Development guides" contentClassName="!p-4 sm:!p-5">
-        <div className="grid gap-4 lg:grid-cols-3">
+      <CoolCallout id="development-guides" icon={DocumentText2} title="Development guides">
+        <CoolActionCardGrid>
           {developmentGuides.map((guide) => (
             <CoolActionCard
               key={guide.title}
               href={guide.href}
               icon={guide.icon}
               title={guide.title}
-              variant="secondary"
+              type="secondary"
               description={guide.description}
               bullets={guide.bullets}
-              cta={guide.cta}
-              className="shadow-none"
+              btn-cta={guide.cta}
             />
           ))}
-        </div>
+        </CoolActionCardGrid>
       </CoolCallout>
-    </div>
+    </CoolDocsPage>
   );
 }

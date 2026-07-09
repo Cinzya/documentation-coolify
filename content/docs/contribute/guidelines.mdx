@@ -12,7 +12,7 @@ We are happy that you are interested in contributing to Coolify.
 
 <ContributionGuidelinesPage>
 
-<CoolCallout id="ways-to-contribute" icon={MessageQuestion2} title="Ways to contribute" contentClassName="!p-4 sm:!p-5">
+<CoolCallout id="ways-to-contribute" icon={MessageQuestion2} title="Ways to contribute">
 <CoolCardGrid columns={2}>
 <CoolCard
   icon={MedalStars}
@@ -20,8 +20,8 @@ We are happy that you are interested in contributing to Coolify.
   description="Answer questions in Discord or GitHub Discussions when you can verify the answer."
   bullets={['Be patient and respectful', 'Share verified information', 'Remember support is voluntary']}
   buttons={[
-    { href: 'https://coollabs.io/discord', label: 'Join Discord', variant: 'primary' },
-    { href: 'https://github.com/coollabsio/coolify/discussions', label: 'View discussions', variant: 'tertiary' },
+    { href: 'https://coollabs.io/discord', label: 'Join Discord', type: 'primary' },
+    { href: 'https://github.com/coollabsio/coolify/discussions', label: 'View discussions', type: 'tertiary' },
   ]}
 />
 
@@ -31,7 +31,7 @@ We are happy that you are interested in contributing to Coolify.
   description="Create an issue only when the bug is reproducible and not already reported."
   bullets={['Include reproduction steps', 'Add expected and actual results', 'Attach logs or screenshots']}
   buttons={[
-    { href: 'https://github.com/coollabsio/coolify/issues', label: 'Open issues', variant: 'secondary' },
+    { href: 'https://github.com/coollabsio/coolify/issues', label: 'Open issues', type: 'secondary' },
   ]}
 />
 
@@ -41,7 +41,7 @@ We are happy that you are interested in contributing to Coolify.
   description="Small fixes are welcome. Larger changes need alignment before implementation."
   bullets={['One pull request per logical change', 'Reference an issue or discussion', 'Target the next branch']}
   buttons={[
-    { href: 'https://github.com/coollabsio/coolify', label: 'View repository', variant: 'secondary' },
+    { href: 'https://github.com/coollabsio/coolify', label: 'View repository', type: 'secondary' },
   ]}
 />
 
@@ -51,7 +51,7 @@ We are happy that you are interested in contributing to Coolify.
   description="Help improve documentation or add one-click service templates."
   bullets={['Keep wording clear', 'Use existing docs patterns', 'Follow service contribution rules']}
   buttons={[
-    { href: '/docs/contribute/documentation', label: 'Read docs guide', variant: 'secondary' },
+    { href: '/docs/contribute/documentation', label: 'Read docs guide', type: 'secondary' },
   ]}
 />
 </CoolCardGrid>
@@ -89,7 +89,7 @@ We are happy that you are interested in contributing to Coolify.
   id="pull-request-flow"
   icon={BranchUp}
   title="Before opening a pull request"
-  summary="For anything beyond a small, obvious fix, align with the maintainers before spending time on implementation."
+  description="For anything beyond a small, obvious fix, align with the maintainers before spending time on implementation."
   steps={[
     'Check existing issues and discussions',
     'Discuss larger changes before coding',
@@ -97,7 +97,7 @@ We are happy that you are interested in contributing to Coolify.
     'Test the change in a clean environment',
     'Open the pull request against the next branch',
   ]}
-  checklist={[
+  list={[
     'Reference and close an issue or discussion when possible.',
     'Do not reformat unrelated files or fix unrelated style issues.',
     'Keep the contributor agreement in the pull request description.',
