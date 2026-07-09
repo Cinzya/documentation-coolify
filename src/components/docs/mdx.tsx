@@ -16,7 +16,6 @@ import { DocumentationContributionPage } from '@/components/pages/documentation-
 import { OffersPage } from '@/components/pages/offers-page';
 import { ServiceContributionPage } from '@/components/pages/service-contribution-page';
 import {
-  FirstDatabaseDeploymentFlow,
   FirstDatabaseExposureWarning,
   FirstDatabaseNextSteps,
   FirstDatabasePortMapping,
@@ -24,7 +23,6 @@ import {
   FirstDatabaseTroubleshooting,
 } from '@/components/pages/deploy-your-first-database';
 import {
-  FirstServiceDeploymentFlow,
   FirstServiceNetworkChoices,
   FirstServiceNextSteps,
   FirstServicePrerequisites,
@@ -39,7 +37,6 @@ import {
 import {
   CloudAccessBasics,
   CloudNextSteps,
-  CloudOnboardingFlow,
   CloudServerOptions,
 } from '@/components/pages/start-with-cloud';
 import { SponsorsPage } from '@/components/pages/sponsors-page';
@@ -91,7 +88,6 @@ export function getMDXComponents(components?: MDXComponents) {
     ContributionGuidelinesPage,
     CloudAccessBasics,
     CloudNextSteps,
-    CloudOnboardingFlow,
     CloudServerOptions,
     CoolActionCard,
     CoolActionCardGrid,
@@ -105,13 +101,11 @@ export function getMDXComponents(components?: MDXComponents) {
     DocumentationContributionPage,
     File,
     Files,
-    FirstDatabaseDeploymentFlow,
     FirstDatabaseExposureWarning,
     FirstDatabaseNextSteps,
     FirstDatabasePortMapping,
     FirstDatabasePrerequisites,
     FirstDatabaseTroubleshooting,
-    FirstServiceDeploymentFlow,
     FirstServiceNetworkChoices,
     FirstServiceNextSteps,
     FirstServicePrerequisites,

@@ -6,7 +6,6 @@ description: Start with Coolify Cloud using your own servers while the Coolify t
 import {
   CloudAccessBasics,
   CloudNextSteps,
-  CloudOnboardingFlow,
   CloudServerOptions,
 } from '@/components/pages/start-with-cloud';
 import { SelfHostedProjectResources } from '@/components/pages/start-with-self-hosted';
@@ -17,6 +16,7 @@ import {
   Layers,
   Notes2,
   Plus,
+  Rocket2,
   ServerCloud,
   ShieldSecurity2,
   StarSparkle,
@@ -160,7 +160,29 @@ For connecting servers to Coolify Cloud, make sure:
 
 ## Get started with Coolify Cloud
 
-<CloudOnboardingFlow />
+<section data-cloud-start className="not-prose my-5">
+<CoolFlow
+  id="cloud-onboarding-flow"
+  icon={Rocket2}
+  title="Cloud onboarding flow"
+  summary="Cloud onboarding connects the managed Coolify control plane to the servers you bring for apps, databases, and services."
+  steps={[
+    'Create Cloud account',
+    'Choose subscription',
+    'Add SSH private key',
+    'Add and validate server',
+    'Deploy first resource',
+  ]}
+  checklist={[
+    'Create your Cloud account with the email you want to use for support.',
+    'Choose the number of servers you want to connect.',
+    'Add or create the SSH key used for server access.',
+    'Validate your first server and install Docker Engine.',
+    'Deploy your first app, database, or service.',
+  ]}
+  endnote="You should end with a Cloud account, an active subscription, one validated server, and a first deploy target."
+/>
+</section>
 
 ---
 

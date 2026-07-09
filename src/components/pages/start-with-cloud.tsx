@@ -1,19 +1,7 @@
-import { ArrowRight, Rocket2 } from 'reicon-react';
+import { ArrowRight } from 'reicon-react';
 import { CoolActionCard } from '@/components/docs/cool-action-card';
 import { CoolActionCardGrid } from '@/components/docs/cool-action-card-grid';
-import { CoolFlow } from '@/components/docs/cool-flow';
 import { firewallSshGuides, nextSteps, serverRequirementOptions } from './start-with-self-hosted';
-
-const cloudFlow = {
-  checklist: [
-    'Create your Cloud account with the email you want to use for support.',
-    'Choose the number of servers you want to connect.',
-    'Add or create the SSH key used for server access.',
-    'Validate your first server and install Docker Engine.',
-    'Deploy your first app, database, or service.',
-  ],
-  steps: ['Create Cloud account', 'Choose subscription', 'Add SSH private key', 'Add and validate server', 'Deploy first resource'],
-};
 
 export function CloudServerOptions() {
   return (
@@ -62,22 +50,6 @@ export function CloudAccessBasics() {
         ))}
       </div>
     </CoolActionCardGrid>
-  );
-}
-
-export function CloudOnboardingFlow() {
-  return (
-    <section data-cloud-start className="not-prose my-5">
-      <CoolFlow
-        checklist={cloudFlow.checklist}
-        icon={Rocket2}
-        id="cloud-onboarding-flow"
-        result="You should end with a Cloud account, an active subscription, one validated server, and a first deploy target."
-        steps={cloudFlow.steps}
-        summary="Cloud onboarding connects the managed Coolify control plane to the servers you bring for apps, databases, and services."
-        title="Cloud onboarding flow"
-      />
-    </section>
   );
 }
 

@@ -13,24 +13,12 @@ import {
   WindowPointer,
 } from 'reicon-react';
 import { CoolCallout } from '@/components/docs/cool-callout';
-import { CoolFlow } from '@/components/docs/cool-flow';
 import {
   FirstDeployCardGrid,
   FirstDeployChoiceGrid,
   FirstDeployNextSteps,
   openFirstDeployIssueTab,
 } from '@/components/docs/first-deploy-sections';
-
-const serviceDeploymentFlow = {
-  checklist: [
-    'Create or open the project where the service will live.',
-    'Choose Umami from the service resources list.',
-    'Keep the service port in the Coolify URL configuration.',
-    'Deploy Umami and wait for the containers to start.',
-    'Open the public URL without the port and sign in.',
-  ],
-  steps: ['Create or open a project', 'Choose Umami', 'Review service URL', 'Deploy service', 'Open the URL and sign in'],
-};
 
 const prerequisiteCards = [
   {
@@ -98,22 +86,6 @@ const nextSteps = [
 export function FirstServicePrerequisites() {
   return (
     <FirstDeployCardGrid cards={prerequisiteCards} dataAttribute="data-first-service" />
-  );
-}
-
-export function FirstServiceDeploymentFlow() {
-  return (
-    <section data-first-service className="not-prose my-5">
-      <CoolFlow
-        checklist={serviceDeploymentFlow.checklist}
-        icon={Settings}
-        id="first-service-deployment-flow"
-        result="You should end with running Umami containers, a generated service URL, and a successful login page."
-        steps={serviceDeploymentFlow.steps}
-        summary="This first service deployment uses Umami because it is a ready-made one-click service with a clear browser check after deployment."
-        title="First service deployment flow"
-      />
-    </section>
   );
 }
 

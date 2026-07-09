@@ -4,7 +4,6 @@ description: Deploy your first Redis database on Coolify using the one-click res
 ---
 
 import {
-  FirstDatabaseDeploymentFlow,
   FirstDatabaseExposureWarning,
   FirstDatabaseNextSteps,
   FirstDatabasePortMapping,
@@ -43,7 +42,31 @@ If Coolify is not ready yet, first follow [Start with Self-hosted](/start-with-s
 
 ## Deployment overview
 
-<FirstDatabaseDeploymentFlow />
+<section data-first-database className="not-prose my-5">
+<CoolFlow
+  id="first-database-deployment-flow"
+  icon={Database}
+  title="First database deployment flow"
+  summary="This first database deployment uses Redis because it is lightweight, quick to deploy, and easy to test from your terminal."
+  steps={[
+    'Create or open a project',
+    'Choose Redis',
+    'Map host port',
+    'Open firewall',
+    'Deploy Redis',
+    'Test with redis-cli',
+  ]}
+  checklist={[
+    'Create or open the project where the database will live.',
+    'Choose Redis from the database resources list.',
+    'Map a temporary host port for terminal testing.',
+    'Open the mapped host port in your firewall rules.',
+    'Deploy Redis and copy the generated password.',
+    'Run PING from redis-cli and confirm Redis returns PONG.',
+  ]}
+  endnote="You should end with a running Redis container, a mapped host port allowed by your firewall, a Redis password, and a successful PONG response."
+/>
+</section>
 
 <CoolCallout className="my-5" id="databases-run-as-containers" icon={Database} title="Databases run as containers">
 

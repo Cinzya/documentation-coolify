@@ -1,5 +1,4 @@
 import type React from 'react';
-import { Check } from 'reicon-react';
 import { CoolCallout } from './cool-callout';
 import type { CoolIcon } from './cool-types';
 
@@ -41,12 +40,9 @@ export function CoolFlow({ checklist, endnote, icon, id, result, steps, summary,
           </div>
         </div>
         <div className="p-4 sm:p-5">
-          <ul className="m-0 space-y-2 p-0">
+          <ul className="m-0 list-disc space-y-2 ps-5 text-sm leading-6 text-fd-muted-foreground">
             {checklist.map((item, index) => (
-              <li key={index} className="flex gap-2 text-sm leading-6 text-fd-muted-foreground">
-                <Check className="mt-1 size-4 shrink-0 text-fd-foreground" aria-hidden={true} />
-                <span>{item}</span>
-              </li>
+              <li key={index} className="ps-1">{item}</li>
             ))}
           </ul>
           {finalNote ? <p className="m-0 mt-5 text-sm leading-6 text-fd-muted-foreground">{finalNote}</p> : null}

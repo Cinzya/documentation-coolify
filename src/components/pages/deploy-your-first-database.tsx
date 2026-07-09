@@ -15,25 +15,12 @@ import {
   WindowPointer,
 } from 'reicon-react';
 import { CoolCallout } from '@/components/docs/cool-callout';
-import { CoolFlow } from '@/components/docs/cool-flow';
 import {
   FirstDeployCardGrid,
   FirstDeployChoiceGrid,
   FirstDeployNextSteps,
   openFirstDeployIssueTab,
 } from '@/components/docs/first-deploy-sections';
-
-const databaseDeploymentFlow = {
-  checklist: [
-    'Create or open the project where the database will live.',
-    'Choose Redis from the database resources list.',
-    'Map a temporary host port for terminal testing.',
-    'Open the mapped host port in your firewall rules.',
-    'Deploy Redis and copy the generated password.',
-    'Run PING from redis-cli and confirm Redis returns PONG.',
-  ],
-  steps: ['Create or open a project', 'Choose Redis', 'Map host port', 'Open firewall', 'Deploy Redis', 'Test with redis-cli'],
-};
 
 const prerequisiteCards = [
   {
@@ -101,22 +88,6 @@ const nextSteps = [
 export function FirstDatabasePrerequisites() {
   return (
     <FirstDeployCardGrid cards={prerequisiteCards} dataAttribute="data-first-database" />
-  );
-}
-
-export function FirstDatabaseDeploymentFlow() {
-  return (
-    <section data-first-database className="not-prose my-5">
-      <CoolFlow
-        checklist={databaseDeploymentFlow.checklist}
-        icon={Database}
-        id="first-database-deployment-flow"
-        result="You should end with a running Redis container, a mapped host port allowed by your firewall, a Redis password, and a successful PONG response."
-        steps={databaseDeploymentFlow.steps}
-        summary="This first database deployment uses Redis because it is lightweight, quick to deploy, and easy to test from your terminal."
-        title="First database deployment flow"
-      />
-    </section>
   );
 }
 

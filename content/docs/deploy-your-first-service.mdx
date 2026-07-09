@@ -4,7 +4,6 @@ description: Deploy your first one-click service on Coolify using Umami and sign
 ---
 
 import {
-  FirstServiceDeploymentFlow,
   FirstServiceNetworkChoices,
   FirstServiceNextSteps,
   FirstServicePrerequisites,
@@ -42,7 +41,29 @@ If Coolify is not ready yet, first follow [Start with Self-hosted](/start-with-s
 
 ## Deployment overview
 
-<FirstServiceDeploymentFlow />
+<section data-first-service className="not-prose my-5">
+<CoolFlow
+  id="first-service-deployment-flow"
+  icon={Settings}
+  title="First service deployment flow"
+  summary="This first service deployment uses Umami because it is a ready-made one-click service with a clear browser check after deployment."
+  steps={[
+    'Create or open a project',
+    'Choose Umami',
+    'Review service URL',
+    'Deploy service',
+    'Open the URL and sign in',
+  ]}
+  checklist={[
+    'Create or open the project where the service will live.',
+    'Choose Umami from the service resources list.',
+    'Keep the service port in the Coolify URL configuration.',
+    'Deploy Umami and wait for the containers to start.',
+    'Open the public URL without the port and sign in.',
+  ]}
+  endnote="You should end with running Umami containers, a generated service URL, and a successful login page."
+/>
+</section>
 
 <CoolCallout className="my-5" id="services-run-as-containers" icon={Settings} title="Services run as containers">
 
