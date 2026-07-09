@@ -4,13 +4,39 @@ description: Learn what kinds of Coolify contributions are likely to be accepted
 ---
 
 import { ContributionGuidelinesPage } from '@/components/pages/contribution-guidelines-page';
-import { BranchUp, BrowserCode, Bug, DocumentText2, MedalStars, MessageQuestion2, ShieldCheck } from 'reicon-react';
+import {
+  ArrowsRight,
+  Box5,
+  BranchUp,
+  BrowserCode,
+  Bug,
+  Checklist2,
+  DocumentText2,
+  MagicWand,
+  MedalStars,
+  MessageQuestion2,
+  ShieldCheck,
+  StarSparkle,
+  Warning22,
+} from 'reicon-react';
 
 # Contributing to Coolify
 
 We are happy that you are interested in contributing to Coolify.
 
 <ContributionGuidelinesPage>
+
+<CoolCallout id="short-version" icon={ArrowsRight} title="The short version">
+
+Coolify is used by 470K+ people and maintained by two core maintainers. Contributions are welcome, but alignment matters more than volume: keep changes focused, discuss larger work before coding, test what you submit, and target the `next` branch.
+
+</CoolCallout>
+
+<CoolCallout id="important" icon={Warning22} title="Important" type="warn">
+
+These guidelines are stricter than many open-source projects on purpose. Clear structure and boundaries reduce maintainer burnout and keep Coolify sustainable long term.
+
+</CoolCallout>
 
 <CoolCallout id="ways-to-contribute" icon={MessageQuestion2} title="Ways to contribute">
 <CoolCardGrid columns={2}>
@@ -104,5 +130,104 @@ We are happy that you are interested in contributing to Coolify.
     'Include detailed testing steps so maintainers can reproduce the result.',
   ]}
 />
+
+<CoolCallout id="formats" icon={Checklist2} title="Commit and pull request format" contentClassName="!p-0">
+<CoolPanel>
+
+Commit messages and pull request titles should start with an action and category. Keep descriptions concise; walls of text listing every small change may be rejected.
+
+</CoolPanel>
+<CoolPanel withDivider>
+
+<CoolTable
+  className="my-0"
+  columns={[
+    { header: 'Prefix', icon: Checklist2 },
+    { header: 'Use', icon: DocumentText2 },
+  ]}
+  rows={[
+    ['fix(ui):', 'UI-related fixes'],
+    ['fix(api):', 'API-related fixes'],
+    ['feat(api):', 'API-related additions'],
+    ['feat(service):', 'One-click service changes'],
+  ]}
+  noWrapColumns={[0]}
+/>
+
+</CoolPanel>
+</CoolCallout>
+
+<CoolCallout id="ai-usage" icon={MagicWand} title="AI usage">
+
+AI tools are allowed, but you must disclose AI usage in the pull request description. You are still responsible for understanding every change, verifying correctness, and following existing project patterns.
+
+</CoolCallout>
+
+<CoolCallout id="faq" icon={MessageQuestion2} title="FAQ" contentClassName="!p-0">
+<CoolAccordions>
+<Accordion title="Should I ask before fixing a typo or small bug?">
+
+No. Small, obvious fixes can be submitted directly as a pull request.
+
+</Accordion>
+<Accordion title="Can I open a pull request for a new feature?">
+
+Discuss it first in GitHub Discussions or Discord. New features without prior alignment may be closed without review.
+
+</Accordion>
+<Accordion title="Can I work on an open issue?">
+
+Comment first to confirm the issue is still relevant and that no one else is actively working on it.
+
+</Accordion>
+<Accordion title="Can I clean up code while fixing something else?">
+
+Keep the pull request focused on the stated goal. Refactors and cleanup work should be discussed and submitted separately.
+
+</Accordion>
+<Accordion title="Can I use AI to help?">
+
+Yes, but disclose it in the pull request description. You must understand, verify, and own every change.
+
+</Accordion>
+<Accordion title="Why was my pull request closed without detailed feedback?">
+
+It usually means the change did not align with project direction, required too much review capacity, or targeted work that is not planned.
+
+</Accordion>
+</CoolAccordions>
+</CoolCallout>
+
+<CoolCallout id="development-guides" icon={DocumentText2} title="Development guides">
+<CoolActionCardGrid>
+<CoolActionCard
+  href="/docs/contribute/coolify"
+  icon={StarSparkle}
+  title="Coolify Core"
+  type="secondary"
+  description="Set up local development and prepare code contributions for the main Coolify repository."
+  bullets={['Local development setup', 'Code contribution flow', 'Pull request expectations']}
+  btn-cta="View core guide"
+/>
+<CoolActionCard
+  href="/docs/contribute/service"
+  icon={Box5}
+  title="Service Templates"
+  type="secondary"
+  description="Add one-click service templates with the expected structure, metadata, and verification."
+  bullets={['Template requirements', 'Service metadata', 'Testing checklist']}
+  btn-cta="View service guide"
+/>
+<CoolActionCard
+  href="/docs/contribute/documentation"
+  icon={DocumentText2}
+  title="Documentation"
+  type="secondary"
+  description="Improve these docs while keeping the existing writing style and component patterns."
+  bullets={['Docs structure', 'MDX patterns', 'Review expectations']}
+  btn-cta="View docs guide"
+/>
+</CoolActionCardGrid>
+</CoolCallout>
 
 </ContributionGuidelinesPage>

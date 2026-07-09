@@ -53,6 +53,7 @@ import { SupportPage } from '@/components/pages/support-page';
 import { TeamPage } from '@/components/pages/team-page';
 import { CoolActionCard } from './cool-action-card';
 import { CoolActionCardGrid } from './cool-action-card-grid';
+import { CoolAccordions } from './cool-accordions';
 import { CoolCard, CoolCardGrid } from './cool-card';
 import { CoolCallout } from './cool-callout';
 import { CoolCompare, CoolCompareColumn } from './cool-compare';
@@ -94,6 +95,7 @@ export function getMDXComponents(components?: MDXComponents) {
     CloudServerOptions,
     CoolActionCard,
     CoolActionCardGrid,
+    CoolAccordions,
     CoolCard,
     CoolCardGrid,
     CoolCallout,
