@@ -26,11 +26,9 @@ import {
   FirstServiceTroubleshooting,
 } from '@/components/pages/deploy-your-first-service';
 import {
-  FirstAppNetworkChoices,
-  FirstAppNextSteps,
-  FirstAppPrerequisites,
-  FirstAppTroubleshooting,
-} from '@/components/pages/deploy-your-first-app';
+  FirstDeployCardGrid,
+  FirstDeployNextSteps,
+} from '@/components/docs/first-deploy-sections';
 import {
   CloudAccessBasics,
   CloudNextSteps,
@@ -119,10 +117,8 @@ export function getMDXComponents(components?: MDXComponents) {
     FirstServiceNextSteps,
     FirstServicePrerequisites,
     FirstServiceTroubleshooting,
-    FirstAppNetworkChoices,
-    FirstAppNextSteps,
-    FirstAppPrerequisites,
-    FirstAppTroubleshooting,
+    FirstDeployCardGrid,
+    FirstDeployNextSteps,
     Folder,
     MediaCard,
     MediaCardGroup,

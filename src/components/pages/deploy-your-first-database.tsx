@@ -15,9 +15,9 @@ import {
   WindowPointer,
 } from 'reicon-react';
 import { CoolCallout } from '@/components/docs/cool-callout';
+import { CoolCompare, CoolCompareColumn } from '@/components/docs/cool-compare';
 import {
   FirstDeployCardGrid,
-  FirstDeployChoiceGrid,
   FirstDeployNextSteps,
   openFirstDeployIssueTab,
 } from '@/components/docs/first-deploy-sections';
@@ -93,28 +93,30 @@ export function FirstDatabasePrerequisites() {
 
 export function FirstDatabasePortMapping() {
   return (
-    <CoolCallout data-first-database className="not-prose my-5 overflow-hidden" contentClassName="!p-0" id="redis-port-mapping" icon={Plug2} title="Redis port mapping">
-      <FirstDeployChoiceGrid
-        choices={[
-          {
-            title: 'Host port',
-            code: '6380',
-            points: [
-              'This is the server port you connect to from your terminal.',
-              'Choose another free host port if 6380 is already used.',
-            ],
-          },
-          {
-            title: 'Container port',
-            code: '6379',
-            points: [
-              'This is the Redis port inside the container.',
-              'Keep this side as 6379 for this guide.',
-            ],
-          },
+    <CoolCompare
+      data-first-database
+      className="not-prose my-5"
+      id="redis-port-mapping"
+      icon={Plug2}
+      title="Redis port mapping"
+    >
+      <CoolCompareColumn
+        title="Host port"
+        code="6380"
+        items={[
+          'This is the server port you connect to from your terminal.',
+          'Choose another free host port if 6380 is already used.',
         ]}
       />
-    </CoolCallout>
+      <CoolCompareColumn
+        title="Container port"
+        code="6379"
+        items={[
+          'This is the Redis port inside the container.',
+          'Keep this side as 6379 for this guide.',
+        ]}
+      />
+    </CoolCompare>
   );
 }
 

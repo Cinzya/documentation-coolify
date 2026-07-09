@@ -1,10 +1,11 @@
 'use client';
 
 import type React from 'react';
-import { ArrowRight, Check } from 'reicon-react';
+import { ArrowRight } from 'reicon-react';
 import { CoolActionCard } from '@/components/docs/cool-action-card';
 import { CoolActionCardGrid } from '@/components/docs/cool-action-card-grid';
 import type { CoolIcon } from '@/components/docs/cool-types';
+import { cn } from '@/lib/ui/cn';
 
 export type FirstDeployCard = {
   bullets?: React.ReactNode[];
@@ -21,37 +22,49 @@ export type FirstDeployStep = {
   title: React.ReactNode;
 };
 
-export type FirstDeployChoice = {
-  code: React.ReactNode;
-  points: React.ReactNode[];
-  title: React.ReactNode;
-};
-
-type FirstDeployCardGridProps = {
+type FirstDeployCardGridProps = React.ComponentProps<'section'> & {
   cards: FirstDeployCard[];
   dataAttribute?: string;
+  issueTabId?: string;
   onCardClick?: (event: React.MouseEvent<HTMLAnchorElement>, card: FirstDeployCard) => void;
   sectionProps?: React.ComponentProps<'section'>;
 };
 
 export function FirstDeployCardGrid({
   cards,
+  className,
   dataAttribute,
+  issueTabId,
   onCardClick,
   sectionProps,
+  ...props
 }: FirstDeployCardGridProps) {
   return (
     <CoolActionCardGrid
+      {...props}
       {...sectionProps}
       {...(dataAttribute ? { [dataAttribute]: true } : {})}
-      className={`not-prose my-5 ${sectionProps?.className ?? ''}`}
+      className={cn('not-prose my-5', className, sectionProps?.className)}
       surface
     >
       {cards.map((card) => (
         <CoolActionCard
           key={String(card.title)}
           href={card.href}
-          onClick={card.href && onCardClick ? (event) => onCardClick(event, card) : undefined}
+          onClick={
+            card.href && (onCardClick || issueTabId)
+              ? (event) => {
+                  if (onCardClick) {
+                    onCardClick(event, card);
+                    return;
+                  }
+
+                  if (issueTabId) {
+                    openFirstDeployIssueTab(event, issueTabId, card.title);
+                  }
+                }
+              : undefined
+          }
           title={card.title}
           description={card.description}
           bullets={card.bullets}
@@ -63,20 +76,27 @@ export function FirstDeployCardGrid({
 }
 
 export function FirstDeployNextSteps({
+  className,
   dataAttribute,
   sectionProps,
   steps,
-}: {
+  ...props
+}: React.ComponentProps<'section'> & {
   dataAttribute?: string;
   sectionProps?: React.ComponentProps<'section'>;
   steps: FirstDeployStep[];
 }) {
   return (
     <section
+      {...props}
       {...sectionProps}
       data-cool-docs
       {...(dataAttribute ? { [dataAttribute]: true } : {})}
-      className={`not-prose my-6 overflow-hidden rounded-lg border border-fd-border bg-fd-background/70 ${sectionProps?.className ?? ''}`}
+      className={cn(
+        'not-prose my-6 overflow-hidden rounded-lg border border-fd-border bg-fd-background/70',
+        className,
+        sectionProps?.className,
+      )}
     >
       <div className="grid gap-4 p-4 sm:grid-cols-2 sm:p-5 lg:grid-cols-3">
         {steps.map((step) => {
@@ -109,16 +129,6 @@ export function FirstDeployNextSteps({
   );
 }
 
-export function FirstDeployChoiceGrid({ choices }: { choices: FirstDeployChoice[] }) {
-  return (
-    <div className="grid gap-0 md:grid-cols-2">
-      {choices.map((choice) => (
-        <FirstDeployChoicePanel key={String(choice.title)} {...choice} />
-      ))}
-    </div>
-  );
-}
-
 export function openFirstDeployIssueTab(
   event: React.MouseEvent<HTMLAnchorElement>,
   id: string,
@@ -137,23 +147,4 @@ export function openFirstDeployIssueTab(
 
   document.getElementById(id)?.scrollIntoView({ block: 'start' });
   window.history.pushState(null, '', `#${id}`);
-}
-
-function FirstDeployChoicePanel({ code, points, title }: FirstDeployChoice) {
-  return (
-    <div className="border-b border-fd-border p-4 last:border-b-0 sm:p-5 md:border-b-0 md:border-e md:last:border-e-0">
-      <h3 className="m-0 text-sm font-semibold text-fd-foreground">{title}</h3>
-      <code className="mt-3 block rounded-md border border-fd-border bg-fd-muted px-3 py-2 text-xs font-semibold text-fd-foreground">
-        {code}
-      </code>
-      <ul className="m-0 mt-4 space-y-2 p-0">
-        {points.map((point, index) => (
-          <li key={index} className="flex gap-2 text-sm leading-6 text-fd-muted-foreground">
-            <Check className="mt-1 size-4 shrink-0 text-fd-foreground" aria-hidden={true} />
-            <span>{point}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
 }

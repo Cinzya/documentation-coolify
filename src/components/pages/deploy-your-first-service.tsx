@@ -12,10 +12,9 @@ import {
   Warning22,
   WindowPointer,
 } from 'reicon-react';
-import { CoolCallout } from '@/components/docs/cool-callout';
+import { CoolCompare, CoolCompareColumn } from '@/components/docs/cool-compare';
 import {
   FirstDeployCardGrid,
-  FirstDeployChoiceGrid,
   FirstDeployNextSteps,
   openFirstDeployIssueTab,
 } from '@/components/docs/first-deploy-sections';
@@ -91,30 +90,32 @@ export function FirstServicePrerequisites() {
 
 export function FirstServiceNetworkChoices() {
   return (
-    <CoolCallout data-first-service className="not-prose my-5 overflow-hidden" contentClassName="!p-0" id="first-service-url" icon={Globe3} title="Generated URL or your own domain">
-      <FirstDeployChoiceGrid
-        choices={[
-          {
-            title: 'Fastest first test',
-            code: 'http://<uuid>.<server-ip>.sslip.io:3000',
-            points: [
-              'Keep :3000 in the Coolify URL configuration.',
-              'Visit the URL without :3000 in your browser.',
-              'Use this only to confirm the service and proxy work.',
-            ],
-          },
-          {
-            title: 'Production-style test',
-            code: 'https://analytics.example.com:3000',
-            points: [
-              'Point DNS to your server IP address.',
-              'Keep :3000 in the Coolify URL configuration.',
-              'Visit https://analytics.example.com in your browser.',
-            ],
-          },
+    <CoolCompare
+      data-first-service
+      className="not-prose my-5"
+      id="first-service-url"
+      icon={Globe3}
+      title="Generated URL or your own domain"
+    >
+      <CoolCompareColumn
+        title="Fastest first test"
+        code="http://<uuid>.<server-ip>.sslip.io:3000"
+        items={[
+          'Keep :3000 in the Coolify URL configuration.',
+          'Visit the URL without :3000 in your browser.',
+          'Use this only to confirm the service and proxy work.',
         ]}
       />
-    </CoolCallout>
+      <CoolCompareColumn
+        title="Production-style test"
+        code="https://analytics.example.com:3000"
+        items={[
+          'Point DNS to your server IP address.',
+          'Keep :3000 in the Coolify URL configuration.',
+          'Visit https://analytics.example.com in your browser.',
+        ]}
+      />
+    </CoolCompare>
   );
 }
 

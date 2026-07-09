@@ -4,12 +4,18 @@ description: Deploy your first application on Coolify using the Docker Image opt
 ---
 
 import {
-  FirstAppNetworkChoices,
-  FirstAppNextSteps,
-  FirstAppPrerequisites,
-  FirstAppTroubleshooting,
-} from '@/components/pages/deploy-your-first-app';
-import { ArrowsRight, Box2, Camera, Globe3, Rocket2, SignalStream, Warning22 } from 'reicon-react';
+  ArrowsRight,
+  Box2,
+  Camera,
+  Database,
+  Globe3,
+  Rocket2,
+  Server,
+  Settings,
+  SignalStream,
+  Warning22,
+  WindowPointer,
+} from 'reicon-react';
 
 # Deploy your first app
 
@@ -32,7 +38,29 @@ This path is ideal for a first deployment because you do not need a Git reposito
 
 Make sure these things are ready before you deploy the app.
 
-<FirstAppPrerequisites />
+<FirstDeployCardGrid
+  data-first-app
+  cards={[
+    {
+      title: 'Dashboard access',
+      description: 'You can sign in to Coolify and see the main dashboard.',
+      bullets: ['You can access Coolify in your browser', 'Dashboard loads without errors'],
+      icon: WindowPointer,
+    },
+    {
+      title: 'Server is connected',
+      description: 'Coolify has at least one server listed on the Servers page.',
+      bullets: ['Open Servers from the sidebar', 'For self-hosted installs, localhost is fine'],
+      icon: Server,
+    },
+    {
+      title: 'Proxy is running',
+      description: 'Open the server page in Coolify and check the proxy status.',
+      bullets: ['Status says Proxy is running', 'If it is stopped, click Start Proxy'],
+      icon: SignalStream,
+    },
+  ]}
+/>
 
 If Coolify is not ready yet, first follow [Start with Self-hosted](/start-with-self-hosted) or [Start with Coolify Cloud](/start-with-cloud).
 
@@ -149,13 +177,34 @@ Set:
 
 Nginx listens on port `80`, so Coolify needs to know that it should send web traffic to port `80` inside the app.
 
-By default, Coolify generates a testing domain in this format:
+By default, Coolify generates a testing domain like `http://<uuid>.<server-ip>.sslip.io`.
 
-```txt
-http://<uuid>.<server-ip>.sslip.io
-```
-
-<FirstAppNetworkChoices />
+<CoolCompare
+  data-first-app
+  className="my-5"
+  id="first-app-network"
+  icon={Globe3}
+  title="Generated URL or your own domain"
+>
+<CoolCompareColumn
+  title="Fastest first test"
+  code="http://<uuid>.<server-ip>.sslip.io"
+  items={[
+    'Keep the generated sslip.io URL.',
+    'Deploy immediately without DNS setup.',
+    'Use this only to confirm routing works.',
+  ]}
+/>
+<CoolCompareColumn
+  title="Production-style test"
+  code="https://shadowarcanist.com"
+  items={[
+    'Point DNS to your server IP address.',
+    'Replace the generated domain in Coolify.',
+    'Use https:// so TLS certificates can be issued.',
+  ]}
+/>
+</CoolCompare>
 
 <Callout type="info" title="Note">
 
@@ -205,8 +254,6 @@ If you can see the default Nginx welcome page in your browser, your first Coolif
 
 Use these checks when the deployment finishes but the application link does not behave as expected.
 
-<FirstAppTroubleshooting />
-
 
 <Tabs id="first-app-issues" items={['No Available Server', "Link doesn't open", 'Site not secure']}>
 <Tab value="No Available Server" icon={Warning22}>
@@ -252,4 +299,26 @@ If you are using your own domain, make sure:
 
 Your first app confirms that Coolify can create and run an application. From here, you can deploy a database, deploy a service, or learn how Git-based app builds work.
 
-<FirstAppNextSteps />
+<FirstDeployNextSteps
+  data-first-app
+  steps={[
+    {
+      title: 'Deploy a database',
+      detail: 'Deploy a database when your app needs persistent data.',
+      href: '/deploy-your-first-database',
+      icon: Database,
+    },
+    {
+      title: 'Deploy a service',
+      detail: 'Deploy a ready-made service from the Coolify catalog.',
+      href: '/deploy-your-first-service',
+      icon: Settings,
+    },
+    {
+      title: 'Learn build packs',
+      detail: 'Move from pre-built images to Git-based application deployments.',
+      href: '/applications/build-packs/overview',
+      icon: Box2,
+    },
+  ]}
+/>
