@@ -120,7 +120,7 @@ export function FirstDatabasePortMapping() {
 
 export function FirstDatabaseExposureWarning() {
   return (
-    <CoolCallout data-first-database className="not-prose my-5" id="database-port-warning" icon={ShieldAlert} title="Do not expose databases casually">
+    <CoolCallout data-first-database className="not-prose my-5" id="database-port-warning" icon={ShieldAlert} title="Do not expose databases casually" type="warn">
       Exposing a database port publicly is risky in production. This guide maps a Redis port only so you can test the first deployment from your terminal.
       For real production workloads, keep databases private unless you have a specific reason and strict network controls.
     </CoolCallout>

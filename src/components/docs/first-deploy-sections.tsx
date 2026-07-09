@@ -45,20 +45,19 @@ export function FirstDeployCardGrid({
       {...sectionProps}
       {...(dataAttribute ? { [dataAttribute]: true } : {})}
       className={`not-prose my-5 ${sectionProps?.className ?? ''}`}
+      surface
     >
-      <div className="grid gap-4 p-4 sm:p-5 lg:grid-cols-3">
-        {cards.map((card) => (
-          <CoolActionCard
-            key={String(card.title)}
-            href={card.href}
-            onClick={card.href && onCardClick ? (event) => onCardClick(event, card) : undefined}
-            title={card.title}
-            description={card.description}
-            bullets={card.bullets}
-            icon={card.icon}
-          />
-        ))}
-      </div>
+      {cards.map((card) => (
+        <CoolActionCard
+          key={String(card.title)}
+          href={card.href}
+          onClick={card.href && onCardClick ? (event) => onCardClick(event, card) : undefined}
+          title={card.title}
+          description={card.description}
+          bullets={card.bullets}
+          icon={card.icon}
+        />
+      ))}
     </CoolActionCardGrid>
   );
 }

@@ -9,7 +9,9 @@ import {
   Warning22,
 } from 'reicon-react';
 import { CoolActionCard } from '@/components/docs/cool-action-card';
+import { CoolActionCardGrid } from '@/components/docs/cool-action-card-grid';
 import { CoolCallout } from '@/components/docs/cool-callout';
+import { CoolDocsPage, CoolPanel } from '@/components/docs/cool-layout';
 import type { CoolIcon } from '@/components/docs/cool-types';
 
 const textLinkClassName = 'font-semibold text-fd-foreground underline decoration-fd-muted-foreground/50 underline-offset-4 hover:text-fd-primary hover:decoration-fd-primary';
@@ -25,7 +27,7 @@ const supportPaths = [
     title: 'Discord community',
     href: 'https://coollabs.io/discord',
     icon: DiscordMark,
-    variant: 'primary' as const,
+    type: 'primary' as const,
     cta: 'Join Discord',
     description: 'Best first stop for most self-hosted questions, setup issues, and troubleshooting.',
     bullets: [
@@ -38,7 +40,7 @@ const supportPaths = [
     title: 'Cloud support',
     href: 'mailto:hi@coollabs.io',
     icon: Mailbox,
-    variant: 'secondary' as const,
+    type: 'secondary' as const,
     cta: 'Email support',
     description: 'For Coolify cloud billing related issues and account management.',
     bullets: [
@@ -101,15 +103,7 @@ const supportWorkflows = [
 
 export function SupportPage() {
   return (
-    <div data-support-page data-cool-docs className="not-prose my-8 space-y-6">
-      <style>
-        {`
-          body:has([data-support-page]) #nd-toc {
-            display: none;
-          }
-        `}
-      </style>
-
+    <CoolDocsPage data-support-page hideToc>
       <CoolCallout id="short-version" icon={ArrowsRight} title="The short version">
         <p>
           Start with the Discord support forum for most questions. If you use Coolify Cloud or need
@@ -121,23 +115,23 @@ export function SupportPage() {
         </p>
       </CoolCallout>
 
-      <section className="grid gap-4 md:grid-cols-2">
+      <CoolActionCardGrid>
         {supportPaths.map((path) => (
           <CoolActionCard
             key={path.title}
             href={path.href}
             icon={path.icon}
             title={path.title}
-            variant={path.variant}
+            type={path.type}
             description={path.description}
             bullets={path.bullets}
-            cta={path.cta}
+            btn-cta={path.cta}
           />
         ))}
-      </section>
+      </CoolActionCardGrid>
 
       <CoolCallout id="before-you-ask" icon={Checklist2} title="Before you ask" contentClassName="!p-0">
-        <div className="p-4 sm:p-5">
+        <CoolPanel>
           <div>
             <h3 className="m-0 text-sm font-semibold text-fd-foreground">Make it easy to help</h3>
             <p className="m-0 text-sm leading-6 text-fd-muted-foreground">
@@ -152,7 +146,7 @@ export function SupportPage() {
               </div>
             ))}
           </div>
-        </div>
+        </CoolPanel>
       </CoolCallout>
 
       <div className="grid gap-4 md:grid-cols-2">
@@ -170,7 +164,7 @@ export function SupportPage() {
         ))}
       </div>
 
-      <CoolCallout id="support-expectations" icon={Warning22} title="Support expectations">
+      <CoolCallout id="support-expectations" icon={Warning22} title="Support expectations" type="warn">
         <ul className="m-0 space-y-2 p-0">
           {expectations.map((item) => (
             <li key={item} className="flex gap-2">
@@ -195,6 +189,6 @@ export function SupportPage() {
           </li>
         </ul>
       </CoolCallout>
-    </div>
+    </CoolDocsPage>
   );
 }

@@ -34,21 +34,19 @@ export function CloudServerOptions() {
 
 export function CloudAccessBasics() {
   return (
-    <CoolActionCardGrid data-cloud-start className="not-prose my-5">
-      <div className="grid gap-4 p-4 sm:grid-cols-2 sm:p-5">
-        {firewallSshGuides.map((guide) => (
-          <CoolActionCard
-            key={guide.title}
-            href={guide.href}
-            title={guide.title}
-            description={guide.detail}
-            bullets={guide.bullets}
-            cta={guide.cta}
-            icon={guide.icon}
-            variant={guide.variant}
-          />
-        ))}
-      </div>
+    <CoolActionCardGrid data-cloud-start className="not-prose my-5" surface>
+      {firewallSshGuides.map((guide) => (
+        <CoolActionCard
+          key={guide.title}
+          href={guide.href}
+          title={guide.title}
+          description={guide.detail}
+          bullets={guide.bullets}
+          btn-cta={guide.cta}
+          icon={guide.icon}
+          type={guide.type}
+        />
+      ))}
     </CoolActionCardGrid>
   );
 }

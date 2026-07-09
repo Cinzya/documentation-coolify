@@ -141,7 +141,7 @@ If you need to connect a third server or more, each additional server slot costs
 
 </CoolCallout>
 
-<CoolCallout className="my-5" id="server-limit-errors" icon={Warning22} title="Server limit errors">
+<CoolCallout className="my-5" id="server-limit-errors" icon={Warning22} title="Server limit errors" type="warn">
 
 If Cloud says you exceeded the connected server limit for your current plan, remove an existing connected server or upgrade your plan. If the issue persists, email **[hi@coollabs.io](mailto:hi@coollabs.io)** and describe the problem.
 
@@ -165,7 +165,7 @@ For connecting servers to Coolify Cloud, make sure:
   id="cloud-onboarding-flow"
   icon={Rocket2}
   title="Cloud onboarding flow"
-  summary="Cloud onboarding connects the managed Coolify control plane to the servers you bring for apps, databases, and services."
+  description="Cloud onboarding connects the managed Coolify control plane to the servers you bring for apps, databases, and services."
   steps={[
     'Create Cloud account',
     'Choose subscription',
@@ -173,7 +173,7 @@ For connecting servers to Coolify Cloud, make sure:
     'Add and validate server',
     'Deploy first resource',
   ]}
-  checklist={[
+  list={[
     'Create your Cloud account with the email you want to use for support.',
     'Choose the number of servers you want to connect.',
     'Add or create the SSH key used for server access.',

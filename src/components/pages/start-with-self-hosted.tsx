@@ -7,7 +7,8 @@ import { CoolActionCard } from '@/components/docs/cool-action-card';
 import { CoolActionCardGrid } from '@/components/docs/cool-action-card-grid';
 import { CoolCallout } from '@/components/docs/cool-callout';
 import { CoolFlow } from '@/components/docs/cool-flow';
-import type { CoolActionCardVariant } from '@/components/docs/cool-types';
+import { CoolPanel } from '@/components/docs/cool-layout';
+import type { CoolActionType } from '@/components/docs/cool-types';
 import {
   ArrowRight,
   Autobrightness2,
@@ -41,7 +42,7 @@ const installMethods = [
     bullets: ['Recommended by the Coolify team', 'One-command installation via script', 'Requires root user access'],
     icon: Autobrightness2,
     cta: 'Choose Automated',
-    variant: 'secondary',
+    type: 'secondary',
   },
   {
     title: 'Manual',
@@ -51,7 +52,7 @@ const installMethods = [
     bullets: ['Works with existing Docker installations', 'Non-root and custom setups', 'You configure networking, volumes, and secrets'],
     icon: LaptopCode,
     cta: 'Choose Manual',
-    variant: 'primary',
+    type: 'primary',
   },
   {
     title: 'Raspberry Pi OS',
@@ -61,7 +62,7 @@ const installMethods = [
     bullets: ['Requires 64-bit Raspberry Pi OS', 'ARM64 architecture required', 'Compatible with both Automated and Manual install'],
     icon: ServerUpdate,
     cta: 'Choose Raspberry Pi OS',
-    variant: 'tertiary',
+    type: 'tertiary',
   },
 ] satisfies Array<{
   title: string;
@@ -71,7 +72,7 @@ const installMethods = [
   bullets: string[];
   icon: IconComponent;
   cta: string;
-  variant: CoolActionCardVariant;
+  type: CoolActionType;
 }>;
 
 function openInstallMethodTab(event: React.MouseEvent<HTMLAnchorElement>, method: (typeof installMethods)[number]) {
@@ -174,7 +175,7 @@ export const firewallSshGuides = [
     href: '/knowledge-base/server/openssh',
     icon: SecuritySafe2,
     cta: 'Configure SSH',
-    variant: 'secondary',
+    type: 'secondary',
   },
   {
     title: 'Firewall ports',
@@ -183,7 +184,7 @@ export const firewallSshGuides = [
     href: '/knowledge-base/server/firewall',
     icon: SignalStream,
     cta: 'Configure Firewall',
-    variant: 'primary',
+    type: 'primary',
   },
 ] satisfies Array<{
   title: string;
@@ -192,7 +193,7 @@ export const firewallSshGuides = [
   href: string;
   icon: IconComponent;
   cta: string;
-  variant: CoolActionCardVariant;
+  type: CoolActionType;
 }>;
 
 const methodGuides = {
@@ -350,24 +351,22 @@ function openAdvancedOptionTab(event: React.MouseEvent<HTMLAnchorElement>, optio
   window.history.replaceState(null, '', '#advanced-installations');
 }
 
-function InstallMethodCards({ methods, gridClassName }: { methods: typeof installMethods; gridClassName: string }) {
+function InstallMethodCards({ methods }: { methods: typeof installMethods }) {
   return (
-    <CoolActionCardGrid>
-      <div className={`grid gap-4 p-4 sm:p-5 ${gridClassName}`}>
-        {methods.map((method) => (
-          <CoolActionCard
-            key={method.title}
-            href={method.href}
-            onClick={(event) => openInstallMethodTab(event, method)}
-            title={method.title}
-            description={method.detail}
-            bullets={method.bullets}
-            cta={method.cta}
-            icon={method.icon}
-            variant={method.variant}
-          />
-        ))}
-      </div>
+    <CoolActionCardGrid surface>
+      {methods.map((method) => (
+        <CoolActionCard
+          key={method.title}
+          href={method.href}
+          onClick={(event) => openInstallMethodTab(event, method)}
+          title={method.title}
+          description={method.detail}
+          bullets={method.bullets}
+          btn-cta={method.cta}
+          icon={method.icon}
+          type={method.type}
+        />
+      ))}
     </CoolActionCardGrid>
   );
 }
@@ -375,7 +374,7 @@ function InstallMethodCards({ methods, gridClassName }: { methods: typeof instal
 export function SelfHostedInstallMethods() {
   return (
     <div data-self-hosted-start className="not-prose my-6">
-      <InstallMethodCards methods={installMethods} gridClassName="lg:grid-cols-3" />
+      <InstallMethodCards methods={installMethods} />
     </div>
   );
 }
@@ -383,10 +382,7 @@ export function SelfHostedInstallMethods() {
 export function SelfHostedRaspberryInstallMethods() {
   return (
     <div data-self-hosted-start className="not-prose my-5">
-      <InstallMethodCards
-        methods={installMethods.filter((method) => method.tabValue !== 'raspberry')}
-        gridClassName="lg:grid-cols-2"
-      />
+      <InstallMethodCards methods={installMethods.filter((method) => method.tabValue !== 'raspberry')} />
     </div>
   );
 }
@@ -445,14 +441,14 @@ export function SelfHostedServerRequirements() {
 export function SelfHostedProjectResources() {
   return (
     <CoolCallout data-self-hosted-start className="not-prose my-6" contentClassName="!p-0" id="example-production-setup" icon={ServerCloud} title="Example production setup">
-      <div className="p-4 sm:p-5">
+      <CoolPanel>
         <p className="m-0 text-sm leading-6 text-fd-muted-foreground">
           ShadowArcanist runs a mixed production workload on one server with the resources below.
           Use this as a rough reference point, not a fixed recommendation.
         </p>
-      </div>
+      </CoolPanel>
       <div className="grid gap-0 border-t border-fd-border lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="border-b border-fd-border p-4 lg:border-b-0 lg:border-e sm:p-5">
+        <CoolPanel className="border-b border-fd-border lg:border-b-0 lg:border-e">
           <div className="grid gap-3 sm:grid-cols-2">
             {projectServerProfile.map((item) => (
               <div
@@ -480,9 +476,9 @@ export function SelfHostedProjectResources() {
               </div>
             ))}
           </div>
-        </div>
+        </CoolPanel>
 
-        <div className="p-4 sm:p-5">
+        <CoolPanel>
           <h3 className="m-0 text-sm font-semibold text-fd-foreground">
             This server comfortably supports:
           </h3>
@@ -494,7 +490,7 @@ export function SelfHostedProjectResources() {
               </div>
             ))}
           </div>
-        </div>
+        </CoolPanel>
       </div>
     </CoolCallout>
   );
@@ -502,21 +498,19 @@ export function SelfHostedProjectResources() {
 
 export function SelfHostedFirewallSshBasics() {
   return (
-    <CoolActionCardGrid data-self-hosted-start className="not-prose my-5">
-      <div className="grid gap-4 p-4 sm:grid-cols-2 sm:p-5">
-        {firewallSshGuides.map((guide) => (
-          <CoolActionCard
-            key={guide.title}
-            href={guide.href}
-            title={guide.title}
-            description={guide.detail}
-            bullets={guide.bullets}
-            cta={guide.cta}
-            icon={guide.icon}
-            variant={guide.variant}
-          />
-        ))}
-      </div>
+    <CoolActionCardGrid data-self-hosted-start className="not-prose my-5" surface>
+      {firewallSshGuides.map((guide) => (
+        <CoolActionCard
+          key={guide.title}
+          href={guide.href}
+          title={guide.title}
+          description={guide.detail}
+          bullets={guide.bullets}
+          btn-cta={guide.cta}
+          icon={guide.icon}
+          type={guide.type}
+        />
+      ))}
     </CoolActionCardGrid>
   );
 }
@@ -719,12 +713,12 @@ export function SelfHostedMethodGuide({ type }: { type: MethodGuideType }) {
   return (
     <section data-self-hosted-start className="not-prose">
       <CoolFlow
-        checklist={[...guide.focus]}
+        list={[...guide.focus]}
         icon={guide.icon}
         id={guide.id}
         result={guide.result}
         steps={steps}
-        summary={guide.summary}
+        description={guide.summary}
         title={guide.title}
       />
     </section>

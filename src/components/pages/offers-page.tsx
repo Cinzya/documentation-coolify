@@ -12,12 +12,10 @@ import { buttonVariants } from 'fumadocs-ui/components/ui/button';
 import { useCopyButton } from 'fumadocs-ui/utils/use-copy-button';
 import { CoolCallout } from '@/components/docs/cool-callout';
 import { CoolFlow } from '@/components/docs/cool-flow';
+import { CoolDocsPage, CoolPanel } from '@/components/docs/cool-layout';
 import { cn } from '@/lib/ui/cn';
 
 const promoCode = 'C00L1FYLM40';
-
-const stepLinkClass =
-  'font-semibold text-fd-foreground underline decoration-fd-muted-foreground/50 underline-offset-4 transition hover:decoration-fd-primary hover:text-fd-primary';
 
 const offerNotes = [
   {
@@ -37,18 +35,10 @@ export function OffersPage({ children }: { children?: React.ReactNode }) {
   const CopyIcon = promoCopied ? CopySuccess2 : Copy;
 
   return (
-    <div data-offers-page data-cool-docs className="not-prose space-y-6">
-      <style>
-        {`
-          body:has([data-offers-page]) #nd-toc {
-            display: none;
-          }
-        `}
-      </style>
-
+    <CoolDocsPage data-offers-page hideToc spacing="none">
       <CoolCallout id="hetzner" icon={ReceiptDiscount2} title="Promo code" contentClassName="!p-0">
         <div className="grid gap-0 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="border-b border-fd-border p-4 lg:border-b-0 lg:border-e sm:p-5">
+          <CoolPanel className="border-b border-fd-border lg:border-b-0 lg:border-e">
             <p className="m-0 text-sm leading-6 text-fd-muted-foreground">
               Use the Coolify promo code below to get <strong className="font-semibold text-fd-foreground">€20</strong> in Hetzner account credit for 3 months.
             </p>
@@ -78,9 +68,9 @@ export function OffersPage({ children }: { children?: React.ReactNode }) {
                 </pre>
               </div>
             </div>
-          </div>
+          </CoolPanel>
 
-          <div className="p-4 sm:p-5">
+          <CoolPanel>
             <h3 className="m-0 text-sm font-semibold text-fd-foreground">Credit comparison</h3>
             <div className="mt-4 grid gap-3">
               {offerNotes.map((note) => (
@@ -93,7 +83,7 @@ export function OffersPage({ children }: { children?: React.ReactNode }) {
                 </div>
               ))}
             </div>
-          </div>
+          </CoolPanel>
         </div>
       </CoolCallout>
 
@@ -103,27 +93,13 @@ export function OffersPage({ children }: { children?: React.ReactNode }) {
         id="activate-promo-code"
         icon={SecuritySafe2}
         title="Activate the promo code"
-        summary="Redeem the code from a new Hetzner account before creating any resources."
+        description="Redeem the code from a new Hetzner account before creating any resources."
         steps={[
-          <>
-            Create a{' '}
-            <a className={stepLinkClass} href="https://accounts.hetzner.com/signUp">
-              Hetzner account
-            </a>
-          </>,
-          <>
-            Open{' '}
-            <a className={stepLinkClass} href="https://accounts.hetzner.com/user">
-              User Account
-            </a>{' '}
-            →{' '}
-            <a className={stepLinkClass} href="https://accounts.hetzner.com/user/promoCodes">
-              Promo Codes
-            </a>
-          </>,
+          'Create a [Hetzner account](https://accounts.hetzner.com/signUp)',
+          'Open [User Account](https://accounts.hetzner.com/user) -> [Promo Codes](https://accounts.hetzner.com/user/promoCodes)',
           'Enter the Coolify promo code',
         ]}
-        checklist={[
+        list={[
           'The credit applies to future invoices automatically.',
           'The Coolify promo code gives you 3 months to use the credit.',
         ]}
@@ -137,6 +113,6 @@ export function OffersPage({ children }: { children?: React.ReactNode }) {
           </a>
         }
       />
-    </div>
+    </CoolDocsPage>
   );
 }
