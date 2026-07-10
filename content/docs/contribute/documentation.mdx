@@ -7,7 +7,6 @@ import {
   ArrowsRight,
   BranchUp,
   BrowserTerminal,
-  Checklist2,
   Clipboard,
   DocumentText2,
   Image,
@@ -24,7 +23,7 @@ Contribute updates and fixes to the Coolify documentation with the same workflow
 
 <CoolDocsPage hideToc>
 
-<CoolCallout id="short-version" icon={ArrowsRight} title="The short version">
+<CoolCallout icon={ArrowsRight} title="The short version">
 
 Fork [coollabsio/coolify-docs](https://github.com/coollabsio/coolify-docs), work from the `next` branch, run the docs locally with Bun, and open focused pull requests back to `next`.
 
@@ -52,7 +51,7 @@ Fork [coollabsio/coolify-docs](https://github.com/coollabsio/coolify-docs), work
 
 ---
 
-<CoolCallout id="local-development" icon={BrowserTerminal} title="Local development">
+<CoolCallout icon={BrowserTerminal} title="Local development">
 
 Install dependencies and start the documentation site from the repository root.
 
@@ -65,7 +64,7 @@ The development server starts at [http://localhost:5173/docs/](http://localhost:
 
 </CoolCallout>
 
-<CoolCallout id="package-manager-note" icon={Warning22} title="Package manager note" type="warn">
+<CoolCallout icon={Warning22} title="Package manager note" type="warn">
 
 Bun is the expected package manager. If you use another tool locally, do not commit its lockfile or configuration files.
 
@@ -73,7 +72,7 @@ Bun is the expected package manager. If you use another tool locally, do not com
 
 ---
 
-<CoolCallout id="writing-content" icon={DocumentText2} title="Writing and structure">
+<CoolCallout icon={DocumentText2} title="Writing and structure">
 
 - Use clear, simple English for readers who may not be native English speakers.
 - Break guides into small steps that a new self-hoster can follow without guessing.
@@ -84,7 +83,7 @@ Bun is the expected package manager. If you use another tool locally, do not com
 
 ---
 
-<CoolCallout id="images" icon={Image} title="Images and screenshots" contentClassName="!p-0">
+<CoolCallout icon={Image} title="Images and screenshots" contentClassName="!p-0">
 <CoolPanel>
 
 Screenshots should make a step easier to follow, not decorate the page.
@@ -92,19 +91,11 @@ Screenshots should make a step easier to follow, not decorate the page.
 </CoolPanel>
 <CoolPanel withDivider>
 
-<CoolTable
-  className="my-0"
-  columns={[
-    { header: 'Rule', icon: Checklist2 },
-    { header: 'Expectation', icon: DocumentText2 },
-  ]}
-  rows={[
-    ['Format', 'Use .webp images for documentation screenshots and illustrations.'],
-    ['Location', 'Place image files in `public/images/...`, then reference them from MDX as `/images/...`.'],
-    ['Component', 'Use the zoomable image component to add images to docs.'],
-  ]}
-  noWrapColumns={[0]}
-/>
+| Rule | Expectation |
+| :--- | :--- |
+| Format | Use .webp images for documentation screenshots and illustrations. |
+| Location | Place image files in `public/images/...`, then reference them from MDX as `/images/...`. |
+| Component | Use the zoomable image component to add images to docs. |
 
 </CoolPanel>
 <CoolPanel withDivider>
@@ -148,7 +139,7 @@ Example:
 
 ---
 
-<CoolCallout id="current-docs-note" icon={Rocket} title="Current docs note">
+<CoolCallout icon={Rocket} title="Current docs note">
 
 The docs are actively being rewritten for better structure and clarity. Contributions that improve accuracy, reduce confusion, or follow the existing page patterns are especially helpful.
 
@@ -156,7 +147,7 @@ The docs are actively being rewritten for better structure and clarity. Contribu
 
 ---
 
-<CoolCallout id="faq" icon={MessageQuestion2} title="FAQ" contentClassName="!p-0">
+<CoolCallout icon={MessageQuestion2} title="FAQ" contentClassName="!p-0">
 <CoolAccordions>
 <Accordion title="Can I fix a typo directly?">
 
@@ -183,7 +174,7 @@ Open an issue for repository-specific problems, or ask in the contribute channel
 
 ---
 
-<CoolCallout id="development-guides" icon={DocumentText2} title="Development guides">
+<CoolCallout icon={DocumentText2} title="Development guides">
 <CoolActionCardGrid>
 <CoolActionCard
   href="/docs/contribute/coolify"

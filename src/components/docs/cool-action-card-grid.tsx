@@ -35,7 +35,7 @@ export function CoolActionCardGrid({
       onClick={
         card.href && tabId
           ? (event) => {
-              openCoolTab(event, tabId, card.tabValue ?? String(card.title));
+              openCoolTab(event, tabId, card.tabValue ?? String(card.title), card.href);
             }
           : undefined
       }
@@ -54,7 +54,7 @@ export function CoolActionCardGrid({
     <section
       data-cool-docs
       className={cn(
-        'grid gap-4 sm:grid-cols-2',
+        'not-prose grid gap-4 sm:grid-cols-2',
         surface ? 'overflow-hidden rounded-lg border border-fd-border bg-fd-background/70 p-4 sm:p-5' : null,
         cardCount === 1 ? 'max-w-md' : null,
         className,
@@ -70,18 +70,22 @@ export function openCoolTab(
   event: React.MouseEvent<HTMLAnchorElement>,
   id: string,
   value: string,
+  hash?: string,
 ) {
   event.preventDefault();
+  const targetHash = hash ?? `#${id}`;
 
   window.dispatchEvent(
     new CustomEvent('mdx-tabs:set-active', {
       detail: {
+        hash: targetHash,
         id,
         value,
       },
     }),
   );
 
-  document.getElementById(id)?.scrollIntoView({ block: 'start' });
-  window.history.pushState(null, '', `#${id}`);
+  const targetId = targetHash.startsWith('#') ? targetHash.slice(1) : targetHash;
+  document.getElementById(targetId)?.scrollIntoView({ block: 'start' });
+  window.history.pushState(null, '', targetHash);
 }

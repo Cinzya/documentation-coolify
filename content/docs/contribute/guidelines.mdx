@@ -26,19 +26,19 @@ We are happy that you are interested in contributing to Coolify.
 
 <ContributionGuidelinesPage>
 
-<CoolCallout id="short-version" icon={ArrowsRight} title="The short version">
+<CoolCallout icon={ArrowsRight} title="The short version">
 
 Coolify is used by 470K+ people and maintained by two core maintainers. Contributions are welcome, but alignment matters more than volume: keep changes focused, discuss larger work before coding, test what you submit, and target the `next` branch.
 
 </CoolCallout>
 
-<CoolCallout id="important" icon={Warning22} title="Important" type="warn">
+<CoolCallout icon={Warning22} title="Important" type="warn">
 
 These guidelines are stricter than many open-source projects on purpose. Clear structure and boundaries reduce maintainer burnout and keep Coolify sustainable long term.
 
 </CoolCallout>
 
-<CoolCallout id="ways-to-contribute" icon={MessageQuestion2} title="Ways to contribute">
+<CoolCallout icon={MessageQuestion2} title="Ways to contribute">
 <CoolCardGrid columns={2}>
 <CoolCard
   icon={MedalStars}
@@ -131,7 +131,7 @@ These guidelines are stricter than many open-source projects on purpose. Clear s
   ]}
 />
 
-<CoolCallout id="formats" icon={Checklist2} title="Commit and pull request format" contentClassName="!p-0">
+<CoolCallout icon={Checklist2} title="Commit and pull request format" contentClassName="!p-0">
 <CoolPanel>
 
 Commit messages and pull request titles should start with an action and category. Keep descriptions concise; walls of text listing every small change may be rejected.
@@ -139,31 +139,23 @@ Commit messages and pull request titles should start with an action and category
 </CoolPanel>
 <CoolPanel withDivider>
 
-<CoolTable
-  className="my-0"
-  columns={[
-    { header: 'Prefix', icon: Checklist2 },
-    { header: 'Use', icon: DocumentText2 },
-  ]}
-  rows={[
-    ['fix(ui):', 'UI-related fixes'],
-    ['fix(api):', 'API-related fixes'],
-    ['feat(api):', 'API-related additions'],
-    ['feat(service):', 'One-click service changes'],
-  ]}
-  noWrapColumns={[0]}
-/>
+| Prefix | Use |
+| :--- | :--- |
+| fix(ui): | UI-related fixes |
+| fix(api): | API-related fixes |
+| feat(api): | API-related additions |
+| feat(service): | One-click service changes |
 
 </CoolPanel>
 </CoolCallout>
 
-<CoolCallout id="ai-usage" icon={MagicWand} title="AI usage">
+<CoolCallout icon={MagicWand} title="AI usage">
 
 AI tools are allowed, but you must disclose AI usage in the pull request description. You are still responsible for understanding every change, verifying correctness, and following existing project patterns.
 
 </CoolCallout>
 
-<CoolCallout id="faq" icon={MessageQuestion2} title="FAQ" contentClassName="!p-0">
+<CoolCallout icon={MessageQuestion2} title="FAQ" contentClassName="!p-0">
 <CoolAccordions>
 <Accordion title="Should I ask before fixing a typo or small bug?">
 
@@ -198,7 +190,7 @@ It usually means the change did not align with project direction, required too m
 </CoolAccordions>
 </CoolCallout>
 
-<CoolCallout id="development-guides" icon={DocumentText2} title="Development guides">
+<CoolCallout icon={DocumentText2} title="Development guides">
 <CoolActionCardGrid>
 <CoolActionCard
   href="/docs/contribute/coolify"

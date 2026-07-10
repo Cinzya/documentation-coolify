@@ -17,52 +17,20 @@ Coolify can be used in two ways: self-hosted, where you run and maintain the Coo
 
 <CoolDocsPage>
 
-<CoolCallout id="short-version" icon={ArrowsRight} title="The short version">
+<CoolCallout icon={ArrowsRight} title="The short version">
 
 Self-hosted and Cloud use the same Coolify features. The choice is only who operates the Coolify instance: you manage it yourself, or Coolify manages it for you.
 
 </CoolCallout>
 
-<CoolTable
-  className="my-0"
-  columns={[
-    { header: 'Area' },
-    { header: 'Self-hosted', icon: Server },
-    { header: 'Coolify Cloud', icon: Cloud },
-  ]}
-  rows={[
-    [
-      'Coolify instance',
-      'You install, update, backup, monitor, and restore the Coolify instance.',
-      'The Coolify team runs, updates, backs up, monitors, and restores the Coolify instance.',
-    ],
-    [
-      'Your servers',
-      'You provide the servers and secure the operating system, SSH access, firewall, and network.',
-      'You still provide the servers and secure the operating system, SSH access, firewall, and network.',
-    ],
-    [
-      'Your workloads',
-      'Your apps, databases, volumes, secrets, and runtime security remain your responsibility.',
-      'Your apps, databases, volumes, secrets, and runtime security remain your responsibility.',
-    ],
-    [
-      'Coolify updates',
-      'You decide when to update Coolify and how to handle maintenance windows.',
-      'Coolify team applies control-plane updates for you.',
-    ],
-    [
-      'Cost model',
-      'No Coolify license fee. You pay for your own infrastructure and operations time.',
-      'Paid managed service for the Coolify instance. You still pay for your own servers.',
-    ],
-    [
-      'Feature set',
-      'All Coolify features.',
-      'Same as self-hosted. No Cloud-only feature paywall.',
-    ],
-  ]}
-/>
+| Area | Self-hosted | Coolify Cloud |
+| :--- | :--- | :--- |
+| Coolify instance | You install, update, backup, monitor, and restore the Coolify instance. | The Coolify team runs, updates, backs up, monitors, and restores the Coolify instance. |
+| Your servers | You provide the servers and secure the operating system, SSH access, firewall, and network. | You still provide the servers and secure the operating system, SSH access, firewall, and network. |
+| Your workloads | Your apps, databases, volumes, secrets, and runtime security remain your responsibility. | Your apps, databases, volumes, secrets, and runtime security remain your responsibility. |
+| Coolify updates | You decide when to update Coolify and how to handle maintenance windows. | Coolify team applies control-plane updates for you. |
+| Cost model | No Coolify license fee. You pay for your own infrastructure and operations time. | Paid managed service for the Coolify instance. You still pay for your own servers. |
+| Feature set | All Coolify features. | Same as self-hosted. No Cloud-only feature paywall. |
 
 <CoolActionCardGrid
   cards={[
@@ -99,7 +67,7 @@ Self-hosted and Cloud use the same Coolify features. The choice is only who oper
   ]}
 />
 
-<CoolCallout id="why-this-choice-matters" icon={Checklist2} title="Why this choice matters">
+<CoolCallout icon={Checklist2} title="Why this choice matters">
 
 Both paths give you the same core product experience, but they differ in who is responsible for operating and maintaining the Coolify instance.
 
@@ -107,7 +75,7 @@ Coolify Cloud includes a monthly subscription for the managed instance, while se
 
 </CoolCallout>
 
-<CoolCallout id="still-unsure" icon={Warning22} title="Still unsure?" type="warn">
+<CoolCallout icon={Warning22} title="Still unsure?" type="warn">
 
 **Start with Self-hosted if you are comfortable operating the control plane.**
 

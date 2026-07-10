@@ -12,7 +12,7 @@ type CoolCalloutProps = Omit<React.ComponentProps<'section'>, 'title'> & {
   children: React.ReactNode;
   contentClassName?: string;
   icon?: CoolIcon;
-  id: string;
+  id?: string;
   title: React.ReactNode;
   type?: string;
 };
@@ -75,6 +75,8 @@ export function CoolCallout({ children, className, contentClassName, icon, id, t
   const Icon = icon ?? meta.icon;
 
   async function copySectionLink() {
+    if (!id) return;
+
     const url = `${window.location.origin}${window.location.pathname}#${id}`;
     try {
       await navigator.clipboard.writeText(url);
@@ -89,7 +91,7 @@ export function CoolCallout({ children, className, contentClassName, icon, id, t
   return (
     <section
       data-cool-docs
-      className={cn('rounded-lg border border-fd-border bg-fd-background/70', className)}
+      className={cn('my-5 rounded-lg border border-fd-border bg-fd-background/70', className)}
       {...props}
     >
       <div
@@ -100,15 +102,17 @@ export function CoolCallout({ children, className, contentClassName, icon, id, t
           <Icon className="size-4 shrink-0" weight="Filled" aria-hidden={true} />
           <span className="truncate">{title}</span>
         </div>
-        <button
-          type="button"
-          aria-label={`Copy link to ${title}`}
-          title={copied ? 'Copied' : 'Copy link'}
-          onClick={copySectionLink}
-          className="inline-flex size-7 shrink-0 items-center justify-center rounded-md text-fd-muted-foreground transition hover:bg-fd-muted/50 hover:text-fd-foreground"
-        >
-          <Link3 className="size-4" weight="Filled" aria-hidden={true} />
-        </button>
+        {id ? (
+          <button
+            type="button"
+            aria-label={`Copy link to ${title}`}
+            title={copied ? 'Copied' : 'Copy link'}
+            onClick={copySectionLink}
+            className="inline-flex size-7 shrink-0 items-center justify-center rounded-md text-fd-muted-foreground transition hover:bg-fd-muted/50 hover:text-fd-foreground"
+          >
+            <Link3 className="size-4" weight="Filled" aria-hidden={true} />
+          </button>
+        ) : null}
       </div>
       <div
         className={cn(

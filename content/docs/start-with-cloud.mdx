@@ -6,21 +6,21 @@ description: Start with Coolify Cloud using your own servers while the Coolify t
 import {
   CloudAccessBasics,
   CloudNextSteps,
-  CloudServerOptions,
 } from '@/components/pages/start-with-cloud';
 import { SelfHostedProjectResources } from '@/components/pages/start-with-self-hosted';
 import {
   ArrowsRight,
-  Cloud3,
+  Flash12,
   Key2,
-  Layers,
-  Notes2,
+  LaptopCode,
   Plus,
   Rocket2,
+  Screencast2,
+  Server,
   ServerCloud,
+  ServerUpdate,
   ShieldSecurity2,
   StarSparkle,
-  User4,
   Warning22,
 } from 'reicon-react';
 
@@ -28,7 +28,7 @@ import {
 
 Using Coolify Cloud means the Coolify team runs the Coolify instance, while you run workloads on servers you control.
 
-<CoolCallout id="short-version" icon={ArrowsRight} title="The short version">
+<CoolCallout icon={ArrowsRight} title="The short version">
 
 Create a Cloud account at [app.coolify.io/register](https://app.coolify.io/register), choose your subscription, add an SSH key, validate your server, then deploy your first resource.
 
@@ -62,7 +62,7 @@ You **do not** get direct access to that managed infrastructure.
 
 Coolify Cloud infrastructure runs on Hetzner infrastructure in Falkenstein, Germany. It connects to your servers over SSH from the documented [IPv4 addresses](https://coolify.io/ipv4.txt) and [IPv6 addresses](https://coolify.io/ipv6.txt).
 
-<CoolCallout className="my-5" id="cloud-managed-control-plane" icon={StarSparkle} title="Managed control plane">
+<CoolCallout icon={StarSparkle} title="Managed control plane">
 
 Cloud keeps the Coolify control plane hosted, updated, maintained, and backed up. Your applications, databases, services, domains, secrets, and workload data remain on the servers you connect.
 
@@ -74,25 +74,16 @@ Cloud keeps the Coolify control plane hosted, updated, maintained, and backed up
 
 Coolify Cloud manages the Coolify control plane. You manage the servers and workloads you connect to it.
 
-<CoolTable
-  noWrapColumns={[1, 2]}
-  columns={[
-    { header: 'Area', icon: Layers },
-    { header: 'Managed by Cloud', icon: Cloud3 },
-    { header: 'Managed by you', icon: User4 },
-    { header: 'Notes', icon: Notes2 },
-  ]}
-  rows={[
-    ['Coolify control plane hosting', 'Yes', 'No', 'Provided at app.coolify.io'],
-    ['Control plane updates and maintenance', 'Yes', 'No', 'Handled by the Coolify team'],
-    ['Control plane backups', 'Yes', 'No', 'Covers Cloud instance data'],
-    ['Server OS updates and hardening', 'No', 'Yes', 'Applies to every server you connect'],
-    ['Application and database runtime/data', 'No', 'Yes', 'Runs on your infrastructure'],
-    ['Application backups and restore', 'No', 'Yes', 'Configure backups for your workloads'],
-  ]}
-/>
+| Area | Managed by Cloud | Managed by you | Notes |
+| :--- | :--- | :--- | :--- |
+| Coolify control plane hosting | Yes | No | Provided at app.coolify.io |
+| Control plane updates and maintenance | Yes | No | Handled by the Coolify team |
+| Control plane backups | Yes | No | Covers Cloud instance data |
+| Server OS updates and hardening | No | Yes | Applies to every server you connect |
+| Application and database runtime/data | No | Yes | Runs on your infrastructure |
+| Application backups and restore | No | Yes | Configure backups for your workloads |
 
-<CoolCallout className="my-5" id="cloud-shared-server-security" icon={ShieldSecurity2} title="You still secure your servers">
+<CoolCallout icon={ShieldSecurity2} title="You still secure your servers">
 
 Coolify Cloud manages the Coolify instance. You still manage server operating system updates, firewall policy, application data, database data, and backups for workloads running on your infrastructure.
 
@@ -106,9 +97,43 @@ Coolify Cloud does **not** provide workload servers. You must bring your own ser
 
 Your server can be:
 
-<CloudServerOptions />
+<CoolIconCardGrid
+  surface
+  cards={[
+    {
+      title: 'VPS',
+      description: 'A Virtual Private Server from any provider.',
+      icon: ServerCloud,
+    },
+    {
+      title: 'Dedicated server',
+      description: 'A full physical server that you control.',
+      icon: Server,
+    },
+    {
+      title: 'Virtual machine',
+      description: 'A Linux VM running on your own infrastructure.',
+      icon: Screencast2,
+    },
+    {
+      title: 'Raspberry Pi',
+      description: 'A 64bit supported Raspberry Pi setup.',
+      icon: ServerUpdate,
+    },
+    {
+      title: 'Laptop',
+      description: 'An old or spare Linux laptop with SSH access.',
+      icon: LaptopCode,
+    },
+    {
+      title: 'Any Linux device',
+      description: 'Any device that runs Linux with SSH access.',
+      icon: Flash12,
+    },
+  ]}
+/>
 
-<CoolCallout className="my-5" id="server-provider" icon={ServerCloud} title="Server provider">
+<CoolCallout icon={ServerCloud} title="Server provider">
 
 If you haven’t picked a server provider yet, consider using [Hetzner](https://coolify.io/hetzner).
 You can even use our [referral link](https://coolify.io/hetzner) to support the project.
@@ -133,7 +158,7 @@ Pricing starts at **$5/month** and scales with the number of servers you want to
 
 Your subscription is based on connected server count, so choose the number of servers you need and complete payment before adding more servers.
 
-<CoolCallout className="my-5" id="included-server-slots" icon={ServerCloud} title="Included server slots">
+<CoolCallout icon={ServerCloud} title="Included server slots">
 
 The base **$5/month** subscription includes **2 server slots**, so you can connect up to 2 servers without paying for additional server slots.
 
@@ -141,7 +166,7 @@ If you need to connect a third server or more, each additional server slot costs
 
 </CoolCallout>
 
-<CoolCallout className="my-5" id="server-limit-errors" icon={Warning22} title="Server limit errors" type="warn">
+<CoolCallout icon={Warning22} title="Server limit errors" type="warn">
 
 If Cloud says you exceeded the connected server limit for your current plan, remove an existing connected server or upgrade your plan. If the issue persists, email **[hi@coollabs.io](mailto:hi@coollabs.io)** and describe the problem.
 

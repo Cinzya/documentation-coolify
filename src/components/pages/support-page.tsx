@@ -104,7 +104,7 @@ const supportWorkflows = [
 export function SupportPage() {
   return (
     <CoolDocsPage data-support-page hideToc>
-      <CoolCallout id="short-version" icon={ArrowsRight} title="The short version">
+      <CoolCallout icon={ArrowsRight} title="The short version">
         <p>
           Start with the Discord support forum for most questions. If you use Coolify Cloud or need
           dedicated support for a self-hosted instance, email{' '}
@@ -130,7 +130,7 @@ export function SupportPage() {
         ))}
       </CoolActionCardGrid>
 
-      <CoolCallout id="before-you-ask" icon={Checklist2} title="Before you ask" contentClassName="!p-0">
+      <CoolCallout icon={Checklist2} title="Before you ask" contentClassName="!p-0">
         <CoolPanel>
           <div>
             <h3 className="m-0 text-sm font-semibold text-fd-foreground">Make it easy to help</h3>
@@ -151,7 +151,7 @@ export function SupportPage() {
 
       <div className="grid gap-4 md:grid-cols-2">
         {supportWorkflows.map((workflow) => (
-          <CoolCallout key={workflow.id} id={workflow.id} icon={workflow.icon} title={workflow.title}>
+          <CoolCallout key={workflow.id} icon={workflow.icon} title={workflow.title}>
             <ul className="m-0 space-y-2 p-0">
               {workflow.items.map((item, index) => (
                 <li key={index} className="flex gap-2">
@@ -164,7 +164,7 @@ export function SupportPage() {
         ))}
       </div>
 
-      <CoolCallout id="support-expectations" icon={Warning22} title="Support expectations" type="warn">
+      <CoolCallout icon={Warning22} title="Support expectations" type="warn">
         <ul className="m-0 space-y-2 p-0">
           {expectations.map((item) => (
             <li key={item} className="flex gap-2">

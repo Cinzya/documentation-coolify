@@ -24,12 +24,27 @@ export function CoolActionCard({
   type = 'primary',
   ...props
 }: CoolActionCardProps) {
-  const content = (
+  const isSimpleCard = !buttonCta && !bullets?.length;
+  const iconNode = (
+    <span className="flex size-10 shrink-0 items-center justify-center rounded-md border border-fd-border bg-fd-muted/40 text-fd-foreground transition-colors group-hover:bg-fd-muted/60">
+      <Icon className="size-5" weight="Filled" aria-hidden={true} />
+    </span>
+  );
+
+  const content = isSimpleCard ? (
+    <article className="flex h-full items-start gap-3">
+      {iconNode}
+      <div className="min-w-0 pt-2">
+        <h3 className="m-0 text-base font-semibold leading-6 text-fd-foreground">{title}</h3>
+        {description ? (
+          <p className="m-0 mt-1 text-sm leading-6 text-fd-muted-foreground">{description}</p>
+        ) : null}
+      </div>
+    </article>
+  ) : (
     <article className="flex h-full flex-col">
       <div className="flex items-center gap-3">
-        <span className="flex size-10 shrink-0 items-center justify-center rounded-md border border-fd-border bg-fd-muted/40 text-fd-foreground transition-colors group-hover:bg-fd-muted/60">
-          <Icon className="size-5" weight="Filled" aria-hidden={true} />
-        </span>
+        {iconNode}
         <div className="min-w-0">
           <h3 className="m-0 text-base font-semibold text-fd-foreground">{title}</h3>
         </div>
@@ -65,7 +80,8 @@ export function CoolActionCard({
         href={href}
         onClick={onClick}
         className={cn(
-          `method-card method-card-${type} group rounded-lg border border-fd-border bg-fd-background/70 p-5 shadow-sm transition duration-200 hover:-translate-y-1`,
+          `not-prose method-card method-card-${type} group rounded-lg border border-fd-border bg-fd-background/70 shadow-sm transition duration-200 hover:-translate-y-1`,
+          isSimpleCard ? 'p-4' : 'p-5',
           className,
         )}
         {...props}
@@ -77,7 +93,11 @@ export function CoolActionCard({
 
   return (
     <div
-      className={cn('method-card group rounded-lg border border-fd-border bg-fd-background/70 p-5 shadow-sm', className)}
+      className={cn(
+        'not-prose method-card group rounded-lg border border-fd-border bg-fd-background/70 shadow-sm',
+        isSimpleCard ? 'p-4' : 'p-5',
+        className,
+      )}
     >
       {content}
     </div>

@@ -36,7 +36,7 @@ export function OffersPage({ children }: { children?: React.ReactNode }) {
 
   return (
     <CoolDocsPage data-offers-page hideToc spacing="none">
-      <CoolCallout id="hetzner" icon={ReceiptDiscount2} title="Promo code" contentClassName="!p-0">
+      <CoolCallout icon={ReceiptDiscount2} title="Promo code" contentClassName="!p-0">
         <div className="grid gap-0 lg:grid-cols-[0.9fr_1.1fr]">
           <CoolPanel className="border-b border-fd-border lg:border-b-0 lg:border-e">
             <p className="m-0 text-sm leading-6 text-fd-muted-foreground">

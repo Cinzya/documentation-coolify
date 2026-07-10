@@ -16,7 +16,6 @@ import {
   Package,
   Rocket,
   Settings,
-  TerminalSquare,
   Warning22,
 } from 'reicon-react';
 
@@ -26,7 +25,7 @@ Set up the local Coolify development environment and prepare code contributions 
 
 <CoolDocsPage hideToc>
 
-<CoolCallout id="short-version" icon={ArrowsRight} title="The short version">
+<CoolCallout icon={ArrowsRight} title="The short version">
 
 Set up Docker, Spin, and a local fork of [coollabsio/coolify](https://github.com/coollabsio/coolify). Start the stack with `spin up`, test at **http://localhost:8000**, and open pull requests against the `next` branch.
 
@@ -34,7 +33,7 @@ Set up Docker, Spin, and a local fork of [coollabsio/coolify](https://github.com
 
 ---
 
-<CoolCallout id="setup-development-environment" icon={Monitor} title="Setup development environment" contentClassName="!p-0">
+<CoolCallout icon={Monitor} title="Setup development environment" contentClassName="!p-0">
 <CoolAccordions>
 <Accordion title="Windows">
 
@@ -68,7 +67,7 @@ Docker Engine is recommended because it avoids the extra VM layer.
 
 ---
 
-<CoolCallout id="verify-installation" icon={Checklist2} title="Verify installation">
+<CoolCallout icon={Checklist2} title="Verify installation">
 
 After installing Docker or OrbStack and Spin, confirm both commands are available.
 
@@ -121,7 +120,7 @@ spin --version
 
 ---
 
-<CoolCallout id="start-coolify" icon={Rocket} title="Start Coolify">
+<CoolCallout icon={Rocket} title="Start Coolify">
 
 Open a terminal in the local Coolify repository and leave the process running.
 
@@ -137,7 +136,7 @@ sudo spin up
 
 </CoolCallout>
 
-<CoolCallout id="startup-note" icon={Warning22} title="Startup note" type="warn">
+<CoolCallout icon={Warning22} title="Startup note" type="warn">
 
 You may see some errors during startup. That can be expected while the development stack is booting.
 
@@ -145,7 +144,7 @@ You may see some errors during startup. That can be expected while the developme
 
 ---
 
-<CoolCallout id="start-development" icon={BrowserTerminal} title="Start development" contentClassName="!p-0">
+<CoolCallout icon={BrowserTerminal} title="Start development" contentClassName="!p-0">
 <CoolPanel>
 
 Use the seeded development account to sign in locally.
@@ -159,28 +158,19 @@ Use the seeded development account to sign in locally.
 </CoolPanel>
 <CoolPanel withDivider>
 
-<CoolTable
-  className="my-0"
-  columns={[
-    { header: 'Tool', icon: BrowserTerminal },
-    { header: 'URL', icon: TerminalSquare },
-    { header: 'Note', icon: Checklist2 },
-  ]}
-  rows={[
-    ['Coolify app', 'http://localhost:8000', 'Use test@example.com and password.'],
-    ['Laravel Horizon', 'http://localhost:8000/horizon', 'Only available when logged in as the root user.'],
-    ['Mailpit', 'http://localhost:8025', 'Catch local development emails.'],
-    ['Telescope', 'http://localhost:8000/telescope', 'Disabled by default; enable it with TELESCOPE_ENABLED=true.'],
-  ]}
-  noWrapColumns={[1]}
-/>
+| Tool | URL | Note |
+| :--- | :--- | :--- |
+| Coolify app | http://localhost:8000 | Use test@example.com and password. |
+| Laravel Horizon | http://localhost:8000/horizon | Only available when logged in as the root user. |
+| Mailpit | http://localhost:8025 | Catch local development emails. |
+| Telescope | http://localhost:8000/telescope | Disabled by default; enable it with TELESCOPE_ENABLED=true. |
 
 </CoolPanel>
 </CoolCallout>
 
 ---
 
-<CoolCallout id="telescope" icon={Settings} title="Enable Telescope">
+<CoolCallout icon={Settings} title="Enable Telescope">
 
 Telescope is disabled by default. Add this to your `.env` file when you need the debugging dashboard.
 
@@ -192,7 +182,7 @@ TELESCOPE_ENABLED=true
 
 ---
 
-<CoolCallout id="pull-request" icon={Clipboard} title="Create a pull request">
+<CoolCallout icon={Clipboard} title="Create a pull request">
 
 - Commit and push your changes to your fork.
 - Open the pull request against the Coolify repository.
@@ -203,7 +193,7 @@ TELESCOPE_ENABLED=true
 
 </CoolCallout>
 
-<CoolCallout id="draft-pull-requests" icon={Warning22} title="Draft pull requests" type="warn">
+<CoolCallout icon={Warning22} title="Draft pull requests" type="warn">
 
 Pull requests that stay in draft for a long time may be closed by maintainers.
 
@@ -211,7 +201,7 @@ Pull requests that stay in draft for a long time may be closed by maintainers.
 
 ---
 
-<CoolCallout id="development-notes" icon={Database} title="Development notes">
+<CoolCallout icon={Database} title="Development notes">
 
 Run migrations after switching branches, pulling updates, or changing database structure.
 
@@ -229,7 +219,7 @@ docker exec -it coolify php artisan migrate:fresh --seed
 
 ---
 
-<CoolCallout id="reset-development-environment" icon={Warning22} title="Reset development environment" type="warn">
+<CoolCallout icon={Warning22} title="Reset development environment" type="warn">
 
 If the local stack or database is broken, remove the development containers and volumes, then start from a clean slate.
 
@@ -294,7 +284,7 @@ docker exec -it coolify php artisan migrate:fresh --seed
 
 ---
 
-<CoolCallout id="development-guides" icon={DocumentText2} title="Development guides">
+<CoolCallout icon={DocumentText2} title="Development guides">
 <CoolActionCardGrid>
 <CoolActionCard
   href="/docs/contribute/service"

@@ -1,7 +1,7 @@
 'use client';
 
 import type React from 'react';
-import { Children, isValidElement, useEffect, useMemo, useState } from 'react';
+import { Children, isValidElement, useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import { Layers } from 'reicon-react';
 import { cn } from '@/lib/ui/cn';
 import type { CoolIcon } from './cool-types';
@@ -22,6 +22,18 @@ function normalizeTabValue(value: string) {
   return value.toLowerCase().replace(/\s/, '-');
 }
 
+function scrollToHash(hash: string) {
+  const id = hash.startsWith('#') ? hash.slice(1) : hash;
+  if (!id) return;
+
+  document.getElementById(id)?.scrollIntoView({ block: 'start' });
+}
+
+function scheduleHashScroll(hash: string) {
+  scrollToHash(hash);
+  requestAnimationFrame(() => scrollToHash(hash));
+}
+
 export function Tabs({
   children,
   className,
@@ -34,6 +46,7 @@ export function Tabs({
 }: TabsProps) {
   const initialValue = defaultValue ?? (items ? normalizeTabValue(items[defaultIndex] ?? items[0] ?? '') : undefined);
   const [activeValue, setActiveValue] = useState(initialValue);
+  const [pendingScrollHash, setPendingScrollHash] = useState<string | null>(null);
   const panels = Children.toArray(children).filter(isValidElement) as React.ReactElement<TabProps>[];
   const renderedItems = items ?? panels.map((panel) => panel.props.value).filter(Boolean) as string[];
   const activePanel = panels.find((panel) => normalizeTabValue(panel.props.value ?? '') === activeValue) ?? panels[0];
@@ -45,14 +58,25 @@ export function Tabs({
     );
   }, [panels]);
 
+  useLayoutEffect(() => {
+    if (!pendingScrollHash) return;
+
+    scheduleHashScroll(pendingScrollHash);
+    setPendingScrollHash(null);
+  }, [activeValue, pendingScrollHash]);
+
   useEffect(() => {
     if (!id) return;
 
     function handleTabChange(event: Event) {
-      const detail = (event as CustomEvent<{ id?: string; value?: string }>).detail;
+      const detail = (event as CustomEvent<{ hash?: string; id?: string; value?: string }>).detail;
       if (detail.id !== id || !detail.value) return;
 
       setActiveValue(normalizeTabValue(detail.value));
+
+      if (detail.hash) {
+        setPendingScrollHash(detail.hash);
+      }
     }
 
     window.addEventListener('mdx-tabs:set-active', handleTabChange);

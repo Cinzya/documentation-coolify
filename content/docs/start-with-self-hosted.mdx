@@ -4,31 +4,27 @@ description: Install and run self-hosted Coolify with a clear path for automated
 ---
 
 import {
-  SelfHostedAdvancedOptions,
   SelfHostedFirewallSshBasics,
-  SelfHostedInstallMethods,
   SelfHostedInstallationTab,
   SelfHostedInstallationTabs,
-  SelfHostedMethodGuide,
   SelfHostedNextSteps,
   SelfHostedProjectResources,
-  SelfHostedRaspberryInstallMethods,
-  SelfHostedServerRequirements,
 } from '@/components/pages/start-with-self-hosted';
 import {
-  ArrowsDown,
   ArrowsRight,
   Autobrightness2,
   Box2,
-  Checklist2,
+  Flash12,
   Globe3,
   LaptopCode,
   Layers,
-  Notes2,
   PenNib,
   SackDollar,
+  Server,
   ServerCloud,
+  ServerUpdate,
   Setting2,
+  Screencast2,
   ShieldSecurity2,
   StarSparkle,
 } from 'reicon-react';
@@ -37,7 +33,7 @@ import {
 
 Self-hosting Coolify means you run the Coolify instance on infrastructure you control.
 
-<CoolCallout id="short-version" icon={ArrowsRight} title="The short version">
+<CoolCallout icon={ArrowsRight} title="The short version">
 
 Coolify needs 2 CPU cores, 2 GB RAM, and 10 GB disk space to run. If your server meets this specification, you can install Coolify by using this install script:
 
@@ -68,15 +64,49 @@ Check these requirements first so you pick the right install method and avoid se
 
 You need a server with SSH access. This could be:
 
-<SelfHostedServerRequirements />
+<CoolIconCardGrid
+  surface
+  cards={[
+    {
+      title: 'VPS',
+      description: 'A Virtual Private Server from any provider.',
+      icon: ServerCloud,
+    },
+    {
+      title: 'Dedicated server',
+      description: 'A full physical server that you control.',
+      icon: Server,
+    },
+    {
+      title: 'Virtual machine',
+      description: 'A Linux VM running on your own infrastructure.',
+      icon: Screencast2,
+    },
+    {
+      title: 'Raspberry Pi',
+      description: 'A 64bit supported Raspberry Pi setup.',
+      icon: ServerUpdate,
+    },
+    {
+      title: 'Laptop',
+      description: 'An old or spare Linux laptop with SSH access.',
+      icon: LaptopCode,
+    },
+    {
+      title: 'Any Linux device',
+      description: 'Any device that runs Linux with SSH access.',
+      icon: Flash12,
+    },
+  ]}
+/>
 
-<CoolCallout className="my-5" id="fresh-server-recommended" icon={StarSparkle} title="Fresh server recommended">
+<CoolCallout icon={StarSparkle} title="Fresh server recommended">
 
 It’s best to use a fresh server for Coolify to avoid any conflicts with existing applications.
 
 </CoolCallout>
 
-<CoolCallout className="my-5" id="server-provider" icon={ServerCloud} title="Server provider">
+<CoolCallout icon={ServerCloud} title="Server provider">
 
 If you haven’t picked a server provider yet, consider using [Hetzner](https://coolify.io/hetzner).
 You can even use our [referral link](https://coolify.io/hetzner) to support the project.
@@ -87,23 +117,16 @@ You can even use our [referral link](https://coolify.io/hetzner) to support the 
 
 ### 2. Supported operating systems
 
-<CoolTable
-  columns={[
-    { header: 'Base', icon: ServerCloud },
-    { header: 'Distributions', icon: Layers },
-    { header: 'Notes', icon: Notes2 },
-  ]}
-  rows={[
-    ['Debian-based', 'Debian, Ubuntu', 'Ubuntu non-LTS: use Manual install'],
-    ['Red Hat-based', 'CentOS, Fedora, Red Hat, AlmaLinux, Rocky, TencentOS, Asahi', 'Docker may need manual pre-install on some variants'],
-    ['SUSE-based', 'SLES, SUSE, openSUSE', 'Supported'],
-    ['Arch-based', 'Arch Linux', 'Supported'],
-    ['Alpine-based', 'Alpine Linux', 'Supported'],
-    ['Raspberry Pi OS', 'Raspberry Pi OS (64-bit)', 'Use 64-bit image'],
-  ]}
-/>
+| Base | Distributions | Notes |
+| :--- | :--- | :--- |
+| Debian-based | Debian, Ubuntu | Ubuntu non-LTS: use Manual install |
+| Red Hat-based | CentOS, Fedora, Red Hat, AlmaLinux, Rocky, TencentOS, Asahi | Docker may need manual pre-install on some variants |
+| SUSE-based | SLES, SUSE, openSUSE | Supported |
+| Arch-based | Arch Linux | Supported |
+| Alpine-based | Alpine Linux | Supported |
+| Raspberry Pi OS | Raspberry Pi OS (64-bit) | Use 64-bit image |
 
-<CoolCallout id="operating-system-support" icon={Layers} title="Operating system support">
+<CoolCallout icon={Layers} title="Operating system support">
 
 The table above reflects distributions where Coolify is known to run well, based on project testing and community reports.
 
@@ -115,21 +138,14 @@ Coolify only runs on Linux-based operating systems. You may be able to run it on
 
 ### 3. Minimum hardware requirements
 
-<CoolTable
-  columns={[
-    { header: 'Item', icon: Checklist2 },
-    { header: 'Minimum', icon: ArrowsDown },
-    { header: 'Notes', icon: Notes2 },
-  ]}
-  rows={[
-    ['CPU', '2 cores', 'Increase cores if running multiple workloads on one server.'],
-    ['Memory', '2 GB RAM', 'Increase memory as your workload grows.'],
-    ['Disk', '10 GB free space', 'Keep additional space for Docker images, volumes, and backups.'],
-    ['Architecture', 'amd64 or arm64', 'ARM64 is required for Raspberry Pi OS installations.'],
-  ]}
-/>
+| Item | Minimum | Notes |
+| :--- | :--- | :--- |
+| CPU | 2 cores | Increase cores if running multiple workloads on one server. |
+| Memory | 2 GB RAM | Increase memory as your workload grows. |
+| Disk | 10 GB free space | Keep additional space for Docker images, volumes, and backups. |
+| Architecture | amd64 or arm64 | ARM64 is required for Raspberry Pi OS installations. |
 
-<CoolCallout id="hardware-resource-planning" icon={SackDollar} title="Hardware resource planning for budget users">
+<CoolCallout icon={SackDollar} title="Hardware resource planning for budget users">
 
 Coolify can run on smaller servers (for example: 1 CPU core, 512 MB RAM, 4 GB disk), but this is not recommended.
 
@@ -157,7 +173,55 @@ The resources you need depend on your projects. If you host multiple services or
 
 ## Choose installation method
 
-<SelfHostedInstallMethods />
+<CoolActionCardGrid
+  className="not-prose my-6"
+  surface
+  tabId="installation-method-tabs"
+  cards={[
+    {
+      title: 'Automated',
+      href: '#install-automated',
+      tabValue: 'automated',
+      description: 'Run one script to install Coolify automatically.',
+      bullets: [
+        'Recommended by the Coolify team',
+        'One-command installation via script',
+        'Requires root user access',
+      ],
+      icon: Autobrightness2,
+      'btn-cta': 'Choose Automated',
+      type: 'secondary',
+    },
+    {
+      title: 'Manual',
+      href: '#install-manual',
+      tabValue: 'manual',
+      description: 'Run each install step yourself for full control.',
+      bullets: [
+        'Works with existing Docker installations',
+        'Non-root and custom setups',
+        'You configure networking, volumes, and secrets',
+      ],
+      icon: LaptopCode,
+      'btn-cta': 'Choose Manual',
+      type: 'primary',
+    },
+    {
+      title: 'Raspberry Pi OS',
+      href: '#install-raspberry-pi-os',
+      tabValue: 'raspberry',
+      description: 'Properly configure Raspberry Pi before installing Coolify.',
+      bullets: [
+        'Requires 64-bit Raspberry Pi OS',
+        'ARM64 architecture required',
+        'Compatible with both Automated and Manual install',
+      ],
+      icon: ServerUpdate,
+      'btn-cta': 'Choose Raspberry Pi OS',
+      type: 'tertiary',
+    },
+  ]}
+/>
 
 
 <SelfHostedInstallationTabs>
@@ -168,7 +232,27 @@ The resources you need depend on your projects. If you host multiple services or
 ## Automated installation <span data-hidden-heading></span>
 
 
-<SelfHostedMethodGuide type="automated" />
+<CoolFlow
+  id="automated-install-flow"
+  icon={Autobrightness2}
+  title="Automated install flow"
+  description="Run one command, let the installer setup everything, then access the Coolify dashboard."
+  steps={[
+    'Run the installer',
+    'Wait for Coolify to start',
+    'Visit `http://<server-ip-here>:8000`',
+    'Create the admin account',
+    'Back up `/data/coolify/source/.env`',
+  ]}
+  list={[
+    'Use a fresh server when possible.',
+    'Use root user account.',
+    'Open necessary ports on Firewall.',
+    'Create admin account as soon as possible.',
+    'Back up generated installation secrets.',
+  ]}
+  result="You should end with a running Coolify dashboard, first admin account, and saved installation secrets."
+/>
 
 ---
 
@@ -231,9 +315,31 @@ That's it!, you can start using Coolify.
 
 ## Manual installation <span data-hidden-heading></span>
 
-<SelfHostedMethodGuide type="manual" />
+<CoolFlow
+  id="manual-install-flow"
+  icon={LaptopCode}
+  title="Manual install flow"
+  description="Prepare the Coolify directory structure, SSH access, file permissions, secrets, Docker network, then start Coolify with Docker Compose."
+  steps={[
+    'Create required directories',
+    'Generate and register SSH key',
+    'Download required files',
+    'Set file permissions',
+    'Generate secure environment values',
+    'Create Docker network',
+    'Start Coolify with Docker Compose',
+    'Create the admin account',
+  ]}
+  list={[
+    'Requires curl and Docker Engine 24+.',
+    'Works well for existing Docker or custom server setups.',
+    'SSH key setup is required so Coolify can manage the server.',
+    'Save generated environment values before running production workloads.',
+  ]}
+  result="You should end with a running Coolify dashboard while keeping every host-level setup step under your control."
+/>
 
-<CoolCallout className="my-5" id="manual-custom-setup" icon={Setting2} title="Planning a custom manual setup?">
+<CoolCallout icon={Setting2} title="Planning a custom manual setup?">
 
 If you want to install Coolify with a non-root user, custom Docker network, custom registry source, or compose overrides, review the [Advanced installations](#advanced-installations) section before following the manual setup steps below.
 
@@ -367,7 +473,24 @@ That's it!, you can start using Coolify.
 
 ## Raspberry Pi OS <span data-hidden-heading></span>
 
-<SelfHostedMethodGuide type="raspberry" />
+<CoolFlow
+  id="raspberry-pi-flow"
+  icon={ServerCloud}
+  title="Raspberry Pi flow"
+  description="Install a 64-bit Raspberry Pi OS image first, enable SSH, then use the Automated or Manual installation methods."
+  steps={[
+    'Flash 64-bit OS',
+    'Enable SSH',
+    'Boot the Pi',
+    'Follow Automated or Manual installation method',
+  ]}
+  list={[
+    'Use Raspberry Pi OS Lite 64-bit for the cleanest starting point.',
+    'Enable SSH during imaging so Coolify can complete onboarding later.',
+    'Avoid passphrase or 2FA-protected SSH keys for this first setup.',
+  ]}
+  result="After the Pi boots, continue with one of the installation methods above."
+/>
 
 ---
 
@@ -429,7 +552,41 @@ Finish writing the OS image, insert the microSD card into your Raspberry Pi, the
 
 After your Raspberry Pi boots, choose one installation method:
 
-<SelfHostedRaspberryInstallMethods />
+<CoolActionCardGrid
+  className="not-prose my-5"
+  surface
+  tabId="installation-method-tabs"
+  cards={[
+    {
+      title: 'Automated',
+      href: '#install-automated',
+      tabValue: 'automated',
+      description: 'Run one script to install Coolify automatically.',
+      bullets: [
+        'Recommended by the Coolify team',
+        'One-command installation via script',
+        'Requires root user access',
+      ],
+      icon: Autobrightness2,
+      'btn-cta': 'Choose Automated',
+      type: 'secondary',
+    },
+    {
+      title: 'Manual',
+      href: '#install-manual',
+      tabValue: 'manual',
+      description: 'Run each install step yourself for full control.',
+      bullets: [
+        'Works with existing Docker installations',
+        'Non-root and custom setups',
+        'You configure networking, volumes, and secrets',
+      ],
+      icon: LaptopCode,
+      'btn-cta': 'Choose Manual',
+      type: 'primary',
+    },
+  ]}
+/>
 
 </SelfHostedInstallationTab>
 
@@ -448,7 +605,46 @@ Once Coolify is running, start by deploying something on the same server where C
 ## Advanced installations
 These options are optional and mostly useful for automation or custom infrastructure requirements.
 
-<SelfHostedAdvancedOptions />
+<CoolCallout
+  contentClassName="!p-0"
+  icon={Setting2}
+  title="Advanced install options"
+>
+<CoolActionCardGrid
+  className="p-4 sm:p-5"
+  tabId="advanced-install-option-tabs"
+  cards={[
+    {
+      title: 'Root user',
+      href: '#_1-root-user',
+      tabValue: 'Root user',
+      description: 'Pre-create the admin account so public registration is never exposed.',
+      icon: ShieldSecurity2,
+    },
+    {
+      title: 'Custom Docker network',
+      href: '#_2-custom-docker-network',
+      tabValue: 'Custom Docker network',
+      description: 'Avoid network overlap with infrastructure-controlled address pools.',
+      icon: Globe3,
+    },
+    {
+      title: 'Custom registry source',
+      href: '#_3-custom-registry-source',
+      tabValue: 'Custom registry source',
+      description: 'Pull Coolify images from ghcr.io or docker.io.',
+      icon: Box2,
+    },
+    {
+      title: 'Compose overrides',
+      href: '#_4-compose-overrides',
+      tabValue: 'Compose overrides',
+      description: 'Persist custom ports, labels, resources, or container settings across upgrades.',
+      icon: PenNib,
+    },
+  ]}
+/>
+</CoolCallout>
 
 <Callout type="warning" title="Safety first">
 

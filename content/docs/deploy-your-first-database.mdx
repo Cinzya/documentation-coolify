@@ -23,7 +23,7 @@ Deploying your first database in Coolify helps you validate database creation, c
 
 In this guide, you will deploy **Redis** from the one-click database resources list.
 
-<CoolCallout id="short-version" icon={ArrowsRight} title="The short version">
+<CoolCallout icon={ArrowsRight} title="The short version">
 
 Create or open a project, create a Redis database resource, map a host port, deploy Redis, copy the generated password, and run `PING` from your terminal.
 
@@ -97,7 +97,7 @@ If Coolify is not ready yet, first follow [Start with Self-hosted](/start-with-s
 />
 </section>
 
-<CoolCallout className="my-5" id="databases-run-as-containers" icon={Database} title="Databases run as containers">
+<CoolCallout icon={Database} title="Databases run as containers">
 
 Coolify deploys databases as containers. For this guide, Coolify will create and run a Redis container, generate credentials, and keep the database data on the server.
 
@@ -205,7 +205,7 @@ Open the mapped host port, for example TCP `6380`, wherever you manage firewall 
 
 For safer testing, allow the port only from your own IP address and close it again when you are done. For general guidance, see [Firewall](/knowledge-base/server/firewall).
 
-<CoolCallout data-first-database className="not-prose my-5" id="database-port-warning" icon={ShieldAlert} title="Do not expose databases casually" type="warn">
+<CoolCallout icon={ShieldAlert} title="Do not expose databases casually" type="warn">
 
 Exposing a database port publicly is risky in production. This guide maps a Redis port only so you can test the first deployment from your terminal.
 

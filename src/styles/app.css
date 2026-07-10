@@ -332,6 +332,7 @@ a[aria-label='GitHub']:hover {
 :where([data-cool-docs], [data-self-hosted-start]) .requirement-card,
 :where([data-cool-docs], [data-self-hosted-start]) .safety-card {
   background-clip: padding-box;
+  text-decoration: none;
 }
 
 :where([data-cool-docs], [data-self-hosted-start]) .requirement-card:hover {

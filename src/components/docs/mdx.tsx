@@ -14,20 +14,14 @@ import { OffersPage } from '@/components/pages/offers-page';
 import {
   CloudAccessBasics,
   CloudNextSteps,
-  CloudServerOptions,
 } from '@/components/pages/start-with-cloud';
 import { SponsorsPage } from '@/components/pages/sponsors-page';
 import {
-  SelfHostedAdvancedOptions,
   SelfHostedFirewallSshBasics,
-  SelfHostedInstallMethods,
   SelfHostedInstallationTab,
   SelfHostedInstallationTabs,
-  SelfHostedMethodGuide,
   SelfHostedNextSteps,
   SelfHostedProjectResources,
-  SelfHostedRaspberryInstallMethods,
-  SelfHostedServerRequirements,
 } from '@/components/pages/start-with-self-hosted';
 import { SupportPage } from '@/components/pages/support-page';
 import { TeamPage } from '@/components/pages/team-page';
@@ -38,6 +32,7 @@ import { CoolCard, CoolCardGrid } from './cool-card';
 import { CoolCallout } from './cool-callout';
 import { CoolCompare, CoolCompareColumn } from './cool-compare';
 import { CoolFlow } from './cool-flow';
+import { CoolIconCard, CoolIconCardGrid } from './cool-icon-card';
 import { CoolNextSteps } from './cool-next-steps';
 import {
   CoolDocsPage,
@@ -46,7 +41,6 @@ import {
   CoolValueCard,
   CoolValueGrid,
 } from './cool-layout';
-import { CoolTable } from './cool-table';
 import { Callout } from './callout';
 import { ScreenshotTab, ScreenshotTabs } from './screenshot-tabs';
 import { Tab, Tabs } from './tabs';
@@ -72,7 +66,6 @@ export function getMDXComponents(components?: MDXComponents) {
     ContributionGuidelinesPage,
     CloudAccessBasics,
     CloudNextSteps,
-    CloudServerOptions,
     CoolActionCard,
     CoolActionCardGrid,
     CoolAccordions,
@@ -83,10 +76,11 @@ export function getMDXComponents(components?: MDXComponents) {
     CoolCompareColumn,
     CoolDocsPage,
     CoolFlow,
+    CoolIconCard,
+    CoolIconCardGrid,
     CoolInlineValue,
     CoolNextSteps,
     CoolPanel,
-    CoolTable,
     CoolValueCard,
     CoolValueGrid,
     File,
@@ -98,16 +92,11 @@ export function getMDXComponents(components?: MDXComponents) {
     ScreenshotTab,
     ScreenshotTabs,
     ServicesList,
-    SelfHostedAdvancedOptions,
     SelfHostedFirewallSshBasics,
-    SelfHostedInstallMethods,
     SelfHostedInstallationTab,
     SelfHostedInstallationTabs,
-    SelfHostedMethodGuide,
     SelfHostedNextSteps,
     SelfHostedProjectResources,
-    SelfHostedRaspberryInstallMethods,
-    SelfHostedServerRequirements,
     SponsorsList,
     SponsorsPage,
     SupportPage,

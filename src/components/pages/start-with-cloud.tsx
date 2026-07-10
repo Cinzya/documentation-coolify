@@ -1,36 +1,7 @@
 import { ArrowRight } from 'reicon-react';
 import { CoolActionCard } from '@/components/docs/cool-action-card';
 import { CoolActionCardGrid } from '@/components/docs/cool-action-card-grid';
-import { firewallSshGuides, nextSteps, serverRequirementOptions } from './start-with-self-hosted';
-
-export function CloudServerOptions() {
-  return (
-    <div data-cloud-start className="not-prose my-4">
-      <section className="overflow-hidden rounded-lg border border-fd-border bg-fd-background/70">
-        <div className="grid gap-4 p-4 sm:grid-cols-2 sm:p-5">
-          {serverRequirementOptions.map((option) => {
-            const Icon = option.icon;
-
-            return (
-              <div
-                key={option.title}
-                className="flex gap-3 rounded-lg border border-fd-border bg-fd-background/70 p-4 shadow-sm"
-              >
-                <span className="flex size-9 shrink-0 items-center justify-center rounded-md border border-fd-border bg-fd-muted/40 text-fd-foreground">
-                  <Icon className="size-5" weight="Filled" aria-hidden="true" />
-                </span>
-                <span className="min-w-0">
-                  <span className="block text-sm font-semibold text-fd-foreground">{option.title}</span>
-                  <span className="mt-1 block text-sm leading-6 text-fd-muted-foreground">{option.detail}</span>
-                </span>
-              </div>
-            );
-          })}
-        </div>
-      </section>
-    </div>
-  );
-}
+import { firewallSshGuides, nextSteps } from './start-with-self-hosted';
 
 export function CloudAccessBasics() {
   return (
