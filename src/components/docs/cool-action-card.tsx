@@ -13,7 +13,7 @@ type CoolActionCardProps = Omit<React.ComponentProps<'a'>, 'title'> & {
 };
 
 export function CoolActionCard({
-  'btn-cta': btnCta,
+  'btn-cta': buttonCta,
   bullets,
   className,
   description,
@@ -50,9 +50,9 @@ export function CoolActionCard({
         </ul>
       ) : null}
 
-      {btnCta ? (
+      {buttonCta ? (
         <span className={`method-button method-button-${type} mt-5 inline-flex w-fit items-center gap-2 border px-3 py-2 text-sm font-semibold transition`}>
-          {btnCta}
+          {buttonCta}
           <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden={true} />
         </span>
       ) : null}

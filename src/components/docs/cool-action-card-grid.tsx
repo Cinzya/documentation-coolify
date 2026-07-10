@@ -1,12 +1,54 @@
 import React from 'react';
 import { cn } from '@/lib/ui/cn';
+import { CoolActionCard } from './cool-action-card';
+import type { CoolActionType, CoolIcon } from './cool-types';
 
-type CoolActionCardGridProps = React.ComponentProps<'section'> & {
-  surface?: boolean;
+export type CoolActionCardItem = {
+  'btn-cta'?: React.ReactNode;
+  bullets?: React.ReactNode[];
+  description?: React.ReactNode;
+  href?: string;
+  icon: CoolIcon;
+  tabValue?: string;
+  title: React.ReactNode;
+  type?: CoolActionType;
 };
 
-export function CoolActionCardGrid({ children, className, surface = false, ...props }: CoolActionCardGridProps) {
-  const cardCount = React.Children.toArray(children).filter(Boolean).length;
+type CoolActionCardGridProps = React.ComponentProps<'section'> & {
+  cards?: CoolActionCardItem[];
+  surface?: boolean;
+  tabId?: string;
+};
+
+export function CoolActionCardGrid({
+  cards,
+  children,
+  className,
+  surface = false,
+  tabId,
+  ...props
+}: CoolActionCardGridProps) {
+  const renderedCards = cards?.map((card) => (
+    <CoolActionCard
+      key={String(card.title)}
+      href={card.href}
+      onClick={
+        card.href && tabId
+          ? (event) => {
+              openCoolTab(event, tabId, card.tabValue ?? String(card.title));
+            }
+          : undefined
+      }
+      title={card.title}
+      description={card.description}
+      bullets={card.bullets}
+      icon={card.icon}
+      type={card.type}
+      btn-cta={card['btn-cta']}
+    />
+  ));
+  const content = renderedCards ?? children;
+  const cardCount = React.Children.toArray(content).filter(Boolean).length;
 
   return (
     <section
@@ -19,7 +61,27 @@ export function CoolActionCardGrid({ children, className, surface = false, ...pr
       )}
       {...props}
     >
-      {children}
+      {content}
     </section>
   );
+}
+
+export function openCoolTab(
+  event: React.MouseEvent<HTMLAnchorElement>,
+  id: string,
+  value: string,
+) {
+  event.preventDefault();
+
+  window.dispatchEvent(
+    new CustomEvent('mdx-tabs:set-active', {
+      detail: {
+        id,
+        value,
+      },
+    }),
+  );
+
+  document.getElementById(id)?.scrollIntoView({ block: 'start' });
+  window.history.pushState(null, '', `#${id}`);
 }

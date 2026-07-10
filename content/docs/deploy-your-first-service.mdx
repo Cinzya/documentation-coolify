@@ -4,12 +4,18 @@ description: Deploy your first one-click service on Coolify using Umami and sign
 ---
 
 import {
-  FirstServiceNetworkChoices,
-  FirstServiceNextSteps,
-  FirstServicePrerequisites,
-  FirstServiceTroubleshooting,
-} from '@/components/pages/deploy-your-first-service';
-import { ArrowsRight, Key2, Settings, SignalStream, Warning22 } from 'reicon-react';
+  ArrowsRight,
+  Box2,
+  Database,
+  Globe3,
+  Key2,
+  Rocket2,
+  Server,
+  Settings,
+  SignalStream,
+  Warning22,
+  WindowPointer,
+} from 'reicon-react';
 
 # Deploy your first service
 
@@ -32,7 +38,31 @@ This path is ideal for a first service deployment because Umami is ready-made, u
 
 Make sure these things are ready before you deploy the service.
 
-<FirstServicePrerequisites />
+<CoolActionCardGrid
+  data-first-service
+  className="not-prose my-5"
+  surface
+  cards={[
+    {
+      title: 'Dashboard access',
+      description: 'You can sign in to Coolify and see the main dashboard.',
+      bullets: ['You can access Coolify in your browser', 'Dashboard loads without errors'],
+      icon: WindowPointer,
+    },
+    {
+      title: 'Server is connected',
+      description: 'Coolify has at least one server listed on the Servers page.',
+      bullets: ['Open Servers from the sidebar', 'For self-hosted installs, localhost is fine'],
+      icon: Server,
+    },
+    {
+      title: 'Proxy is running',
+      description: 'Services need the proxy to route the generated URL to the right container.',
+      bullets: ['Open the server page', 'Start the proxy if it is stopped'],
+      icon: SignalStream,
+    },
+  ]}
+/>
 
 If Coolify is not ready yet, first follow [Start with Self-hosted](/start-with-self-hosted) or [Start with Coolify Cloud](/start-with-cloud).
 
@@ -129,7 +159,32 @@ Coolify will create an Umami service resource with generated settings.
 
 Coolify gives the service a generated URL so you can test it quickly.
 
-<FirstServiceNetworkChoices />
+<CoolCompare
+  data-first-service
+  className="not-prose my-5"
+  id="first-service-url"
+  icon={Globe3}
+  title="Generated URL or your own domain"
+>
+<CoolCompareColumn
+  title="Fastest first test"
+  code="http://<uuid>.<server-ip>.sslip.io:3000"
+  items={[
+    'Keep `:3000` in the Coolify URL configuration.',
+    'Visit the URL without `:3000` in your browser.',
+    'Use this only to confirm the service and proxy work.',
+  ]}
+/>
+<CoolCompareColumn
+  title="Production-style test"
+  code="https://analytics.example.com:3000"
+  items={[
+    'Point DNS to your server IP address.',
+    'Keep `:3000` in the Coolify URL configuration.',
+    'Visit `https://analytics.example.com` in your browser.',
+  ]}
+/>
+</CoolCompare>
 
 <CoolCallout className="my-5" id="keep-service-port" icon={Settings} title="Keep the service port in Coolify">
 
@@ -189,7 +244,32 @@ After the first test works, change the default Umami password before using the s
 
 Use these checks when Umami deploys but the browser test does not behave as expected.
 
-<FirstServiceTroubleshooting />
+<CoolActionCardGrid
+  data-first-service
+  className="not-prose my-5"
+  surface
+  tabId="first-service-issues"
+  cards={[
+    {
+      title: "Link doesn't open",
+      description: 'Usually means DNS, firewall, or proxy routing is not ready.',
+      href: '#first-service-issues',
+      icon: SignalStream,
+    },
+    {
+      title: 'Login fails',
+      description: 'Usually means the login details are wrong.',
+      href: '#first-service-issues',
+      icon: Key2,
+    },
+    {
+      title: 'Site not secure',
+      description: 'sslip.io can be rate-limited. Use a real domain for TLS.',
+      href: '#first-service-issues',
+      icon: Warning22,
+    },
+  ]}
+/>
 
 
 <Tabs id="first-service-issues" items={["Link doesn't open", 'Login fails', 'Site not secure']}>
@@ -242,4 +322,26 @@ If you are using your own domain, make sure:
 
 Your first service confirms that Coolify can create a one-click service, start its containers, route a URL through the proxy, and load the service in a browser.
 
-<FirstServiceNextSteps />
+<CoolNextSteps
+  data-first-service
+  steps={[
+    {
+      title: 'Deploy an app',
+      detail: 'Deploy an application when you want to run your own image or code.',
+      href: '/deploy-your-first-app',
+      icon: Rocket2,
+    },
+    {
+      title: 'Deploy a database',
+      detail: 'Deploy a database when your app or service needs persistent data.',
+      href: '/deploy-your-first-database',
+      icon: Database,
+    },
+    {
+      title: 'Explore services',
+      detail: 'Browse the one-click service catalog and deploy another resource.',
+      href: '/services/all',
+      icon: Box2,
+    },
+  ]}
+/>

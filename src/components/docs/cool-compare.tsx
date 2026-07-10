@@ -2,6 +2,7 @@ import type React from 'react';
 import { cn } from '@/lib/ui/cn';
 import { CoolCallout } from './cool-callout';
 import { CoolHighlightedCode } from './cool-highlighted-code';
+import { renderCoolInlineContent } from './cool-inline-content';
 import type { CoolIcon } from './cool-types';
 
 type CoolCompareProps = Omit<React.ComponentProps<'section'>, 'title'> & {
@@ -17,7 +18,6 @@ type CoolCompareProps = Omit<React.ComponentProps<'section'>, 'title'> & {
 type CoolCompareColumnProps = Omit<React.ComponentProps<'div'>, 'title'> & {
   'code-lang'?: string;
   code?: React.ReactNode;
-  codeLang?: string;
   items: React.ReactNode[];
   title: React.ReactNode;
 };
@@ -72,19 +72,16 @@ export function CoolCompare({
 export function CoolCompareColumn({
   className,
   code,
-  'code-lang': codeLangAttribute,
-  codeLang,
+  'code-lang': syntaxLanguage,
   items,
   title,
   ...props
 }: CoolCompareColumnProps) {
-  const language = codeLangAttribute ?? codeLang;
-
   return (
     <div className={cn('px-4 py-3 sm:px-5 sm:py-4', className)} {...props}>
       <h3 className="m-0 text-sm font-semibold text-fd-foreground">{title}</h3>
-      {code && language && typeof code === 'string' ? (
-        <CoolHighlightedCode code={code} lang={language} />
+      {code && syntaxLanguage && typeof code === 'string' ? (
+        <CoolHighlightedCode code={code} lang={syntaxLanguage} />
       ) : code ? (
         <code className="mt-2 block rounded-md border border-fd-border bg-fd-muted px-3 py-2 text-xs font-semibold text-fd-foreground">
           {code}
@@ -93,7 +90,7 @@ export function CoolCompareColumn({
       <ul className="m-0 mt-3 list-disc space-y-2 ps-5">
         {items.map((item, index) => (
           <li key={index} className="pl-1 text-sm leading-6 text-fd-muted-foreground">
-            <span>{item}</span>
+            <span>{renderCoolInlineContent(item)}</span>
           </li>
         ))}
       </ul>

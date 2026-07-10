@@ -4,13 +4,18 @@ description: Deploy your first Redis database on Coolify using the one-click res
 ---
 
 import {
-  FirstDatabaseExposureWarning,
-  FirstDatabaseNextSteps,
-  FirstDatabasePortMapping,
-  FirstDatabasePrerequisites,
-  FirstDatabaseTroubleshooting,
-} from '@/components/pages/deploy-your-first-database';
-import { ArrowsRight, BrowserTerminal, Database, Key2, Plug2 } from 'reicon-react';
+  ArrowsRight,
+  BrowserTerminal,
+  Database,
+  Key2,
+  Plug2,
+  Rocket2,
+  Server,
+  Settings,
+  ShieldAlert,
+  TerminalSquare,
+  WindowPointer,
+} from 'reicon-react';
 
 # Deploy your first database
 
@@ -33,7 +38,31 @@ This path is ideal for a first database deployment because Redis is lightweight 
 
 Make sure these things are ready before you deploy the database.
 
-<FirstDatabasePrerequisites />
+<CoolActionCardGrid
+  data-first-database
+  className="not-prose my-5"
+  surface
+  cards={[
+    {
+      title: 'Dashboard access',
+      description: 'You can sign in to Coolify and see the main dashboard.',
+      bullets: ['You can access Coolify in your browser', 'Dashboard loads without errors'],
+      icon: WindowPointer,
+    },
+    {
+      title: 'Server is connected',
+      description: 'Coolify has at least one server listed on the Servers page.',
+      bullets: ['Open Servers from the sidebar', 'For self-hosted installs, localhost is fine'],
+      icon: Server,
+    },
+    {
+      title: 'Terminal ready',
+      description: 'You can run a command from your computer to test Redis.',
+      bullets: ['Use redis-cli if installed', 'Use Docker if redis-cli is not installed'],
+      icon: TerminalSquare,
+    },
+  ]}
+/>
 
 If Coolify is not ready yet, first follow [Start with Self-hosted](/start-with-self-hosted) or [Start with Coolify Cloud](/start-with-cloud).
 
@@ -138,7 +167,30 @@ Example:
 6380:6379
 ```
 
-<FirstDatabasePortMapping />
+<CoolCompare
+  data-first-database
+  className="not-prose my-5"
+  id="redis-port-mapping"
+  icon={Plug2}
+  title="Redis port mapping"
+>
+<CoolCompareColumn
+  title="Host port"
+  code="6380"
+  items={[
+    'This is the server port you connect to from your terminal.',
+    'Choose another free host port if 6380 is already used.',
+  ]}
+/>
+<CoolCompareColumn
+  title="Container port"
+  code="6379"
+  items={[
+    'This is the Redis port inside the container.',
+    'Keep this side as 6379 for this guide.',
+  ]}
+/>
+</CoolCompare>
 
 <ZoomableImage src="shadow-to-do" alt="Configure Redis port mapping in Coolify" />
 
@@ -153,7 +205,13 @@ Open the mapped host port, for example TCP `6380`, wherever you manage firewall 
 
 For safer testing, allow the port only from your own IP address and close it again when you are done. For general guidance, see [Firewall](/knowledge-base/server/firewall).
 
-<FirstDatabaseExposureWarning />
+<CoolCallout data-first-database className="not-prose my-5" id="database-port-warning" icon={ShieldAlert} title="Do not expose databases casually" type="warn">
+
+Exposing a database port publicly is risky in production. This guide maps a Redis port only so you can test the first deployment from your terminal.
+
+For real production workloads, keep databases private unless you have a specific reason and strict network controls.
+
+</CoolCallout>
 
 ---
 
@@ -218,9 +276,6 @@ If the connection works, it returns `PONG`.
 
 Use these checks when Redis deploys but the terminal test does not behave as expected.
 
-<FirstDatabaseTroubleshooting />
-
-
 <Tabs id="first-database-issues" items={['Connection refused', 'Auth failed', 'redis-cli missing']}>
 <Tab value="Connection refused" icon={Plug2}>
 
@@ -265,4 +320,26 @@ If Docker is not installed either, install Redis CLI locally or test from a mach
 
 Your first database confirms that Coolify can create a database, generate credentials, expose a test port, and accept a connection.
 
-<FirstDatabaseNextSteps />
+<CoolNextSteps
+  data-first-database
+  steps={[
+    {
+      title: 'Deploy an app',
+      detail: 'Deploy an application that can connect to a database.',
+      href: '/deploy-your-first-app',
+      icon: Rocket2,
+    },
+    {
+      title: 'Deploy a service',
+      detail: 'Deploy a ready-made service from the Coolify catalog.',
+      href: '/deploy-your-first-service',
+      icon: Settings,
+    },
+    {
+      title: 'Learn databases',
+      detail: 'Learn how Coolify manages database resources, passwords, and backups.',
+      href: '/databases/index',
+      icon: Database,
+    },
+  ]}
+/>

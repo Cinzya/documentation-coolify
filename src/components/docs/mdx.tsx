@@ -13,23 +13,6 @@ import { ChooseYourPath } from '@/components/pages/choose-your-path';
 import { ContributionGuidelinesPage } from '@/components/pages/contribution-guidelines-page';
 import { OffersPage } from '@/components/pages/offers-page';
 import {
-  FirstDatabaseExposureWarning,
-  FirstDatabaseNextSteps,
-  FirstDatabasePortMapping,
-  FirstDatabasePrerequisites,
-  FirstDatabaseTroubleshooting,
-} from '@/components/pages/deploy-your-first-database';
-import {
-  FirstServiceNetworkChoices,
-  FirstServiceNextSteps,
-  FirstServicePrerequisites,
-  FirstServiceTroubleshooting,
-} from '@/components/pages/deploy-your-first-service';
-import {
-  FirstDeployCardGrid,
-  FirstDeployNextSteps,
-} from '@/components/docs/first-deploy-sections';
-import {
   CloudAccessBasics,
   CloudNextSteps,
   CloudServerOptions,
@@ -56,6 +39,7 @@ import { CoolCard, CoolCardGrid } from './cool-card';
 import { CoolCallout } from './cool-callout';
 import { CoolCompare, CoolCompareColumn } from './cool-compare';
 import { CoolFlow } from './cool-flow';
+import { CoolNextSteps } from './cool-next-steps';
 import {
   CoolDocsPage,
   CoolInlineValue,
@@ -102,23 +86,13 @@ export function getMDXComponents(components?: MDXComponents) {
     CoolDocsPage,
     CoolFlow,
     CoolInlineValue,
+    CoolNextSteps,
     CoolPanel,
     CoolTable,
     CoolValueCard,
     CoolValueGrid,
     File,
     Files,
-    FirstDatabaseExposureWarning,
-    FirstDatabaseNextSteps,
-    FirstDatabasePortMapping,
-    FirstDatabasePrerequisites,
-    FirstDatabaseTroubleshooting,
-    FirstServiceNetworkChoices,
-    FirstServiceNextSteps,
-    FirstServicePrerequisites,
-    FirstServiceTroubleshooting,
-    FirstDeployCardGrid,
-    FirstDeployNextSteps,
     Folder,
     MediaCard,
     MediaCardGroup,
