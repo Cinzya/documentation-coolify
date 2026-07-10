@@ -9,7 +9,6 @@ import { MediaCard } from '@/components/cards/media-card';
 import { MediaCardGroup } from '@/components/cards/media-card-group';
 import { ServicesList } from '@/components/data/services-list';
 import { SponsorsList } from '@/components/data/sponsors-list';
-import { ChooseYourPath } from '@/components/pages/choose-your-path';
 import { ContributionGuidelinesPage } from '@/components/pages/contribution-guidelines-page';
 import { OffersPage } from '@/components/pages/offers-page';
 import {
@@ -70,7 +69,6 @@ export function getMDXComponents(components?: MDXComponents) {
     Callout,
     Card,
     Cards,
-    ChooseYourPath,
     ContributionGuidelinesPage,
     CloudAccessBasics,
     CloudNextSteps,
