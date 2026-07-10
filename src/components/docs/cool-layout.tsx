@@ -79,9 +79,19 @@ export function CoolPanelGrid({ children, className, ...props }: React.Component
   );
 }
 
-export function CoolValueGrid({ children, className, ...props }: React.ComponentProps<'div'>) {
+type CoolValueGridProps = React.ComponentProps<'div'> & {
+  columns?: 1 | 2 | 3;
+};
+
+const valueGridColumns: Record<NonNullable<CoolValueGridProps['columns']>, string> = {
+  1: '',
+  2: 'sm:grid-cols-2',
+  3: 'sm:grid-cols-3',
+};
+
+export function CoolValueGrid({ children, className, columns = 3, ...props }: CoolValueGridProps) {
   return (
-    <div className={cn('mt-4 grid gap-3 sm:grid-cols-3', className)} {...props}>
+    <div className={cn('mt-4 grid gap-3', valueGridColumns[columns], className)} {...props}>
       {children}
     </div>
   );
@@ -91,11 +101,29 @@ export function CoolValueCard({
   children,
   description,
   label,
+  layout = 'stacked',
 }: {
   children: React.ReactNode;
   description?: React.ReactNode;
   label: string;
+  layout?: 'split' | 'stacked';
 }) {
+  if (layout === 'split') {
+    return (
+      <div className="rounded-lg border border-fd-border bg-fd-muted/20 p-3">
+        <div className="flex items-center justify-between gap-4">
+          <span className="text-sm font-semibold text-fd-foreground">{label}</span>
+          <span className="text-sm font-medium text-fd-foreground">{renderCoolLinkValue(children)}</span>
+        </div>
+        {description ? (
+          <p className="m-0 mt-1 text-xs leading-5 text-fd-muted-foreground">
+            {renderCoolLinkValue(description)}
+          </p>
+        ) : null}
+      </div>
+    );
+  }
+
   return (
     <div className="rounded-lg border border-fd-border bg-fd-muted/20 p-3">
       <p className="m-0 text-xs font-medium uppercase tracking-wide text-fd-muted-foreground">{label}</p>
