@@ -4,12 +4,8 @@ description: Start with Coolify Cloud using your own servers while the Coolify t
 ---
 
 import {
-  CloudAccessBasics,
-  CloudNextSteps,
-} from '@/components/pages/start-with-cloud';
-import { SelfHostedProjectResources } from '@/components/pages/start-with-self-hosted';
-import {
   ArrowsRight,
+  Database,
   Flash12,
   Key2,
   LaptopCode,
@@ -19,9 +15,13 @@ import {
   Server,
   ServerCloud,
   ServerUpdate,
+  Settings,
+  SecuritySafe2,
   ShieldSecurity2,
+  SignalStream,
   StarSparkle,
   Warning22,
+  WindowPointer,
 } from 'reicon-react';
 
 # Start with Coolify Cloud
@@ -146,7 +146,49 @@ You can even use our [referral link](https://coolify.io/hetzner) to support the 
 
 The resources you need depend on your projects. If you host multiple services or larger applications, choose a server with higher CPU, memory, and storage.
 
-<SelfHostedProjectResources />
+<CoolResourceShowcase
+  icon={ServerCloud}
+  title="Example production setup"
+  description="ShadowArcanist runs a mixed production workload on one server with the resources below. Use this as a rough reference point, not a fixed recommendation."
+  profile={[
+    {
+      label: 'Hosting provider',
+      value: 'Hetzner',
+    },
+    {
+      label: 'Server type',
+      value: 'CAX11',
+    },
+  ]}
+  resources={[
+    {
+      label: 'Memory',
+      value: '4 GB',
+      description: 'Average usage: 2.8 GB',
+    },
+    {
+      label: 'CPU',
+      value: '2 cores',
+      description: 'Average usage: 60-80%',
+    },
+    {
+      label: 'Storage',
+      value: '40 GB',
+      description: 'Average usage: 30 GB',
+    },
+  ]}
+  supports={[
+    '16 Static Sites',
+    '9 Rust API services',
+    '5 Rust Apps (full stack)',
+    '4 Rust Discord bots',
+    '7 Rust workers',
+    '2 Valkey databases',
+    '2 PostgreSQL databases',
+    'Umami Analytics',
+    'Beszel',
+  ]}
+/>
 
 ---
 
@@ -178,7 +220,36 @@ If Cloud says you exceeded the connected server limit for your current plan, rem
 
 For connecting servers to Coolify Cloud, make sure:
 
-<CloudAccessBasics />
+<CoolActionCardGrid
+  data-cloud-start
+  surface
+  cards={[
+    {
+      title: 'SSH access',
+      href: '/knowledge-base/server/openssh',
+      description: 'Configure OpenSSH so Coolify can connect to your server.',
+      bullets: [
+        'Confirm SSH works from your machine',
+        'Use root or a sudo-capable user',
+      ],
+      icon: SecuritySafe2,
+      'btn-cta': 'Configure SSH',
+      type: 'secondary',
+    },
+    {
+      title: 'Firewall ports',
+      href: '/knowledge-base/server/firewall',
+      description: 'Open the required ports on firewall.',
+      bullets: [
+        'Allow SSH access',
+        'Open Coolify and application ports',
+      ],
+      icon: SignalStream,
+      'btn-cta': 'Configure Firewall',
+      type: 'primary',
+    },
+  ]}
+/>
 
 ---
 
@@ -286,7 +357,29 @@ After validation succeeds, you will see the server status update in onboarding.
 
 Once your server is validated, deploy your first resource by following one of these guides:
 
-<CloudNextSteps />
+<CoolNextSteps
+  data-cloud-start
+  cards={[
+    {
+      title: 'Deploy an application',
+      href: '/deploy-your-first-app',
+      description: 'Start with an app deployment once your server is connected.',
+      icon: WindowPointer,
+    },
+    {
+      title: 'Deploy a database',
+      href: '/deploy-your-first-database',
+      description: 'Add a database when your first app needs persistent data.',
+      icon: Database,
+    },
+    {
+      title: 'Deploy a service',
+      href: '/deploy-your-first-service',
+      description: 'Launch a one-click service from the service catalog.',
+      icon: Settings,
+    },
+  ]}
+/>
 
 
 ## Quick answers

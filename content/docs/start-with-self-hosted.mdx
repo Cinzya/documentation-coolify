@@ -4,29 +4,33 @@ description: Install and run self-hosted Coolify with a clear path for automated
 ---
 
 import {
-  SelfHostedFirewallSshBasics,
   SelfHostedInstallationTab,
   SelfHostedInstallationTabs,
-  SelfHostedNextSteps,
-  SelfHostedProjectResources,
 } from '@/components/pages/start-with-self-hosted';
 import {
   ArrowsRight,
   Autobrightness2,
   Box2,
+  Database,
   Flash12,
   Globe3,
   LaptopCode,
   Layers,
   PenNib,
+  Refresh23,
+  Rocket2,
   SackDollar,
+  SecuritySafe2,
   Server,
   ServerCloud,
   ServerUpdate,
   Setting2,
+  Settings,
   Screencast2,
   ShieldSecurity2,
+  SignalStream,
   StarSparkle,
+  WindowPointer,
 } from 'reicon-react';
 
 # Start with Self-hosted
@@ -161,13 +165,85 @@ If you’re running both builds and Coolify on the same server, monitor your res
 
 The resources you need depend on your projects. If you host multiple services or larger applications, choose a server with higher CPU, memory, and storage.
 
-<SelfHostedProjectResources />
+<CoolResourceShowcase
+  icon={ServerCloud}
+  title="Example production setup"
+  description="ShadowArcanist runs a mixed production workload on one server with the resources below. Use this as a rough reference point, not a fixed recommendation."
+  profile={[
+    {
+      label: 'Hosting provider',
+      value: 'Hetzner',
+    },
+    {
+      label: 'Server type',
+      value: 'CAX11',
+    },
+  ]}
+  resources={[
+    {
+      label: 'Memory',
+      value: '4 GB',
+      description: 'Average usage: 3.2 GB',
+    },
+    {
+      label: 'CPU',
+      value: '2 cores',
+      description: 'Average usage: 70-90%',
+    },
+    {
+      label: 'Storage',
+      value: '40 GB',
+      description: 'Average usage: 32 GB',
+    },
+  ]}
+  supports={[
+    '16 Static Sites',
+    '9 Rust API services',
+    '5 Rust Apps (full stack)',
+    '4 Rust Discord bots',
+    '7 Rust workers',
+    '2 Valkey databases',
+    '2 PostgreSQL databases',
+    'Umami Analytics',
+    'Coolify',
+    'Beszel',
+  ]}
+/>
 
 ---
 
 ### 5. Configure SSH access and firewall
 
-<SelfHostedFirewallSshBasics />
+<CoolActionCardGrid
+  data-self-hosted-start
+  surface
+  cards={[
+    {
+      title: 'SSH access',
+      href: '/knowledge-base/server/openssh',
+      description: 'Configure OpenSSH so Coolify can connect to your server.',
+      bullets: [
+        'Confirm SSH works from your machine',
+        'Use root or a sudo-capable user',
+      ],
+      icon: SecuritySafe2,
+      'btn-cta': 'Configure SSH',
+      type: 'secondary',
+    },
+    {
+      title: 'Firewall ports',
+      href: '/knowledge-base/server/firewall',
+      description: 'Open the required ports on firewall.',
+      bullets: [
+        'Allow SSH access',
+        'Open Coolify and application ports',
+      ],
+      icon: SignalStream,
+      'btn-cta': 'Configure Firewall',
+      type: 'primary',
+    },
+  ]}
+/>
 
 ---
 
@@ -598,7 +674,69 @@ After your Raspberry Pi boots, choose one installation method:
 
 Once Coolify is running, start by deploying something on the same server where Coolify is installed. When that works, expand to more servers or use the maintenance guides as needed.
 
-<SelfHostedNextSteps />
+<CoolNextSteps
+  data-self-hosted-start
+  cards={[
+    {
+      title: 'Deploy an application',
+      href: '/deploy-your-first-app',
+      description: 'Start with an app deployment once your server is connected.',
+      icon: WindowPointer,
+    },
+    {
+      title: 'Deploy a database',
+      href: '/deploy-your-first-database',
+      description: 'Add a database when your first app needs persistent data.',
+      icon: Database,
+    },
+    {
+      title: 'Deploy a service',
+      href: '/deploy-your-first-service',
+      description: 'Launch a one-click service from the service catalog.',
+      icon: Settings,
+    },
+  ]}
+  groups={[
+    {
+      title: 'Grow beyond one server',
+      description: 'Add more compute capacity when your workloads outgrow the first server.',
+      icon: Rocket2,
+      links: [
+        {
+          title: 'Add and validate servers',
+          href: 'shadow-to-do',
+        },
+        {
+          title: 'Build server',
+          href: 'shadow-to-do',
+        },
+        {
+          title: 'Multiple servers',
+          href: 'shadow-to-do',
+        },
+      ],
+    },
+    {
+      title: 'Ongoing operations',
+      description: 'Use these guides when you need to maintain or remove your Coolify instance.',
+      icon: Refresh23,
+      links: [
+        {
+          title: 'Upgrade',
+          href: 'shadow-to-do',
+        },
+        {
+          title: 'Downgrade',
+          href: 'shadow-to-do',
+        },
+        {
+          title: 'Uninstallation',
+          href: 'shadow-to-do',
+        },
+      ],
+    },
+  ]}
+/>
 
 ---
 

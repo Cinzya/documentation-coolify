@@ -11,17 +11,10 @@ import { ServicesList } from '@/components/data/services-list';
 import { SponsorsList } from '@/components/data/sponsors-list';
 import { ContributionGuidelinesPage } from '@/components/pages/contribution-guidelines-page';
 import { OffersPage } from '@/components/pages/offers-page';
-import {
-  CloudAccessBasics,
-  CloudNextSteps,
-} from '@/components/pages/start-with-cloud';
 import { SponsorsPage } from '@/components/pages/sponsors-page';
 import {
-  SelfHostedFirewallSshBasics,
   SelfHostedInstallationTab,
   SelfHostedInstallationTabs,
-  SelfHostedNextSteps,
-  SelfHostedProjectResources,
 } from '@/components/pages/start-with-self-hosted';
 import { SupportPage } from '@/components/pages/support-page';
 import { TeamPage } from '@/components/pages/team-page';
@@ -34,6 +27,7 @@ import { CoolCompare, CoolCompareColumn } from './cool-compare';
 import { CoolFlow } from './cool-flow';
 import { CoolIconCard, CoolIconCardGrid } from './cool-icon-card';
 import { CoolNextSteps } from './cool-next-steps';
+import { CoolResourceShowcase } from './cool-resource-showcase';
 import {
   CoolDocsPage,
   CoolInlineValue,
@@ -64,8 +58,6 @@ export function getMDXComponents(components?: MDXComponents) {
     Card,
     Cards,
     ContributionGuidelinesPage,
-    CloudAccessBasics,
-    CloudNextSteps,
     CoolActionCard,
     CoolActionCardGrid,
     CoolAccordions,
@@ -81,6 +73,7 @@ export function getMDXComponents(components?: MDXComponents) {
     CoolInlineValue,
     CoolNextSteps,
     CoolPanel,
+    CoolResourceShowcase,
     CoolValueCard,
     CoolValueGrid,
     File,
@@ -92,11 +85,8 @@ export function getMDXComponents(components?: MDXComponents) {
     ScreenshotTab,
     ScreenshotTabs,
     ServicesList,
-    SelfHostedFirewallSshBasics,
     SelfHostedInstallationTab,
     SelfHostedInstallationTabs,
-    SelfHostedNextSteps,
-    SelfHostedProjectResources,
     SponsorsList,
     SponsorsPage,
     SupportPage,
