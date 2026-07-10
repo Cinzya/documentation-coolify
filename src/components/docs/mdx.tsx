@@ -10,7 +10,6 @@ import { MediaCardGroup } from '@/components/cards/media-card-group';
 import { ServicesList } from '@/components/data/services-list';
 import { SponsorsList } from '@/components/data/sponsors-list';
 import { ContributionGuidelinesPage } from '@/components/pages/contribution-guidelines-page';
-import { OffersPage } from '@/components/pages/offers-page';
 import { SponsorsPage } from '@/components/pages/sponsors-page';
 import {
   SelfHostedInstallationTab,
@@ -24,6 +23,7 @@ import { CoolAccordions } from './cool-accordions';
 import { CoolCard, CoolCardGrid } from './cool-card';
 import { CoolCallout } from './cool-callout';
 import { CoolCompare, CoolCompareColumn } from './cool-compare';
+import { CoolCopyCode } from './cool-copy-code';
 import { CoolFlow } from './cool-flow';
 import { CoolIconCard, CoolIconCardGrid } from './cool-icon-card';
 import { CoolNextSteps } from './cool-next-steps';
@@ -32,6 +32,7 @@ import {
   CoolDocsPage,
   CoolInlineValue,
   CoolPanel,
+  CoolPanelGrid,
   CoolValueCard,
   CoolValueGrid,
 } from './cool-layout';
@@ -66,6 +67,7 @@ export function getMDXComponents(components?: MDXComponents) {
     CoolCallout,
     CoolCompare,
     CoolCompareColumn,
+    CoolCopyCode,
     CoolDocsPage,
     CoolFlow,
     CoolIconCard,
@@ -73,6 +75,7 @@ export function getMDXComponents(components?: MDXComponents) {
     CoolInlineValue,
     CoolNextSteps,
     CoolPanel,
+    CoolPanelGrid,
     CoolResourceShowcase,
     CoolValueCard,
     CoolValueGrid,
@@ -81,7 +84,6 @@ export function getMDXComponents(components?: MDXComponents) {
     Folder,
     MediaCard,
     MediaCardGroup,
-    OffersPage,
     ScreenshotTab,
     ScreenshotTabs,
     ServicesList,

@@ -1,3 +1,4 @@
+import { Children } from 'react';
 import type React from 'react';
 import { cn } from '@/lib/ui/cn';
 import { renderCoolLinkValue } from './cool-inline-content';
@@ -59,6 +60,25 @@ export function CoolPanel({
   );
 }
 
+export function CoolPanelGrid({ children, className, ...props }: React.ComponentProps<'div'>) {
+  const panels = Children.toArray(children).filter(Boolean);
+
+  return (
+    <div className={cn('grid gap-0 lg:grid-cols-[0.9fr_1.1fr]', className)} {...props}>
+      {panels.map((panel, index) => (
+        <div
+          key={index}
+          className={cn(
+            index < panels.length - 1 ? 'border-b border-fd-border lg:border-b-0 lg:border-e' : null,
+          )}
+        >
+          {panel}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export function CoolValueGrid({ children, className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div className={cn('mt-4 grid gap-3 sm:grid-cols-3', className)} {...props}>
@@ -67,13 +87,26 @@ export function CoolValueGrid({ children, className, ...props }: React.Component
   );
 }
 
-export function CoolValueCard({ children, label }: { children: React.ReactNode; label: string }) {
+export function CoolValueCard({
+  children,
+  description,
+  label,
+}: {
+  children: React.ReactNode;
+  description?: React.ReactNode;
+  label: string;
+}) {
   return (
     <div className="rounded-lg border border-fd-border bg-fd-muted/20 p-3">
       <p className="m-0 text-xs font-medium uppercase tracking-wide text-fd-muted-foreground">{label}</p>
       <p className="m-0 mt-1 text-sm font-semibold text-fd-foreground [&_a]:underline [&_a]:decoration-fd-primary [&_a]:decoration-2 [&_a]:underline-offset-4 [&_a:hover]:decoration-fd-primary/70">
         {renderCoolLinkValue(children)}
       </p>
+      {description ? (
+        <p className="m-0 mt-1 text-xs leading-5 text-fd-muted-foreground">
+          {renderCoolLinkValue(description)}
+        </p>
+      ) : null}
     </div>
   );
 }
