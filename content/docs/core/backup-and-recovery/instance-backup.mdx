@@ -1,268 +1,178 @@
 ---
-title: Coolify Instance backup
-description: Configure instance backups for the Coolify database, download backup files, and keep the required `.env` file for restore.
+title: Back up Coolify
+description: Create and verify self-hosted Coolify instance backups, save the instance encryption key, and configure recurring backups.
 ---
 
-# Instance backup
-Instance backup lets you backup the Coolify database for your Coolify instance.
+import { BrowserTerminal, Refresh23 } from 'reicon-react';
 
-::: info Note
-This guide is for **self-hosted** users who want to setup and manage backups of their Coolify instance.
+# Back up Coolify
 
-If you use **Coolify Cloud**, instance backup for the Coolify control plane is managed by the Coolify team and is not user-configurable.
-:::
+An instance backup saves Coolify's own data, including your projects, resources, settings, and deployment history. It does not back up data stored inside your applications, databases, or volumes.
 
-To access instance backup:
-- click **Settings** from the left sidebar, then open **Backup**
-- visit `https://your-coolify-domain.com/settings/backup`
+<Callout type="warn" title="Self-hosted instances only">
+The Coolify team manages Coolify Cloud instance backups. You are still responsible for backing up the applications and databases deployed to your connected servers.
+</Callout>
 
-<ZoomableImage src="shadow-to-do" alt="Coolify instance backup settings" />
+For a self-hosted instance, open **Settings** in the left sidebar, then select **Backup**.
 
-The Backup tab has two main areas:
-| Item | Description |
-| :--- | :--- |
-| [Scheduled Backup](#scheduled-backup) | Configure automatic backup behavior for the `coolify-db` database. |
-| [Executions](#executions) | Review backup history, file locations, availability, and cleanup actions. |
+If Coolify says instance backups are disabled, validate the server that runs Coolify:
 
-## Before you start
-If the Backup tab says instance backup is disabled, validate the **localhost** server (where Coolify is running) first.
+1. Select **Go to Server Settings to Validate**.
+2. On the server page, select **Validate Server**.
+3. After validation succeeds, open **Settings > Backup** again.
 
-If you see **Configure Backup**, click it once to create the instance backup configuration.
+The first time you open **Backup**, select **Configure Backup**. Coolify then creates the backup configuration and turns on a daily backup schedule.
 
-Default frequency is `0 0 * * *` (every day at `00:00`)
+## Before you back up
 
-
-## Backup from dashboard
-Use the Backup tab if the Coolify dashboard is available, otherwise follow the [Backup from terminal guide](#backup-from-terminal)
-
-### Create a backup now
-Use this when you want to create a backup immediately.
-
-1. Visit `https://your-coolify-domain.com/settings/backup`
-2. Click **Backup Now**
-2. Wait for the new backup entry to appear in **Executions**
-3. Download the backup file or copy the value from `Location`
-
-::: tip Tip
-If `S3 Enabled` is active, `Backup Now` also uploads the backup to the selected S3 storage.
-:::
-
-### Scheduled Backup settings
-The Scheduled Backup page includes:
-| Item | Description |
-| :--- | :--- |
-| [Backup Enabled](#backup-enabled) | Enable or pause scheduled instance backups. |
-| [S3 Enabled](#s3-enabled) | Store an additional backup copy in validated S3 storage. |
-| [Disable Local Backup](#disable-local-backup) | Delete the local file immediately after successful S3 upload. |
-| [Backup Now](#backup-now) | Queue an on-demand backup immediately. |
-| [Frequency](#frequency) | Schedule expression for automatic backups. |
-| [Timezone](#timezone) | Read-only timezone used to evaluate the schedule. |
-| [Timeout](#timeout) | Maximum runtime for one backup job. |
-| [Backup Retention Settings](#backup-retention-settings) | Cleanup rules for local and optional S3 backups. |
-
-<ZoomableImage src="shadow-to-do" alt="Coolify scheduled instance backup settings" />
+- Choose where you will keep a copy of the backup, such as another server or your computer. Do not keep the only copy on the Coolify server.
+- Save the instance `APP_KEY` as described below. Coolify uses this key to encrypt secrets stored in its database.
 
 ---
 
-#### Backup Enabled
-`Backup Enabled` controls whether the scheduled instance backup runs automatically.
+## Choose a backup path
 
-If you disable it, existing backup files and execution history are not removed.
+Use the dashboard while it is available. Use the terminal when the dashboard is unavailable or you need a backup that does not depend on the configured schedule.
 
-Only future scheduled runs stop.
+<Tabs id="manual-instance-backup" items={['Dashboard', 'Terminal']}>
+<Tab value="Dashboard" icon={Refresh23}>
 
----
+### Create a backup from the dashboard
 
-#### S3 Enabled
-`S3 Enabled` stores an additional copy of each successful backup in validated S3 storage.
+<Steps>
+<Step>
 
-When enabled, you must select an `S3 Storage` target.
+**Queue the backup**
 
-If no validated S3 storage exists, this option is disabled.
+Under **Scheduled Backup**, select **Backup Now**.
 
----
+<ZoomableImage src="/docs/images/knowledge-base/how-tos/backup-restore-coolify/2.webp" alt="Backup Now action in the Scheduled Backup section" />
 
-#### Disable Local Backup
-`Disable Local Backup` deletes the local backup file immediately after a successful S3 upload.
+</Step>
+<Step>
 
-This option requires `S3 Enabled`.
+**Confirm the result**
 
-Use this when you want S3 to be the only backup location.
+After you select **Backup Now**, a new entry appears under **Executions**. Its status changes from **In Progress** to **Success** when the backup is ready. If it changes to **Failed**, read the message shown in the entry.
 
-::: info Note
-The dashboard `Download` action reads the backup file from local storage.
+Select **Download** while **Local Storage** is available to save a copy to your computer.
 
-If local backup is disabled, download it from your S3 storage instead.
-:::
+</Step>
+</Steps>
 
----
+</Tab>
 
-#### Backup Now
-`Backup Now` queues an on-demand backup immediately.
+<Tab value="Terminal" icon={BrowserTerminal}>
 
-This button is available when `coolify-db` is running.
+### Create a backup from the terminal
 
-After you click it, the new execution usually appears in the execution history within a few minutes.
-
-::: tip Tip
-If `S3 Enabled` is active, `Backup Now` also uploads the backup to the selected S3 storage.
-:::
-
----
-
-#### Frequency
-`Frequency` controls how often Coolify creates an automatic instance backup.
-
-Use a cron expression such as `0 0 * * *`.
-
-Default is `0 0 * * *` (daily at `00:00`).
-
----
-
-#### Timezone
-`Timezone` is a read-only field in this page.
-
-Instance backup follows the **Server Timezone** of the localhost server (where Coolify is running).
-
----
-
-#### Timeout
-`Timeout` controls how long one backup job is allowed to run before timing out.
-
-This value is in seconds.
-
-Default is `3600`.
-
----
-
-#### Backup Retention Settings
-Backup retention is configured separately for:
-- local storage
-- S3 storage
-
-Each location has three limits:
-- number of backups to keep
-- number of days to keep backups
-- maximum storage in GB
-
-Rules to know:
-- setting a value to `0` means unlimited retention for that rule
-- the rules work independently
-- whichever rule is reached first triggers cleanup
-- cleanup removes older successful backups first
-
----
-
-### Executions
-The Executions area shows the backup history for the Coolify database.
-
-<ZoomableImage src="shadow-to-do" alt="Coolify instance backup executions" />
-
-Each execution shows:
-- status
-- run time
-- file size
-- backup location
-- availability in local storage and S3
-
-For successful executions, Coolify shows a `Download` action.
-
-This downloads the local backup file from the server.
-
-You can also delete a single execution from this area.
-
-If the backup still exists in S3, the delete flow can optionally remove the S3 copy too.
-
-The execution list also includes two cleanup tools:
-
-**A. Cleanup Failed Backups**
-- removes failed execution entries from history
-
-**B. Cleanup Deleted**
-- removes execution entries already marked as deleted from local storage
-- does **not** delete the actual backup files
-
----
-
-### Backup file location
-Use the `Location` value from **Executions**.
-
-For Local and S3, backup files are stored under: `/data/coolify/backups/coolify/coolify-db-hostdockerinternal/`
-
-Files are created with names like: `pg-dump-coolify-1713700000.dmp`
-
-
-### Copy the `.env` file
-After you download or save the backup file path, also copy `/data/coolify/source/.env`.
-
-Run:
+Run the following command on the server that hosts Coolify to create the backup file:
 
 ```sh
-cp /data/coolify/source/.env /data/backups/coolify-source.env
-```
-
-This creates a copy at: `/data/backups/coolify-source.env`
-
-### Back up SSH keys
-If you may restore this backup on another server later, also back up the Coolify SSH keys.
-
-Run:
-
-```sh
-mkdir -p /data/backups/coolify-ssh-keys
-cp -R /data/coolify/ssh/keys/. /data/backups/coolify-ssh-keys/
-```
-
-This creates `/data/backups/coolify-ssh-keys/`
-
-These files help the restored instance reconnect to servers managed by Coolify.
-
-
-## Backup from terminal
-Use this if the dashboard is unavailable.
-
-### 1. Create the database backup
-::: info Note
-The `coolify-db` container must be running before you run the backup command.
-:::
-
-Run:
-
-```sh
-mkdir -p /data/backups/
+mkdir -p /data/backups
 docker exec coolify-db \
   pg_dump --format=custom --no-acl --no-owner \
   --username=coolify coolify \
   > /data/backups/coolify-db-manual-backup.dmp
 ```
 
-This creates the backup at: `/data/backups/coolify-db-manual-backup.dmp`
-
-### 2. Copy the `.env` file
-Run:
+Confirm that the file exists and is not empty:
 
 ```sh
-cp /data/coolify/source/.env /data/backups/coolify-source.env
+test -s /data/backups/coolify-db-manual-backup.dmp \
+  && ls -lh /data/backups/coolify-db-manual-backup.dmp
 ```
 
-This creates a copy at: `/data/backups/coolify-source.env`
+The backup is now stored at `/data/backups/coolify-db-manual-backup.dmp`. Copy it to another computer or server so it is not lost if the Coolify server fails.
 
-### 3. Back up SSH keys
-If you may restore this backup on another server later, also back up the Coolify SSH keys.
+</Tab>
+</Tabs>
 
-Run:
+---
+
+## Save the instance encryption key
+
+Coolify encrypts saved credentials and private keys before storing them in its database. The `APP_KEY` in `/data/coolify/source/.env` is the key used for that encryption. A database backup does not include this file.
+
+<Callout type="warn" title="Without this key, restored secrets cannot be read">
+Save the `APP_KEY` before you need to restore the instance. Treat it like a password and do not publish or share it.
+</Callout>
+
+On the server that hosts Coolify, display the key:
 
 ```sh
-mkdir -p /data/backups/coolify-ssh-keys
-cp -R /data/coolify/ssh/keys/. /data/backups/coolify-ssh-keys/
+grep '^APP_KEY=' /data/coolify/source/.env
 ```
 
-This creates `/data/backups/coolify-ssh-keys/`
+Copy the complete `APP_KEY=...` line into a password manager or another secure place outside the Coolify server. S3 instance backups include only the database backup file, so you must save this key separately.
 
-These files help the restored instance reconnect to servers managed by Coolify.
+---
 
-### 4. Keep the restore files
-Keep these files somewhere safe:
-- `/data/backups/coolify-db-manual-backup.dmp`
-- `/data/backups/coolify-source.env`
-- `/data/backups/coolify-ssh-keys/`
+## Configure recurring backups
+
+The default **Frequency** is `0 0 * * *`, which creates one backup each day at midnight in the instance timezone.
+
+<Steps>
+<Step>
+
+**Set the schedule**
+
+<ZoomableImage src="shadow-to-do" alt="Backup schedule settings with Frequency, Timezone, and Timeout" />
+
+Turn on **Backup Enabled**. Enter a valid cron expression in **Frequency**, or use `every_minute`, `hourly`, `daily`, `weekly`, `monthly`, or `yearly`.
+
+**Timezone** is read-only and uses the instance timezone.
+
+Set **Timeout** to the maximum backup runtime in seconds, then select **Save**. The accepted range is `60` to `36000`; the default is `3600` seconds.
+
+</Step>
+<Step>
+
+**Configure local retention**
+
+<ZoomableImage src="shadow-to-do" alt="Local Backup Retention settings" />
+
+Under **Local Backup Retention**, set any combination of these limits:
+
+- **Number of backups to keep** accepts `0` or a positive integer.
+- **Days to keep backups** accepts `0` or a positive integer.
+- **Maximum storage (GB)** accepts `0` or a positive number, including decimals.
+
+A value of `0` makes that limit unlimited. The limits work independently, and Coolify removes the oldest successful backups when any configured limit is reached.
+
+</Step>
+<Step>
+
+**Add an S3 copy**
+
+<ZoomableImage src="shadow-to-do" alt="S3 backup and S3 Storage Retention settings" />
+
+Turn on **S3 Enabled**, select a validated **S3 Storage** target, then select **Save**. If no validated target exists, **S3 Enabled** remains unavailable.
+
+When S3 is enabled, **S3 Storage Retention** provides the same three independent limits for S3 copies.
+
+Turn on **Disable Local Backup** only when S3 should be the sole backup location. Coolify deletes the local file after a successful upload. If an S3 upload fails, Coolify keeps the local file and marks the execution **Success (S3 Warning)**.
+
+The dashboard cannot download a remote-only file. Download the backup from your S3 storage provider instead.
+
+</Step>
+</Steps>
+
+---
+
+## Verify and manage backups
+
+**Executions** shows the status, database name, size, location, and storage availability for each backup.
+
+<ZoomableImage src="/docs/images/knowledge-base/how-tos/backup-restore-coolify/3.webp" alt="Successful backup execution with its file location and storage availability" />
+
+For a usable backup, confirm that the execution shows **Success** and that at least one storage location is available. Local instance backups are stored under `/data/coolify/backups/coolify/coolify-db-<server-ip>/`; use the exact **Location** shown in the execution to find a specific file.
+
+The available actions depend on the execution:
+
+- **Download** saves the local backup to your computer.
+- **Delete** removes the local backup and can also remove its S3 copy when one exists.
+- **Cleanup Failed Backups** removes failed execution records.
+- **Cleanup Deleted** removes execution records already marked as deleted from local storage. It does not delete backup files.
+
+Periodically check that you can access the copies stored on another server or your computer. Also confirm that you still have the saved `APP_KEY`. To test or perform recovery, follow [Restore a Coolify instance](/core/backup-and-recovery/instance-restore).
