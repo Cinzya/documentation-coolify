@@ -1,33 +1,20 @@
 ---
 title: Commands
-description: "Essential Coolify CLI commands for root password reset, email changes, and deleting stuck services via Docker exec and Artisan commands."
+description: Run administrative commands for a self-hosted Coolify instance and find the complete root account recovery guide.
 ---
 
 # Commands
-## Root password reset without SMTP
-You can use the following method to reset the root user's password, in case you forgot and do not have an SMTP server set, so you cannot request a forgot password.
 
-Login to your server through SSH and execute the following command:
+## Recover the root account
 
-```bash
-docker exec -ti coolify sh -c "php artisan root:reset-password"
-```
+Use the complete recovery guide for the root account command. The guide includes prerequisites, consequences, verification, and failure recovery:
 
-## Root email change
-You can change root user's email.
-
-Login to your server through SSH and execute the following command:
-
-```bash
-docker exec -ti coolify sh -c "php artisan root:change-email"
-```
+- [Reset Root Password](/core/backup-and-recovery/reset-root-password)
 
 ## Delete a stuck service
- You can easily delete a stuck service.
- 
-  Login to your server through SSH and execute the following command:
 
-```bash
-docker exec -ti coolify sh -c "php artisan services:delete"
+Connect to the server that runs Coolify over SSH, then run:
+
+```sh
+docker exec -it coolify php artisan services:delete
 ```
-

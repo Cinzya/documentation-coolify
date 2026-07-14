@@ -2,6 +2,7 @@
   "title": "Backup and Recovery",
   "pages": [
     "instance-backup",
-    "instance-restore"
+    "instance-restore",
+    "reset-root-password"
   ]
 }
