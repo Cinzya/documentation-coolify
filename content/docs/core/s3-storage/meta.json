@@ -1,7 +1,7 @@
 {
-  "title": "S3",
+  "title": "S3 Storage",
   "pages": [
-    "introduction",
+    "overview",
     "aws",
     "r2",
     "supabase"

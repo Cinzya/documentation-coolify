@@ -12,6 +12,8 @@
     "security-model",
     "---Manage Coolify---",
     "instance-management",
-    "backup-and-recovery"
+    "backup-and-recovery",
+    "---Persistent Storage---",
+    "s3-storage"
   ]
 }
