@@ -1,134 +1,263 @@
 ---
 title: How Coolify works
-description: An overview of how Coolify works to deploy and manage applications on your own servers.
+description: How the Coolify instance, connected servers, Docker, and reverse proxies work together.
 ---
 
+import {
+  ArrowsRight,
+  Box2,
+  Globe3,
+  Layers,
+  Rocket2,
+  Server,
+  ServerCloud,
+  Settings,
+  ShieldSecurity2,
+} from 'reicon-react';
 
 # How Coolify works
-Coolify is an open source, self-hosted platform that helps you build, deploy, and manage applications, databases, and services using Docker. It is designed for people and teams who want an easy PaaS-like experience without the complexity of Kubernetes or managed cloud providers.
 
+Coolify separates platform control from workload runtime. The Coolify instance stores configuration and coordinates actions, while Docker on each connected server runs your applications, databases, and services.
 
-## High-level overview
-Coolify is a **control plane** that coordinates Docker workloads across one or more servers you own. You install Coolify once on a server, and then you can connect additional servers to it. 
+That separation determines where deployments run, how traffic reaches resources, what each backup contains, and what happens during an outage.
 
-The core idea is:
-- Coolify **manages and orchestrates workloads**
-- Docker on each server **runs the applications**
-- Each server can run its **own reverse proxy**
-- Traffic is routed directly to the application containers
-- If Coolify is removed, the applications **continue running** because they depend only on Docker (and reverse proxy, if used)
+<CoolCallout icon={ArrowsRight} title="The short version">
 
-This design avoids a central traffic bottleneck and creates a true **zero vendor lock-in** architecture.
+You configure a resource in the Coolify dashboard or API. The Coolify instance connects to the selected server over SSH, then runs the Docker operations needed to build, deploy, and manage that resource.
 
+For HTTP resources, requests go to the reverse proxy on the server running the resource and then to its containers. The Coolify server does not relay your application traffic.
 
-## Core components
-1. [Control plane](#control-plane-coolify-server)
-2. [Managed servers](#managed-servers)
-3. [Docker containers](#docker-containers)
-4. [Reverse proxy](#reverse-proxy-and-traffic-flow)
+</CoolCallout>
+
+You can run the Coolify server yourself or use Coolify Cloud. With self-hosted Coolify, you maintain the Coolify server. With Coolify Cloud, the Coolify team maintains it. In both setups, your applications, databases, and services run on servers you provide.
 
 ---
 
-### Control plane (Coolify server)
-The **control plane** is the central coordination layer of Coolify. It runs as a set of Docker containers on a single server. 
+## The control path and traffic path
 
-This is where the web UI, API, and orchestration logic live. You install Coolify on one machine, this becomes the “**main server**.”
+Coolify sends deployment and management commands through the control path. Your users reach running HTTP resources through the application traffic path.
 
-The control plane includes the following internal services:
-- `coolify` - main backend
-- `coolify-db` - PostgreSQL database for storing metadata, secrets, etc..
-- `coolify-redis` - Redis for queues, caching, and background jobs
-- `coolify-realtime` - Soketi for real-time UI updates and logs streaming
-- `coolify-sentinel` - optional service for resource and container monitoring
-- `coolify-proxy` - optional Traefik or Caddy instance on the Coolify host to handle traffic routing
+<CoolCompare
+  id="coolify-control-and-traffic-paths"
+  className="not-prose"
+  icon={Layers}
+  title="How Coolify manages resources and serves traffic"
+  description="Coolify uses the control path for deployments and management actions. Running HTTP resources use the application traffic path for user requests."
+>
+<CoolCompareColumn
+  title="Control path"
+  items={[
+    'Starts when you use the Coolify dashboard or API, trigger a deployment webhook, or run scheduled automation.',
+    'Reads saved configuration from the Coolify database and places the requested action in a queue.',
+    'Reaches the selected server through SSH.',
+    'Runs Docker commands on the target server or a configured build server.',
+  ]}
+/>
+<CoolCompareColumn
+  title="Application traffic path"
+  items={[
+    'Starts from a client after DNS or an upstream network layer directs the request.',
+    'Reaches the reverse proxy on the server running the resource.',
+    'Travels from the reverse proxy to the correct container over Docker networks.',
+    'Does not pass through the Coolify dashboard or API service.',
+  ]}
+/>
+</CoolCompare>
 
-These internal services work together to track state, schedule deployments, and coordinate remote actions.
-
-The control plane is generally **not in the traffic path** of your applications, it instructs remote Docker engines to run containers but does not proxy HTTP or HTTPS traffic itself.  
-
-::: info Note
-If you choose to deploy applications directly on the main Coolify server, the local reverse proxy will route traffic to those applications just like it does on any other managed server.
-:::
-
----
-
-### Managed servers
-A **managed server** is any machine you control with SSH access, including:
-- Cloud virtual machines
-- Bare metal servers
-- Home lab machines
-- ARM and x86 devices
-- Old laptops or Macs running Linux
-
-Coolify **does not require a persistent deployment agent** on these servers. Instead, it connects remotely using SSH and runs Docker commands when needed.  
-For monitoring, Coolify can optionally run `coolify-sentinel` on a managed server.
-
-This means the server remains usable and independent even without Coolify.
-
-Each managed server handles:
-- running containers
-- handling builds (if configured)
-- running its own reverse proxy (if enabled)
-- exposing apps to the internet
-
-Because services run locally on these servers, traffic goes directly from clients to application containers, not through the main Coolify server.
+A self-hosted Coolify server can also run deployed resources. In that setup, the Coolify server and resource containers share a machine but still run as separate containers.
 
 ---
 
-### Docker containers
-Every application, database, or service Coolify handles runs as a **Docker container**. 
+## Parts of a Coolify setup
 
-Containers isolate processes, making it easier to:
-- run multiple apps on one machine
-- avoid conflicts between ports and dependencies
-- restart or replace services consistently
+A Coolify setup has four main parts.
 
-Coolify uses Docker to:
-- build images from source using Dockerfiles
-- pull prebuilt images from registries
-- manage container lifecycle (start, stop, restart)
-- attach Docker volumes for persistent data
+<CoolIconCardGrid
+  surface
+  cards={[
+    {
+      title: 'Coolify instance',
+      description: 'Provides the Coolify dashboard and API, then runs deployments, server checks, and scheduled jobs.',
+      icon: Settings,
+    },
+    {
+      title: 'Connected servers',
+      description: 'Provide SSH access to Coolify and run Docker for builds, resources, the reverse proxy, and monitoring.',
+      icon: Server,
+    },
+    {
+      title: 'Docker resources',
+      description: 'Run applications, databases, and services as standard containers with networks and persistent storage.',
+      icon: Box2,
+    },
+    {
+      title: 'Reverse proxy',
+      description: 'Routes configured domains to containers and handles HTTPS on each server where it is enabled.',
+      icon: Globe3,
+    },
+  ]}
+/>
 
-Because everything is standard Docker, you can manage containers manually with Docker commands outside of Coolify if needed.
+Coolify does not require a persistent deployment agent on a connected server. It uses SSH for deployments and server actions. The optional `coolify-sentinel` container adds monitoring data, but it does not replace SSH.
+
+### Inside a self-hosted Coolify instance
+
+A standard self-hosted installation runs four base containers.
+
+| <span className="inline-block min-w-40">Container</span> | Role |
+| :--- | :--- |
+| `coolify` | Serves the Coolify dashboard and API, processes queued jobs with Laravel Horizon, and runs scheduled jobs. |
+| `coolify-db` | Runs PostgreSQL for Coolify configuration and state. |
+| `coolify-redis` | Supports queued work and caching. |
+| <span className="whitespace-nowrap">`coolify-realtime`</span> | Runs Soketi for Coolify dashboard updates and a WebSocket server for browser terminal sessions. |
+
+The `coolify-proxy` and `coolify-sentinel` containers belong to the server runtime rather than this base control-plane stack. Coolify starts a reverse proxy on each server where it is enabled, while Sentinel remains optional.
 
 ---
 
-### Reverse proxy and traffic flow
-Each server managed by Coolify can run its **own reverse proxy container** (Traefik or Caddy). 
+## From configuration to running containers
 
-This proxy:
-- listens on ports **80** (HTTP) and **443** (HTTPS)
-- receives incoming web requests
-- terminates TLS with certificates
-- renews TLS certificates automatically
-- routes traffic to the correct application container based on hostname and path.
+The details vary by resource type, but most operations follow the same control path.
 
-Because the proxy runs locally:
-- Traffic is directly routed to the containers
-- Applications remain reachable even if Coolify stops
+<CoolFlow
+  id="coolify-deployment-control-flow"
+  icon={Rocket2}
+  title="From configuration to runtime"
+  description="Coolify turns saved resource configuration into Docker resources on the selected server."
+  steps={[
+    'Save resource configuration',
+    'Queue the requested action',
+    'Connect to the server',
+    'Build or pull images',
+    'Start containers and routing',
+  ]}
+  list={[
+    'Coolify stores the project, environment, resource, and server configuration on the Coolify instance.',
+    'A request from the Coolify dashboard or API, a deployment webhook, or a schedule adds the requested action to a queue.',
+    'Coolify uses SSH to run the required commands on the selected server.',
+    'Coolify pulls an existing image or builds an application image on the target server or a dedicated build server.',
+    'Docker creates or updates containers, networks, and storage attachments. For HTTP resources, Coolify also applies reverse proxy routing.',
+  ]}
+  endnote="The final containers run on the resource's destination server even when a separate build server creates the image. Configured health checks can determine when a new application container is ready to receive traffic."
+/>
 
-This is key to the “zero vendor lock-in” of Coolify: **your apps continue running and remain reachable through their existing routing setup even if Coolify stops**
+Applications built from Git have more build stages than databases, one-click services, or prebuilt images. Read the [Build and deployment model](/core/build-deployment-model) for those resource-specific paths.
 
+---
 
-## Zero vendor lock-in
-Coolify uses only standard open source tools:
-- Docker containers
-- SSH connections
-- Open Source reverse proxies
-- Docker storage volumes
+## How requests reach a resource
 
-Applications **do not depend** on the Coolify to run. If Coolify is removed:
+When an HTTP resource has a domain and uses the reverse proxy, a request follows this sequence:
 
-- containers continue running
-- reverse proxies continue routing traffic
-- data remains intact
+1. DNS or an upstream network layer directs the domain to the connected server.
+2. The reverse proxy on that server receives the request on port `80` or `443` and handles TLS when configured.
+3. The reverse proxy matches the hostname and path, then forwards the request to the resource container over an attached Docker network.
+4. The container handles the request and returns the response.
 
-You can manage and run everything directly with Docker if you choose.
+The Coolify server does not relay these requests. If Coolify and the resource run on the same machine, the reverse proxy still sends each request directly to the resource container.
 
+If you disable the Coolify-managed reverse proxy for a server, you must provide the external routing and TLS path yourself. Non-HTTP resources can communicate over Docker networks or through explicitly published ports instead of this reverse proxy path.
 
-## Self-hosted or Coolify Cloud
-You can use Coolify in **two ways**:
-- **Self-hosted** – you run Coolify on your own servers, with full control.  
-- **Coolify Cloud** – we host Coolify for you for convenience.  
+Read [Networking in Coolify](/core/networking-in-coolify) for Docker networks, reverse proxy options, domains, and your firewall responsibilities.
 
-All features are the same in both, Cloud just saves you from managing Coolify by yourself. Learn more in our [Self-hosted vs Coolify Cloud comparison](/core/selfhosted-cloud-comparison).
+---
+
+## Where configuration and data live
+
+Coolify configuration and workload data do not all live in one place.
+
+| Layer | Location | What it contains |
+| :--- | :--- | :--- |
+| Coolify configuration | Coolify instance | Projects, environments, server and resource settings, credentials, and platform state used by the control plane. |
+| Deployment and runtime files | Connected server or build server | Generated deployment files, build artifacts, Docker images, containers, and networks used for that server's work. |
+| Resource data | Connected server or external storage | Docker volumes, bind mounts, and external storage used by applications, databases, and services. |
+| Reverse proxy state | Connected server with the reverse proxy enabled | The reverse proxy configuration and certificate data used to route traffic on that server. |
+
+An [instance backup](/core/backup-and-recovery/instance-backup) contains a copy of the Coolify database used by the control plane. Application files, database data, volumes, and external storage on connected servers are not part of an instance backup.
+
+---
+
+## When the Coolify instance is unavailable
+
+Already-running resources use Docker and the existing reverse proxy configuration. They do not need the Coolify server to handle each request.
+
+<CoolCompare
+  id="coolify-instance-outage-boundary"
+  className="not-prose"
+  icon={ShieldSecurity2}
+  title="Runtime independence has limits"
+  description="This comparison assumes the connected server, Docker daemon, resource containers, network path, and reverse proxy remain healthy."
+>
+<CoolCompareColumn
+  title="Keeps running"
+  items={[
+    'Containers that Docker is already running',
+    'Persistent data in volumes, bind mounts, or external storage',
+    'The reverse proxy using its existing routing configuration',
+    'Requests to running HTTP resources',
+  ]}
+/>
+<CoolCompareColumn
+  title="Requires the Coolify instance"
+  items={[
+    'Coolify dashboard and API operations',
+    'Deployments, configuration changes, and lifecycle actions started through Coolify',
+    'Scheduled jobs, webhooks, and background automation coordinated by the control plane',
+    'Status checks, log access, and notifications initiated by Coolify',
+  ]}
+/>
+</CoolCompare>
+
+Losing SSH access has a similar boundary: Coolify cannot operate that server, but the SSH failure does not stop existing containers by itself. If the connected server, Docker daemon, reverse proxy, or upstream network fails, resources on that path can become unavailable even while the Coolify instance remains healthy.
+
+Standard Docker resources reduce platform lock-in because you can inspect and operate them directly. The Coolify instance still holds the configuration and automation that make them manageable as Coolify resources. Keep separate backups of the Coolify database and workload data.
+
+---
+
+## Continue learning
+
+Use the detailed Core pages to follow each part of the model.
+
+<CoolNextSteps
+  cards={[
+    {
+      title: 'Docker and containers',
+      href: '/core/docker-and-containers',
+      description: 'Learn how images, containers, networks, and volumes form the runtime layer.',
+      icon: Box2,
+    },
+    {
+      title: 'Build and deployment model',
+      href: '/core/build-deployment-model',
+      description: 'Follow how Coolify builds images and replaces application containers.',
+      icon: Rocket2,
+    },
+    {
+      title: 'Networking in Coolify',
+      href: '/core/networking-in-coolify',
+      description: 'Understand reverse proxy routing, domains, Docker networks, and exposed ports.',
+      icon: Globe3,
+    },
+  ]}
+  groups={[
+    {
+      title: 'Choose the control plane',
+      description: 'Compare who operates the Coolify instance before choosing a setup.',
+      icon: ServerCloud,
+      links: [
+        { title: 'Self-hosted vs Coolify Cloud', href: '/core/selfhosted-cloud-comparison' },
+        { title: 'Choose your path', href: '/choose-your-path' },
+      ],
+    },
+    {
+      title: 'Security and backups',
+      description: 'Review security responsibilities and create backups for the Coolify database and workload data.',
+      icon: ShieldSecurity2,
+      links: [
+        { title: 'Security model', href: '/core/security-model' },
+        { title: 'Instance backup', href: '/core/backup-and-recovery/instance-backup' },
+        { title: 'Database backups', href: '/databases/backups' },
+      ],
+    },
+  ]}
+/>
