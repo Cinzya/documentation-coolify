@@ -512,7 +512,7 @@ service sshd start
 
 Before disabling password-based root login, make sure the public key used for the `root` account is already in `/root/.ssh/authorized_keys`.
 
-If you have not added a key yet, complete [Create and authorize an SSH key](/core/servers/add-server#create-and-authorize-an-ssh-key), then return to this step.
+If you have not added a key yet, complete [Create and authorize an SSH key](/core/infrastructure/servers/add-server#create-and-authorize-an-ssh-key), then return to this step.
 
 </Step>
 <Step>
@@ -601,7 +601,7 @@ Keep the original server session open until this connection succeeds.
 
 ### Connect the server to Coolify
 
-Finish the [Connect the server to Coolify](/core/servers/add-server#connect-the-server-to-coolify) steps and validate the server.
+Finish the [Connect the server to Coolify](/core/infrastructure/servers/add-server#connect-the-server-to-coolify) steps and validate the server.
 
 </Step>
 </Steps>
@@ -621,13 +621,13 @@ The private key selected for the server does not match a public key in the SSH u
 
 For **localhost**, repeat the **Authorize the localhost SSH key** and **Select the private key** steps in the **Manual** tab.
 
-For a remote server, repeat the SSH key steps in [Add Server](/core/servers/add-server#create-and-authorize-an-ssh-key).
+For a remote server, repeat the SSH key steps in [Add Server](/core/infrastructure/servers/add-server#create-and-authorize-an-ssh-key).
 
 </Accordion>
 
 <Accordion title="Why does validation time out?">
 
-Confirm that the server IP address and SSH port are correct. Then confirm that the [firewall](/core/servers/firewall) allows the SSH connection from Coolify.
+Confirm that the server IP address and SSH port are correct. Then confirm that the [firewall](/core/infrastructure/servers/firewall) allows the SSH connection from Coolify.
 
 </Accordion>
 

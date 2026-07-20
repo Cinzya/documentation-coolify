@@ -29,7 +29,7 @@ If your server becomes very slow or crashes during deployment, consider the foll
 - **For Building from Source Deployments:**
 
   - The docker image build process can overload your server.
-  - **Solution:** Offload the build process to an external [Build Server](/core/servers/build-servers), or use an alternative method such as [GitHub Actions](https://docs.github.com/en/actions) to handle the build externally. Alternatively, consider upgrading your server’s capacity.
+  - **Solution:** Offload the build process to an external [Build Server](/core/infrastructure/servers/build-servers), or use an alternative method such as [GitHub Actions](https://docs.github.com/en/actions) to handle the build externally. Alternatively, consider upgrading your server’s capacity.
 
 - **General Tip:**  
   SSH into your server and run `htop` to monitor processes. Identify any process consuming excessive resources, and kill it if necessary.

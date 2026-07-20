@@ -20,7 +20,7 @@ Before you start, make sure you have:
 - access to the Coolify dashboard
 - an open SSH port, usually port `22`
 
-To connect with a non-root account, complete the [Non-root User](/core/servers/non-root-user) setup first. Use port `22` unless you changed the SSH port on the server.
+To connect with a non-root account, complete the [Non-root User](/core/infrastructure/servers/non-root-user) setup first. Use port `22` unless you changed the SSH port on the server.
 
 If Coolify cannot reach the server's IP address, it can connect over SSH through a domain or hostname instead. Follow [Server SSH Access via Cloudflare Tunnels](/integrations/cloudflare/tunnels/server-ssh) to connect the server through a domain.
 
@@ -163,8 +163,8 @@ If validation reports an SSH error:
 
 - confirm the IP address, port, and user are correct
 - confirm the selected private key matches the public key in `/root/.ssh/authorized_keys`
-- confirm the SSH port is open in the [firewall](/core/servers/firewall)
-- follow [OpenSSH](/core/servers/openssh) to check the SSH service
+- confirm the SSH port is open in the [firewall](/core/infrastructure/servers/firewall)
+- follow [OpenSSH](/core/infrastructure/servers/openssh) to check the SSH service
 
 </Step>
 </Steps>

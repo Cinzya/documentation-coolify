@@ -121,7 +121,7 @@ Follow the installation and rule instructions in the ufw-docker repository. Keep
 
 <Accordion title="Coolify is inaccessible after an update, server patch, or reboot">
 
-Check whether a rule created with ufw-docker uses the IP address of the `coolify` container. A container can receive a different IP address when it is recreated during a Coolify update, [server patch](/core/servers/server-patching), or reboot. The rule then continues pointing to the old IP address and blocks access to Coolify.
+Check whether a rule created with ufw-docker uses the IP address of the `coolify` container. A container can receive a different IP address when it is recreated during a Coolify update, [server patch](/core/infrastructure/servers/server-patching), or reboot. The rule then continues pointing to the old IP address and blocks access to Coolify.
 
 Remove the rule that uses the old container IP address. Replace it with a rule for the required destination port so the rule continues working when the container IP changes.
 
@@ -262,7 +262,7 @@ After saving the rules:
 - For self-hosted Coolify, open the dashboard using port `8000` or its configured domain.
 - Validate a connected server from **Servers > your server > General**.
 - Open an application domain and confirm it loads through HTTPS.
-- Open the [Web Terminal](/core/servers/web-terminal) if you use it.
+- Open the [Web Terminal](/core/infrastructure/servers/web-terminal) if you use it.
 
 If server validation times out, check the SSH port and allowed source address first. If validation succeeds but an application does not load, check ports `80` and `443` and confirm the domain points to the correct server.
 

@@ -16,7 +16,7 @@
     "---Persistent Storage---",
     "s3-storage",
     "---Infrastructure---",
-    "servers",
+    "infrastructure/servers",
     "infrastructure/scaling",
     "---Networking---",
     "overview",

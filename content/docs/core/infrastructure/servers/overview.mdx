@@ -85,7 +85,7 @@ By default, Coolify builds an application on the same server where that applicat
 
 Add one later if application builds use too much CPU, memory, or disk space on the deployment server.
 
-Read [Build Servers](/core/servers/build-servers) when you are ready to configure one.
+Read [Build Servers](/core/infrastructure/servers/build-servers) when you are ready to configure one.
 
 ---
 
@@ -98,21 +98,21 @@ Follow these guides in order:
 
 ### Prepare OpenSSH
 
-Follow [OpenSSH](/core/servers/openssh) to install SSH and allow key-based access.
+Follow [OpenSSH](/core/infrastructure/servers/openssh) to install SSH and allow key-based access.
 
 </Step>
 <Step>
 
 ### Configure the firewall
 
-Follow [Firewall](/core/servers/firewall) to open the ports required for SSH and web traffic.
+Follow [Firewall](/core/infrastructure/servers/firewall) to open the ports required for SSH and web traffic.
 
 </Step>
 <Step>
 
 ### Add and validate the server
 
-Follow [Add Server](/core/servers/add-server) to create an SSH key, add it to the server, connect the server, and validate it.
+Follow [Add Server](/core/infrastructure/servers/add-server) to create an SSH key, add it to the server, connect the server, and validate it.
 
 </Step>
 </Steps>
@@ -129,19 +129,19 @@ After the server is connected, use these guides for routine server tasks.
   cards={[
     {
       title: 'Patch server packages',
-      href: '/core/servers/server-patching',
+      href: '/core/infrastructure/servers/server-patching',
       description: 'Check for operating-system package updates and choose when to install them.',
       icon: Refresh23,
     },
     {
       title: 'Configure Docker cleanup',
-      href: '/core/servers/automated-docker-cleanup',
+      href: '/core/infrastructure/servers/automated-docker-cleanup',
       description: 'Schedule cleanup and control which unused Docker data Coolify may remove.',
       icon: HardDrive,
     },
     {
       title: 'Open the Web Terminal',
-      href: '/core/servers/web-terminal',
+      href: '/core/infrastructure/servers/web-terminal',
       description: 'Open a browser shell for a reachable server or running container.',
       icon: BrowserTerminal,
     },

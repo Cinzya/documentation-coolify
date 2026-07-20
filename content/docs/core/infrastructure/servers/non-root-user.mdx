@@ -167,7 +167,7 @@ The `cooluser` user can now manage files under `/data/coolify`. Coolify applies 
 
 ### Continue to Add Server
 
-Follow [Add Server](/core/servers/add-server#connect-the-server-to-coolify) to connect and validate the server.
+Follow [Add Server](/core/infrastructure/servers/add-server#connect-the-server-to-coolify) to connect and validate the server.
 
 When you complete the server form:
 
@@ -182,7 +182,7 @@ If validation fails:
 - Run `su - cooluser -c 'sudo -n true'` again. A password prompt means the sudo rule is incorrect.
 - Confirm the public key is in `/home/cooluser/.ssh/authorized_keys`.
 - Confirm **User** is `cooluser` in Coolify.
-- Check the [OpenSSH](/core/servers/openssh) settings and [firewall](/core/servers/firewall) rule for the SSH port.
+- Check the [OpenSSH](/core/infrastructure/servers/openssh) settings and [firewall](/core/infrastructure/servers/firewall) rule for the SSH port.
 
 </Step>
 </Steps>
