@@ -1,0 +1,149 @@
+---
+title: Overview
+description: Learn what servers do in Coolify and follow the correct path to connect and prepare your first server.
+---
+
+import { ArrowsRight, BrowserTerminal, HardDrive, Refresh23, Rocket2, Server, ServerCloud } from 'reicon-react';
+
+# Servers overview
+
+A server is the machine where Coolify runs your applications, databases, and services.
+
+When you add a server, Coolify connects to it through SSH, checks that it can run Docker, and prepares it for deployments. The server stays with your hosting provider; Coolify only manages it after you connect it.
+
+<CoolCallout icon={ArrowsRight} title="The short version">
+
+Self-hosted Coolify starts with a **localhost** server. Coolify Cloud users connect their own server before deploying resources.
+
+Applications build on their deployment server by default. A separate build server is optional and is useful only when builds need dedicated capacity.
+
+</CoolCallout>
+
+---
+
+## Server types
+
+Coolify uses three server roles.
+
+<CoolIconCardGrid
+  columns={3}
+  surface
+  cards={[
+    {
+      title: 'Localhost',
+      description: 'The server that runs a self-hosted Coolify instance and can also run deployed resources.',
+      icon: Server,
+    },
+    {
+      title: 'Remote server',
+      description: 'A Linux server you connect to Coolify so it can run applications, databases, and services.',
+      icon: ServerCloud,
+    },
+    {
+      title: 'Build server',
+      description: 'A dedicated server that builds application images but does not run deployed resources.',
+      icon: Rocket2,
+    },
+  ]}
+/>
+
+### The server Coolify runs on
+
+A self-hosted Coolify installation starts with a server named **localhost**. This is the machine where Coolify is installed.
+
+<Callout type="info" title="Using Coolify Cloud?">
+Coolify Cloud users cannot access or deploy resources to the server that runs the Coolify Cloud dashboard. You must connect your own server before deploying an application, database, or service.
+</Callout>
+
+You can deploy resources to localhost, but those resources share the machine's CPU, memory, and storage with Coolify. For production workloads, you may prefer to connect another server so application activity does not affect the dashboard.
+
+The localhost server cannot be removed.
+
+### Remote servers
+
+A remote server is a Linux server that you own or rent and then add to Coolify. Coolify connects to it through SSH and deploys your resources there.
+
+<Callout type="info" title="A public IP address is not required">
+Coolify only needs a working SSH path to the server. If the server does not have a public IP address, or you do not want to expose its SSH port publicly, follow [Server SSH Access via Cloudflare Tunnels](/integrations/cloudflare/tunnels/server-ssh).
+</Callout>
+
+Use a remote server when you want to:
+
+- deploy resources with Coolify Cloud
+- keep applications away from the server running the Coolify dashboard
+- deploy resources in another location
+- separate workloads across multiple machines
+- replace a server without reinstalling the Coolify dashboard
+
+To connect one, you need an IP address or hostname that Coolify can reach, an SSH user, an SSH private key, and access to the matching user account on the server.
+
+### Build servers
+
+A build server is used only to build application images. Applications, databases, and services cannot be deployed to it.
+
+By default, Coolify builds an application on the same server where that application will be deployed. You do not need a separate build server when getting started.
+
+Add one later if application builds use too much CPU, memory, or disk space on the deployment server.
+
+Read [Build Servers](/core/servers/build-servers) when you are ready to configure one.
+
+---
+
+## Connect your first remote server
+
+Follow these guides in order:
+
+<Steps>
+<Step>
+
+### Prepare OpenSSH
+
+Follow [OpenSSH](/core/servers/openssh) to install SSH and allow key-based access.
+
+</Step>
+<Step>
+
+### Configure the firewall
+
+Follow [Firewall](/core/servers/firewall) to open the ports required for SSH and web traffic.
+
+</Step>
+<Step>
+
+### Add and validate the server
+
+Follow [Add Server](/core/servers/add-server) to create an SSH key, add it to the server, connect the server, and validate it.
+
+</Step>
+</Steps>
+
+After validation succeeds, the server is ready to run applications, databases, and services.
+
+---
+
+## Manage a connected server
+
+After the server is connected, use these guides for routine server tasks.
+
+<CoolNextSteps
+  cards={[
+    {
+      title: 'Patch server packages',
+      href: '/core/servers/server-patching',
+      description: 'Check for operating-system package updates and choose when to install them.',
+      icon: Refresh23,
+    },
+    {
+      title: 'Configure Docker cleanup',
+      href: '/core/servers/automated-docker-cleanup',
+      description: 'Schedule cleanup and control which unused Docker data Coolify may remove.',
+      icon: HardDrive,
+    },
+    {
+      title: 'Open the Web Terminal',
+      href: '/core/servers/web-terminal',
+      description: 'Open a browser shell for a reachable server or running container.',
+      icon: BrowserTerminal,
+    },
+  ]}
+/>
