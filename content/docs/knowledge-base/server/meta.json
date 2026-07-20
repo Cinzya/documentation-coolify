@@ -1,16 +1,8 @@
 {
   "title": "Servers",
   "pages": [
-    "introduction",
-    "automated-cleanup",
-    "build-server",
-    "firewall",
     "multiple-servers",
-    "non-root-user",
-    "openssh",
     "oracle-cloud",
-    "proxies",
-    "patching",
-    "terminal-access"
+    "proxies"
   ]
 }
