@@ -1,0 +1,15 @@
+{
+  "title": "Servers",
+  "pages": [
+    "overview",
+    "add-server",
+    "remove-server",
+    "openssh",
+    "firewall",
+    "non-root-user",
+    "build-servers",
+    "server-patching",
+    "automated-docker-cleanup",
+    "web-terminal"
+  ]
+}
