@@ -1,0 +1,182 @@
+---
+title: Add Server
+description: Add a remote Linux server to Coolify and prepare it for application, database, and service deployments.
+---
+
+# Add a server
+
+Add a remote Linux server to run applications, databases, and services managed by Coolify.
+
+<Callout type="info" title="When to add a server">
+Coolify Cloud users must add a remote server because they do not have access to a localhost server. Self-hosted users can add one to keep workloads separate from the server that runs Coolify.
+</Callout>
+
+## What you need
+
+Before you start, make sure you have:
+
+- a Linux server with an IP address or hostname that Coolify can reach
+- the password or console access for the server's `root` user
+- access to the Coolify dashboard
+- an open SSH port, usually port `22`
+
+To connect with a non-root account, complete the [Non-root User](/core/servers/non-root-user) setup first. Use port `22` unless you changed the SSH port on the server.
+
+If Coolify cannot reach the server's IP address, it can connect over SSH through a domain or hostname instead. Follow [Server SSH Access via Cloudflare Tunnels](/integrations/cloudflare/tunnels/server-ssh) to connect the server through a domain.
+
+<Callout type="warning" title="Use a fresh server when possible">
+Server validation can install Docker and restart the Docker service. If the server already runs containers, they may be temporarily unavailable.
+</Callout>
+
+---
+
+## Create and authorize an SSH key
+
+<Steps>
+<Step>
+
+### Create an SSH key in Coolify
+
+<ZoomImage src="/docs/images/core/infrastructure/servers/private-keys/private-keys-page.webp" alt="Private Keys page in Coolify" />
+
+1. Open the Coolify dashboard.
+2. Select **Keys & Tokens** in the sidebar.
+3. Open **Private Keys**.
+4. Select **+ Add**.
+
+</Step>
+<Step>
+
+### Generate the SSH key
+
+<ZoomImage src="/docs/images/core/infrastructure/servers/private-keys/new-private-key-form.webp" alt="New Private Key form in Coolify" />
+
+1. Select **Generate new ED25519 SSH Key**.
+2. Enter a name such as `production-server`.
+3. Copy the value shown in **Public Key**. You will paste it on the server in the next step.
+4. Select **Continue** to save the key.
+
+Do not add a passphrase to the private key. Coolify must be able to use it without an interactive prompt.
+
+</Step>
+<Step>
+
+### Add the public key to the server
+
+Connect to the server as `root`:
+
+```sh
+ssh root@<server-ip>
+```
+
+Replace `<server-ip>` with the server's IP address. If the SSH service uses a port other than `22`, run:
+
+```sh
+ssh -p <ssh-port> root@<server-ip>
+```
+
+If you use a non-root account, replace `root` with your account username.
+
+After connecting, run:
+
+```sh
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+nano ~/.ssh/authorized_keys
+```
+
+Paste the complete public key copied from Coolify on a new line. Save the file, then run:
+
+```sh
+chmod 600 ~/.ssh/authorized_keys
+```
+
+</Step>
+</Steps>
+
+---
+
+## Connect the server to Coolify
+
+<Steps>
+<Step>
+
+### Open the Servers page
+
+<ZoomImage src="/docs/images/core/infrastructure/servers/add-server/servers-page-add-button.webp" alt="Servers page with the Add button in Coolify" />
+
+1. Select **Servers** in the Coolify sidebar.
+2. Select **+ Add**.
+3. Find **Add Server by IP Address**.
+
+</Step>
+<Step>
+
+### Enter the server details
+
+<ZoomImage src="/docs/images/core/infrastructure/servers/add-server/server-form.webp" alt="New Server form in Coolify" />
+
+| Field | What to enter |
+| :--- | :--- |
+| **Name** | A name you will recognize, such as `production-server`. |
+| **Description** | Optional information about what the server will run. |
+| **IP Address/Domain** | The server IP address or a hostname such as `server.example.com`. Do not include `http://` or `https://`. |
+| **Port** | The SSH port. Use `22` unless you changed it on the server. |
+| **User** | Enter `root` for this guide. |
+| **Private Key** | Select the key from [step 1 (Create an SSH key in Coolify)](#create-an-ssh-key-in-coolify). |
+
+<Callout type="info" title="Adding a deployment server?">
+Leave **Use it as a build server?** disabled unless this machine will only build application images.
+</Callout>
+
+Select **Continue**. Coolify adds the server and opens its **General** page.
+
+</Step>
+<Step>
+
+### Validate the server
+
+<ZoomImage src="/docs/images/core/infrastructure/servers/add-server/validate-server.webp" alt="Validate Server button on the server General page" />
+
+Select **Validate Server & Install Docker Engine**.
+
+Keep the page open while Coolify:
+
+1. connects to the server through SSH
+2. checks the operating system
+3. installs the required tools
+4. installs or verifies Docker Engine and Docker Compose
+5. prepares the server for deployments
+
+The process can take several minutes on a new server.
+
+</Step>
+<Step>
+
+### Confirm the server is ready
+
+<ZoomImage src="/docs/images/core/infrastructure/servers/add-server/validated-server.webp" alt="Validated Coolify server with the proxy running" />
+
+Validation is complete when the **General** page shows **Server is reachable and validated**.
+
+If validation reports an SSH error:
+
+- confirm the IP address, port, and user are correct
+- confirm the selected private key matches the public key in `/root/.ssh/authorized_keys`
+- confirm the SSH port is open in the [firewall](/core/servers/firewall)
+- follow [OpenSSH](/core/servers/openssh) to check the SSH service
+
+</Step>
+</Steps>
+
+---
+
+## Set a wildcard domain (optional)
+
+The **Wildcard Domain** setting is only used to generate a domain when you create a new resource. If you leave it empty, Coolify generates an `sslip.io` domain from the server IP address.
+
+For example, entering `https://example.com` lets Coolify generate a domain such as `https://<application-id>.example.com` for a new application.
+
+Setting a wildcard domain does not move resources, expose ports, change the server connection, or replace DNS configuration. It also does not change domains already assigned to existing resources.
+
+Before using it, create a DNS record for `*.example.com` and point it to this server's IP address. The generated domain will not work until that DNS record exists.
