@@ -37,8 +37,6 @@
     "events",
     "channels",
     "---Automation---",
-    "scheduled-tasks",
-    "tags",
-    "cron-syntax"
+    "...automation"
   ]
 }
