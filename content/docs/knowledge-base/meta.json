@@ -4,7 +4,6 @@
   "pages": [
     "internal",
     "---Self-hosted Instance---",
-    "monitoring",
     "notifications",
     "webhook-payloads",
     "self-update",
@@ -27,7 +26,6 @@
     "---Resources---",
     "environment-variables",
     "persistent-storage",
-    "drain-logs",
     "rolling-updates",
     "health-checks",
     "nodejs-multi-core-scaling",

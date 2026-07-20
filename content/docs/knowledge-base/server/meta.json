@@ -6,7 +6,6 @@
     "build-server",
     "firewall",
     "multiple-servers",
-    "sentinel",
     "non-root-user",
     "openssh",
     "oracle-cloud",
