@@ -17,7 +17,7 @@
     "s3-storage",
     "---Infrastructure---",
     "servers",
-    "scaling",
+    "infrastructure/scaling",
     "---Networking---",
     "overview",
     "destinations",
