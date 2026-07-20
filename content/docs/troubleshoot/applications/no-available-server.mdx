@@ -6,7 +6,7 @@ tags: ["No Available Server", "503"]
 
 # No Available Server (503) Error
 
-If your deployed application or service shows a **"No Available Server"** error, this indicates that [Traefik](/knowledge-base/proxy/traefik) (the reverse proxy) cannot find any (healthy) containers to route traffic to under the provided secured URL (`https`).
+If your deployed application or service shows a **"No Available Server"** error, this indicates that [Traefik](/core/networking/proxy/traefik/overview) (the reverse proxy) cannot find any (healthy) containers to route traffic to under the provided secured URL (`https`).
 
 ## What Causes This Error?
 
@@ -158,7 +158,7 @@ Make sure the protocol in your domain configuration matches how you want to acce
 **Symptoms:**
 
 - Application / Service works via `http://IP:port` but not via domain (manual port mapping required)
-- [Traefik](/knowledge-base/proxy/traefik) can't reach the application
+- [Traefik](/core/networking/proxy/traefik/overview) can't reach the application
 
 **Steps:**
 

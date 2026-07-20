@@ -95,12 +95,12 @@ Read more about how Coolifys proxies read and interpret the health of your resou
 
 ## Catch Multiple Domains
 
-Multitenancy is supported with Coolify. When using [Traefik](/knowledge-base/proxy/traefik), you can automatically catch multiple domains, by editing the `Container Labels` of your Application or Service and define a [`HostRegexp`](https://doc.traefik.io/traefik/reference/routing-configuration/http/routing/rules-and-priority/#host-and-hostregexp) rule.
+Multitenancy is supported with Coolify. When using [Traefik](/core/networking/proxy/traefik/overview), you can automatically catch multiple domains, by editing the `Container Labels` of your Application or Service and define a [`HostRegexp`](https://doc.traefik.io/traefik/reference/routing-configuration/http/routing/rules-and-priority/#host-and-hostregexp) rule.
 
 
 <Callout type="warn" title="Catch-All &amp; SSL Certificates">
 
-The Coolify Proxy won't be able to issue SSL certificates for catch-all domains. For subdomains of a specific domain, you have the option to generate a [Wildcard SSL certificate](/knowledge-base/proxy/traefik/wildcard-certs).
+The Coolify Proxy won't be able to issue SSL certificates for catch-all domains. For subdomains of a specific domain, you have the option to generate a [Wildcard SSL certificate](/core/networking/proxy/traefik/wildcard-certs).
 
 </Callout>
 
