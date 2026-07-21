@@ -261,12 +261,10 @@ html:not(.dark) #nd-subnav {
   color: hsl(0 0% 90%);
 }
 
-#nd-sidebar p[class*='mb-1.5'][class*='mt-6'] ~ a {
+#nd-sidebar :is(a, button):has(> .fd-page-tree-item-name),
+#nd-sidebar-mobile :is(a, button):has(> .fd-page-tree-item-name) {
   margin-inline-start: 0.375rem;
-}
-
-#nd-sidebar-mobile p[class*='mb-1.5'][class*='mt-6'] ~ a {
-  margin-inline-start: 0.375rem;
+  width: calc(100% - 0.375rem);
 }
 
 #nd-sidebar-mobile > div:last-child {
