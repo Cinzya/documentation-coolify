@@ -1,6 +1,6 @@
 ---
 title: "Environment Variables"
-description: "Manage build-time and runtime environment variables in Coolify with team, project, and environment-based shared variables plus predefined system values."
+description: "Manage build-time and runtime environment variables in Coolify with team, project, environment, and server-scoped shared variables plus predefined system values."
 ---
 
 # Environment Variables
@@ -148,33 +148,13 @@ The `Literal` checkbox is hidden when `Multiline` is already enabled, since mult
 </Callout>
 
 
-## Shared Variables
+## Shared variables
 
-You could have 3 types of shared variables:
+Shared variables let you define a value at team, project, environment, or server scope and reference it from resource configuration.
 
-1. Team Based
-2. Project Based
-3. Environment Based (production, staging, etc.)
+Follow [Shared Variables](/core/team/shared-variables) to choose a scope, create a value, use reference syntax such as `{{team.NODE_ENV}}`, and manage variables in Normal or Developer view.
 
-You can set shared variables on their respective pages.
-
-Then you can use these variables anywhere. For example: You defined `NODE_ENV` to `production`.
-
-### Team Based
-
-You can set them on the `Team` page and use it with `{{team.NODE_ENV}}`. Do not replace "team" with your actual team name.
-
-### Project Based
-
-You can set them on the `Projects` page, under the gear icon and use it with `{{project.NODE_ENV}}`. Do not replace "project" with your actual project name.
-
-### Environment Based
-
-You can set them on the `Environments` page (select a `Project`), under the gear icon and use it with `{{environment.NODE_ENV}}` Do not replace "environment" with your actual environment name.
-
-### Using Environment and Shared Variables in Docker Compose
-
-Within Coolify you can configure these easily following the details found in the [Knowledge Base for Docker Compose](/knowledge-base/docker/compose#shared-environment-variables).
+For Docker Compose placement and examples, see [Shared Environment Variables in Docker Compose](/knowledge-base/docker/compose#shared-environment-variables).
 
 ## Predefined Variables
 
