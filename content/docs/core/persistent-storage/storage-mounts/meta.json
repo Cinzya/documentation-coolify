@@ -4,6 +4,7 @@
     "overview",
     "volume-mounts",
     "bind-mounts",
-    "file-mounts"
+    "file-mounts",
+    "backups"
   ]
 }
