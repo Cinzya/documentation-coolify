@@ -4,8 +4,6 @@
   "pages": [
     "internal",
     "---Self-hosted Instance---",
-    "notifications",
-    "webhook-payloads",
     "self-update",
     "commands",
     "delete-user",
