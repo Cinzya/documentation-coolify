@@ -161,6 +161,16 @@ html:not(.dark) #nd-subnav {
   background-color: hsl(0 0% 96% / 0.86);
 }
 
+#nd-subnav {
+  grid-column: 1 / -1;
+}
+
+#nd-subnav > [data-header-body],
+#nd-subnav > [data-header-tabs] {
+  width: min(100%, var(--fd-layout-width, 97rem));
+  margin-inline: auto;
+}
+
 #nd-sidebar-mobile {
   z-index: 60;
 }
