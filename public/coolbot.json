@@ -268,8 +268,8 @@
     "link": "https://coolify.io/docs/core/notifications/overview"
   },
   {
-    "name": "Knowledge Base - OAuth",
-    "link": "https://coolify.io/docs/knowledge-base/oauth"
+    "name": "Authentication - OAuth",
+    "link": "https://coolify.io/docs/core/security/authentication/oauth/overview"
   },
   {
     "name": "Knowledge Base - Persistent Storage",
