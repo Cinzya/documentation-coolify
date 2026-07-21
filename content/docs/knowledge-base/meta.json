@@ -14,7 +14,6 @@
     "change-localhost-key",
     "---Resources---",
     "environment-variables",
-    "persistent-storage",
     "rolling-updates",
     "health-checks",
     "nodejs-multi-core-scaling",
