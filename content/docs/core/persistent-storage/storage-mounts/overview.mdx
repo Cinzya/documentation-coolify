@@ -3,7 +3,7 @@ title: Overview
 description: Understand how persistent storage keeps application and database data outside replaceable containers and choose the correct mount type in Coolify.
 ---
 
-import { HardDrive, Package, Server } from 'reicon-react';
+import { CloudStorage, HardDrive, Package, Server } from 'reicon-react';
 
 # Persistent storage overview
 
@@ -12,7 +12,7 @@ Containers are replaceable. When Coolify redeploys a resource, Docker may remove
 Data written only to the container filesystem disappears when that container is removed. Persistent storage keeps important data on the deployment server and mounts it into each replacement container at the path your application expects.
 
 <Callout type="warning" title="Persistent storage is not a backup">
-Persistent storage protects data from normal container replacement, but it does not protect against accidental deletion, disk failure, server loss, or corrupted data. Back up important application and database data separately.
+Persistent storage protects data from normal container replacement, but it does not protect against accidental deletion, disk failure, server loss, or corrupted data. For application volumes and directory mounts, Coolify can create [scheduled storage backups](/core/persistent-storage/storage-mounts/backups). Keep at least one backup outside the deployment server and test how you will restore it.
 </Callout>
 
 ## How persistent storage works
@@ -28,7 +28,7 @@ Only data written under a mounted destination path is persistent. Adding a mount
 
 ## Choose a storage mount
 
-Coolify shows three choices under **Persistent Storage**. These dashboard choices map to two underlying Docker storage types: named volumes and bind mounts.
+Coolify shows four choices under **Persistent Storage**. A **Volume Mount** can also work in two ways, depending on whether you enter a **Source Path**. These dashboard workflows map to two underlying Docker storage types: named volumes and bind mounts.
 
 | Choice in Coolify | Storage location | Use it for |
 | :--- | :--- | :--- |
@@ -36,10 +36,11 @@ Coolify shows three choices under **Persistent Storage**. These dashboard choice
 | **Volume Mount** with a **Source Path** | The exact directory you choose on the deployment server | Data you need to inspect, copy, or manage directly from the server filesystem |
 | **Directory Mount** | The exact directory you choose on the deployment server | A server directory that Coolify creates when needed and shows under **Directories** |
 | **File Mount** | A Coolify-managed file on the deployment server | A single configuration file mounted at one exact path inside the container |
+| **Host File Mount** | An existing file at the exact path you choose on the deployment server | A file that Coolify mounts without creating, editing, changing permissions, or deleting it |
 
 Start with a [volume mount](/core/persistent-storage/storage-mounts/volume-mounts) unless the application or an operational requirement needs a specific server path. Docker manages the volume location, while you only provide its name and container destination.
 
-Use a [bind mount](/core/persistent-storage/storage-mounts/bind-mounts) when the source must be a known server directory. Use a [file mount](/core/persistent-storage/storage-mounts/file-mounts) when the container needs one dashboard-managed file rather than a directory of persistent data.
+Use a [bind mount](/core/persistent-storage/storage-mounts/bind-mounts) when the source must be a known server directory. Use a [file mount](/core/persistent-storage/storage-mounts/file-mounts) when the container needs one file rather than a directory. Coolify can manage the file content, or it can bind an existing host file without managing it.
 
 ## Where mounts are configured
 
@@ -81,10 +82,14 @@ The deployment server stores the volume or bind-mounted files. If one Coolify in
     {
       title: 'File mounts',
       href: '/core/persistent-storage/storage-mounts/file-mounts',
-      description: 'Create and manage one file mounted at an exact path inside the container.',
+      description: 'Mount one managed or existing host file at an exact path inside the container.',
       icon: Package,
+    },
+    {
+      title: 'Storage mount backups',
+      href: '/core/persistent-storage/storage-mounts/backups',
+      description: 'Schedule local and optional S3 archives for eligible application storage mounts.',
+      icon: CloudStorage,
     },
   ]}
 />
-
-To connect object storage for supported backup workflows, read [S3 storage](/core/s3-storage/overview).
