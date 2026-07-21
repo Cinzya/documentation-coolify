@@ -66,7 +66,19 @@ Replace `/app/data` with the exact data directory used by the image. Save the Co
 
 Coolify prefixes parsed volume names to avoid collisions. The **Persistent Storage** page displays the resulting mount as read-only because the Compose file owns its configuration. Edit the Compose file when the source or destination needs to change.
 
-## Inspect and back up a volume
+## Back up a volume
+
+For an application, Coolify can create scheduled file-level archives of a Volume Mount, including a Volume Mount with a **Source Path**. You can keep archives on the deployment server and optionally copy them to S3-compatible storage.
+
+Read [Storage mount backups](/core/persistent-storage/storage-mounts/backups) to choose a target, reduce the risk of an inconsistent archive, set retention, and verify each execution.
+
+<Callout type="warning" title="Use an application-aware backup for databases">
+A file-level volume archive created while a database is writing may be inconsistent. Use the database engine's supported backup workflow for database data. If you also archive its storage, stop writes or enable **Stop containers while creating the archive**.
+</Callout>
+
+Coolify does not let you delete a volume while its storage backup schedule exists. Delete the schedule and its archives first, then delete the volume only after confirming that you no longer need its data.
+
+## Inspect a volume
 
 Connect over SSH to the deployment server, then list its Docker volumes:
 
@@ -80,7 +92,7 @@ Inspect the volume after finding its actual name:
 docker volume inspect <actual-volume-name>
 ```
 
-The inspection output includes Docker's server-side mountpoint. Avoid editing files inside Docker's internal volume directory while the application is running. Use the application's supported backup method, or stop writes before copying volume data.
+The inspection output includes Docker's server-side mountpoint. Avoid editing files inside Docker's internal volume directory while the application is running.
 
 <Callout type="error" title="Docker cleanup can permanently delete volume data">
 An unused volume can still contain important data. Keep **Delete Unused Volumes** disabled unless you have identified and backed up every volume that cleanup may remove. Read [Automated Docker Cleanup](/core/infrastructure/servers/automated-docker-cleanup) before enabling it.
