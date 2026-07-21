@@ -16,8 +16,6 @@
     "custom-docker-registry",
     "custom-compose-overrides",
     "change-localhost-key",
-    "---DNS & Domains---",
-    "dns-configuration",
     "---Destinations---",
     "destinations/index",
     "destinations/create",
