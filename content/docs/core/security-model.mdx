@@ -100,9 +100,9 @@ The built-in controls cover four parts of control-plane security.
   ]}
 />
 
-On self-hosted instances, **Settings > Configuration > Advanced** also lets you disable API access or restrict it to specific IP addresses and CIDR ranges. Create and revoke tokens under **Security > API Tokens**.
+On self-hosted instances, **Settings > Configuration > Advanced** also lets you disable API access or restrict it to specific IP addresses and CIDR ranges. Create and revoke tokens under **Keys & Tokens > API Tokens**.
 
-Read [API authorization](/api-reference/authorization) for the available token permissions and request format.
+Read [API tokens](/core/security/credentials/api-tokens) for the available token permissions and request format.
 
 These controls reduce risk in the paths Coolify manages. They do not replace security reviews, dependency updates, or runtime protections inside your applications.
 
@@ -228,8 +228,11 @@ Use the detailed guides to apply the security model to your Coolify instance and
       description: 'Configure the people and integrations that can operate Coolify.',
       icon: Key2,
       links: [
-        { title: 'API authorization', href: '/api-reference/authorization' },
-        { title: 'OAuth', href: '/knowledge-base/oauth' },
+        { title: 'API tokens', href: '/core/security/credentials/api-tokens' },
+        { title: 'SSH keys', href: '/core/security/credentials/ssh-keys' },
+        { title: 'OAuth', href: '/core/security/authentication/oauth/overview' },
+        { title: 'SSO', href: '/core/security/authentication/sso/overview' },
+        { title: '2FA', href: '/core/security/authentication/2fa' },
         { title: 'Terminal access', href: '/core/infrastructure/servers/web-terminal' },
       ],
     },
