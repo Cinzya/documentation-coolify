@@ -2,6 +2,7 @@
   "title": "Networking",
   "pages": [
     "domains",
+    "dns",
     "proxy"
   ]
 }
