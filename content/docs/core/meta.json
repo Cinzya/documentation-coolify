@@ -20,7 +20,7 @@
     "infrastructure/scaling",
     "---Networking---",
     "overview",
-    "destinations",
+    "networking/destinations",
     "...networking",
     "---Team Management---",
     "team/members",
