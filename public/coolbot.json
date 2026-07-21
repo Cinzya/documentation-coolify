@@ -160,16 +160,20 @@
     "link": "https://coolify.io/docs/knowledge-base/delete-user"
   },
   {
-    "name": "Destinations - Creating Destinations",
-    "link": "https://coolify.io/docs/knowledge-base/destinations/create"
+    "name": "Destinations - Create a Destination",
+    "link": "https://coolify.io/docs/core/networking/destinations/create"
   },
   {
-    "name": "Destinations - Introduction",
-    "link": "https://coolify.io/docs/knowledge-base/destinations"
+    "name": "Destinations - Overview",
+    "link": "https://coolify.io/docs/core/networking/destinations/overview"
   },
   {
-    "name": "Destinations - Managing Destinations",
-    "link": "https://coolify.io/docs/knowledge-base/destinations/manage"
+    "name": "Destinations - Manage Destinations",
+    "link": "https://coolify.io/docs/core/networking/destinations/manage"
+  },
+  {
+    "name": "Destinations - Delete Destination",
+    "link": "https://coolify.io/docs/core/networking/destinations/delete"
   },
   {
     "name": "Knowledge Base - DNS Configuration",

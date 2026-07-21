@@ -56,11 +56,11 @@ When you define custom Docker networks in your Docker Compose file, the `coolify
 
 #### Solution 1: Use Coolify Destinations (Recommended)
 
-Let Coolify manage networks automatically by using [Destinations](/knowledge-base/destinations/) instead of custom networks:
+Let Coolify manage networks automatically by using [Destinations](/core/networking/destinations/overview) instead of custom networks:
 
 1. Remove custom network definitions from your Docker Compose file
-2. [Configure the network destination](/knowledge-base/destinations/create) in Coolify's UI under **Destinations**
-3. [Move your application / service to the desired destination](/knowledge-base/destinations/manage#assign-resources-to-a-destination)
+2. [Create the network destination](/core/networking/destinations/create) in Coolify under **Destinations**
+3. [Connect the Docker Compose resource to its predefined destination](/core/networking/destinations/manage#connect-docker-compose-resources)
 4. Redeploy
 
 **Before (problematic):**
