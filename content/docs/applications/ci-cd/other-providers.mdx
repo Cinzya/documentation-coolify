@@ -12,7 +12,7 @@ This guide will show you how to use other Git provider with Coolify, such as Gog
 You can use public repositories from any Git provider without any additional setup.
 
 1. Select the `Public repository` option in Coolify when you create a new resource.
-2. Add your repository URL to the input field, for example: `https://git.example.com/username/repository`
+2. Add your repository URL to the input field, for example: `https://git.shadowarcanist.com/username/repository`
 
 
 <Callout type="warn" title="Caution">
@@ -48,7 +48,7 @@ ssh-keygen -t ed25519 -C "coolify_deploy_key"
 
 
 2. Create a new resource and select the `Private Repository (with deploy key)`
-3. Add your repository URL to the input field, for example: `git@git.example.com:username/repository.git`
+3. Add your repository URL to the input field, for example: `git@git.shadowarcanist.com:username/repository.git`
 
 
 <Callout type="warn" title="Caution">
@@ -76,7 +76,7 @@ If your provider doesn't support this, you'll need to trigger deployments manual
 
 ### Prerequisites
 
-1. Create a [Coolify API Token](/api-reference/authorization) in your Coolify dashboard
+1. Create a [Coolify API token](/core/security/credentials/api-tokens) in your Coolify dashboard
 2. Get the Deploy Webhook URL from your resource (Your resource → `Webhooks` menu → `Deploy Webhook`)
 
 ### Setup with Workflow/CI System
