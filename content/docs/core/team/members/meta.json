@@ -1,0 +1,9 @@
+{
+  "title": "Members",
+  "pages": [
+    "overview",
+    "add-a-member",
+    "remove-a-member",
+    "manage-members"
+  ]
+}
