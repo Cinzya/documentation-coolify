@@ -264,8 +264,8 @@
     "link": "https://coolify.io/docs/knowledge-base/nodejs-multi-core-scaling"
   },
   {
-    "name": "Knowledge Base - Notifications",
-    "link": "https://coolify.io/docs/knowledge-base/notifications"
+    "name": "Notifications - Overview",
+    "link": "https://coolify.io/docs/core/notifications/overview"
   },
   {
     "name": "Knowledge Base - OAuth",
@@ -404,8 +404,8 @@
     "link": "https://coolify.io/docs/knowledge-base/server/terminal-access"
   },
   {
-    "name": "Knowledge Base - Webhook Payloads",
-    "link": "https://coolify.io/docs/knowledge-base/webhook-payloads"
+    "name": "Notifications - Webhook Payload Reference",
+    "link": "https://coolify.io/docs/core/notifications/channels/webhook/payload-reference"
   },
   {
     "name": "Troubleshoot - Bad Gateway Error",
