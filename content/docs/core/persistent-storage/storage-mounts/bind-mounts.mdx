@@ -81,7 +81,9 @@ For repository-relative directories, read the [Docker Compose build pack storage
 
 ## Back up and move bind-mounted data
 
-Back up the source directory on the deployment server. The container destination is only another view of those same files.
+For an application, Coolify can schedule file-level archives for both bind mount workflows on this page: a **Volume Mount** with a **Source Path** and a **Directory Mount**. Read [Storage mount backups](/core/persistent-storage/storage-mounts/backups) to configure local archives, an optional S3 copy, and retention.
+
+For a manual backup or server move, copy the source directory on the deployment server. The container destination is only another view of those same files.
 
 When moving the resource to another server:
 
@@ -92,5 +94,5 @@ When moving the resource to another server:
 5. Verify the application can read and write the mounted data.
 
 <Callout type="error" title="Deleting a Directory Mount can delete its contents">
-The Directory Mount deletion dialog can remove the source directory and all its contents from the deployment server. Back up the directory and read every confirmation option before deleting the mount.
+The Directory Mount deletion dialog can remove the source directory and all its contents from the deployment server. Back up the directory and read every confirmation option before deleting the mount. If the directory has a storage backup schedule, delete that schedule and its archives before Coolify will let you delete the mount.
 </Callout>
