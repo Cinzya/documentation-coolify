@@ -173,7 +173,7 @@
   },
   {
     "name": "Knowledge Base - DNS Configuration",
-    "link": "https://coolify.io/docs/knowledge-base/dns-configuration"
+    "link": "https://coolify.io/docs/core/networking/domains"
   },
   {
     "name": "Docker - Docker Compose",
@@ -193,7 +193,7 @@
   },
   {
     "name": "Knowledge Base - Domains",
-    "link": "https://coolify.io/docs/knowledge-base/domains"
+    "link": "https://coolify.io/docs/core/networking/domains"
   },
   {
     "name": "Knowledge Base - Drain Logs",
