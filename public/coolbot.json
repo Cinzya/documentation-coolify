@@ -276,8 +276,8 @@
     "link": "https://coolify.io/docs/core/security/authentication/oauth/overview"
   },
   {
-    "name": "Knowledge Base - Persistent Storage",
-    "link": "https://coolify.io/docs/knowledge-base/persistent-storage"
+    "name": "Storage Mounts - Overview",
+    "link": "https://coolify.io/docs/core/persistent-storage/storage-mounts/overview"
   },
   {
     "name": "Proxy Caddy - Caddy Basic Auth",
