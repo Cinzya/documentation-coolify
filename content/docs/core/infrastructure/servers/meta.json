@@ -3,6 +3,8 @@
   "pages": [
     "overview",
     "add-server",
+    "provision-cloud-server",
+    "manage-server",
     "remove-server",
     "openssh",
     "firewall",
