@@ -1,83 +1,115 @@
 ---
 title: Remove Server
-description: Review managed resources and safely remove a remote server from Coolify.
+description: Remove a server from Coolify, optionally delete its resources, and understand provider deletion.
 ---
 
 # Remove a server
 
-Removing a server from Coolify removes its server details from the database. It does not uninstall Docker or delete files on the Linux server.
+Deleting a server always removes it's details from the Coolify database. Depending on the options you choose, Coolify can also delete its managed resources and its linked Hetzner, DigitalOcean, or Vultr machine.
 
-The **localhost** server of a self-hosted Coolify installation cannot be removed.
+The **localhost** server in a self-hosted Coolify installation cannot be deleted.
 
-## Remove the server from Coolify
+<Callout type="error" title="Back up important data first">
+Deleting resources or the linked provider machine can permanently destroy application files, databases, volumes, and backups stored on that machine.
+</Callout>
+
+## Decide what to delete
+
+Before opening the deletion dialog, choose the required outcome.
+
+| Option | Result |
+| :--- | :--- |
+| **Only delete server from Coolify** | Removes the server from Coolify. The Linux machine, Docker installation, and files remain. |
+| **Delete all resources** | Starts deletion for every resource Coolify manages on this server, then removes the server from database. |
+| **Also delete server/droplet from the provider** | Sends a deletion request for the linked Hetzner server, Vultr instance, or DigitalOcean Droplet. |
+
+Provider deletion is not selected by default. If you leave it disabled, the provider continues billing for a machine that still exists.
+
+---
+
+## Prepare for removal
 
 <Steps>
 <Step>
 
-### Review the server Resources page
+### Review managed resources
 
-1. Open **Servers** in the Coolify sidebar.
-2. Select the server you want to remove.
-3. Open **Resources** page.
-4. Select **Managed**.
-5. Review every resource listed on the page.
+1. Open **Servers** and select the server.
+2. Open **Resources > Managed**.
+3. Review every listed application, database, and service.
 
-Decide what should happen to each resource before removing the server:
-
-- Create backups of important application and database data.
-- Redeploy or recreate resources you want to keep on another server.
-- Delete resources you no longer need.
-- Update DNS records after redeploying resources on another server.
-
-<Callout type="error" title="Remove managed resources first">
-Do not remove the server while the **Managed** tab still lists resources. Back up important data, then redeploy each required resource elsewhere or delete it before continuing.
-</Callout>
+Back up important data. Redeploy resources you want to keep to another server and update their DNS records.
 
 </Step>
 <Step>
 
-### Open the server Danger Zone
+### Choose how resources will be handled
 
-After the **Managed** tab shows **No managed resources found**:
+For the safest and most controlled migration, move or delete each resource before removing the server.
 
-1. Select **Danger** in the server sidebar.
-2. Find **Delete Server** under **Danger Zone**.
-
-</Step>
-<Step>
-
-### Remove the server
-
-1. Select **Delete**.
-2. Confirm that the dialog says the server will be permanently deleted from Coolify.
-3. Enter the server name exactly as shown.
-4. Enter your Coolify account password.
-5. Complete the confirmation.
-
-Coolify returns to the **Servers** page after the server is removed.
+If resources remain, the confirmation dialog offers **Delete all resources** and shows how many will be deleted. Enable it only if every remaining resource can be destroyed.
 
 </Step>
 <Step>
 
-### Confirm the removal
+### Check the provider link
 
-Check that the server no longer appears on **Servers** page.
+If the server is linked to Hetzner, DigitalOcean, or Vultr, decide whether the actual provider machine should also be deleted.
 
-Removing server from Coolify does not remove Docker, application files, or other data that may remain on the machine.
+Keep the provider option disabled if you need the machine, its files, or console access after removing it from Coolify.
 
 </Step>
 </Steps>
 
 ---
 
-## Add the server again
+## Delete the server
 
-There is no restore button for a removed server.
+<Steps>
+<Step>
 
-<Callout type="warning" title="Re-adding the server does not restore its resources">
-Applications, databases, and services that were previously deployed to the server do not return to the Coolify dashboard when you add the server again, even if their containers or files still remain on the machine.
+### Open the Danger Zone
 
-Removing the server deletes the relationships in Coolify that connected those resources to the server. Adding the same machine again creates a new server on database without those relationships.
+Open the server's **Danger** page and find **Delete Server** under **Danger Zone**.
+
+</Step>
+<Step>
+
+### Review the confirmation
+
+Select **Delete** and review every action shown in the dialog.
+
+When applicable:
+
+- enable **Delete all resources** only if the remaining managed resources can be destroyed
+- enable **Also delete server from Hetzner Cloud** only if the linked Hetzner server should be permanently deleted
+- enable **Also delete server from Vultr** only if the linked Vultr instance should be permanently deleted
+- enable **Also delete droplet from DigitalOcean** only if the linked DigitalOcean Droplet should be permanently deleted
+
+Enter the required confirmation value and complete the deletion.
+
+</Step>
+<Step>
+
+### Verify the result
+
+Confirm that the server no longer appears on the **Servers** page.
+
+If you selected provider deletion, open the provider console and confirm that the machine was deleted. If it still exists, delete it through the provider console to prevent unexpected charges.
+
+</Step>
+</Steps>
+
+<Callout type="info" title="Removing only the Coolify record does not clean the machine">
+Coolify does not uninstall Docker or remove application files merely because you delete the server record. Clean up or repurpose the machine yourself if it remains at the provider.
 </Callout>
 
-If the Linux machine still exists, follow [Add Server](/core/infrastructure/servers/add-server) and enter its current IP address, SSH port, user, and private key. Validate the server, then recreate or redeploy each resource you want Coolify to manage.
+---
+
+## Add the machine again
+
+There is no restore action for a deleted server record.
+
+If the Linux machine still exists, follow [Add Server](/core/infrastructure/servers/add-server) and validate it again. This creates a new Coolify server record.
+
+Applications, databases, and services from the deleted record do not automatically return, even if their containers or files remain on the machine. Recreate or redeploy each resource that Coolify should manage.
