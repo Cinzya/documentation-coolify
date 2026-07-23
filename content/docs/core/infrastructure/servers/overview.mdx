@@ -1,29 +1,21 @@
 ---
 title: Overview
-description: Learn what servers do in Coolify and follow the correct path to connect and prepare your first server.
+description: Understand server roles in Coolify and choose the right way to add, provision, and manage a server.
 ---
 
-import { ArrowsRight, BrowserTerminal, HardDrive, Refresh23, Rocket2, Server, ServerCloud } from 'reicon-react';
+import { BrowserTerminal, HardDrive, Refresh23, Rocket2, Server, ServerCloud, Settings } from 'reicon-react';
 
 # Servers overview
 
-A server is the machine where Coolify runs your applications, databases, and services.
+A server is a machine where Coolify runs applications, databases, and services, or builds application images.
 
-When you add a server, Coolify connects to it through SSH, checks that it can run Docker, and prepares it for deployments. The server stays with your hosting provider; Coolify only manages it after you connect it.
+Coolify manages a connected server through SSH. The machine and its provider account remain under your control.
 
-<CoolCallout icon={ArrowsRight} title="The short version">
+<Callout type="info" title="Using Coolify Cloud?">
+Coolify Cloud users must connect or provision a server before deploying a resource. Self-hosted installations start with a **localhost** server.
+</Callout>
 
-Self-hosted Coolify starts with a **localhost** server. Coolify Cloud users connect their own server before deploying resources.
-
-Applications build on their deployment server by default. A separate build server is optional and is useful only when builds need dedicated capacity.
-
-</CoolCallout>
-
----
-
-## Server types
-
-Coolify uses three server roles.
+## Server roles
 
 <CoolIconCardGrid
   columns={3}
@@ -31,102 +23,73 @@ Coolify uses three server roles.
   cards={[
     {
       title: 'Localhost',
-      description: 'The server that runs a self-hosted Coolify instance and can also run deployed resources.',
+      description: 'The server running a self-hosted Coolify instance. It can also run deployed resources.',
       icon: Server,
     },
     {
-      title: 'Remote server',
-      description: 'A Linux server you connect to Coolify so it can run applications, databases, and services.',
+      title: 'Deployment server',
+      description: 'A remote Linux server that runs applications, databases, and services managed by Coolify.',
       icon: ServerCloud,
     },
     {
       title: 'Build server',
-      description: 'A dedicated server that builds application images but does not run deployed resources.',
+      description: 'A dedicated server that builds application images but cannot run deployed resources.',
       icon: Rocket2,
     },
   ]}
 />
 
-### The server Coolify runs on
+### Localhost
 
-A self-hosted Coolify installation starts with a server named **localhost**. This is the machine where Coolify is installed.
+A self-hosted installation starts with a server named **localhost**. You can deploy resources to it, but those resources share CPU, memory, and storage with the Coolify dashboard.
 
-<Callout type="info" title="Using Coolify Cloud?">
-Coolify Cloud users cannot access or deploy resources to the server that runs the Coolify Cloud dashboard. You must connect your own server before deploying an application, database, or service.
-</Callout>
+For production workloads, consider adding a remote server so application activity does not affect Coolify itself. The localhost server cannot be removed.
 
-You can deploy resources to localhost, but those resources share the machine's CPU, memory, and storage with Coolify. For production workloads, you may prefer to connect another server so application activity does not affect the dashboard.
+### Deployment servers
 
-The localhost server cannot be removed.
-
-### Remote servers
-
-A remote server is a Linux server that you own or rent and then add to Coolify. Coolify connects to it through SSH and deploys your resources there.
-
-<Callout type="info" title="A public IP address is not required">
-Coolify only needs a working SSH path to the server. If the server does not have a public IP address, or you do not want to expose its SSH port publicly, follow [Server SSH Access via Cloudflare Tunnels](/integrations/cloudflare/tunnels/server-ssh).
-</Callout>
-
-Use a remote server when you want to:
+A deployment server is a Linux server that you own or rent and connect to Coolify. Use one to:
 
 - deploy resources with Coolify Cloud
-- keep applications away from the server running the Coolify dashboard
+- keep workloads separate from the Coolify dashboard
 - deploy resources in another location
-- separate workloads across multiple machines
-- replace a server without reinstalling the Coolify dashboard
+- divide workloads across multiple machines
 
-To connect one, you need an IP address or hostname that Coolify can reach, an SSH user, an SSH private key, and access to the matching user account on the server.
+Coolify needs a working SSH path to the server. The server can use a reachable IP address, hostname, or [Cloudflare Tunnel](/integrations/cloudflare/tunnels/server-ssh).
 
 ### Build servers
 
-A build server is used only to build application images. Applications, databases, and services cannot be deployed to it.
+Applications build on their deployment server by default. A separate build server is optional and is useful when builds need dedicated CPU, memory, or storage.
 
-By default, Coolify builds an application on the same server where that application will be deployed. You do not need a separate build server when getting started.
-
-Add one later if application builds use too much CPU, memory, or disk space on the deployment server.
-
-Read [Build Servers](/core/infrastructure/servers/build-servers) when you are ready to configure one.
+A server marked as a build server cannot host applications, databases, or services. Read [Build Servers](/core/infrastructure/servers/build-servers) before enabling this role.
 
 ---
 
-## Connect your first remote server
+## Choose how to add a server
 
-Follow these guides in order:
+| Your situation | Guide |
+| :--- | :--- |
+| You already have a Linux server | [Add a server manually](/core/infrastructure/servers/add-server) |
+| You want Coolify to purchase and create a server at Hetzner, DigitalOcean, or Vultr | [Provision a cloud server](/core/infrastructure/servers/provision-cloud-server) |
+| You need a server used only for application builds | [Configure a build server](/core/infrastructure/servers/build-servers) |
 
-<Steps>
-<Step>
+Both manual and provider-created servers must be validated before Coolify can deploy resources to them. During validation, Coolify checks SSH access, verifies the operating system and required tools, and installs or verifies Docker Engine and Docker Compose.
 
-### Prepare OpenSSH
-
-Follow [OpenSSH](/core/infrastructure/servers/openssh) to install SSH and allow key-based access.
-
-</Step>
-<Step>
-
-### Configure the firewall
-
-Follow [Firewall](/core/infrastructure/servers/firewall) to open the ports required for SSH and web traffic.
-
-</Step>
-<Step>
-
-### Add and validate the server
-
-Follow [Add Server](/core/infrastructure/servers/add-server) to create an SSH key, add it to the server, connect the server, and validate it.
-
-</Step>
-</Steps>
-
-After validation succeeds, the server is ready to run applications, databases, and services.
+<Callout type="warning" title="Validation can change the server">
+Validation can install Docker and restart the Docker service. Use a fresh server when possible. Existing containers may be temporarily unavailable.
+</Callout>
 
 ---
 
-## Manage a connected server
-
-After the server is connected, use these guides for routine server tasks.
+## After connecting a server
 
 <CoolNextSteps
   cards={[
+    {
+      title: 'Manage server settings',
+      href: '/core/infrastructure/servers/manage-server',
+      description: 'Update the connection, timezone, wildcard domain, and cloud-provider link.',
+      icon: Settings,
+    },
     {
       title: 'Patch server packages',
       href: '/core/infrastructure/servers/server-patching',
@@ -138,12 +101,6 @@ After the server is connected, use these guides for routine server tasks.
       href: '/core/infrastructure/servers/automated-docker-cleanup',
       description: 'Schedule cleanup and control which unused Docker data Coolify may remove.',
       icon: HardDrive,
-    },
-    {
-      title: 'Open the Web Terminal',
-      href: '/core/infrastructure/servers/web-terminal',
-      description: 'Open a browser shell for a reachable server or running container.',
-      icon: BrowserTerminal,
     },
   ]}
 />
