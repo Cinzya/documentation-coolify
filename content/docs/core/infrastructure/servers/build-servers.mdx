@@ -46,19 +46,15 @@ Complete [Create and authorize an SSH key](/core/infrastructure/servers/add-serv
 
 ### Open the Servers page
 
-<ZoomImage src="/docs/images/core/infrastructure/servers/add-server/servers-page-add-button.webp" alt="Servers page with the Add button in Coolify" />
-
 1. Open the Coolify dashboard.
 2. Select **Servers** in the sidebar.
 3. Select **+ Add**.
-4. Find **Add Server by IP Address**.
+4. Select **Manual**.
 
 </Step>
 <Step>
 
 ### Add the build server
-
-<ZoomImage src="/docs/images/core/infrastructure/servers/build-servers/new-server-build-setting.webp" alt="New Server form with the build server setting enabled" />
 
 1. Enter the server name, IP address or domain, SSH port, user, and private key.
 2. Enable **Use it as a build server?**.
@@ -88,9 +84,8 @@ Coolify adds the server and opens its **General** page.
 
 1. Open **Servers** in the Coolify sidebar.
 2. Select the server you want to use.
-3. Select **Resources**.
-4. Select **Managed**.
-5. Confirm that the page says **No managed resources found**.
+3. Open **Resources > Managed**.
+4. Confirm that the page says **No managed resources found**.
 
 If the server has managed resources, move or delete them before continuing. Coolify disables the build-server setting while resources are connected to the server.
 
@@ -101,7 +96,7 @@ If the server has managed resources, move or delete them before continuing. Cool
 
 <ZoomImage src="/docs/images/core/infrastructure/servers/build-servers/existing-server-build-setting.webp" alt="Build server setting on an existing server General page" />
 
-1. Open **General** for the server.
+1. Open **Configuration > General** for the server.
 2. Enable **Use it as a build server?**.
 
 The setting saves immediately. The server can no longer be selected as a deployment destination while it remains a build server.
