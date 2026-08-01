@@ -38,7 +38,7 @@ Run **multiple worker processes** inside the container. Each runtime has its pre
 | Bun | `Bun.serve({ reusePort: true })` | One-line app change | Kernel load-balances via `SO_REUSEPORT` |
 | Deno | `Deno.serve({ reusePort: true })` | One-line app change | Same kernel mechanism as Bun |
 
-This guide covers **PM2 cluster mode** (Node.js) and **`reusePort`** (Bun, Deno), with examples for the [Dockerfile](/applications/build-packs/dockerfile) and [Nixpacks](/applications/build-packs/nixpacks) build packs.
+This guide covers **PM2 cluster mode** (Node.js) and **`reusePort`** (Bun, Deno), with examples for the [Dockerfile](/applications/builds/dockerfile) and [Nixpacks](/applications/builds/nixpacks/overview) build packs.
 
 ## Technical Background
 
@@ -48,7 +48,7 @@ This guide covers **PM2 cluster mode** (Node.js) and **`reusePort`** (Bun, Deno)
 
 ## Dockerfile Example (PM2 Cluster Mode)
 
-Use this when your app is built with the [Dockerfile build pack](/applications/build-packs/dockerfile).
+Use this when your app is built with the [Dockerfile build pack](/applications/builds/dockerfile).
 
 ```dockerfile
 FROM node:lts-alpine
@@ -71,7 +71,7 @@ Key points:
 
 ## Nixpacks Example
 
-Use this when your app is built with the [Nixpacks build pack](/applications/build-packs/nixpacks).
+Use this when your app is built with the [Nixpacks build pack](/applications/builds/nixpacks/overview).
 
 ### Option A — Set `NIXPACKS_START_CMD` as an Environment Variable
 

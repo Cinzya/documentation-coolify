@@ -1,7 +1,6 @@
 {
   "title": "How-Tos",
   "pages": [
-    "migrate-apps-different-host",
     "backup-restore-coolify",
     "hetzner-loadbalancing",
     "wordpress-multisite",
