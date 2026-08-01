@@ -29,7 +29,7 @@ These settings do not create the Swarm cluster. The manager and worker nodes mus
 
 An application deployed to a Swarm destination must have **Docker Image** configured. The manager pushes the built image to that registry, and every node that may run the application must be able to pull it.
 
-Authenticate the configured server user to the registry on the manager and worker nodes. See [Docker Registry](/knowledge-base/docker/registry#docker-credentials).
+Authenticate the configured server user to the registry on the manager and worker nodes. See [Docker registries](/applications/builds/docker-registries#authenticate-a-private-registry).
 
 Local Docker volumes belong to one node. If a Swarm task can move between workers, use storage that is available from every eligible node, such as a shared network filesystem or an external storage service supported by the application.
 
