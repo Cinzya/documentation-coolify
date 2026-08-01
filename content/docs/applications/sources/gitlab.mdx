@@ -1,0 +1,41 @@
+---
+title: GitLab
+description: Deploy GitLab repositories and configure push and merge-request webhooks.
+---
+
+# GitLab
+
+Use an HTTPS URL for a [public repository](/applications/sources/public-repositories) or an SSH URL for a [private repository with a deploy key](/applications/sources/deploy-keys).
+
+```sh
+https://gitlab.com/example/application.git
+git@gitlab.com:example/application.git
+```
+
+## Configure automatic deployments
+
+1. Open **Configuration > Webhooks** in the Coolify application.
+2. Copy the **GitLab** URL.
+3. Enter and save **GitLab Webhook Secret**.
+4. In the GitLab project, open **Settings > Webhooks**.
+5. Enter the URL and the same secret token.
+6. Enable **Push events**.
+7. Enable **Merge request events** when using preview deployments.
+8. Enable **Configuration > Advanced > Auto Deploy** in Coolify.
+
+GitLab webhooks accept push and merge-request events. Test the webhook from GitLab, then push to the configured branch and inspect **Deployments**.
+
+## GitLab Container Registry
+
+Repository credentials do not authenticate Docker to the registry.
+
+For a private GitLab registry, create a GitLab deploy token with `read_registry` and authenticate Docker on every server that pulls the image:
+
+```bash
+echo "$GITLAB_REGISTRY_TOKEN" | \
+  docker login registry.gitlab.com \
+  --username "$GITLAB_REGISTRY_USER" \
+  --password-stdin
+```
+
+Then use the complete image reference, including its tag, in a Docker Image or Docker Compose application.
