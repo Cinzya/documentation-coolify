@@ -128,11 +128,11 @@ export function ApiServerSelector({ onServerChange }: { onServerChange: () => vo
 
   return (
     <>
-      <div className="flex items-center gap-3 rounded-t-xl border bg-fd-card px-3 py-2.5 text-sm text-fd-card-foreground">
+      <div className="flex items-center gap-3 border-b bg-fd-muted/20 px-3 py-2.5 text-sm text-fd-card-foreground">
         <div className="flex min-w-0 flex-1 items-center gap-2.5">
           <CurrentServerIcon className="size-4 shrink-0 text-fd-muted-foreground" aria-hidden="true" />
-          <div className="min-w-0">
-            <p className="text-xs font-medium text-fd-muted-foreground">API server</p>
+          <div className="flex min-w-0 flex-1 flex-col sm:flex-row sm:items-baseline sm:gap-2">
+            <p className="shrink-0 text-xs font-medium text-fd-muted-foreground">API server</p>
             <code className="block truncate text-[0.8125rem] font-medium">{currentUrl}</code>
           </div>
         </div>

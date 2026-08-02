@@ -49,9 +49,9 @@ function ApiOperationLayout({
     <div className="flex flex-col gap-x-6 gap-y-4 @4xl:flex-row @4xl:items-start">
       <div className="min-w-0 flex-1">
         {header}
-        <div className="not-prose">
+        <div className="not-prose overflow-hidden rounded-xl border bg-fd-card text-fd-card-foreground shadow-md">
           <ApiServerSelector onServerChange={refreshServer} />
-          <div className="api-playground-shell [&>form]:rounded-t-none [&>form]:border-t-0 [&>form>button:first-child]:hidden">
+          <div className="api-playground-shell [&>form]:rounded-none [&>form]:border-0 [&>form]:shadow-none [&>form>button:first-child]:hidden">
             {apiPlayground}
           </div>
         </div>
