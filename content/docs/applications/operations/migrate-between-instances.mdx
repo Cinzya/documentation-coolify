@@ -95,7 +95,7 @@ Create destination mounts before restoring data. Then use each path that matches
 
 Create a logical database backup with the database engine's supported tool. Transfer and restore it into the destination database, then update the destination application variables with the new connection details.
 
-For a Coolify-managed database, use [Database backups](/databases/backups) as the starting point. Verify the restore by checking required tables or records before the destination application uses the database.
+For a Coolify-managed database, create the recovery file with [Database backups](/databases/backups), then follow [Restore a database](/databases/restore) when the destination engine supports Coolify's import workflow. Verify required tables or records before the destination application uses the database.
 
 Move object storage, queues, caches, and other external state through the provider's supported process. A cache usually does not need migration unless the application treats it as durable data.
 
