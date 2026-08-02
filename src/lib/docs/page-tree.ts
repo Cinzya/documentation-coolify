@@ -28,10 +28,10 @@ const folderIndexLinks = new Map<string, FolderIndexLink>([
     'services/meta.json',
     {
       item: {
-        $id: 'services-introduction-index',
+        $id: 'services-index',
         type: 'page',
         name: 'Services',
-        url: '/services/all',
+        url: '/services',
       },
     },
   ],
