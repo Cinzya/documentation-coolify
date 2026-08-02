@@ -170,7 +170,7 @@ async function writeDocsManifest() {
     multiple({
       docs: createSource({ metas, pages: sourcePages }),
       openapi: await openapiSource(openapi, {
-        baseDir: 'api-reference/api',
+        baseDir: 'api/endpoints',
         groupBy: 'tag',
       }),
     }),

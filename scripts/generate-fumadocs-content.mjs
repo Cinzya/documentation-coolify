@@ -48,7 +48,7 @@ const sidebarMetas = {
       'databases',
       'integrations',
       'knowledge-base',
-      'api-reference',
+      'api',
       'troubleshoot',
     ],
   },
@@ -271,10 +271,23 @@ const sidebarMetas = {
     title: 'Caddy',
     pages: ['basic-auth', 'dns-challenge'],
   },
-  'api-reference': {
+  'api': {
     title: 'API Reference',
     root: true,
-    pages: ['authorization', 'api'],
+    pages: [
+      '---Get Started---',
+      'overview',
+      'making-requests',
+      '---Access & Security---',
+      'authorization',
+      'permissions',
+      'ip-allowlist',
+      '---Requests & Responses---',
+      'rate-limits',
+      'errors',
+      '---Endpoint Reference---',
+      '...endpoints',
+    ],
   },
   troubleshoot: {
     title: 'Troubleshoot',
@@ -320,7 +333,7 @@ async function walk(dir) {
 
     const fullPath = path.join(dir, entry.name)
     const relativeDir = toPosix(path.relative(sourceDir, fullPath))
-    if (entry.isDirectory() && relativeDir === 'api-reference/api') {
+    if (entry.isDirectory() && relativeDir === 'api/endpoints') {
       continue
     }
 
@@ -517,7 +530,7 @@ Set up Coolify and deploy your first app in minutes.
 <MediaCardGroup>
   <MediaCard title="Quick start" imageSrc="/docs/images/home/quick-start.webp" href="/choose-your-path" />
   <MediaCard title="Deploy your first application" imageSrc="/docs/images/home/deploy-first-application.webp" href="/deploy-your-first-app" />
-  <MediaCard title="API" imageSrc="/docs/images/home/api.webp" href="/api-reference/authorization" />
+  <MediaCard title="API" imageSrc="/docs/images/home/api.webp" href="/api/overview" />
   <MediaCard title="CLI" imageSrc="/docs/images/home/cli.webp" href="/knowledge-base/commands" />
 </MediaCardGroup>
 

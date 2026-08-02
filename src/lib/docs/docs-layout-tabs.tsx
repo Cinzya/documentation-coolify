@@ -64,7 +64,7 @@ const tabDefinitions: TabDefinition[] = [
     icon: <Plug2 weight="Filled" className={tabIconClassName} aria-hidden="true" />,
   },
   {
-    ref: 'api-reference/meta.json',
+    ref: 'api/meta.json',
     title: 'API Reference',
     label: 'API',
     icon: <LaptopCode weight="Filled" className={tabIconClassName} aria-hidden="true" />,

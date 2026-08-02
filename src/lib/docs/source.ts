@@ -8,7 +8,7 @@ export const source = loader(
   multiple({
     docs: docs.toFumadocsSource(),
     openapi: await openapiSource(openapi, {
-      baseDir: 'api-reference/api',
+      baseDir: 'api/endpoints',
       groupBy: 'tag',
     }),
   }),
