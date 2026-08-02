@@ -23,6 +23,8 @@ Deploying your first database in Coolify helps you validate database creation, c
 
 In this guide, you will deploy **Redis** from the one-click database resources list.
 
+A one-click database is a standalone database resource that Coolify creates from its **New Resource > Databases** list. Coolify supplies the Redis image, generated credentials, persistent storage, network, and connection details so you can deploy it without writing a Docker Compose file.
+
 <CoolCallout icon={ArrowsRight} title="The short version">
 
 Create or open a project, create a Redis database resource, map a host port, deploy Redis, copy the generated password, and run `PING` from your terminal.
@@ -121,8 +123,6 @@ On the Coolify dashboard:
 - enter a project name, for example `my-first-project`
 - click **Continue**
 
-<ZoomableImage src="shadow-to-do" alt="Create a project in Coolify" />
-
 <Callout type="success" title="Tip">
 
 If you already have a project, skip this step and continue to Step 2.
@@ -136,8 +136,6 @@ If you already have a project, skip this step and continue to Step 2.
 
 Open your project and click **Create New Resource**.
 
-<ZoomableImage src="shadow-to-do" alt="Create new resource in Coolify project" />
-
 A resource is something Coolify will run for you, such as an app, database, or service. In this guide, the resource will be a Redis database.
 
 ---
@@ -149,8 +147,6 @@ In the resource list:
 
 - search for **Redis**
 - click **Redis**
-
-<ZoomableImage src="shadow-to-do" alt="Select Redis from one-click database list" />
 
 Coolify will create a Redis database resource with generated settings and credentials.
 
@@ -192,8 +188,6 @@ Example:
 />
 </CoolCompare>
 
-<ZoomableImage src="shadow-to-do" alt="Configure Redis port mapping in Coolify" />
-
 ---
 
 
@@ -216,11 +210,9 @@ For real production workloads, keep databases private unless you have a specific
 ---
 
 
-### 6. Deploy
+### 6. Start Redis
 
-Click the **Deploy** button.
-
-<ZoomableImage src="shadow-to-do" alt="Deploy Redis database on Coolify" />
+Click **Start**.
 
 After deployment, keep these values ready:
 
@@ -338,7 +330,7 @@ Your first database confirms that Coolify can create a database, generate creden
     {
       title: 'Learn databases',
       description: 'Learn how Coolify manages database resources, passwords, and backups.',
-      href: '/databases/index',
+      href: '/databases',
       icon: Database,
     },
   ]}
