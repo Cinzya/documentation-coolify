@@ -51,7 +51,7 @@ function ApiOperationLayout({
         {header}
         <div className="not-prose">
           <ApiServerSelector onServerChange={refreshServer} />
-          <div className="[&>form]:rounded-t-none [&>form]:border-t-0 [&>form>button:first-child]:hidden">
+          <div className="api-playground-shell [&>form]:rounded-t-none [&>form]:border-t-0 [&>form>button:first-child]:hidden">
             {apiPlayground}
           </div>
         </div>
