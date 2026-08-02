@@ -78,6 +78,7 @@ export function ApiServerSelector({ onServerChange }: { onServerChange: () => vo
   const dialogRef = useRef<HTMLDialogElement>(null);
   const inputId = useId();
   const [mode, setMode] = useState<ServerMode>('cloud');
+  const [currentMode, setCurrentMode] = useState<ServerMode>('cloud');
   const [selfHostedUrl, setSelfHostedUrl] = useState(DEFAULT_SELF_HOSTED_URL);
   const [currentUrl, setCurrentUrl] = useState(CLOUD_URL);
   const [error, setError] = useState('');
@@ -85,6 +86,7 @@ export function ApiServerSelector({ onServerChange }: { onServerChange: () => vo
   useEffect(() => {
     const selection = getStoredSelection();
     setMode(selection.mode);
+    setCurrentMode(selection.mode);
     setSelfHostedUrl(selection.selfHostedUrl);
     setCurrentUrl(
       selection.mode === 'cloud' ? CLOUD_URL : `${selection.selfHostedUrl.replace(/\/$/, '')}/api/v1`,
@@ -110,6 +112,7 @@ export function ApiServerSelector({ onServerChange }: { onServerChange: () => vo
     }
 
     const parsed = mode === 'self-hosted' ? parseSelfHostedUrl(selfHostedUrl) : null;
+    setCurrentMode(mode);
     setCurrentUrl(mode === 'cloud' ? CLOUD_URL : `${parsed?.displayUrl}/api/v1`);
     closeDialog();
     onServerChange();
@@ -121,12 +124,13 @@ export function ApiServerSelector({ onServerChange }: { onServerChange: () => vo
       : parseSelfHostedUrl(selfHostedUrl)
         ? `${parseSelfHostedUrl(selfHostedUrl)?.displayUrl}/api/v1`
         : 'Enter a valid Coolify URL';
+  const CurrentServerIcon = currentMode === 'cloud' ? Cloud : Server;
 
   return (
     <>
       <div className="flex items-center gap-3 rounded-t-xl border bg-fd-card px-3 py-2.5 text-sm text-fd-card-foreground">
         <div className="flex min-w-0 flex-1 items-center gap-2.5">
-          <Server className="size-4 shrink-0 text-fd-muted-foreground" aria-hidden="true" />
+          <CurrentServerIcon className="size-4 shrink-0 text-fd-muted-foreground" aria-hidden="true" />
           <div className="min-w-0">
             <p className="text-xs font-medium text-fd-muted-foreground">API server</p>
             <code className="block truncate text-[0.8125rem] font-medium">{currentUrl}</code>
@@ -245,7 +249,7 @@ export function ApiServerSelector({ onServerChange }: { onServerChange: () => vo
             <button
               type="button"
               onClick={applyServer}
-              className="rounded-md bg-fd-primary px-3 py-2 text-sm font-medium text-fd-primary-foreground transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fd-ring"
+              className="api-server-primary-button rounded-md border border-transparent px-3 py-2 text-sm font-medium text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fd-ring"
             >
               Use this server
             </button>
@@ -272,8 +276,8 @@ function ServerOption({
   return (
     <label
       className={cn(
-        'cursor-pointer rounded-lg border p-3 transition-colors hover:bg-fd-accent/50',
-        checked && 'border-fd-primary bg-fd-primary/5 ring-1 ring-fd-primary',
+        'cursor-pointer rounded-lg border p-3 transition duration-200 hover:-translate-y-0.5',
+        checked ? 'api-server-option-selected' : 'border-fd-border hover:bg-fd-accent/50',
       )}
     >
       <input type="radio" name="api-server" checked={checked} onChange={onChange} className="sr-only" />
