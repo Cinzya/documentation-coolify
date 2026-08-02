@@ -25,6 +25,7 @@
     "databases",
     "integrations",
     "knowledge-base",
+    "cli",
     "api",
     "troubleshoot"
   ]

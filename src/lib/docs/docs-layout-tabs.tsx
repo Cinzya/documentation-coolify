@@ -8,6 +8,7 @@ import { Office } from 'reicon-react/icons/Office';
 import { Plug2 } from 'reicon-react/icons/Plug2';
 import { Settings } from 'reicon-react/icons/Settings';
 import { StarFall3 } from 'reicon-react/icons/StarFall3';
+import { TerminalSquare } from 'reicon-react/icons/TerminalSquare';
 import { Warning22 } from 'reicon-react/icons/Warning22';
 import { WindowPointer } from 'reicon-react/icons/WindowPointer';
 
@@ -62,6 +63,11 @@ const tabDefinitions: TabDefinition[] = [
     ref: 'integrations/meta.json',
     title: 'Integrations',
     icon: <Plug2 weight="Filled" className={tabIconClassName} aria-hidden="true" />,
+  },
+  {
+    ref: 'cli/meta.json',
+    title: 'CLI',
+    icon: <TerminalSquare weight="Filled" className={tabIconClassName} aria-hidden="true" />,
   },
   {
     ref: 'api/meta.json',
