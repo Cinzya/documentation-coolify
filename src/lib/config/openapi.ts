@@ -30,6 +30,32 @@ function titleFromDuplicateOperation(operationId: string, method: string) {
 
 function normalizeOpenAPI() {
   const schema = structuredClone(openapiSchema);
+  const document = schema as Document;
+
+  document.servers = [
+    {
+      name: 'Coolify Cloud',
+      url: 'https://app.coolify.io/api/v1',
+      description: 'Coolify Cloud API',
+    },
+    {
+      name: 'Self-hosted',
+      url: '{protocol}://{domain}/api/v1',
+      description: 'Your self-hosted Coolify API',
+      variables: {
+        protocol: {
+          default: 'https',
+          enum: ['https', 'http'],
+          description: 'Select the protocol used by your Coolify instance.',
+        },
+        domain: {
+          default: 'coolify.example.com',
+          description: 'Enter only the trusted Coolify domain or IP address. Do not include http:// or https://.',
+        },
+      },
+    },
+  ];
+
   const declaredTags = new Set((schema.tags ?? []).map((tag) => tag.name));
   const usedTags = new Set<string>();
   const operations: Array<{
@@ -101,7 +127,7 @@ function normalizeOpenAPI() {
   }
 
   return {
-    'coolify-openapi': schema as Document,
+    'coolify-openapi': document,
   };
 }
 
