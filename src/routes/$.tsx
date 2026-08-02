@@ -7,7 +7,7 @@ import { Suspense, useMemo, type ReactNode } from 'react';
 import { ClientAPIPage } from '@/components/pages/api-page';
 import { ReiconMarkdownCopyButton } from '@/components/docs/markdown-copy-button';
 import { MobileDrawerHeaderActions } from '@/components/layout/mobile-header-controls';
-import { DocsLayout } from 'fumadocs-ui/layouts/notebook';
+import { DocsLayout, type DocsSlots } from 'fumadocs-ui/layouts/notebook';
 import { DocsBody, DocsPage } from 'fumadocs-ui/layouts/notebook/page';
 import { useMDXComponents } from '@/components/docs/mdx';
 import { CarbonAds } from '@/components/layout/carbon-ads';
@@ -18,12 +18,23 @@ import { baseOptions } from '@/lib/ui/layout.shared';
 import { prepareHomeSidebarPageTree, preparePageTree } from '@/lib/docs/page-tree';
 import { absoluteUrl, getDocGithubPath, getDocOgPath, site } from '@/lib/config/site';
 import { getPageMarkdownUrl, source } from '@/lib/docs/source';
+import services from '@/generated/services.json';
 
 type RuntimeLoaderData = LoaderData extends infer T
   ? T extends unknown
     ? Omit<T, 'pageTree'> & { pageTree: Root }
     : never
   : never;
+
+const hiddenSidebarSlots: DocsSlots['sidebar'] = {
+  provider: ({ children }) => children,
+  root: () => null,
+  trigger: () => null,
+  collapseTrigger: () => null,
+  useSidebar: () => ({ collapsed: true, open: false, setOpen: () => {} }),
+};
+
+const servicePageUrls = new Set(services.map((service) => `/services/${service.slug}`));
 
 function toPublicDocUrl(url: string): string {
   if (url === '/') return site.docsBasePath;
@@ -231,6 +242,8 @@ const clientLoader = browserCollections.docs.createClientLoader({
 function Page() {
   const data = useFumadocsLoader(Route.useLoaderData()) as unknown as RuntimeLoaderData;
   const hasHomeSidebar = isHomeSidebarRoute(data);
+  const internalUrl = toInternalDocUrl(data.url);
+  const hideSidebar = servicePageUrls.has(internalUrl);
   const layoutTabs = useMemo(() => createDocsLayoutTabs(data.pageTree), [data.pageTree]);
   const sidebarTree = useMemo(
     () => (hasHomeSidebar ? prepareHomeSidebarPageTree(data.pageTree) : data.pageTree),
@@ -261,6 +274,7 @@ function Page() {
       key={hasHomeSidebar ? 'home-sidebar' : 'docs-sidebar'}
       nav={{ ...layoutOptions.nav, mode: 'top' }}
       sidebar={{ banner: <MobileDrawerHeaderActions /> }}
+      slots={hideSidebar ? { sidebar: hiddenSidebarSlots } : undefined}
       tree={sidebarTree}
       tabs={layoutTabs}
     >
