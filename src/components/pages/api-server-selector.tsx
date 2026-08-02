@@ -249,7 +249,7 @@ export function ApiServerSelector({ onServerChange }: { onServerChange: () => vo
             <button
               type="button"
               onClick={applyServer}
-              className="api-server-primary-button rounded-md border border-transparent px-3 py-2 text-sm font-medium text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fd-ring"
+              className="api-server-primary-button rounded-md px-3 py-2 text-sm font-medium text-white focus-visible:outline-none"
             >
               Use this server
             </button>
