@@ -1,0 +1,30 @@
+---
+title: Deployments, Projects, and Resources
+description: Find Coolify CLI commands for deployments, projects, environments, resource inventory, and tags.
+---
+
+# Deployment, project, and resource commands
+
+| Command group | Commands and purpose |
+| :--- | :--- |
+| `deploy` | Deploy by UUID or name, deploy a batch, list and inspect deployments, or cancel a deployment. |
+| `project` | List, inspect, create, update, and delete projects; manage project environments. |
+| `resource` | List applications, databases, and services together. |
+| `tag` | List tags available to the current team. |
+
+## Deployment commands
+
+```sh
+coolify deploy uuid <resource-uuid>
+coolify deploy name <resource-name>
+coolify deploy batch api,worker,frontend
+coolify deploy list
+coolify deploy get <deployment-uuid>
+coolify deploy cancel <deployment-uuid>
+```
+
+Use `coolify deploy <command> --help` for force deployment, preview deployment, and image-tag options supported by your installed version.
+
+## Project environments
+
+Use `coolify project environments --help` to list, create, inspect, update, or delete environments within a project. Resource operations use UUIDs; team commands use numeric team IDs.

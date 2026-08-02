@@ -1,0 +1,40 @@
+---
+title: Overview
+description: Find the Coolify CLI command group and open focused references for resources, infrastructure, integrations, and CLI configuration.
+---
+
+# CLI command reference
+
+The command reference groups related Coolify CLI commands by the resources and operations they manage. Use it to find the relevant command group, then run the installed CLI's help for its exact arguments and flags.
+
+## Global flags
+
+| Flag | Purpose |
+| :--- | :--- |
+| `--context <name>` | Use a saved context for one command instead of the default. |
+| `--token <token>` | Override the selected context's token for one command. |
+| `--format table\|json\|pretty` | Choose human-readable table output, compact JSON, or indented JSON. |
+| `--show-sensitive`, `-s` | Display sensitive values when the token has permission. |
+| `--debug` | Print additional diagnostic output. |
+| `--help`, `-h` | Show help for the current command level. |
+
+## Reference sections
+
+- [Applications](/cli/command-reference/applications)
+- [Databases and services](/cli/command-reference/databases-services)
+- [Deployments, projects, and resources](/cli/command-reference/deployments-projects)
+- [Infrastructure](/cli/command-reference/infrastructure)
+- [Integrations and credentials](/cli/command-reference/integrations)
+- [Teams and CLI utilities](/cli/command-reference/teams-cli)
+
+## Discover nested commands
+
+Help is available at every level:
+
+```sh
+coolify database --help
+coolify database backup --help
+coolify database backup create --help
+```
+
+The built-in help is authoritative for the installed CLI version. The [Coolify CLI repository](https://github.com/coollabsio/coolify-cli) contains release notes and generated command catalogs.

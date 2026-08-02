@@ -1,0 +1,21 @@
+---
+title: Integrations and Credentials
+description: Find Coolify CLI commands for source integrations, private keys, notifications, shared variables, MCP, and storage credentials.
+---
+
+# Integration and credential commands
+
+| Command group | Purpose |
+| :--- | :--- |
+| `github` | Manage GitHub App integrations and inspect accessible repositories and branches. |
+| `gitlab` | Manage GitLab integrations. |
+| `private-key` | Manage SSH private keys used by Coolify. |
+| `notification` | Manage team notification channel settings. |
+| `shared-env` | Manage hierarchical shared environment variables. |
+| `mcp` | Manage the Coolify MCP server configuration. |
+| `s3` | Manage S3-compatible storage destinations. |
+| `cloud-token` | Manage provider API tokens used for cloud provisioning. |
+
+Sensitive fields remain hidden unless the API token has permission to read them and `--show-sensitive` is supplied. Do not use `--show-sensitive` in shared terminal or CI logs.
+
+Run `coolify <command-group> --help` to inspect the operations and required credentials supported by the installed CLI version.

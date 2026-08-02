@@ -1,0 +1,12 @@
+{
+  "title": "Command Reference",
+  "pages": [
+    "index",
+    "applications",
+    "databases-services",
+    "deployments-projects",
+    "infrastructure",
+    "integrations",
+    "teams-cli"
+  ]
+}
