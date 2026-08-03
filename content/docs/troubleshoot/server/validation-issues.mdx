@@ -7,7 +7,9 @@ description: Resolve Coolify server validation errors by verifying SSH private k
 
 You cannot validate your server because of a validation error.
 
-## Invalid private key (`error in libcrypto`)
+<Accordions type="multiple">
+
+<Accordion title="Invalid private key (`error in libcrypto`)">
 
 ### Symptoms
 - During validation you receive an `error in libcrypto` error.
@@ -15,7 +17,9 @@ You cannot validate your server because of a validation error.
 ### Solution
 Check the private key added to Coolify. It is probably missing a few things, like the `-----BEGIN OPENSSH PRIVATE KEY-----` and `-----END OPENSSH PRIVATE KEY-----` lines.
 
-## Permission denied (publickey)
+</Accordion>
+
+<Accordion title="Permission denied (publickey)">
 
 ### Symptoms
 - During validation you receive: `Server is not reachable. Reason: root@host.docker.internal: Permission denied (publickey).`
@@ -28,3 +32,7 @@ If it was not added, append it manually on the server:
 ```bash
 cat /data/coolify/ssh/keys/id.root@host.docker.internal.pub >> ~/.ssh/authorized_keys
 ```
+
+</Accordion>
+
+</Accordions>
