@@ -109,3 +109,21 @@ Run validation again after changing:
 - network routing, firewall rules, or tunnel configuration
 
 If the connection fails, restore the previous settings or use the provider console to correct SSH access. Follow [OpenSSH](/core/infrastructure/servers/openssh) and [Firewall](/core/infrastructure/servers/firewall) for the common checks.
+
+---
+
+## Build and deployment limits
+
+Open **Configuration > Advanced** to control how many deployments a server runs at once and how long each deployment may run.
+
+| Setting | What it controls | Default |
+| :--- | :--- | :--- |
+| **Number of concurrent builds** | How many build and deployment processes run at the same time on this server. Raise it to deploy more resources in parallel; lower it to protect a small server from resource exhaustion during builds. | `2` |
+| **Deployment timeout (sec)** | The maximum time a single deployment may run before Coolify cancels it. Increase it for large images or slow builds that legitimately exceed the limit. | `3600` |
+| **Deployment queue limit** | The maximum number of deployments allowed to wait in the queue. When the limit is reached, Coolify rejects new deployments with an HTTP `429` response. | — |
+
+Select **Save** after changing these values.
+
+<Callout type="info" title="Limits are per server">
+The concurrent-build count and queue limit apply to each server independently. A dedicated [build server](/core/infrastructure/servers/build-servers) has its own limits, so raising them there does not affect deployments on other servers.
+</Callout>
