@@ -4,6 +4,7 @@
     "overview",
     "add-a-member",
     "remove-a-member",
+    "delete-user",
     "manage-members"
   ]
 }
