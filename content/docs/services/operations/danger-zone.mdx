@@ -61,6 +61,16 @@ Confirm that:
 
 Coolify does not remove DNS records at your DNS provider. Remove or update obsolete records separately.
 
+## Force-delete a stuck Service
+
+If a Service cannot be removed from the dashboard, connect over SSH to the server that runs Coolify and run:
+
+```sh
+docker exec -it coolify php artisan services:delete
+```
+
+Select the Service to delete when prompted. Use this only when the dashboard deletion above does not remove the Service.
+
 ## Recreate a deleted Service
 
 Coolify cannot restore the deleted Service record from Danger Zone. Create a new one-click or user-defined Service, review its generated values, restore each persistent dependency, and deploy with temporary domains before reconnecting production traffic.
