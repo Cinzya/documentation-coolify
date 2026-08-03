@@ -156,3 +156,20 @@ After validation, you can set **Wildcard Domain** under **Configuration > Genera
 For example, `https://example.com` lets Coolify suggest a domain such as `https://<application-id>.example.com` for a new resource. Create a DNS record for `*.example.com` that points to this server before using the generated domains.
 
 The setting does not change existing resource domains, update DNS, or change how Coolify connects to the server.
+
+---
+
+## Oracle Cloud (free ARM) notes
+
+Oracle Cloud free ARM servers need a few extra steps before Coolify can use them, whether as the Coolify host or as a remote server.
+
+**Use the root user.** Oracle images disable root login by default. To enable it:
+
+1. Switch to root: `sudo su -`
+2. In `/etc/ssh/sshd_config`, set `PermitRootLogin` to `without-password`.
+3. Restart SSH: `service sshd restart`
+4. Add the public key of the [SSH key configured in Coolify](#create-and-authorize-an-ssh-key) to `/root/.ssh/authorized_keys`.
+
+**Or use a non-root user.** A non-root user works with passwordless `sudo` (experimental). Add the Coolify SSH key to the user's `~/.ssh/authorized_keys`, then follow [Non-root User](/core/infrastructure/servers/non-root-user).
+
+**Open the firewall.** Oracle ARM servers enable a firewall by default. If you self-host Coolify on the server, open the required ports — see [Firewall](/core/infrastructure/servers/firewall).
