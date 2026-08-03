@@ -51,7 +51,7 @@ const tabDefinitions: TabDefinition[] = [
   {
     ref: 'services/meta.json',
     title: 'Services',
-    fallbackUrl: '/services/all',
+    fallbackUrl: '/services/what-is-a-service',
     icon: <Settings weight="Filled" className={tabIconClassName} aria-hidden="true" />,
   },
   {
