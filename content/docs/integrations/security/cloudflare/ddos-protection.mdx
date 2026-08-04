@@ -42,7 +42,7 @@ When using Cloudflare’s Proxy, CDN, and security features, all incoming traffi
 
 A simple high-level overview diagram to give you a visual idea of how this works:
 
-<ZoomImage src="/docs/images/integrations/security/cloudflare/overview-diagram.webp" />
+<ZoomImage src="/docs/images/integrations/security/cloudflare/ddos-protection/overview-diagram.webp" />
 
 ## 1. Setup Origin TLS Certificate
 Communication between your server and Cloudflare is encrypted using a TLS certificate. 
@@ -77,19 +77,19 @@ There are 2 ways to setup the Origin TLS Certificate so follow one of the method
 
 <Tab value="Cloudflare Origin Certificate">
 A simple high-level overview diagram to give you a visual idea of how this works:
-<ZoomImage src="/docs/images/integrations/security/cloudflare/cf-origin-certificate-overview-diagram.webp" />
+<ZoomImage src="/docs/images/integrations/security/cloudflare/ddos-protection/cf-origin-certificate-overview-diagram.webp" />
 
 ---
 
 ## A. Create Cloudflare Origin Certificate [!toc]
-<ZoomImage src="/docs/images/integrations/security/cloudflare/1.webp" />
+<ZoomImage src="/docs/images/integrations/security/cloudflare/ddos-protection/1.webp" />
 
 1. In your Cloudflare dashboard, go to **SSL/TLS**.
 2. Select **Origin Server**.
 3. Select **Origin Certificates**
 3. Click the **Create Certificate** button.
 
-<ZoomImage src="/docs/images/integrations/security/cloudflare/2.webp" />
+<ZoomImage src="/docs/images/integrations/security/cloudflare/ddos-protection/2.webp" />
 
 1. Choose **RSA (2048)** for the key type.
 2. Add the hostnames you want the certificate to cover.
@@ -109,7 +109,7 @@ A simple high-level overview diagram to give you a visual idea of how this works
 
 </Callout>
 
-<ZoomImage src="/docs/images/integrations/security/cloudflare/3.webp" />
+<ZoomImage src="/docs/images/integrations/security/cloudflare/ddos-protection/3.webp" />
 
 1. Choose **PEM** as the key format.
 2. Copy your **Origin Certificate** and save it somewhere safe
@@ -207,7 +207,7 @@ Now the origin certificate is installed on your server.
 
 
 ## C. Configure Coolify proxy to Use the Origin Certificate [!toc]
-<ZoomImage src="/docs/images/integrations/security/cloudflare/8.webp" />
+<ZoomImage src="/docs/images/integrations/security/cloudflare/ddos-protection/8.webp" />
 
 1. Go to the **Server** section in the sidebar.
 2. Select **Proxy**.
@@ -223,7 +223,7 @@ Dynamic configuration file slightly varies between Caddy and Traefik, so choose 
 
 <Tab value="Traefik">
 
-<ZoomImage src="/docs/images/integrations/security/cloudflare/9.webp" />
+<ZoomImage src="/docs/images/integrations/security/cloudflare/ddos-protection/9.webp" />
 
 1. Choose a name for your configuration (must end with `.yaml`).
 2. Enter the following details in the configuration field:
@@ -261,7 +261,7 @@ tls:
 
 <Tab value="Caddy">
 
-<ZoomImage src="/docs/images/integrations/security/cloudflare/10.webp" />
+<ZoomImage src="/docs/images/integrations/security/cloudflare/ddos-protection/10.webp" />
 
 1. Choose a name for your configuration (must end with `.caddy`).
 2. Enter the following details in the configuration field:
@@ -309,7 +309,7 @@ From now on, Coolify will use the origin certificate for requests matching the h
 
 <Tab value="Public CA Certificate">
 A simple high-level overview diagram to give you a visual idea of how this works:
-<ZoomImage src="/docs/images/integrations/security/cloudflare/public-ca-origin-certificate-overview-diagram.webp" />
+<ZoomImage src="/docs/images/integrations/security/cloudflare/ddos-protection/public-ca-origin-certificate-overview-diagram.webp" />
 
 We already have guides to set up DNS challenge for TLS certificates, you can follow them here:
 
@@ -327,7 +327,7 @@ Come back to this guide after you finish setting up the DNS challenge using the 
 ## 2. Set Up DNS Records
 To route traffic through Cloudflare, configure your DNS records in Cloudflare:
 
-<ZoomImage src="/docs/images/integrations/security/cloudflare/4.webp" />
+<ZoomImage src="/docs/images/integrations/security/cloudflare/ddos-protection/4.webp" />
 
 1. In Cloudflare dashboard, go to **DNS**.
 2. Select **Records**.
@@ -348,13 +348,13 @@ This isn't necessary if you only need to proxy (or protect against DDoS) for a s
 ## 3. Set Up TLS Encryption
 To make Cloudflare use stricter encryption when connecting to your server, configure your TLS encryption in Cloudflare:
 
-<ZoomImage src="/docs/images/integrations/security/cloudflare/5.webp" />
+<ZoomImage src="/docs/images/integrations/security/cloudflare/ddos-protection/5.webp" />
 
 1. Go to **SSL/TLS** in Cloudflare.
 2. Select **Overview**.
 3. Click **Configure** button
 
-<ZoomImage src="/docs/images/integrations/security/cloudflare/6.webp" />
+<ZoomImage src="/docs/images/integrations/security/cloudflare/ddos-protection/6.webp" />
 
 1. Choose **Full (Strict)** as the encryption mode.
 2. Click **Save** button
@@ -362,7 +362,7 @@ To make Cloudflare use stricter encryption when connecting to your server, confi
 ## 4. Set Up Always Use HTTPS
 To make Cloudflare automatically redirect HTTP requests to HTTPS, configure your redirects in Cloudflare:
 
-<ZoomImage src="/docs/images/integrations/security/cloudflare/7.webp" />
+<ZoomImage src="/docs/images/integrations/security/cloudflare/ddos-protection/7.webp" />
 
 1. In Cloudflare, go to **SSL/TLS** 
 2. Select **Edge Certificates**.
