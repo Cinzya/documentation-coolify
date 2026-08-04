@@ -101,27 +101,27 @@
   },
   {
     "name": "Cloudflare - Cloudflare DDoS Protection",
-    "link": "https://coolify.io/docs/integrations/cloudflare/ddos-protection"
+    "link": "https://coolify.io/docs/integrations/security/cloudflare/ddos-protection"
   },
   {
     "name": "Cloudflare - Access All Resource via Cloudflare Tunnels",
-    "link": "https://coolify.io/docs/integrations/cloudflare/tunnels/all-resource"
+    "link": "https://coolify.io/docs/integrations/networking/cloudflare/tunnels/all-resource"
   },
   {
     "name": "Cloudflare - Full HTTPS/TLS Setup for All Resources",
-    "link": "https://coolify.io/docs/integrations/cloudflare/tunnels/full-tls"
+    "link": "https://coolify.io/docs/integrations/networking/cloudflare/tunnels/full-tls"
   },
   {
     "name": "Cloudflare - Cloudflare Tunnels",
-    "link": "https://coolify.io/docs/integrations/cloudflare/tunnels"
+    "link": "https://coolify.io/docs/integrations/networking/cloudflare/tunnels"
   },
   {
     "name": "Cloudflare - Server SSH Access via Cloudflare Tunnels",
-    "link": "https://coolify.io/docs/integrations/cloudflare/tunnels/server-ssh"
+    "link": "https://coolify.io/docs/integrations/networking/cloudflare/tunnels/server-ssh"
   },
   {
     "name": "Cloudflare - Access Single Resource via Cloudflare Tunnels",
-    "link": "https://coolify.io/docs/integrations/cloudflare/tunnels/single-resource"
+    "link": "https://coolify.io/docs/integrations/networking/cloudflare/tunnels/single-resource"
   },
   {
     "name": "Integrations - MCP Server",

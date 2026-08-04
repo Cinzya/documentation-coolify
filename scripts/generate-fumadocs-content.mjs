@@ -9,7 +9,7 @@ const ignoredDirs = new Set(['public'])
 const folderIndexAliases = new Map([
   ['applications/build-packs/overview', 'applications/build-packs/index.mdx'],
   ['applications/ci-cd/introduction', 'applications/ci-cd/index.mdx'],
-  ['integrations/cloudflare/tunnels/overview', 'integrations/cloudflare/tunnels/index.mdx'],
+  ['integrations/networking/cloudflare/tunnels/overview', 'integrations/networking/cloudflare/tunnels/index.mdx'],
   ['knowledge-base/overview', 'knowledge-base/index.mdx'],
   ['knowledge-base/proxy/traefik/overview', 'knowledge-base/proxy/traefik/index.mdx'],
   ['knowledge-base/proxy/caddy/overview', 'knowledge-base/proxy/caddy/index.mdx'],
@@ -141,15 +141,33 @@ const sidebarMetas = {
   integrations: {
     title: 'Integrations',
     root: true,
-    pages: ['cloudflare', 'external:[Crowdsec](https://www.crowdsec.net/blog/securing-automated-app-deployment-crowdsec-and-coolify)'],
+    pages: [
+      '---Networking---',
+      'networking/cloudflare/tunnels',
+      '---Security---',
+      'security/cloudflare/ddos-protection',
+      'external:[Crowdsec](https://www.crowdsec.net/blog/securing-automated-app-deployment-crowdsec-and-coolify)',
+    ],
   },
-  'integrations/cloudflare': {
+  'integrations/networking': {
+    title: 'Networking',
+    pages: ['cloudflare'],
+  },
+  'integrations/networking/cloudflare': {
     title: 'Cloudflare',
-    pages: ['tunnels', 'ddos-protection'],
+    pages: ['tunnels'],
   },
-  'integrations/cloudflare/tunnels': {
-    title: 'Tunnels',
-    pages: ['all-resource', 'single-resource', 'server-ssh', 'full-tls'],
+  'integrations/networking/cloudflare/tunnels': {
+    title: 'Cloudflare Tunnel',
+    pages: ['index', 'all-resource', 'single-resource', 'server-ssh', 'full-tls'],
+  },
+  'integrations/security': {
+    title: 'Security',
+    pages: ['cloudflare'],
+  },
+  'integrations/security/cloudflare': {
+    title: 'Cloudflare',
+    pages: ['ddos-protection'],
   },
   'knowledge-base': {
     title: 'Knowledge Base',

@@ -63,7 +63,7 @@ const tabDefinitions: TabDefinition[] = [
   {
     ref: 'integrations/meta.json',
     title: 'Integrations',
-    fallbackUrl: '/integrations/cloudflare/tunnels',
+    fallbackUrl: '/integrations/networking/cloudflare/tunnels',
     icon: <Plug2 weight="Filled" className={tabIconClassName} aria-hidden="true" />,
   },
   {

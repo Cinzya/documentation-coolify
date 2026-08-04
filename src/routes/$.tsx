@@ -51,7 +51,7 @@ function toInternalDocUrl(url: string): string {
 const folderIndexRedirects = new Map([
   ['applications/build-packs/overview', '/applications/build-packs'],
   ['applications/ci-cd/introduction', '/applications/ci-cd'],
-  ['integrations/cloudflare/tunnels/overview', '/integrations/cloudflare/tunnels'],
+  ['integrations/networking/cloudflare/tunnels/overview', '/integrations/networking/cloudflare/tunnels'],
   ['knowledge-base/overview', '/knowledge-base'],
   ['knowledge-base/proxy/traefik/overview', '/knowledge-base/proxy/traefik'],
   ['knowledge-base/proxy/caddy/overview', '/knowledge-base/proxy/caddy'],
