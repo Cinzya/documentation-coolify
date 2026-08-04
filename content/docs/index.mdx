@@ -3,10 +3,21 @@ title: Home
 description: Welcome to Coolify Documentation
 ---
 
+import {
+  ArrowSquare2,
+  CodeCircle,
+  Database,
+  MedalStars,
+  Settings,
+} from 'reicon-react';
+
 # Build & deploy with Coolify
 Your handbook to owning and operating your infrastructure with Coolify.
 
-## Get started
+<CoolDocsPage>
+
+<CoolCallout id="get-started" icon={ArrowSquare2} title="Get started">
+
 Set up Coolify and deploy your first app in minutes.
 
 <MediaCardGroup columns={3}>
@@ -16,37 +27,38 @@ Set up Coolify and deploy your first app in minutes.
   <MediaCard title="CLI" imageSrc="/docs/images/home/cli.webp" href="/cli/what-is-the-cli" />
 </MediaCardGroup>
 
----
+</CoolCallout>
 
-## Deploy any language. Any framework.
-If it runs in Docker, you can deploy it with Coolify.
+<CoolCallout icon={CodeCircle} title="Deploy any language. Any framework.">
+
+if Docker can package it, Coolify can run it.
 
 <MediaCardGroup columns={3}>
   <MediaCard title="Laravel" imageSrc="/docs/images/home/laravel.webp" href="/applications/framework-examples/php/laravel" />
   <MediaCard title="Next.js" imageSrc="/docs/images/home/nextjs.webp" href="/applications/framework-examples/javascript/nextjs" />
   <MediaCard title="Django" imageSrc="/docs/images/home/django.webp" href="/applications/framework-examples/python/django" />
   <MediaCard title="Ruby on Rails" imageSrc="/docs/images/home/rails.webp" href="/applications/framework-examples/ruby/rails" />
+  <MediaCard title="View all framework guides" icon={CodeCircle} href="/applications" />
 </MediaCardGroup>
 
-[View all language and framework guides](/applications)
+</CoolCallout>
 
----
+<CoolCallout icon={Database} title="Deploy any database">
 
-## Deploy any database
-If it runs in Docker, you can deploy it with Coolify.
+If your database has a Docker image, Coolify can deploy it.
 
 <MediaCardGroup columns={3}>
   <MediaCard title="PostgreSQL" imageSrc="/docs/images/home/postgres.webp" href="/databases/postgresql" />
   <MediaCard title="MySQL" imageSrc="/docs/images/home/mysql.webp" href="/databases/mysql" />
   <MediaCard title="Redis" imageSrc="/docs/images/home/redis.webp" href="/databases/redis" />
   <MediaCard title="MongoDB" imageSrc="/docs/images/home/mongodb.webp" href="/databases/mongodb" />
+  <MediaCard title="View all database guides" icon={Database} href="/databases" />
 </MediaCardGroup>
 
-[View all database guides](/databases)
+</CoolCallout>
 
----
+<CoolCallout icon={Settings} title="Deploy any service">
 
-## Deploy any service
 Run **300+** open-source software with our **single click** service templates.
 
 <MediaCardGroup columns={3}>
@@ -54,13 +66,13 @@ Run **300+** open-source software with our **single click** service templates.
   <MediaCard title="Strapi" imageSrc="/docs/images/home/strapi.webp" href="/services/strapi" />
   <MediaCard title="Convex" imageSrc="/docs/images/home/convex.webp" href="/services/convex" />
   <MediaCard title="WordPress" imageSrc="/docs/images/home/wordpress.webp" href="/services/wordpress" />
+  <MediaCard title="View all service templates" icon={Settings} href="/services/all" />
 </MediaCardGroup>
 
-[View all service templates](/services/all)
+</CoolCallout>
 
----
+<CoolCallout icon={MedalStars} title="Help & Support">
 
-## Help & Support
 Get help from the community and the Coolify team.
 
 <MediaCardGroup columns={3}>
@@ -68,3 +80,7 @@ Get help from the community and the Coolify team.
   <MediaCard title="Github discussions" imageSrc="/docs/images/home/github-discussions.webp" href="https://github.com/coollabsio/coolify/discussions" />
   <MediaCard title="Email" imageSrc="/docs/images/home/email.webp" href="/support" />
 </MediaCardGroup>
+
+</CoolCallout>
+
+</CoolDocsPage>

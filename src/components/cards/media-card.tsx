@@ -2,31 +2,32 @@
 
 import Link from 'fumadocs-core/link';
 import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import type { CoolIcon } from '@/components/docs/cool-types';
 
-interface MediaCardProps {
+type MediaCardProps = {
   title: string;
   description?: string;
   href?: string;
-  imageSrc: string;
-  imageAlt?: string;
-}
+} & ({ imageSrc: string; imageAlt?: string } | { icon: CoolIcon });
 
-export function MediaCard({
-  title,
-  description,
-  href,
-  imageSrc,
-  imageAlt = title,
-}: MediaCardProps) {
+export function MediaCard(props: MediaCardProps) {
+  const { title, description, href } = props;
+  const visual =
+    'imageSrc' in props ? (
+      href ? (
+        <MediaImage imageSrc={props.imageSrc} imageAlt={props.imageAlt ?? title} />
+      ) : (
+        <ImageZoom src={props.imageSrc} alt={props.imageAlt ?? title}>
+          <MediaImage imageSrc={props.imageSrc} imageAlt={props.imageAlt ?? title} zoomable />
+        </ImageZoom>
+      )
+    ) : (
+      <MediaIcon icon={props.icon} />
+    );
+
   const content = (
     <>
-      {href ? (
-        <MediaImage imageSrc={imageSrc} imageAlt={imageAlt} />
-      ) : (
-        <ImageZoom src={imageSrc} alt={imageAlt}>
-          <MediaImage imageSrc={imageSrc} imageAlt={imageAlt} zoomable />
-        </ImageZoom>
-      )}
+      {visual}
       <div className="px-4 py-3">
         <h2 className="not-prose !m-0 text-base font-medium">{title}</h2>
         {description ? <p className="my-0! mt-1 text-sm text-fd-muted-foreground">{description}</p> : null}
@@ -35,7 +36,7 @@ export function MediaCard({
   );
 
   const className =
-    'block overflow-hidden rounded-xl border bg-fd-card text-fd-card-foreground transition-colors hover:bg-fd-accent/80';
+    'method-card method-card-primary block overflow-hidden rounded-xl border bg-fd-card text-fd-card-foreground no-underline! transition duration-200 hover:-translate-y-1';
 
   if (href) {
     return (
@@ -48,6 +49,16 @@ export function MediaCard({
   return (
     <div data-card className={className}>
       {content}
+    </div>
+  );
+}
+
+function MediaIcon({ icon: Icon }: { icon: CoolIcon }) {
+  return (
+    <div className="not-prose flex aspect-video items-center justify-center bg-white dark:bg-fd-muted/20">
+      <span className="flex size-16 items-center justify-center rounded-xl border border-fd-border bg-fd-background/70 text-fd-foreground shadow-sm">
+        <Icon className="size-8" weight="Filled" aria-hidden={true} />
+      </span>
     </div>
   );
 }
