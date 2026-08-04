@@ -7,6 +7,7 @@ import { LaptopCode } from 'reicon-react/icons/LaptopCode';
 import { Office } from 'reicon-react/icons/Office';
 import { Plug2 } from 'reicon-react/icons/Plug2';
 import { Settings } from 'reicon-react/icons/Settings';
+import { Sparkles } from 'reicon-react/icons/Sparkles';
 import { StarFall3 } from 'reicon-react/icons/StarFall3';
 import { TerminalSquare } from 'reicon-react/icons/TerminalSquare';
 import { Warning22 } from 'reicon-react/icons/Warning22';
@@ -62,7 +63,13 @@ const tabDefinitions: TabDefinition[] = [
   {
     ref: 'integrations/meta.json',
     title: 'Integrations',
+    fallbackUrl: '/integrations/cloudflare/tunnels',
     icon: <Plug2 weight="Filled" className={tabIconClassName} aria-hidden="true" />,
+  },
+  {
+    ref: 'mcp/meta.json',
+    title: 'MCP',
+    icon: <Sparkles weight="Filled" className={tabIconClassName} aria-hidden="true" />,
   },
   {
     ref: 'cli/meta.json',
