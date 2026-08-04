@@ -1,48 +1,48 @@
 ---
-title: Cloudflare DDoS Protection
-description: Learn how to set up Cloudflare DDoS protection for applications deployed with Coolify.
+title: "Full TLS"
+description: "Configure end-to-end HTTPS for Coolify resources through Cloudflare Tunnels with Origin Certificates, strict TLS encryption, and proper domain setup."
 ---
 
-# Cloudflare DDoS Protection
+# Full HTTPS/TLS Setup for All Resources
 
-Cloudflare provides a robust layer of DDoS protection for your server and applications. 
+When tunneling resources with Coolify through Cloudflare, Cloudflare typically handles HTTPS and TLS termination, while Coolify runs your resources over HTTP.
 
-When using Cloudflare’s Proxy, CDN, and security features, all incoming traffic to your Coolify-hosted apps is shielded from malicious attacks, like DDoS, and secured through Cloudflare’s global network.
+This setup works for most users, but some may face issues with URL mismatches, especially for apps that require HTTPS on Coolify to issue JWT tokens or handle callback URLs.
+
+This guide solves that issue by configuring your resources to run fully on HTTPS, bypassing Cloudflare's HTTPS handling and ensuring your app functions correctly with secure connections.
+
+## Who this is for?
+
+This guide is ideal for users who:
+
+- Have followed our [Tunnel All Resources Using Cloudflare Tunnel](/integrations/networking/cloudflare/tunnels/all-resource) or [Tunnel Specific Resources Using Cloudflare Tunnel](/integrations/networking/cloudflare/tunnels/single-resource) guide.
+- Need their resources deployed with Coolify to run on HTTPS for applications requiring HTTPS for JWT issuance, callback functions, or similar features.
+
+## Setup Requirements
+
+To follow this guide, you'll need:
+
+- A working Cloudflare tunnel setup as described in the previous guides.
+- A domain configured in Cloudflare to handle HTTP traffic and redirect to HTTPS.
+
+## Before We Start
+
+- If your Coolify instance is on the same tunnel as the domain you want to configure, make sure you can access the Coolify Dashboard using the server IP and port (e.g., **203.0.113.1:8000**) before starting these steps.
+- The default port is **8000**, but if you’ve changed or disabled it, ensure you can access the Coolify Dashboard through the new port or that port **8000** is re-enabled on the server.
 
 ---
 
-## Why Use Cloudflare for DDoS Protection with Coolify?
 
-1. Blocks malicious traffic before it reaches your server.
-2. No need to scale server resources during DDoS attacks — Cloudflare absorbs the impact.
-3. Hides your server’s real IP address by proxying your application through Cloudflare’s global network. 
+<Callout type="warn" title="Example Data">
 
----
+The following data is used as an example in this guide. Please replace it with your actual data when following the steps:
 
-## When Not to Use Cloudflare for DDoS Protection
-
-1. You prefer not to route all traffic through Cloudflare’s network.
-2. Privacy concerns, Cloudflare terminates TLS, which means they can inspect incoming requests.
-3. You need free wildcard support for deep subdomains (more than 1 level subdomains -- e.g., `*.sub.domain.com` which Cloudflare does not offer for free).
-
----
-
-
-<Callout type="info" title="Example Data">
-
-  The following data is used as an example in this guide. Please replace it with your actual data when following the steps:
-  
-  - **IPv4 Address of Origin Server:** `203.0.113.1`
-  - **Domain Name:** `shadowarcanist.com`
-  - **Username:** `shadowarcanist`
+- **IPv4 Address of Origin Server:** 203.0.113.1
+- **Domain Name:** shadowarcanist.com
+- **Username:** shadowarcanist
 
 </Callout>
 
-## How It Works?
-
-A simple high-level overview diagram to give you a visual idea of how this works:
-
-<ZoomImage src="/docs/images/integrations/cloudflare/ddos-protection/overview-diagram.webp" />
 
 ## 1. Setup Origin TLS Certificate
 Communication between your server and Cloudflare is encrypted using a TLS certificate. 
@@ -77,19 +77,19 @@ There are 2 ways to setup the Origin TLS Certificate so follow one of the method
 
 <Tab value="Cloudflare Origin Certificate">
 A simple high-level overview diagram to give you a visual idea of how this works:
-<ZoomImage src="/docs/images/integrations/cloudflare/ddos-protection/cf-origin-certificate-overview-diagram.webp" />
+<ZoomImage src="/docs/images/integrations/networking/cloudflare/tunnels/cf-origin-certificate-overview-diagram.webp" />
 
 ---
 
 ## A. Create Cloudflare Origin Certificate [!toc]
-<ZoomImage src="/docs/images/integrations/cloudflare/ddos-protection/1.webp" />
+<ZoomImage src="/docs/images/integrations/networking/cloudflare/tunnels/1.webp" />
 
 1. In your Cloudflare dashboard, go to **SSL/TLS**.
 2. Select **Origin Server**.
 3. Select **Origin Certificates**
 3. Click the **Create Certificate** button.
 
-<ZoomImage src="/docs/images/integrations/cloudflare/ddos-protection/2.webp" />
+<ZoomImage src="/docs/images/integrations/networking/cloudflare/tunnels/2.webp" />
 
 1. Choose **RSA (2048)** for the key type.
 2. Add the hostnames you want the certificate to cover.
@@ -109,7 +109,7 @@ A simple high-level overview diagram to give you a visual idea of how this works
 
 </Callout>
 
-<ZoomImage src="/docs/images/integrations/cloudflare/ddos-protection/3.webp" />
+<ZoomImage src="/docs/images/integrations/networking/cloudflare/tunnels/3.webp" />
 
 1. Choose **PEM** as the key format.
 2. Copy your **Origin Certificate** and save it somewhere safe
@@ -207,7 +207,7 @@ Now the origin certificate is installed on your server.
 
 
 ## C. Configure Coolify proxy to Use the Origin Certificate [!toc]
-<ZoomImage src="/docs/images/integrations/cloudflare/ddos-protection/8.webp" />
+<ZoomImage src="/docs/images/integrations/networking/cloudflare/tunnels/8.webp" />
 
 1. Go to the **Server** section in the sidebar.
 2. Select **Proxy**.
@@ -223,7 +223,7 @@ Dynamic configuration file slightly varies between Caddy and Traefik, so choose 
 
 <Tab value="Traefik">
 
-<ZoomImage src="/docs/images/integrations/cloudflare/ddos-protection/9.webp" />
+<ZoomImage src="/docs/images/integrations/networking/cloudflare/tunnels/9.webp" />
 
 1. Choose a name for your configuration (must end with `.yaml`).
 2. Enter the following details in the configuration field:
@@ -261,7 +261,7 @@ tls:
 
 <Tab value="Caddy">
 
-<ZoomImage src="/docs/images/integrations/cloudflare/ddos-protection/10.webp" />
+<ZoomImage src="/docs/images/integrations/networking/cloudflare/tunnels/10.webp" />
 
 1. Choose a name for your configuration (must end with `.caddy`).
 2. Enter the following details in the configuration field:
@@ -309,7 +309,7 @@ From now on, Coolify will use the origin certificate for requests matching the h
 
 <Tab value="Public CA Certificate">
 A simple high-level overview diagram to give you a visual idea of how this works:
-<ZoomImage src="/docs/images/integrations/cloudflare/ddos-protection/public-ca-origin-certificate-overview-diagram.webp" />
+<ZoomImage src="/docs/images/integrations/networking/cloudflare/tunnels/public-ca-origin-certificate-overview-diagram.webp" />
 
 We already have guides to set up DNS challenge for TLS certificates, you can follow them here:
 
@@ -324,62 +324,52 @@ Come back to this guide after you finish setting up the DNS challenge using the 
 </Tabs>
 
 
-## 2. Set Up DNS Records
-To route traffic through Cloudflare, configure your DNS records in Cloudflare:
-
-<ZoomImage src="/docs/images/integrations/cloudflare/ddos-protection/4.webp" />
-
-1. In Cloudflare dashboard, go to **DNS**.
-2. Select **Records**.
-3. Add 2 A records:
-4. Enter name as **`shadowarcanist.com`** and `*`
-5. Use the **IP address** of your server as the content for both records.
-6. Set the proxy status to **Proxied** for both records.
-
-
-<Callout type="info" title="Note">
-
-Enabling the "Proxied" (orange cloud) option for both A records: `shadowarcanist.com` and `*` will proxy the root domain and all one-level subdomains via a wildcard. 
-
-This isn't necessary if you only need to proxy (or protect against DDoS) for a specific domain. In that case, simply enable proxying for the domain you want protection for.
-
-</Callout>
-
-## 3. Set Up TLS Encryption
+## 2. Setup TLS Encryption
 To make Cloudflare use stricter encryption when connecting to your server, configure your TLS encryption in Cloudflare:
 
-<ZoomImage src="/docs/images/integrations/cloudflare/ddos-protection/5.webp" />
+<ZoomImage src="/docs/images/integrations/networking/cloudflare/tunnels/5.webp" />
 
 1. Go to **SSL/TLS** in Cloudflare.
 2. Select **Overview**.
 3. Click **Configure** button
 
-<ZoomImage src="/docs/images/integrations/cloudflare/ddos-protection/6.webp" />
+<ZoomImage src="/docs/images/integrations/networking/cloudflare/tunnels/6.webp" />
 
 1. Choose **Full (Strict)** as the encryption mode.
 2. Click **Save** button
 
-## 4. Set Up Always Use HTTPS
+## 3. Setup Always Use HTTPS
 To make Cloudflare automatically redirect HTTP requests to HTTPS, configure your redirects in Cloudflare:
 
-<ZoomImage src="/docs/images/integrations/cloudflare/ddos-protection/7.webp" />
+<ZoomImage src="/docs/images/integrations/networking/cloudflare/tunnels/7.webp" />
 
 1. In Cloudflare, go to **SSL/TLS** 
 2. Select **Edge Certificates**.
 3. Enable **Always Use HTTPS**.
 
 
-## 5. Configure Firewall
+## 4. Configure Tunnel to Use HTTPS
 
-<Callout type="info" title="Note">
-  This step is completely optional but recommended.
-</Callout>
+<ZoomImage src="/docs/images/integrations/networking/cloudflare/tunnels/17.webp" />
 
-Configure your firewall to allow incoming traffic on port **443** only from [Cloudflare’s IP ranges ↗](https://www.cloudflare.com/en-gb/ips/).
+1. Click the three dots icon to open the settings menu.
+2. Click **Edit route** option
 
-Block all other inbound traffic, except for your SSH port.
+Next, update the service URL as follows:
 
-This prevents attackers from bypassing Cloudflare and directly targeting your server with traffic on ports 80 or 443.
+<ZoomImage src="/docs/images/integrations/networking/cloudflare/tunnels/18.webp" />
+
+Change the type from `http://localhost:80` to `https://localhost:443`
 
 
-Now you’re done! Your server is set up to use Origin TLS Certificate, and all traffic is proxied through Cloudflare's network so all incoming attacks like DDoS are prevented by Cloudflare before it reaches your server.
+## 5. Update URLs from HTTP to HTTPS
+
+Now, update all URLs from **HTTP** to **HTTPS** in Coolify, including resources and the instance domain on the settings page.
+
+<ZoomImage src="/docs/images/integrations/networking/cloudflare/tunnels/10.webp" />
+
+<br />
+
+<ZoomImage src="/docs/images/integrations/networking/cloudflare/tunnels/11.webp" />
+
+**Congratulations!** All your resources are now running on HTTPS at all times.
