@@ -56,6 +56,12 @@ For a user installation without administrator access, install into `%LOCALAPPDAT
 $env:COOLIFY_USER_INSTALL=1; irm https://raw.githubusercontent.com/coollabsio/coolify-cli/main/scripts/install.ps1 | iex
 ```
 
+To install a specific release, set `COOLIFY_VERSION` before running the installer:
+
+```powershell
+$env:COOLIFY_VERSION='v1.0.0'; irm https://raw.githubusercontent.com/coollabsio/coolify-cli/main/scripts/install.ps1 | iex
+```
+
 Restart the terminal if `coolify` is not found after the installer updates `PATH`.
 
 </Tab>
