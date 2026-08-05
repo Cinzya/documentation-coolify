@@ -64,6 +64,8 @@ Verify that the container can read the file and that the application loads the e
 Coolify does not create, edit, load, change permissions on, or delete the source file used by a Host File Mount. If the source file is missing or unreadable, correct it directly on the deployment server.
 </Callout>
 
+If the source path does not exist, Docker can create a directory where the file should be. A deployment can then fail with `not a directory: unknown`. Remove the incorrectly created directory, create the expected file at the same path, and redeploy the resource.
+
 ## Define file mounts in Docker Compose
 
 For a Docker Compose application or one-click service, define file mounts in the Compose file. Coolify supports a bind mount with inline `content`:

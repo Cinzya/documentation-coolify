@@ -352,6 +352,14 @@ Coolify displays parsed storage under **Configuration > Persistent Storage**, bu
 
 Coolify also supports `is_directory: true` and `content:` extensions for repository-relative bind sources. Use these only when the deployment must create the directory or file.
 
+<Callout type="warning" title="A file bind source must exist">
+
+For a file bind mount, create the source file before deployment or use `content:` so Coolify creates it. When the file comes from the Git repository, enable **Configuration > General > Preserve Repository During Deployment** so it remains available in the deployment directory.
+
+If Docker receives a missing file source, it can create a directory at that path. The container then fails to start with an error such as `not a directory: unknown`.
+
+</Callout>
+
 Create a repository-relative directory before the container starts:
 
 ```yaml
@@ -380,6 +388,8 @@ services:
 ```
 
 Read [Persistent storage](/core/persistent-storage/storage-mounts/overview) before choosing paths or backup behavior.
+
+If a file bind mount fails with `not a directory: unknown`, inspect the source path on the deployment server. Confirm that it exists as a file rather than a directory, then redeploy the resource.
 
 ## Health checks
 

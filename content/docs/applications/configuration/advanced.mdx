@@ -116,6 +116,18 @@ Enable **Submodules** when the selected repository commit depends on Git submodu
 
 The connected source or deploy key must be able to access every private submodule.
 
+For private submodules in the same GitHub user or organization, prefer a relative URL in `.gitmodules`:
+
+```ini
+[submodule "prisma"]
+    path = prisma
+    url = ../prisma.git
+```
+
+The relative URL uses the authenticated parent-repository remote instead of starting a separate unauthenticated HTTPS clone. If checkout still fails, confirm that the GitHub App installation or deploy key can access both repositories.
+
+Changing only the submodule repository does not update the commit recorded by the parent repository. Commit the new submodule pointer in the parent repository before deploying it.
+
 ---
 
 ### LFS
