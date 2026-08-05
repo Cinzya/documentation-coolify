@@ -1,5 +1,5 @@
 ---
-title: What is the CLI?
+title: What is the Coolify CLI?
 description: Install and configure the Coolify CLI to manage Coolify resources from a terminal or automation workflow.
 ---
 
@@ -43,6 +43,21 @@ coolify app create --help
 coolify database backup --help
 ```
 
-The built-in help is the authoritative reference for the installed CLI version. [Command reference](/cli/command-reference) provides a map of the main command groups, while [common workflows](/cli/common-workflows) shows typical operations.
+The built-in help is the authoritative reference for the installed CLI version. Open **Commands** in the sidebar for operation-level syntax and options. Follow [Deploy applications](/cli/deploy-applications), [Automate with the CLI](/cli/automate-with-cli), or [Manage database backups](/cli/database-backups) for complete workflows.
 
 Use [Update the Coolify CLI](/cli/update) when a new release is available. Follow [Uninstall the Coolify CLI](/cli/uninstallation) to remove the local command without affecting resources managed through Coolify.
+
+## Use the CLI with AI agents
+
+The CLI repository publishes generated catalogs for tools that need machine-readable command context:
+
+- [`llms.txt`](https://github.com/coollabsio/coolify-cli/blob/main/llms.txt) contains concise instructions and common commands.
+- [`llms-full.txt`](https://github.com/coollabsio/coolify-cli/blob/main/llms-full.txt) contains the generated command and flag catalog.
+
+CLI contributors can regenerate both files from the repository with:
+
+```sh
+go run ./coolify docs llms
+```
+
+The [Coolify CLI source repository](https://github.com/coollabsio/coolify-cli) also contains build, test, contribution, and release instructions for CLI development.
