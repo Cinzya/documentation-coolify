@@ -2,18 +2,21 @@
   "title": "CLI",
   "root": true,
   "pages": [
-    "---Understand CLI---",
-    "what-is-the-cli",
+    "---Overview---",
+    "what-is-the-coolify-cli",
     "how-cli-works",
-    "---Get Started---",
+    "---Get started---",
     "installation",
     "authentication",
     "contexts",
-    "---Manage CLI---",
+    "---Workflows---",
+    "deploy-applications",
+    "automate-with-cli",
+    "database-backups",
+    "---Maintain the CLI---",
     "update",
     "uninstallation",
-    "---Use the CLI---",
-    "common-workflows",
-    "command-reference"
+    "---Commands---",
+    "...command-reference"
   ]
 }
