@@ -285,8 +285,8 @@
     "name": "Cockpit",
     "slug": "cockpit",
     "icon": "/docs/images/services/cockpit-logo.svg",
-    "description": "Web-based server administration interface.",
-    "category": "Administration"
+    "description": "Headless CMS with REST & GraphQL APIs.",
+    "category": "CMS"
   },
   {
     "name": "Code Server",
