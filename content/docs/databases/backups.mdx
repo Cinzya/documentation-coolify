@@ -1,77 +1,129 @@
 ---
-title: "Backups"
-description: Configure scheduled database backups for PostgreSQL, MySQL, MariaDB, and MongoDB with cron expressions and S3 storage integration.
+title: Backups
+description: Schedule, retain, and store PostgreSQL, MySQL, MariaDB, MongoDB, and ClickHouse database backups in Coolify.
 ---
+
+import { BranchUp, Refresh23, Server } from 'reicon-react';
 
 # Backups
 
-Scheduled database backups could be configured for PostgreSQL and for Coolify itself.
+Coolify can create scheduled, engine-aware database backups for PostgreSQL, MySQL, MariaDB, MongoDB, and ClickHouse. Each backup schedule creates a backup on the database's server, and can upload a copy to an S3-compatible storage provider.
 
-This schedules are based on cron expressions, so you can configure them to run as often as you want.
+Redis, Dragonfly, and KeyDB do not support this scheduled database backup workflow. Use the engine's persistence and backup tools for those databases, or deploy a backup-capable service separately.
 
-You can also use simple cron expressions like:
+<Callout type="warning" title="A backup is not a restore test">
 
-```js
-const VALID_CRON_STRINGS = [
-    'every_minute' => '* * * * *',
-    'hourly' => '0 * * * *',
-    'daily' => '0 0 * * *',
-    'weekly' => '0 0 * * 0',
-    'monthly' => '0 0 1 * *',
-    'yearly' => '0 0 1 1 *',
-];
-```
-
-## PostgreSQL
-
-Coolify creates a full backup of your PostgreSQL databases. You can specify which database to backup, with a comma separated list.
-
-
-<Callout type="info" title="Tip">
-
-Coolify's own database is also backed up using this method.
+A successful backup only proves that Coolify created a file. [Restore a copy](/databases/restore) into a disposable database and verify the application can read it before treating the backup as recoverable.
 
 </Callout>
 
+## Create a backup schedule
 
-### Backup command
+1. Open a supported database.
+2. Select **Backups** in the resource navigation.
+3. Select **+ Add** next to **Scheduled Backups**.
+4. Enter a cron expression or a supported human-readable frequency.
+5. Select **Save**.
 
-```bash
-pg_dump --format=custom --no-acl --no-owner --username <username> <databaseName>
+The schedule runs on the server where the database is deployed. The **Timezone** field is read-only: it uses the server timezone when one is configured, otherwise the Coolify instance timezone.
+
+A backup job runs only while the database is running. If the database is stopped when the schedule fires, Coolify skips that execution.
+
+## Set the backup scope
+
+Open a schedule to configure the databases included in each execution.
+
+| Database | Scope controls | Backup created by Coolify |
+| :--- | :--- | :--- |
+| PostgreSQL | **Backup All Databases** or **Databases To Backup** | `pg_dump` custom format for selected databases; `pg_dumpall` gzip output when all databases are selected. |
+| MySQL | **Backup All Databases** or **Databases To Backup** | `mysqldump` output; all-database dumps use gzip compression. |
+| MariaDB | **Backup All Databases** or **Databases To Backup** | `mariadb-dump` output; all-database dumps pass the command's `--compress` option but are not piped through `gzip` by Coolify. |
+| MongoDB | **Databases To Include** | `mongodump` gzip archive. Empty includes all databases and collections. |
+| ClickHouse | **Databases To Backup** | A ClickHouse backup archive created with the database's backup command. |
+
+For PostgreSQL, MySQL, MariaDB, and ClickHouse, enter multiple database names as a comma-separated list. An empty field uses the database configured in the resource.
+
+For MongoDB, use `database:collection1,collection2|database2` to exclude collections from each database. For example:
+
+```sh
+app:events,logs|analytics
 ```
 
-### Restore command
+This includes all collections in `app` except `events` and `logs`, and all collections in `analytics`. Leave the field empty to include all databases and collections.
 
-The backup has custom format, so you can restore it using the following command (or with any equivalent tool):
+## Choose a frequency
 
-```bash
-pg_restore --verbose --clean -h localhost -U postgres -d postgres pg-dump-postgres-1697207547.dmp
-```
+Coolify accepts standard five-field cron expressions and these named schedules:
 
-## MySQL
+| Name | Cron expression |
+| :--- | :--- |
+| `every_minute` | `* * * * *` |
+| `hourly` | `0 * * * *` |
+| `daily` | `0 0 * * *` |
+| `weekly` | `0 0 * * 0` |
+| `monthly` | `0 0 1 * *` |
+| `yearly` | `0 0 1 1 *` |
 
-```bash
-mysqldump -u root -p <password> <datatabaseName>
-```
+Use a **Timeout** of at least `60` seconds when a database dump needs more time. The timeout applies to the backup job and defaults to `3600` seconds in the job when no value is set.
 
-## MariaDB
+## Store backups locally
 
-```bash
-mariadb-dump -u root -p <password> <datatabaseName>
-```
+Coolify writes local database backups under `/data/coolify/backups` on the deployment server. The exact subdirectory includes the team, database, and execution name; use the **Executions** page to inspect the result instead of relying on a manually reconstructed path.
 
-## MongoDB
+Local retention can remove successful backup files after an execution completes. In **Retention**, set any of these values to `0` for no limit:
 
-```bash
-mongodump --authenticationDatabase=admin --uri=<uri> --gzip --archive=<archive>
-```
+- **Number of backups to keep**
+- **Days to keep backups**
+- **Maximum storage (GB)**
 
-Or if you exclude some collections:
+The limits work independently. Coolify deletes a backup when any configured limit is reached, keeping the most recent backups first.
 
-```bash
-mongodump --authenticationDatabase=admin --uri=<uri> --gzip --archive=<archive> --excludeCollection=<collectionName> --excludeCollection=<collectionName>
-```
+## Upload backups to S3
 
-## S3 Backups
+1. Configure and validate an S3-compatible storage under [S3 storage](/core/s3-storage/overview).
+2. Open the database schedule and select the **S3** section.
+3. Enable S3, select the validated storage, and select **Save**.
+4. Optionally enable **Disable Local Backup**.
 
-You can also define your own [S3 compatible](/knowledge-base/s3/introduction) storage to store your backups.
+Coolify uploads the local backup file to the selected S3 storage after the local dump succeeds. If the upload fails, the local backup can still remain available and the execution reports the S3 warning.
+
+**Disable Local Backup** removes the local file after a successful S3 upload. It does not remove the S3 copy. Set S3 retention separately; local and S3 retention rules are independent.
+
+## Run and verify a backup
+
+Open a schedule and select **Backup Now** while the database is running. Coolify queues the backup job and shows the execution in the schedule.
+
+Open the execution to verify:
+
+- status is **Success**
+- the database names match the intended scope
+- the file size is greater than zero
+- S3 upload status is successful when S3 is enabled
+- the local copy still exists unless **Disable Local Backup** was enabled
+
+A failed S3 upload does not necessarily mean the local database dump failed. Read the execution message and notification to identify which copy is available.
+
+## Related guides
+
+<CoolNextSteps
+  cards={[
+    {
+      title: 'Restore a database',
+      href: '/databases/restore',
+      description: 'Import a compatible file or S3 backup into a supported database.',
+      icon: Refresh23,
+    },
+    {
+      title: 'S3 storage',
+      href: '/core/s3-storage/overview',
+      description: 'Configure an S3-compatible destination for off-server backup copies.',
+      icon: Server,
+    },
+    {
+      title: 'Persistent storage',
+      href: '/core/persistent-storage/storage-mounts/overview',
+      description: 'Understand the live storage attached to database containers.',
+      icon: BranchUp,
+    },
+  ]}
+/>

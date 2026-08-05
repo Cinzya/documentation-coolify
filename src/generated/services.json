@@ -268,6 +268,13 @@
     "category": "Development"
   },
   {
+    "name": "Cloudflare DDNS",
+    "slug": "cloudflare-ddns",
+    "icon": "/docs/images/services/cloudflare-ddns.svg",
+    "description": "Cloudflare DNS updater for dynamic public IP addresses.",
+    "category": "Automation"
+  },
+  {
     "name": "Cloudflared",
     "slug": "cloudflared",
     "icon": "/docs/images/services/cloudflared-logo.svg",
@@ -285,8 +292,8 @@
     "name": "Cockpit",
     "slug": "cockpit",
     "icon": "/docs/images/services/cockpit-logo.svg",
-    "description": "Web-based server administration interface.",
-    "category": "Administration"
+    "description": "Headless CMS with REST & GraphQL APIs.",
+    "category": "CMS"
   },
   {
     "name": "Code Server",
@@ -1366,6 +1373,13 @@
     "icon": "/docs/images/services/openclaw-logo.svg",
     "description": "AI-powered coding assistant with multi-provider support and browser automation.",
     "category": "AI"
+  },
+  {
+    "name": "OpenObserve",
+    "slug": "openobserve",
+    "icon": "/docs/images/services/openobserve-logo.svg",
+    "description": "Observability platform for logs, metrics, traces, RUM, and session replays.",
+    "category": "Monitoring"
   },
   {
     "name": "OpenPanel",

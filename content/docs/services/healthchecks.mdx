@@ -2,27 +2,31 @@
 title: "Healthchecks"
 description: "Open-source cron job and background task monitoring service."
 og:
-  description: "Monitor your nightly backups, weekly reports, cron jobs, and scheduled tasks on Coolify with Healthchecks on a simple web dashboard with integrations for up to 25+ services."
+  description: "Monitor cron jobs, scheduled tasks, backups, and background processes with Healthchecks on Coolify."
 category: "Monitoring"
 icon: "/docs/images/services/healthchecks.webp"
 ---
 
-# What is Healthchecks?
+# Healthchecks
 
-Healthchecks is a cron job monitoring service. It listens for HTTP requests and email messages from your cron jobs and scheduled tasks. When a ping does not arrive on time, Healthchecks sends out alerts.
+<ZoomImage src="/docs/images/services/healthchecks.webp" alt="Healthchecks logo" />
 
-After deploying Healthchecks, you have two options for creating an account:
-*   **Magic Link:** Send a login link directly to your email (requires SMTP to be set up).
-*   **CLI Setup:** Use the `manage.py` script inside the app container to create a superuser account.
+## What is Healthchecks?
 
-For more information on this setup, refer to the [official docker self hosting documentation](https://healthchecks.io/docs/self_hosted_docker/).
+Healthchecks monitors cron jobs and scheduled tasks by waiting for HTTP requests or email messages. It sends an alert when an expected ping does not arrive on time.
 
-## Screenshots
+## Create the first account
 
-<ZoomImage src="/docs/images/services/healthchecks-screenshot.png" alt="Healthchecks interface screenshot" />
+After deployment, create an account through an emailed magic link or run the Healthchecks `manage.py` command in the application container to create a superuser. Magic-link authentication requires working email configuration.
 
+Read the [Healthchecks Docker documentation](https://healthchecks.io/docs/self_hosted_docker/) for the supported account-creation commands and email settings.
+
+## Screenshot
+
+<ZoomImage src="/docs/images/services/healthchecks-screenshot.png" alt="Healthchecks monitoring dashboard" />
 
 ## Links
 
-- [Website](https://healthchecks.io/)
-- [GitHub](https://github.com/healthchecks/healthchecks)
+- [Official website](https://healthchecks.io/)
+- [Documentation](https://healthchecks.io/docs/)
+- [GitHub repository](https://github.com/healthchecks/healthchecks)

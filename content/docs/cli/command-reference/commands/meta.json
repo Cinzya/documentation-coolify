@@ -1,0 +1,29 @@
+{
+  "title": "Commands",
+  "pages": [
+    "global-options",
+    "context",
+    "app",
+    "database",
+    "service",
+    "deploy",
+    "project",
+    "resources",
+    "server",
+    "destination",
+    "cloud-token",
+    "cloud-init",
+    "s3",
+    "github",
+    "gitlab",
+    "notification",
+    "shared-env",
+    "teams",
+    "private-key",
+    "tag",
+    "completion",
+    "config",
+    "version",
+    "update"
+  ]
+}
