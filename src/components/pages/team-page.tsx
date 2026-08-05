@@ -38,7 +38,7 @@ const teamMembers: TeamMember[] = [
   },
   {
     name: 'ShadowArcanist',
-    role: 'Community Lead, Docs Maintainer',
+    role: 'Community Lead, Developer',
     image: '/docs/images/team/shadowarcanist.webp',
     links: [
       { label: 'GitHub', href: 'https://github.com/shadowarcanist' },
