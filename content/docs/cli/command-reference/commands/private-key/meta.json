@@ -1,0 +1,8 @@
+{
+  "title": "Private Key",
+  "pages": [
+    "add",
+    "list",
+    "remove"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "title": "Project",
+  "pages": [
+    "create",
+    "get",
+    "list",
+    "update-environment"
+  ]
+}
