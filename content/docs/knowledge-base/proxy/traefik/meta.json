@@ -2,7 +2,6 @@
   "title": "Traefik",
   "pages": [
     "basic-auth",
-    "noindex",
     "custom-ssl-certs",
     "dashboard",
     "custom-middlewares",
