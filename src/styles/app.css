@@ -141,6 +141,16 @@ body {
   text-decoration: none;
 }
 
+/* Below md the sidebar/toc columns collapse to 0 and the notebook grid's
+   flexible outer gutters shrink the main column to its min-content, centering
+   content in a narrow band. Force the main column to fill the viewport. */
+@media (max-width: 767px) {
+  #nd-notebook-layout {
+    grid-template-columns:
+      0 var(--fd-sidebar-col) minmax(0, 1fr) var(--fd-toc-width) 0 !important;
+  }
+}
+
 @media (max-width: 1279px) {
   div[class*='[grid-area:toc-popover]'] ~ article[class*='[grid-area:main]'] {
     transition: filter 150ms ease;
