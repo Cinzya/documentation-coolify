@@ -7,6 +7,7 @@ import { Suspense, useMemo, type ReactNode } from 'react';
 import { ClientAPIPage } from '@/components/pages/api-page';
 import { ReiconMarkdownCopyButton } from '@/components/docs/markdown-copy-button';
 import { MobileDrawerHeaderActions } from '@/components/layout/mobile-header-controls';
+import { PageSwitcherGuide } from '@/components/layout/page-switcher-guide';
 import { DocsLayout, type DocsSlots } from 'fumadocs-ui/layouts/notebook';
 import { DocsBody, DocsPage } from 'fumadocs-ui/layouts/notebook/page';
 import { useMDXComponents } from '@/components/docs/mdx';
@@ -279,6 +280,7 @@ function Page() {
       tabs={layoutTabs}
     >
       <Suspense>{content}</Suspense>
+      <PageSwitcherGuide />
     </DocsLayout>
   );
 }

@@ -899,3 +899,48 @@ figure.shiki.border {
 [data-media-card] > * {
   margin: 0 !important;
 }
+
+/* Animated purple gradient border shimmer for the section switcher while the
+   onboarding guide is active. A conic gradient is spun via an animatable
+   --angle custom property (registered with @property so it interpolates
+   smoothly with no jump at the loop boundary) and masked to reveal only the
+   padding, leaving a rotating gradient border. */
+@property --coolify-switcher-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes coolify-switcher-shimmer {
+  to {
+    --coolify-switcher-angle: 360deg;
+  }
+}
+
+[data-page-switcher-shimmer] {
+  padding: 2px;
+  background: conic-gradient(
+    from var(--coolify-switcher-angle),
+    #4a2bc4,
+    #8b73ff,
+    #5c38d5,
+    #7a5ce9,
+    #4020a8,
+    #4a2bc4
+  );
+  animation: coolify-switcher-shimmer 2.5s linear infinite;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-page-switcher-shimmer] {
+    animation: none;
+  }
+}
