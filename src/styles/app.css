@@ -151,6 +151,16 @@ body {
   }
 }
 
+/* Reserve the table-of-contents column at desktop even when a page has no
+   ToC. Otherwise the ToC column collapses to 0, the flexible outer gutters
+   recenter the main content, and it shifts horizontally when navigating
+   between pages with and without a ToC. */
+@media (min-width: 1280px) {
+  #nd-notebook-layout {
+    --fd-toc-width: 268px;
+  }
+}
+
 @media (max-width: 1279px) {
   div[class*='[grid-area:toc-popover]'] ~ article[class*='[grid-area:main]'] {
     transition: filter 150ms ease;
