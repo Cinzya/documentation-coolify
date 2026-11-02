@@ -2,6 +2,7 @@
   "title": "How-Tos",
   "pages": [
     "macos-colima",
-    "webstudio-with-hetzner"
+    "webstudio-with-hetzner",
+    "scale-to-zero-with-sablier"
   ]
 }

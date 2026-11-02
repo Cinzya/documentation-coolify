@@ -1,0 +1,271 @@
+---
+title: Scale Applications to Zero with Traefik and Sablier
+description: Stop idle Coolify resources automatically and start them again on the next request with Sablier and the Traefik proxy.
+---
+
+# Scale applications to zero with Traefik and Sablier
+
+Small projects and internal tools often sit idle but still use memory on your server. [Sablier](https://github.com/sablierapp/sablier?utm_source=coolify.io) stops these containers when they receive no traffic and starts them again when the next request arrives.
+
+This guide adds Sablier to the Traefik proxy on a Coolify server and enables it for individual resources.
+
+<Callout type="info" title="Credit">
+
+This guide is based on [Docker Scale-to-Zero with Traefik and Sablier](https://www.production-ready.de/2023/08/20/docker-scale-to-zero-with-traefik-sablier-en.html) by David Ullrich, published on Production Ready in 2023. We adapted the idea for Coolify and current Sablier and Traefik versions.
+
+</Callout>
+
+## How it works
+
+Sablier has two parts:
+
+- The **Traefik plugin** runs as a middleware in the proxy and checks every request to a protected resource.
+- The **Sablier server** runs next to the proxy. It uses the Docker API to start containers and to stop them after a period without requests.
+
+When a request reaches a stopped resource, the middleware asks the Sablier server to start it. Depending on the strategy, the visitor sees a waiting page or the request waits until the resource is ready. Each request extends the session, and Sablier stops the container when the session expires.
+
+<ZoomImage src="/docs/images/knowledge-base/how-tos/sablier/reverse-proxy-integration.png" alt="The reverse proxy middleware asks Sablier whether the resource is ready, then forwards the request or returns a waiting page" />
+
+Diagram from the [Sablier project](https://github.com/sablierapp/sablier?utm_source=coolify.io), licensed under AGPL-3.0.
+
+## When not to use this
+
+Scale to zero suits web resources that are idle for long periods and can accept a slow first request. Sablier only sees HTTP requests that pass through Traefik, so do not use it for:
+
+- **Resources with background work:** Workers, queues, and long-running jobs can stop in the middle of a job because they create no HTTP traffic.
+- **Resources with Coolify scheduled tasks:** A [scheduled task](/core/automation/scheduled-tasks/create-a-task) runs inside the container, so it cannot run while the container is stopped.
+- **Traffic that does not use Traefik:** Connections through published ports or internal Docker networks do not count as activity and do not wake the resource.
+- **Resources that need a fast response at all times:** Every first request after an idle period has to wait for the container to start.
+
+This guide does not cover:
+
+- **Standalone databases:** They have no HTTP route that can wake them.
+- **Preview deployments.**
+- **Docker Swarm servers.**
+- **The Caddy proxy.**
+
+<Callout type="warning" title="Sablier controls your Docker host">
+
+Sablier needs the Docker socket, and access to that socket is equivalent to root access on the server. Pin the image to a version you trust, and do not publish port `10000`. In the configuration below, only containers on the proxy network can reach it.
+
+</Callout>
+
+## Prerequisites
+
+- A server that uses the [Traefik proxy](/core/networking/proxy/traefik/overview) in standalone Docker mode.
+- Traefik v3.6 or later. Check the `image` line in your proxy configuration, and [update Traefik](/core/networking/proxy/traefik/update) if it is older. Earlier versions do not keep routes for stopped containers.
+- Outbound internet access from the server, because Traefik downloads the plugin.
+
+## 1. Add Sablier to the proxy
+
+Repeat this step on every server that runs a resource you want to scale to zero.
+
+1. Open **Servers > your server > Proxy > Configuration**.
+2. Copy the current configuration somewhere safe.
+3. Add the plugin flags to the end of `services.traefik.command`. Keep the existing flags.
+4. Add the `sablier` service under `services`. Use the same network name as your `traefik` service, which is `coolify` on most servers.
+5. Save the configuration and restart the proxy.
+
+```yaml
+services:
+  traefik:
+    # ...keep the existing configuration...
+    command:
+      # ...keep the existing flags...
+      - '--experimental.plugins.sablier.moduleName=github.com/sablierapp/sablier-traefik-plugin'
+      - '--experimental.plugins.sablier.version=v1.4.0'
+  sablier:
+    image: 'sablierapp/sablier:1.19.1'
+    container_name: coolify-sablier
+    restart: unless-stopped
+    command:
+      - start
+      - '--provider.name=docker'
+    networks:
+      - coolify
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+```
+
+This guide uses Sablier 1.19.1 and plugin v1.4.0. Check the [Sablier releases](https://github.com/sablierapp/sablier/releases?utm_source=coolify.io) and [plugin releases](https://github.com/sablierapp/sablier-traefik-plugin/releases?utm_source=coolify.io) for newer versions. Avoid the `latest` tag, because Coolify pulls the images in this file every time the proxy starts, so Sablier would update on any proxy restart.
+
+Traefik loads plugins only when it starts, so saving the configuration is not enough. Restarting the proxy briefly interrupts all resources on the server.
+
+<Callout type="warning" title="Reset to default removes this setup">
+
+**Reset to default** replaces the proxy configuration with Coolify's defaults. This removes the plugin flags and the `sablier` service, so stopped resources can no longer wake up. Keep a copy of your configuration and add these entries again after a reset.
+
+</Callout>
+
+## 2. Enable Sablier on a resource
+
+Every resource needs:
+
+- `sablier.enable` and `sablier.group` labels, so Sablier knows which containers to manage. Coolify can change a container's name on each deployment, so this guide targets the group and not the name.
+- A middleware that uses the plugin.
+- `traefik.docker.allownonrunning=true`, so Traefik keeps the route while the container is stopped.
+
+Choose a group name that is unique on the server. The examples use `my-app`.
+
+<Tabs id="sablier-resource-type" items={['Docker Compose', 'One-click service', 'Standard application']}>
+<Tab value="Docker Compose">
+
+Add the labels to the service that receives the domain, then save and redeploy the resource:
+
+```yaml
+services:
+  app:
+    image: traefik/whoami
+    labels:
+      - sablier.enable=true
+      - sablier.group=my-app
+      - traefik.docker.allownonrunning=true
+      - traefik.http.middlewares.my-app-sablier.plugin.sablier.group=my-app
+      - traefik.http.middlewares.my-app-sablier.plugin.sablier.sablierUrl=http://sablier:10000
+      - traefik.http.middlewares.my-app-sablier.plugin.sablier.sessionDuration=1m
+      - traefik.http.middlewares.my-app-sablier.plugin.sablier.dynamic.displayName=My App
+      - coolify.traefik.middlewares=my-app-sablier
+```
+
+Assign a domain to `app` as usual. Coolify generates the routers and adds the middleware to them.
+
+</Tab>
+<Tab value="One-click service">
+
+Open the service, select **Edit Compose File**, and add the labels from the **Docker Compose** tab to the service that receives the domain. Save and redeploy the service.
+
+Leave the labels off a bundled database if you want it to keep running. If you want Sablier to stop it as well, see [Manage several containers together](#manage-several-containers-together).
+
+</Tab>
+<Tab value="Standard application">
+
+Applications built from Git or a Docker image use the **Container labels** field:
+
+1. Open the application **General** page.
+2. Set **Label management** to **Managed manually (edit labels yourself)**.
+3. Add these labels to **Container labels**:
+
+   ```ini
+   sablier.enable=true
+   sablier.group=my-app
+   traefik.docker.allownonrunning=true
+   traefik.http.middlewares.my-app-sablier.plugin.sablier.group=my-app
+   traefik.http.middlewares.my-app-sablier.plugin.sablier.sablierUrl=http://sablier:10000
+   traefik.http.middlewares.my-app-sablier.plugin.sablier.sessionDuration=1m
+   traefik.http.middlewares.my-app-sablier.plugin.sablier.dynamic.displayName=My App
+   ```
+
+4. Add `my-app-sablier` to the existing HTTPS router label. Keep every existing middleware name:
+
+   ```ini
+   traefik.http.routers.https-0-<resource-id>.middlewares=gzip # [!code --]
+   traefik.http.routers.https-0-<resource-id>.middlewares=gzip,my-app-sablier # [!code ++]
+   ```
+
+5. Save and redeploy the application.
+
+While labels are managed manually, Coolify no longer regenerates them. If you change a domain, update the labels yourself. See [Custom middlewares](/core/networking/proxy/traefik/custom-middlewares#attach-middleware-to-a-resource) for how to go back to generated labels.
+
+</Tab>
+</Tabs>
+
+## 3. Test the resource
+
+1. Open the resource's domain in your browser. You should see the page of your application.
+2. Wait until the session has expired. With `sessionDuration=1m`, this takes about a minute after your last request.
+3. Check that the resource shows as stopped in Coolify.
+4. Open the domain again. You should see a waiting page, followed by your application.
+
+<ZoomImage src="/docs/images/knowledge-base/how-tos/sablier/shuffle.png" alt="Sablier waiting page that lists the state of each container in a group" />
+
+Example waiting page from the [Sablier project](https://github.com/sablierapp/sablier?utm_source=coolify.io), licensed under AGPL-3.0.
+
+The one-minute session makes testing easier. For real use, raise `sessionDuration` to a value such as `30m`, so that resources do not restart between the page views of a single visitor.
+
+## Choose a strategy
+
+Sablier can handle a request to a stopped resource in two ways. Use only one per middleware.
+
+<Tabs id="sablier-strategy" items={['Dynamic', 'Blocking']}>
+<Tab value="Dynamic">
+
+Dynamic mode shows a waiting page that refreshes until the resource is ready. Use it for websites that people open in a browser. This is the mode used in the examples above:
+
+```ini
+traefik.http.middlewares.my-app-sablier.plugin.sablier.dynamic.displayName=My App
+```
+
+</Tab>
+<Tab value="Blocking">
+
+Blocking mode holds the request until the resource is ready or the timeout expires. The client sees a slow response and no waiting page, so use it for APIs. Replace the `dynamic` label with:
+
+```ini
+traefik.http.middlewares.my-app-sablier.plugin.sablier.blocking.timeout=30s
+```
+
+Set a timeout that is longer than the resource's startup time.
+
+</Tab>
+</Tabs>
+
+## Manage several containers together
+
+An application that has more than one container, such as a web server with an API, usually has to start and stop as one unit. Add the same two labels to every container in the unit:
+
+```yaml
+labels:
+  - sablier.enable=true
+  - sablier.group=my-app
+```
+
+Only the service that receives the domain needs the middleware labels.
+
+## Optional plugin settings
+
+Add these as further labels on the middleware, using the prefix `traefik.http.middlewares.my-app-sablier.plugin.sablier`:
+
+| Setting | Purpose |
+|---------|---------|
+| `keepAliveInterval` | Renews the session while a long-lived connection, such as a WebSocket, is open. Set it lower than `sessionDuration`. |
+| `ignoreUserAgent` | Matching user agents get an immediate response and do not wake the resource. Use it for uptime monitors. |
+| `failOpen` | Passes requests through when Sablier is unreachable, instead of returning an HTTP 500 error. |
+| `dialTimeout` | Limits how long the plugin tries to connect to Sablier. |
+
+See the [plugin documentation](https://github.com/sablierapp/sablier-traefik-plugin?utm_source=coolify.io) for all settings.
+
+## What to expect in Coolify
+
+- A resource that Sablier has stopped shows as **Exited**. This is expected and does not mean the deployment failed.
+- If you have enabled [**Resource status changes** notifications](/core/notifications/events), you can receive one each time Sablier stops a resource.
+- Uptime monitors keep a resource awake with their checks, unless you exclude them with `ignoreUserAgent`.
+
+## Troubleshooting
+
+<Accordions type="multiple">
+<Accordion title="The resource returns a 404 error while it is stopped">
+
+Traefik no longer has a route for the container. Check that the resource has the `traefik.docker.allownonrunning=true` label and that it has been redeployed since you added it. Also check that the proxy runs Traefik v3.6 or later.
+
+</Accordion>
+<Accordion title="Requests return an HTTP 500 error">
+
+The plugin cannot reach the Sablier server. Check that the `coolify-sablier` container is running and that it shares a network with `coolify-proxy`.
+
+</Accordion>
+<Accordion title="The middleware does not work or Traefik reports a plugin error">
+
+Traefik disables a plugin that it cannot load. Check the proxy logs for plugin errors, and confirm that the version in the proxy configuration exists and that the server has internet access. Restart the proxy after any change to the plugin flags.
+
+</Accordion>
+<Accordion title="The resource never stops">
+
+A session stays open while requests arrive. Look for uptime monitors, browser tabs that poll the resource, or a `keepAliveInterval` that keeps a connection alive.
+
+</Accordion>
+</Accordions>
+
+## Next steps
+
+- Read [Custom middlewares](/core/networking/proxy/traefik/custom-middlewares) to learn more about Traefik middleware in Coolify.
+- Read the [Sablier documentation](https://sablierapp.dev/?utm_source=coolify.io) for themes and server configuration.
